@@ -16,8 +16,21 @@
 #>
 
 param(
-    [string]$AtlasUrl = ($env:ATLAS_URL ?? "http://localhost:8600")
+    [string]$AtlasUrl       = ($env:ATLAS_URL            ?? "http://localhost:8600"),
+    [string]$InternalSecret = ($env:AETHER_SESSION_SECRET ?? "")
 )
+
+# Try reading from Aether .env if secret not supplied
+if (-not $InternalSecret) {
+    $aetherEnv = Join-Path $PSScriptRoot "..\..\Aether\.env"
+    if (Test-Path $aetherEnv) {
+        $line = Get-Content $aetherEnv | Where-Object { $_ -match "^SESSION_SECRET=" } | Select-Object -First 1
+        if ($line) { $InternalSecret = ($line -split "=", 2)[1].Trim() }
+    }
+}
+
+$headers = @{ "Content-Type" = "application/json" }
+if ($InternalSecret) { $headers["X-Aether-Internal"] = $InternalSecret }
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path $PSScriptRoot -Parent
@@ -33,17 +46,17 @@ $Body = $AppConfig | ConvertTo-Json -Depth 5
 
 Write-Host "==> Checking if '$Slug' is already registered with Atlas..." -ForegroundColor Cyan
 try {
-    $existing = Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps/$Slug" -Method GET -ErrorAction Stop
+    $existing = Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps/$Slug" -Method GET -Headers $headers -ErrorAction Stop
     Write-Host "    App exists (status: $($existing.status)) — updating config and redeploying..." -ForegroundColor Yellow
     Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps/$Slug" -Method PUT `
-        -Body $Body -ContentType "application/json" | Out-Null
-    Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps/$Slug/restart" -Method POST | Out-Null
+        -Body $Body -Headers $headers | Out-Null
+    Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps/$Slug/restart" -Method POST -Headers $headers | Out-Null
     Write-Host "==> Redeployed." -ForegroundColor Green
 } catch {
     if ($_.Exception.Response.StatusCode.value__ -eq 404) {
         Write-Host "    Not found — registering new app..." -ForegroundColor Yellow
         Invoke-RestMethod -Uri "$AtlasUrl/api/v1/apps" -Method POST `
-            -Body $Body -ContentType "application/json" | Out-Null
+            -Body $Body -Headers $headers | Out-Null
         Write-Host "==> Registered and deployed." -ForegroundColor Green
     } else {
         Write-Error "Atlas API error: $_"
