@@ -485,9 +485,7 @@
   </h1>
   <nav class="app-nav">
     <a href="{{ root_path }}/" {% if request.url.path == root_path + '/' or request.url.path == root_path %}class="active"{% endif %}>Home</a>
-    <a href="{{ root_path }}/tax/t1"    {% if '/tax/t1' in request.url.path and 'bc428' not in request.url.path %}class="active"{% endif %}>T1 General</a>
-    <a href="{{ root_path }}/tax/bc428" {% if 'bc428' in request.url.path %}class="active"{% endif %}>BC428</a>
-    <a href="{{ root_path }}/tax/compare" {% if 'compare' in request.url.path %}class="active"{% endif %}>Compare</a>
+    <a href="#" style="opacity:.55; cursor:default;" title="Profile — coming soon">Profile</a>
   </nav>
 </div>
 
