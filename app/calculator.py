@@ -1,14 +1,14 @@
 """
-CRA Tax Helper — calculation engine (2024 tax year).
+CRA Tax Helper — calculation engine (2025 tax year).
 
 All formulas are based on publicly available CRA tax rates, brackets, and
-credit amounts for the 2024 tax year.  Line numbers match the official
+credit amounts for the 2025 tax year.  Line numbers match the official
 T1 General and BC428 (5010-C) forms.
 
 Rules:
 - All monetary inputs are in Canadian dollars (floats).
 - Negative results are floored to 0 unless the field is explicitly a loss.
-- Line numbers follow the 2024 T1 General and BC428 forms.
+- Line numbers follow the 2025 T1 General and BC428 forms.
 """
 
 from __future__ import annotations
@@ -16,58 +16,58 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
-# ── 2024 Tax Constants ────────────────────────────────────────────────────────
+# ── 2025 Tax Constants ────────────────────────────────────────────────────────
 
-# Federal income tax brackets  (upper limit, marginal rate)
+# Federal income tax brackets (upper limit, marginal rate)
+# Lowest rate is 14.5% — blended rate for 2025 (15% Jan–Jun, 14% Jul–Dec)
 FEDERAL_BRACKETS: list[tuple[float, float]] = [
-    (55_867,    0.1500),
-    (111_733,   0.2050),
-    (154_906,   0.2600),
-    (220_000,   0.2900),
+    (57_375,       0.1450),
+    (114_750,      0.2050),
+    (177_882,      0.2600),
+    (253_414,      0.2900),
     (float("inf"), 0.3300),
 ]
 
 # BC provincial income tax brackets
 BC_BRACKETS: list[tuple[float, float]] = [
-    (45_654,    0.0506),
-    (91_310,    0.0770),
-    (104_835,   0.1050),
-    (127_299,   0.1229),
-    (172_602,   0.1470),
-    (240_716,   0.1680),
+    (49_279,       0.0506),
+    (98_560,       0.0770),
+    (113_158,      0.1050),
+    (137_407,      0.1229),
+    (186_306,      0.1470),
+    (259_829,      0.1680),
     (float("inf"), 0.2050),
 ]
 
-# 2024 Federal amounts
-FEDERAL_BASIC_PERSONAL       = 15_705.00
-FEDERAL_AGE_AMOUNT_MAX       = 8_790.00
-FEDERAL_AGE_INCOME_THRESHOLD = 42_335.00  # reduction begins here
-FEDERAL_AGE_INCOME_CEILING   = 98_309.00  # fully phased out above this
-FEDERAL_EMPLOYMENT_MAX       = 1_433.00
+# 2025 Federal amounts
+FEDERAL_BASIC_PERSONAL       = 16_129.00
+FEDERAL_AGE_AMOUNT_MAX       = 9_028.00
+FEDERAL_AGE_INCOME_THRESHOLD = 45_522.00   # reduction begins here
+FEDERAL_AGE_INCOME_CEILING   = 105_709.00  # 45,522 + 9,028 / 0.15
+FEDERAL_EMPLOYMENT_MAX       = 1_471.00
 FEDERAL_PENSION_MAX          = 2_000.00
-FEDERAL_CREDIT_RATE          = 0.15
+FEDERAL_CREDIT_RATE          = 0.145       # 14.5% blended rate
 
-# 2024 BC amounts
-BC_BASIC_PERSONAL            = 11_981.00
-BC_AGE_AMOUNT_MAX            = 4_965.00
-BC_AGE_INCOME_THRESHOLD      = 35_985.00
-BC_AGE_INCOME_CEILING        = 75_885.00
-BC_EMPLOYMENT_MAX            = 1_146.00  # BC equivalent of Canada employment amount
+# 2025 BC amounts  (source: BC government official credits page)
+BC_BASIC_PERSONAL            = 12_932.00
+BC_AGE_AMOUNT_MAX            = 5_799.00
+BC_AGE_INCOME_THRESHOLD      = 43_169.00
+BC_AGE_INCOME_CEILING        = 81_829.00   # 43,169 + 5,799 / 0.15
 BC_PENSION_MAX               = 1_000.00
-BC_DISABILITY                = 9_428.00
+BC_DISABILITY                = 9_699.00
 BC_CREDIT_RATE               = 0.0506
 
-# Dividend gross-up factors (2024)
-ELIGIBLE_GROSS_UP            = 1.38   # 38 % gross-up
-NON_ELIGIBLE_GROSS_UP        = 1.15   # 15 % gross-up
+# Dividend gross-up factors (unchanged)
+ELIGIBLE_GROSS_UP            = 1.38
+NON_ELIGIBLE_GROSS_UP        = 1.15
 
-# Federal dividend tax credit rates (applied to taxable/grossed-up dividend)
+# Federal dividend tax credit rates (applied to grossed-up taxable amount)
 FEDERAL_ELIGIBLE_DTC_RATE    = (6 / 11) * (0.38 / 1.38)   # ≈ 15.0198 %
 FEDERAL_NON_ELIGIBLE_DTC_RATE = (9 / 13) * (0.15 / 1.15)  # ≈  9.0301 %
 
-# BC dividend tax credit rates (applied to taxable/grossed-up dividend)
-BC_ELIGIBLE_DTC_RATE         = 0.12 / ELIGIBLE_GROSS_UP     # ≈  8.6957 %
-BC_NON_ELIGIBLE_DTC_RATE     = 0.024674 / NON_ELIGIBLE_GROSS_UP  # ≈  2.1456 %
+# BC dividend tax credit rates — applied to grossed-up taxable dividend (2025)
+BC_ELIGIBLE_DTC_RATE         = 0.12    # 12 % of taxable eligible dividends
+BC_NON_ELIGIBLE_DTC_RATE     = 0.0196  # 1.96 % of taxable non-eligible dividends
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -87,7 +87,7 @@ def apply_brackets(income: float, brackets: list[tuple[float, float]]) -> float:
 
 
 def federal_age_amount(net_income: float, age_65_or_over: bool) -> float:
-    """Return the 2024 federal age amount (line 30100)."""
+    """Return the 2025 federal age amount (line 30100)."""
     if not age_65_or_over:
         return 0.0
     if net_income <= FEDERAL_AGE_INCOME_THRESHOLD:
@@ -99,7 +99,7 @@ def federal_age_amount(net_income: float, age_65_or_over: bool) -> float:
 
 
 def bc_age_amount(net_income: float, age_65_or_over: bool) -> float:
-    """Return the 2024 BC age amount (line 58080)."""
+    """Return the 2025 BC age amount (line 58080)."""
     if not age_65_or_over:
         return 0.0
     if net_income <= BC_AGE_INCOME_THRESHOLD:
@@ -114,7 +114,7 @@ def bc_age_amount(net_income: float, age_65_or_over: bool) -> float:
 
 @dataclass
 class T1Input:
-    """User-supplied fields on the 2024 T1 General (Step 2 – Step 5)."""
+    """User-supplied fields on the 2025 T1 General (Step 2 – Step 5)."""
 
     # ── Step 2 — Total Income ──────────────────────────────────────────
     line_10100: float = 0.0   # Employment income
@@ -224,7 +224,7 @@ class T1Input:
 
 @dataclass
 class T1Result:
-    """All computed lines for the 2024 T1 General."""
+    """All computed lines for the 2025 T1 General."""
 
     # Step 2
     line_15000: float = 0.0   # Total income
@@ -354,7 +354,7 @@ def calculate_t1(inp: T1Input, bc_net_tax: float = 0.0) -> T1Result:
 
 @dataclass
 class BC428Input:
-    """User-supplied fields on the 2024 BC428 (5010-C)."""
+    """User-supplied fields on the 2025 BC428 (5010-C)."""
 
     # BC428 Part 2 — Non-refundable tax credits
     # Line numbers match the 2024 BC428 form
@@ -365,7 +365,7 @@ class BC428Input:
     line_58200: float = 0.0   # BC caregiver for spouse/CLP
     line_58240: float = 0.0   # BC CPP/QPP contributions through employment
     line_58280: float = 0.0   # BC EI premiums through employment
-    line_58300: float = 0.0   # BC Canada employment amount (auto-computed)
+    line_58300: float = 0.0   # Volunteer firefighter / SAR volunteer amount (user-entered, max $3,000)
     line_58360: float = 0.0   # BC disability amount (self) (max $9,428)
     line_58400: float = 0.0   # BC disability amount transferred
     line_58440: float = 0.0   # BC interest paid on student loans
@@ -388,11 +388,11 @@ class BC428Input:
 
 @dataclass
 class BC428Result:
-    """All computed lines for the 2024 BC428."""
+    """All computed lines for the 2025 BC428."""
 
     bc_tax_on_income: float = 0.0    # BC tax before credits (Part 1)
     line_58080:       float = 0.0    # BC age amount (computed)
-    line_58300:       float = 0.0    # BC employment amount (computed)
+    line_58300:       float = 0.0    # Volunteer firefighter / SAR volunteer amount
     bc_pension_amt:   float = 0.0    # BC pension income amount (computed, max $1,000)
     line_59090:       float = 0.0    # Total BC credit amounts
     bc_credits:       float = 0.0    # 59090 × 5.06 %
@@ -420,8 +420,7 @@ def calculate_bc428(
 
     # Part 2 — Computed credit amounts
     r.line_58080 = bc_age_amount(taxable_income, inp.age_65_or_over)
-    r.line_58300 = round(min(inp.line_58240 + inp.line_58280, BC_EMPLOYMENT_MAX), 2)
-    # Note: BC employment amount is approximated as min(CPP + EI paid, BC max)
+    r.line_58300 = inp.line_58300  # volunteer firefighter/SAR — user-entered
     r.bc_pension_amt = round(min(inp.bc_eligible_pension, BC_PENSION_MAX), 2)
 
     r.line_59090 = round(sum([

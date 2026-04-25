@@ -157,34 +157,39 @@
 
     /* ── Section / sub-section headers ── */
     .form-section {
-      background: var(--cra-section);
+      background: #1c1c1c;
       color: #fff;
-      padding: 7px 16px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: .3px;
+      padding: 6px 14px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
       margin-top: 1px;
     }
     .form-subsection {
-      background: var(--cra-sub);
-      color: var(--cra-navy);
-      padding: 5px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      border-bottom: 1px solid var(--cra-border);
+      background: #d8d8d8;
+      color: #111;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      border-bottom: 1px solid #aaa;
     }
 
     /* ── Form lines ── */
     .form-line {
       display: grid;
-      grid-template-columns: 1fr 72px 190px;
+      grid-template-columns: 1fr 26px 72px 158px;
       min-height: 34px;
-      border-bottom: 1px solid #e4e9ef;
+      border-bottom: 1px solid #e0e0e0;
       align-items: stretch;
+      background: #fff;
     }
-    .form-line:nth-child(even) { background: var(--cra-row-even); }
-    .form-line.calc  { background: var(--cra-calc-bg) !important; }
-    .form-line.total { background: var(--cra-total-bg) !important; font-weight: 700; }
+    .form-line.calc  { background: #f4f4f4 !important; }
+    .form-line.total {
+      background: #e6e6e6 !important;
+      border-top: 2px solid #333;
+      font-weight: 700;
+    }
 
     .line-desc {
       padding: 6px 10px 6px 16px;
@@ -192,7 +197,9 @@
       line-height: 1.35;
       display: flex;
       align-items: center;
+      gap: 4px;
     }
+    .line-desc span:first-child { flex: 1 1 auto; }
     .line-desc.indent1 { padding-left: 30px; }
     .line-desc.indent2 { padding-left: 44px; }
     .line-desc .note {
@@ -202,16 +209,26 @@
       margin-top: 2px;
     }
 
+    .line-op {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #444;
+      border-left: 1px solid #e0e0e0;
+    }
+
     .line-num {
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11px;
-      font-weight: 600;
-      color: var(--cra-navy);
-      border-left: 1px solid #d4dce8;
-      border-right: 1px solid #d4dce8;
-      background: rgba(220,233,245,.4);
+      font-weight: 700;
+      color: #333;
+      border-left: 1px solid #aaa;
+      border-right: 1px solid #aaa;
+      background: #eaeaea;
       padding: 0 4px;
       text-align: center;
     }
@@ -232,11 +249,11 @@
     .amount-field {
       width: 100%;
       text-align: right;
-      border: 1.5px solid var(--cra-input-bd);
+      border: 1px solid #222;
+      border-radius: 0;
       padding: 4px 7px;
       font-size: 13px;
       font-family: "Courier New", monospace;
-      border-radius: 1px;
       background: #fff;
       color: var(--text);
       outline: none;
@@ -247,15 +264,60 @@
       box-shadow: 0 0 0 2px rgba(26,82,150,.2);
     }
     .amount-field[readonly] {
-      background: var(--cra-calc-bg);
-      border-color: var(--cra-border);
-      color: var(--cra-navy);
+      background: #f4f4f4;
+      border-color: #aaa;
+      color: #333;
       cursor: default;
     }
     .form-line.total .amount-field[readonly] {
-      background: var(--cra-total-bg);
-      border-color: var(--cra-mid);
+      background: #e6e6e6;
+      border-color: #777;
       font-weight: 700;
+    }
+
+    /* ── Formula tooltip ── */
+    .formula-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #1a5296;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      margin-left: 6px;
+      flex-shrink: 0;
+      vertical-align: middle;
+      font-family: serif;
+      font-style: italic;
+      line-height: 1;
+    }
+    .formula-btn:hover { background: #0e3d7a; }
+
+    .formula-panel {
+      display: none;
+      grid-column: 1 / -1;
+      background: #f0f7ff;
+      border: 1px solid #a8c4e0;
+      border-top: 2px solid #1a5296;
+      padding: 8px 14px 8px 18px;
+      font-size: 11.5px;
+      color: #1c3a5c;
+      line-height: 1.55;
+    }
+    .formula-panel.open { display: block; }
+    .formula-panel strong { color: #0e3d7a; }
+    .formula-panel .formula-expr {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      background: #deeaf7;
+      padding: 3px 7px;
+      border-radius: 2px;
+      margin-top: 4px;
+      display: inline-block;
     }
 
     /* ── Action toolbar ── */
@@ -335,7 +397,7 @@
     #toast.err { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
     @media (max-width: 660px) {
-      .form-line { grid-template-columns: 1fr 60px 130px; }
+      .form-line { grid-template-columns: 1fr 20px 54px 110px; }
       .line-desc { padding-left: 10px; font-size: 12px; }
       .form-header { grid-template-columns: 1fr; }
     }
@@ -360,7 +422,7 @@
 <div class="app-header">
   <h1>
     CRA Tax Helper
-    <small>Interactive calculator — 2024 Tax Year</small>
+    <small>Interactive calculator — 2025 Tax Year</small>
   </h1>
   <nav class="app-nav">
     <a href="{{ root_path }}/" {% if request.url.path == root_path + '/' or request.url.path == root_path %}class="active"{% endif %}>Home</a>
@@ -399,6 +461,15 @@
     return v > 0
       ? `<span class="diff-pos">${s}</span>`
       : `<span class="diff-neg">${s}</span>`;
+  }
+
+  function toggleFormula(btn) {
+    const row = btn.closest('.form-line');
+    const panel = row ? row.nextElementSibling : null;
+    if (panel && panel.classList.contains('formula-panel')) {
+      panel.classList.toggle('open');
+      btn.textContent = panel.classList.contains('open') ? '×' : 'i';
+    }
   }
 </script>
 

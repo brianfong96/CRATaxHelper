@@ -1,12 +1,16 @@
 {% extends "base.html" %}
-{% block title %}BC428 — British Columbia Tax 2024{% endblock %}
+{% block title %}BC428 — British Columbia Tax 2025{% endblock %}
 
 {% block content %}
-{% macro fl(num, label, type="input", indent="", note="") %}
+{% macro fl(num, label, type="input", op="+", indent="", note="", formula="") %}
 <div class="form-line {{ type }}" id="row-{{ num }}">
   <div class="line-desc {{ indent }}">
-    {{ label }}{% if note %}<span class="note">{{ note }}</span>{% endif %}
+    <span>{{ label }}{% if note %}<span class="note">{{ note }}</span>{% endif %}</span>
+    {% if type in ("calc","total") and formula %}
+    <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    {% endif %}
   </div>
+  <div class="line-op">{% if type in ("calc","total") %}={% elif op %}{{ op }}{% endif %}</div>
   <div class="line-num">{{ num }}</div>
   <div class="line-amount">
     {% if type in ("calc","total") %}
@@ -16,6 +20,12 @@
     {% endif %}
   </div>
 </div>
+{% if type in ("calc","total") and formula %}
+<div class="formula-panel" id="fp-{{ num }}">
+  <strong>How line {{ num }} is calculated:</strong><br>
+  <span class="formula-expr">{{ formula }}</span>
+</div>
+{% endif %}
 {% endmacro %}
 
 <div class="cra-form">
@@ -26,17 +36,17 @@
       <div class="form-subtitle">Form 5010-C &nbsp;·&nbsp; British Columbia residents</div>
     </div>
     <div class="form-number">
-      <strong>BC428-2024</strong>
+      <strong>BC428-2025</strong>
       Canada Revenue Agency
     </div>
   </div>
   <div class="form-meta-bar">
     <span>Protected B when completed</span>
-    <span>2024 tax year</span>
+    <span>2025 tax year</span>
     <span>
       <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
         <input type="checkbox" id="age65bc" onchange="recalcBC428()">
-        Age 65 or older on Dec 31, 2024
+        Age 65 or older on Dec 31, 2025
       </label>
     </span>
   </div>
@@ -46,9 +56,10 @@
   <div class="form-subsection">Taxable income (from T1 line 26000)</div>
   <div class="form-line" id="row-taxable">
     <div class="line-desc">
-      Taxable income — enter amount from T1 line 26000
-      <span class="note">Use the "Open BC428 →" button on the T1 form to pre-fill this field.</span>
+      <span>Taxable income — enter amount from T1 line 26000
+      <span class="note">Use the "Open BC428 →" button on the T1 form to pre-fill this field.</span></span>
     </div>
+    <div class="line-op">+</div>
     <div class="line-num">26000</div>
     <div class="line-amount">
       <input class="amount-field" type="number" id="fTaxableIncome"
@@ -56,73 +67,145 @@
     </div>
   </div>
   <div class="form-line" id="row-div1">
-    <div class="line-desc">Taxable eligible dividends (T1 line 12000 — grossed-up amount)</div>
+    <div class="line-desc"><span>Taxable eligible dividends (T1 line 12000 — grossed-up amount)</span></div>
+    <div class="line-op">+</div>
     <div class="line-num">12000</div>
     <div class="line-amount">
       <input class="amount-field" type="number" id="fDiv12000" min="0" step="0.01" value="0" inputmode="decimal">
     </div>
   </div>
   <div class="form-line" id="row-div2">
-    <div class="line-desc">Taxable other-than-eligible dividends (T1 line 12010 — grossed-up amount)</div>
+    <div class="line-desc"><span>Taxable other-than-eligible dividends (T1 line 12010 — grossed-up amount)</span></div>
+    <div class="line-op">+</div>
     <div class="line-num">12010</div>
     <div class="line-amount">
       <input class="amount-field" type="number" id="fDiv12010" min="0" step="0.01" value="0" inputmode="decimal">
     </div>
   </div>
 
-  {{ fl("bcTax", "BC tax on taxable income", type="calc",
-        note="2024 brackets: 5.06% / 7.70% / 10.50% / 12.29% / 14.70% / 16.80% / 20.50%") }}
+  <div class="form-line calc" id="row-bcTax">
+    <div class="line-desc">
+      <span>BC tax on taxable income
+      <span class="note">2025 brackets: 5.06% / 7.70% / 10.50% / 12.29% / 14.70% / 16.80% / 20.50%</span></span>
+      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    </div>
+    <div class="line-op">=</div>
+    <div class="line-num">bcTax</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="fbcTax" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+  <div class="formula-panel" id="fp-bcTax">
+    <strong>How BC tax on income is calculated:</strong><br>
+    <span class="formula-expr">Apply 2025 BC tax brackets to taxable income (line 26000):  5.06% on first $49,279 · 7.70% on $49,279–$98,560 · 10.50% on $98,560–$113,158 · 12.29% on $113,158–$137,407 · 14.70% on $137,407–$186,306 · 16.80% on $186,306–$259,829 · 20.50% above $259,829</span>
+  </div>
 
   <!-- ══ PART 2: BC Non-Refundable Tax Credits ══════════════════════════════ -->
   <div class="form-section">Part 2 — BC Non-Refundable Tax Credits</div>
   <div class="form-subsection">Personal amounts</div>
-  {{ fl("58040", "BC basic personal amount",
-        note="2024: $11,981.00 — enter this amount") }}
+  {{ fl("58040", "BC basic personal amount", op="+",
+        note="2025: $12,932.00 — enter this amount") }}
   {{ fl("58080", "BC age amount (if born before January 1, 1960)", type="calc",
-        note="Auto-computed from taxable income — 2024 max $4,965") }}
-  {{ fl("58120", "Spouse or common-law partner amount") }}
-  {{ fl("58160", "Amount for an eligible dependant") }}
-  {{ fl("58200", "Canada caregiver amount for spouse or common-law partner") }}
+        formula="max(0, $5,799 − (net_income − $43,169) × 15%)  •  Zero if net income ≥ $81,829  •  Full $5,799 if net income ≤ $43,169") }}
+  {{ fl("58120", "Spouse or common-law partner amount", op="+") }}
+  {{ fl("58160", "Amount for an eligible dependant", op="+") }}
+  {{ fl("58200", "Canada caregiver amount for spouse or common-law partner", op="+") }}
 
   <div class="form-subsection">Employment amounts</div>
-  {{ fl("58240", "CPP or QPP contributions through employment (from T1 line 31000)") }}
-  {{ fl("58280", "Employment insurance premiums through employment (from T1 line 31200)") }}
-  {{ fl("58300", "BC employment amount", type="calc",
-        note="Auto-computed — min(CPP paid + EI paid, $1,146)") }}
+  {{ fl("58240", "CPP or QPP contributions through employment (from T1 line 31000)", op="+") }}
+  {{ fl("58280", "Employment insurance premiums through employment (from T1 line 31200)", op="+") }}
+  {{ fl("58300", "Volunteer firefighter / search and rescue volunteer amount (user-entered, max $3,000)", op="+") }}
 
   <div class="form-subsection">Pension and disability amounts</div>
-  {{ fl("bcPensionSrc", "Eligible pension income (source for BC pension amount)") }}
-  {{ fl("bcPensionAmt", "BC pension income amount", type="calc",
-        note="Auto-computed — min(eligible pension income, $1,000)") }}
-  {{ fl("58360", "BC disability amount for self") }}
-  {{ fl("58400", "BC disability amount transferred from a dependant") }}
+  {{ fl("bcPensionSrc", "Eligible pension income (source for BC pension amount)", op="+") }}
+  <div class="form-line calc" id="row-bcPensionAmt">
+    <div class="line-desc">
+      <span>BC pension income amount
+      <span class="note">Auto-computed — min(eligible pension income, $1,000)</span></span>
+      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    </div>
+    <div class="line-op">=</div>
+    <div class="line-num">bcPensionAmt</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="fbcPensionAmt" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+  <div class="formula-panel" id="fp-bcPensionAmt">
+    <strong>How BC pension income amount is calculated:</strong><br>
+    <span class="formula-expr">min(eligible pension income, $1,000)</span>
+  </div>
+  {{ fl("58360", "BC disability amount for self", op="+") }}
+  {{ fl("58400", "BC disability amount transferred from a dependant", op="+") }}
 
   <div class="form-subsection">Education and medical amounts</div>
-  {{ fl("58440", "Interest paid on student loans") }}
-  {{ fl("58480", "Tuition and education amounts") }}
-  {{ fl("58560", "Tuition transferred from a child or grandchild") }}
-  {{ fl("58640", "Amounts transferred from your spouse or common-law partner") }}
-  {{ fl("58689", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later") }}
-  {{ fl("58729", "Allowable amount of medical expenses for other dependants") }}
+  {{ fl("58440", "Interest paid on student loans", op="+") }}
+  {{ fl("58480", "Tuition and education amounts", op="+") }}
+  {{ fl("58560", "Tuition transferred from a child or grandchild", op="+") }}
+  {{ fl("58640", "Amounts transferred from your spouse or common-law partner", op="+") }}
+  {{ fl("58689", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later", op="+") }}
+  {{ fl("58729", "Allowable amount of medical expenses for other dependants", op="+") }}
 
   <div class="form-subsection">Donations and gifts</div>
-  {{ fl("58800", "Donations and gifts (Schedule 9)") }}
+  {{ fl("58800", "Donations and gifts (Schedule 9)", op="+") }}
 
   {{ fl("59090", "Total BC non-refundable tax credit amounts", type="calc",
-        note="Sum of lines 58040 – 58800") }}
-  {{ fl("bcCredits", "BC non-refundable tax credit (line 59090 × 5.06%)", type="calc") }}
+        formula="58040 + 58080 + 58120 + 58160 + 58200 + 58240 + 58280 + 58300 + pension + 58360 + 58400 + 58440 + 58480 + 58560 + 58640 + 58689 + 58729 + 58800") }}
+
+  <div class="form-line calc" id="row-bcCredits">
+    <div class="line-desc">
+      <span>BC non-refundable tax credit (line 59090 × 5.06%)</span>
+      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    </div>
+    <div class="line-op">=</div>
+    <div class="line-num">bcCredits</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="fbcCredits" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+  <div class="formula-panel" id="fp-bcCredits">
+    <strong>How BC credits are calculated:</strong><br>
+    <span class="formula-expr">line 59090 × 5.06%  (BC non-refundable tax credit rate)</span>
+  </div>
 
   <!-- ══ PART 3: BC Tax ══════════════════════════════════════════════════════ -->
   <div class="form-section">Part 3 — Net BC Tax</div>
   <div class="form-subsection">BC dividend tax credit</div>
-  {{ fl("bcDTC", "BC dividend tax credit", type="calc",
-        note="Auto-computed from lines 12000 and 12010") }}
+  <div class="form-line calc" id="row-bcDTC">
+    <div class="line-desc">
+      <span>BC dividend tax credit
+      <span class="note">Auto-computed from lines 12000 and 12010</span></span>
+      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    </div>
+    <div class="line-op">=</div>
+    <div class="line-num">bcDTC</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="fbcDTC" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+  <div class="formula-panel" id="fp-bcDTC">
+    <strong>How BC dividend tax credit is calculated:</strong><br>
+    <span class="formula-expr">line 12000 × 12%  +  line 12010 × 1.96%  (BC dividend tax credit on grossed-up taxable amounts)</span>
+  </div>
   <div class="form-subsection">Other BC tax credits</div>
-  {{ fl("61520", "BC political contribution tax credit") }}
-  {{ fl("61600", "BC mining exploration tax credit") }}
+  {{ fl("61520", "BC political contribution tax credit", op="+") }}
+  {{ fl("61600", "BC mining exploration tax credit", op="+") }}
 
-  {{ fl("42800", "BC tax — enter on line 42000 of your T1 return", type="total",
-        note="BC tax on income minus BC credits and BC DTC") }}
+  <div class="form-line total" id="row-42800">
+    <div class="line-desc">
+      <span>BC tax — enter on line 42000 of your T1 return
+      <span class="note">BC tax on income minus BC credits and BC DTC</span></span>
+      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+    </div>
+    <div class="line-op">=</div>
+    <div class="line-num">42800</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="f42800" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+  <div class="formula-panel" id="fp-42800">
+    <strong>How line 42800 is calculated:</strong><br>
+    <span class="formula-expr">BC tax on income − BC non-refundable credits − BC dividend tax credit − line 61520 − line 61600 (minimum 0)</span>
+  </div>
 
   <!-- Toolbar -->
   <div class="form-toolbar">
@@ -138,20 +221,19 @@
 
 {% block scripts %}
 <script>
-// ── 2024 BC tax brackets ──────────────────────────────────────────────────────
+// ── 2025 BC tax brackets ──────────────────────────────────────────────────────
 const BC_BRACKETS = [
-  [45654, 0.0506],[91310, 0.0770],[104835, 0.1050],
-  [127299, 0.1229],[172602, 0.1470],[240716, 0.1680],[Infinity, 0.2050]
+  [49279,0.0506],[98560,0.0770],[113158,0.1050],
+  [137407,0.1229],[186306,0.1470],[259829,0.1680],[Infinity,0.2050]
 ];
-const BC_BASIC_PERSONAL = 11981;
-const BC_EMPLOYMENT_MAX = 1146;
+const BC_BASIC_PERSONAL = 12932;
 const BC_PENSION_MAX    = 1000;
-const BC_AGE_MAX        = 4965;
-const BC_AGE_LO         = 35985;
-const BC_AGE_HI         = 75885;
+const BC_AGE_MAX        = 5799;
+const BC_AGE_LO         = 43169;
+const BC_AGE_HI         = 81829;
 const BC_CREDIT_RATE    = 0.0506;
-const BC_ELIG_DTC_RATE  = 0.12 / 1.38;
-const BC_NELIG_DTC_RATE = 0.024674 / 1.15;
+const BC_ELIG_DTC_RATE  = 0.12;     // 12% of grossed-up taxable amount
+const BC_NELIG_DTC_RATE = 0.0196;   // 1.96% of grossed-up taxable amount
 
 function applyBrackets(income, brackets) {
   income = Math.max(0, income);
@@ -193,17 +275,13 @@ function recalcBC428() {
   }
   s(58080, age58080);
 
-  // Employment amount
-  const emp58300 = Math.min(gId(58240) + gId(58280), BC_EMPLOYMENT_MAX);
-  s(58300, emp58300);
-
   // Pension amount
   const pen = Math.min(g('fbcPensionSrc'), BC_PENSION_MAX);
   sEl('fbcPensionAmt', pen);
 
-  // Total credits (59090)
+  // Total credits (59090) — line 58300 is now user-entered volunteer amount
   const total59090 = gId(58040) + age58080 + gId(58120) + gId(58160) + gId(58200)
-    + gId(58240) + gId(58280) + emp58300
+    + gId(58240) + gId(58280) + gId(58300)
     + pen + gId(58360) + gId(58400) + gId(58440) + gId(58480)
     + gId(58560) + gId(58640) + gId(58689) + gId(58729) + gId(58800);
   s(59090, total59090);
@@ -237,7 +315,7 @@ function saveAndReturnToT1() {
 
 // ── Persistence ────────────────────────────────────────────────────────────
 const BC428_INPUTS_IDS = [
-  'f58040','f58120','f58160','f58200','f58240','f58280',
+  'f58040','f58120','f58160','f58200','f58240','f58280','f58300',
   'f58360','f58400','f58440','f58480','f58560','f58640',
   'f58689','f58729','f58800','f61520','f61600',
   'fbcPensionSrc','fTaxableIncome','fDiv12000','fDiv12010'

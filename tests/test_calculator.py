@@ -1,7 +1,7 @@
 """
-Unit tests for the CRA Tax Helper calculator module (2024 tax year).
+Unit tests for the CRA Tax Helper calculator module (2025 tax year).
 
-All expected values are derived from the publicly available 2024 federal and BC
+All expected values are derived from the publicly available 2025 federal and BC
 tax rates and brackets.  Where possible, hand-computed values are provided in
 comments so the test intent is clear without running the code.
 """
@@ -32,30 +32,29 @@ class TestApplyBrackets:
         assert apply_brackets(-5000, FEDERAL_BRACKETS) == 0.0
 
     def test_first_bracket_only(self):
-        # $40,000 × 15 % = $6,000
-        assert apply_brackets(40_000, FEDERAL_BRACKETS) == pytest.approx(6_000.00, abs=0.01)
+        # $40,000 × 14.5% = $5,800.00
+        assert apply_brackets(40_000, FEDERAL_BRACKETS) == pytest.approx(5_800.00, abs=0.01)
 
     def test_crosses_first_bracket(self):
-        # $55,867 × 15% = $8,380.05
-        # + ($60,000 - $55,867) × 20.5% = $4,133 × 20.5% = $847.27
-        # total ≈ $9,227.32
+        # $57,375 × 14.5% = $8,319.375
+        # + ($60,000 - $57,375) × 20.5% = $2,625 × 20.5% = $538.125
+        # total = $8,857.50
         result = apply_brackets(60_000, FEDERAL_BRACKETS)
-        assert result == pytest.approx(9_227.32, abs=0.02)
+        assert result == pytest.approx(8_857.50, abs=0.02)
 
     def test_exactly_at_bracket_boundary(self):
-        expected = 55_867 * 0.15
-        assert apply_brackets(55_867, FEDERAL_BRACKETS) == pytest.approx(expected, abs=0.01)
+        expected = 57_375 * 0.145
+        assert apply_brackets(57_375, FEDERAL_BRACKETS) == pytest.approx(expected, abs=0.01)
 
     def test_all_federal_brackets(self):
-        # $250,000 income — crosses all five brackets
-        # Bracket 1: $55,867 × 15%              =  $8,380.05
-        # Bracket 2: ($111,733-$55,867) × 20.5% = $11,452.53
-        # Bracket 3: ($154,906-$111,733) × 26%  = $11,224.98
-        # Bracket 4: ($220,000-$154,906) × 29%  = $18,877.26
-        # Bracket 5: ($250,000-$220,000) × 33%  =  $9,900.00
-        # Total                                  = $59,834.82
+        # $250,000 income — crosses four brackets
+        # Bracket 1: $57,375 × 14.5%              =  $8,319.375
+        # Bracket 2: ($114,750-$57,375) × 20.5%   = $11,761.875
+        # Bracket 3: ($177,882-$114,750) × 26%    = $16,414.32
+        # Bracket 4: ($250,000-$177,882) × 29%    = $20,914.22
+        # Total                                    = $57,409.79
         result = apply_brackets(250_000, FEDERAL_BRACKETS)
-        assert result == pytest.approx(59_834.82, abs=0.10)
+        assert result == pytest.approx(57_409.79, abs=0.10)
 
     def test_bc_first_bracket(self):
         # $30,000 × 5.06% = $1,518.00
@@ -63,10 +62,10 @@ class TestApplyBrackets:
         assert result == pytest.approx(1_518.00, abs=0.01)
 
     def test_bc_two_brackets(self):
-        # $60,000:  $45,654 × 5.06%  = $2,310.09
-        #         + $14,346 × 7.70%  = $1,104.64  → total ≈ $3,414.73
+        # $60,000:  $49,279 × 5.06%  = $2,493.52
+        #         + $10,721 × 7.70%  = $825.52  → total ≈ $3,319.04
         result = apply_brackets(60_000, BC_BRACKETS)
-        assert result == pytest.approx(3_414.73, abs=0.02)
+        assert result == pytest.approx(3_319.04, abs=0.02)
 
     def test_bc_all_brackets(self):
         result_300k = apply_brackets(300_000, BC_BRACKETS)
@@ -82,22 +81,22 @@ class TestFederalAgeAmount:
         assert federal_age_amount(50_000, False) == 0.0
 
     def test_over_65_low_income(self):
-        assert federal_age_amount(30_000, True) == pytest.approx(8_790.00, abs=0.01)
+        assert federal_age_amount(30_000, True) == pytest.approx(9_028.00, abs=0.01)
 
     def test_over_65_at_threshold(self):
-        assert federal_age_amount(42_335, True) == pytest.approx(8_790.00, abs=0.01)
+        assert federal_age_amount(45_522, True) == pytest.approx(9_028.00, abs=0.01)
 
     def test_over_65_partial_reduction(self):
-        # income = $60,000 → reduction = ($60,000 - $42,335) × 15% = $2,649.75
-        # age amount = $8,790 - $2,649.75 = $6,140.25
+        # income = $60,000 → reduction = ($60,000 - $45,522) × 15% = $2,171.70
+        # age amount = $9,028 - $2,171.70 = $6,856.30
         result = federal_age_amount(60_000, True)
-        assert result == pytest.approx(6_140.25, abs=0.01)
+        assert result == pytest.approx(6_856.30, abs=0.01)
 
     def test_over_65_fully_phased_out(self):
-        assert federal_age_amount(100_000, True) == 0.0
+        assert federal_age_amount(110_000, True) == 0.0
 
     def test_over_65_at_ceiling(self):
-        assert federal_age_amount(98_309, True) == 0.0
+        assert federal_age_amount(105_709, True) == 0.0
 
 
 class TestBCageAmount:
@@ -105,10 +104,10 @@ class TestBCageAmount:
         assert bc_age_amount(40_000, False) == 0.0
 
     def test_over_65_low_income(self):
-        assert bc_age_amount(20_000, True) == pytest.approx(4_965.00, abs=0.01)
+        assert bc_age_amount(20_000, True) == pytest.approx(5_799.00, abs=0.01)
 
     def test_over_65_fully_phased_out(self):
-        assert bc_age_amount(80_000, True) == 0.0
+        assert bc_age_amount(85_000, True) == 0.0
 
 
 # ── T1 calculate_t1 ────────────────────────────────────────────────────────────
@@ -151,9 +150,9 @@ class TestCalculateT1:
         assert r.line_26000 == pytest.approx(75_000.00, abs=0.01)
 
     def test_canada_employment_amount_capped(self):
-        # Employment income > $1,433 → capped at $1,433
+        # Employment income > $1,471 → capped at $1,471
         r = self._simple(line_10100=100_000)
-        assert r.line_31260 == pytest.approx(1_433.00, abs=0.01)
+        assert r.line_31260 == pytest.approx(1_471.00, abs=0.01)
 
     def test_canada_employment_amount_partial(self):
         # Employment income = $800 → employment amount = $800
@@ -169,32 +168,31 @@ class TestCalculateT1:
         assert r.line_31400 == pytest.approx(1_200.00, abs=0.01)
 
     def test_age_amount_auto_computed(self):
-        # Net income $30,000 is below the $42,335 threshold → full $8,790 age amount
+        # Net income $30,000 is below the $45,522 threshold → full $9,028 age amount
         r = calculate_t1(T1Input(line_10100=30_000, age_65_or_over=True))
-        assert r.line_30100 == pytest.approx(8_790.00, abs=0.01)
+        assert r.line_30100 == pytest.approx(9_028.00, abs=0.01)
 
     def test_age_amount_partially_reduced(self):
-        # Net income $50,000: reduction = ($50,000 - $42,335) × 15% = $1,149.75
-        # age amount = $8,790 - $1,149.75 = $7,640.25
+        # Net income $50,000: reduction = ($50,000 - $45,522) × 15% = $671.70
+        # age amount = $9,028 - $671.70 = $8,356.30
         r = calculate_t1(T1Input(line_10100=50_000, age_65_or_over=True))
-        assert r.line_30100 == pytest.approx(7_640.25, abs=0.01)
+        assert r.line_30100 == pytest.approx(8_356.30, abs=0.01)
 
     def test_federal_credits_total(self):
         # Only basic personal amount filled in
         inp = T1Input(line_10100=0)
-        inp.line_30000 = 15_705
+        inp.line_30000 = 16_129
         r = calculate_t1(inp)
-        assert r.line_35000 == pytest.approx(15_705.00, abs=0.01)
-        assert r.line_35100 == pytest.approx(15_705 * 0.15, abs=0.01)
+        assert r.line_35000 == pytest.approx(16_129.00, abs=0.01)
+        assert r.line_35100 == pytest.approx(16_129 * 0.145, abs=0.01)
 
     def test_federal_tax_single_bracket(self):
-        # Taxable income $30,000 → all in 15% bracket
-        # Federal tax = $30,000 × 15% = $4,500
-        # Credits: basic personal $15,705 × 15% = $2,355.75 + employment $1,433 × 15% = $214.95
-        # = $2,570.70 credit; net tax = $4,500 - $2,570.70 = $1,929.30
+        # Taxable income $30,000 → all in 14.5% bracket
+        # Federal tax = $30,000 × 14.5% = $4,350
+        # Credits: basic personal $16,129 × 14.5% + employment $1,471 × 14.5%
         r = calculate_t1(T1Input(
             line_10100=30_000,
-            line_30000=15_705,
+            line_30000=16_129,
         ))
         fed_tax = apply_brackets(r.line_26000, FEDERAL_BRACKETS)
         assert r.line_38000 == pytest.approx(fed_tax, abs=0.01)
@@ -202,28 +200,27 @@ class TestCalculateT1:
 
     def test_net_federal_tax_is_non_negative(self):
         # Very low income — credits exceed tax, result clamped to 0
-        r = calculate_t1(T1Input(line_10100=10_000, line_30000=15_705))
+        r = calculate_t1(T1Input(line_10100=10_000, line_30000=16_129))
         assert r.line_40424 == 0.0
 
     def test_dividend_tax_credit_eligible(self):
         # Eligible dividends taxable amount $10,000 (grossed-up)
         # DTC = $10,000 × (6/11) × (0.38/1.38) ≈ $1,501.98
         from app.calculator import FEDERAL_ELIGIBLE_DTC_RATE
-        r = calculate_t1(T1Input(line_12000=10_000, line_30000=15_705))
+        r = calculate_t1(T1Input(line_12000=10_000, line_30000=16_129))
         expected_dtc = 10_000 * FEDERAL_ELIGIBLE_DTC_RATE
         assert r.line_40425 == pytest.approx(expected_dtc, abs=0.01)
 
     def test_dividend_tax_credit_non_eligible(self):
         from app.calculator import FEDERAL_NON_ELIGIBLE_DTC_RATE
-        r = calculate_t1(T1Input(line_12010=5_000, line_30000=15_705))
+        r = calculate_t1(T1Input(line_12010=5_000, line_30000=16_129))
         expected_dtc = 5_000 * FEDERAL_NON_ELIGIBLE_DTC_RATE
         assert r.line_40425 == pytest.approx(expected_dtc, abs=0.01)
 
     def test_refund_when_tax_deducted_exceeds_payable(self):
-        # Tax deducted $10,000, payable ~$1,929 → refund ≈ $8,071
         r = calculate_t1(T1Input(
             line_10100=30_000,
-            line_30000=15_705,
+            line_30000=16_129,
             line_43700=10_000,
         ))
         assert r.line_48400 > 0
@@ -233,19 +230,19 @@ class TestCalculateT1:
         # No tax deducted, large income
         r = calculate_t1(T1Input(
             line_10100=200_000,
-            line_30000=15_705,
+            line_30000=16_129,
             line_43700=0,
         ))
         assert r.line_48500 > 0
         assert r.line_48400 == 0.0
 
     def test_refund_and_balance_not_both_positive(self):
-        r = calculate_t1(T1Input(line_10100=80_000, line_30000=15_705, line_43700=20_000))
+        r = calculate_t1(T1Input(line_10100=80_000, line_30000=16_129, line_43700=20_000))
         # Exactly one of them should be > 0 (or both 0 if exactly equal)
         assert not (r.line_48400 > 0 and r.line_48500 > 0)
 
     def test_bc_provincial_tax_fed_into_payable(self):
-        r = calculate_t1(T1Input(line_10100=80_000, line_30000=15_705), bc_net_tax=5_000)
+        r = calculate_t1(T1Input(line_10100=80_000, line_30000=16_129), bc_net_tax=5_000)
         assert r.line_42000 == pytest.approx(5_000.00, abs=0.01)
         assert r.line_48200 == pytest.approx(r.line_40424 + 5_000, abs=0.01)
 
@@ -262,7 +259,7 @@ class TestCalculateT1:
         r = calculate_t1(T1Input(
             line_10100=90_000,
             line_20800=10_000,
-            line_30000=15_705,
+            line_30000=16_129,
             line_31000=3_867.50,
             line_31200=1_049.12,
             line_43700=18_000,
@@ -285,18 +282,18 @@ class TestCalculateBC428:
         assert r.line_42800 == 0.0
 
     def test_bc_tax_on_income(self):
-        # $60,000 → 2 brackets: $45,654 × 5.06% + $14,346 × 7.70% ≈ $3,414.73
+        # $60,000 → 2 brackets: $49,279 × 5.06% + $10,721 × 7.70% ≈ $3,319.04
         r = calculate_bc428(BC428Input(), taxable_income=60_000)
-        assert r.bc_tax_on_income == pytest.approx(3_414.73, abs=0.02)
+        assert r.bc_tax_on_income == pytest.approx(3_319.04, abs=0.02)
 
     def test_bc_basic_personal_credit(self):
-        # Only basic personal amount → credits = $11,981 × 5.06% = $606.24
-        r = calculate_bc428(BC428Input(line_58040=11_981), taxable_income=50_000)
-        assert r.bc_credits == pytest.approx(11_981 * BC_CREDIT_RATE, abs=0.01)
+        # Only basic personal amount → credits = $12,932 × 5.06%
+        r = calculate_bc428(BC428Input(line_58040=12_932), taxable_income=50_000)
+        assert r.bc_credits == pytest.approx(12_932 * BC_CREDIT_RATE, abs=0.01)
 
     def test_age_amount_auto_computed(self):
         r = calculate_bc428(BC428Input(age_65_or_over=True), taxable_income=30_000)
-        assert r.line_58080 == pytest.approx(4_965.00, abs=0.01)
+        assert r.line_58080 == pytest.approx(5_799.00, abs=0.01)
 
     def test_age_amount_zero_if_not_65(self):
         r = calculate_bc428(BC428Input(age_65_or_over=False), taxable_income=30_000)
@@ -316,20 +313,10 @@ class TestCalculateBC428:
         )
         assert r.bc_pension_amt == pytest.approx(600.00, abs=0.01)
 
-    def test_bc_employment_amount_capped(self):
-        # CPP $3,867.50 + EI $1,049.12 = $4,916.62 → capped at $1,146
-        r = calculate_bc428(
-            BC428Input(line_58240=3_867.50, line_58280=1_049.12),
-            taxable_income=80_000,
-        )
-        assert r.line_58300 == pytest.approx(1_146.00, abs=0.01)
-
-    def test_bc_employment_amount_partial(self):
-        r = calculate_bc428(
-            BC428Input(line_58240=500, line_58280=300),
-            taxable_income=80_000,
-        )
-        assert r.line_58300 == pytest.approx(800.00, abs=0.01)
+    def test_bc_volunteer_amount_passed_through(self):
+        # line_58300 is now user-entered; value should pass through unchanged
+        r = calculate_bc428(BC428Input(line_58300=3_000), taxable_income=80_000)
+        assert r.line_58300 == 3_000.0
 
     def test_bc_dividend_tax_credit_eligible(self):
         from app.calculator import BC_ELIGIBLE_DTC_RATE
@@ -343,25 +330,21 @@ class TestCalculateBC428:
 
     def test_bc_net_tax_is_non_negative(self):
         # Low income — credits should exceed tax
-        r = calculate_bc428(BC428Input(line_58040=11_981), taxable_income=10_000)
+        r = calculate_bc428(BC428Input(line_58040=12_932), taxable_income=10_000)
         assert r.line_42800 == 0.0
 
     def test_bc_net_tax_positive_high_income(self):
-        r = calculate_bc428(BC428Input(line_58040=11_981), taxable_income=150_000)
+        r = calculate_bc428(BC428Input(line_58040=12_932), taxable_income=150_000)
         assert r.line_42800 > 0
 
     def test_known_scenario_bc428(self):
         """
-        $80,000 taxable income, basic personal, CPP+EI employment amounts.
-        BC tax: $45,654×5.06% + $34,346×7.70% = $2,310.09 + $2,644.64 = $4,954.73
-        Credits: ($11,981 + $1,146) × 5.06% ≈ $664.32
-        Net BC tax ≈ $4,954.73 - $664.32 = $4,290.41
+        $80,000 taxable income, basic personal amount only (2025).
+        BC tax: $49,279×5.06% + $30,721×7.70% = $2,493.52 + $2,365.52 = $4,859.04
+        Credits: $12,932 × 5.06% = $654.36 (basic personal only)
+        Net BC tax ≈ $4,859.04 - $654.36 = $4,204.68
         """
-        inp = BC428Input(
-            line_58040=11_981,
-            line_58240=3_867.50,
-            line_58280=1_049.12,
-        )
+        inp = BC428Input(line_58040=12_932)
         r = calculate_bc428(inp, taxable_income=80_000)
         bc_raw = apply_brackets(80_000, BC_BRACKETS)
         assert r.bc_tax_on_income == pytest.approx(bc_raw, abs=0.01)
@@ -384,14 +367,14 @@ class TestIntegration:
         t1_inp = T1Input(
             line_10100=100_000,
             line_20800=15_000,   # RRSP deduction
-            line_30000=15_705,
+            line_30000=16_129,
             line_31000=3_867.50,
             line_31200=1_049.12,
         )
         t1_first = calculate_t1(t1_inp)
 
         bc_inp = BC428Input(
-            line_58040=11_981,
+            line_58040=12_932,
             line_58240=3_867.50,
             line_58280=1_049.12,
         )
@@ -408,10 +391,10 @@ class TestIntegration:
         withheld = 20_000
 
         t1_low = calculate_t1(T1Input(
-            line_10100=60_000, line_30000=15_705, line_43700=withheld
+            line_10100=60_000, line_30000=16_129, line_43700=withheld
         ))
         t1_high = calculate_t1(T1Input(
-            line_10100=120_000, line_30000=15_705, line_43700=withheld
+            line_10100=120_000, line_30000=16_129, line_43700=withheld
         ))
 
         # Higher income → higher tax → smaller refund (or larger balance owing)
@@ -419,8 +402,8 @@ class TestIntegration:
 
     def test_rrsp_deduction_reduces_tax(self):
         """An RRSP deduction should reduce or maintain the net federal tax."""
-        base = calculate_t1(T1Input(line_10100=80_000, line_30000=15_705))
+        base = calculate_t1(T1Input(line_10100=80_000, line_30000=16_129))
         with_rrsp = calculate_t1(T1Input(
-            line_10100=80_000, line_20800=15_000, line_30000=15_705
+            line_10100=80_000, line_20800=15_000, line_30000=16_129
         ))
         assert with_rrsp.line_40424 <= base.line_40424
