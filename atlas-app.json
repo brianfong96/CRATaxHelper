@@ -1,0 +1,13 @@
+{
+  "name": "CRA Tax Helper",
+  "slug": "cra-taxhelper",
+  "image": "aether-taxhelper:latest",
+  "port": 8080,
+  "health_path": "/health",
+  "description": "Interactive CRA T1 General and BC428 tax calculator with scenario comparison",
+  "cpu_limit": "0.5",
+  "memory_limit": "256m",
+  "env": {
+    "ROOT_PATH": "/app/cra-taxhelper"
+  }
+}

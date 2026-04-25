@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+{% block title %}BC428 — British Columbia Tax 2024{% endblock %}
+
+{% block content %}
+{% macro fl(num, label, type="input", indent="", note="") %}
+<div class="form-line {{ type }}" id="row-{{ num }}">
+  <div class="line-desc {{ indent }}">
+    {{ label }}{% if note %}<span class="note">{{ note }}</span>{% endif %}
+  </div>
+  <div class="line-num">{{ num }}</div>
+  <div class="line-amount">
+    {% if type in ("calc","total") %}
+    <input class="amount-field" type="text" id="f{{ num }}" readonly value="0.00" tabindex="-1">
+    {% else %}
+    <input class="amount-field" type="number" id="f{{ num }}" min="0" step="0.01" value="0" inputmode="decimal">
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+<div class="cra-form">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">BC428 — British Columbia Tax</div>
+      <div class="form-subtitle">Form 5010-C &nbsp;·&nbsp; British Columbia residents</div>
+    </div>
+    <div class="form-number">
+      <strong>BC428-2024</strong>
+      Canada Revenue Agency
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2024 tax year</span>
+    <span>
+      <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="age65bc" onchange="recalcBC428()">
+        Age 65 or older on Dec 31, 2024
+      </label>
+    </span>
+  </div>
+
+  <!-- Taxable income imported from T1 -->
+  <div class="form-section">Part 1 — BC Tax on Taxable Income</div>
+  <div class="form-subsection">Taxable income (from T1 line 26000)</div>
+  <div class="form-line" id="row-taxable">
+    <div class="line-desc">
+      Taxable income — enter amount from T1 line 26000
+      <span class="note">Use the "Open BC428 →" button on the T1 form to pre-fill this field.</span>
+    </div>
+    <div class="line-num">26000</div>
+    <div class="line-amount">
+      <input class="amount-field" type="number" id="fTaxableIncome"
+             min="0" step="0.01" value="0" inputmode="decimal">
+    </div>
+  </div>
+  <div class="form-line" id="row-div1">
+    <div class="line-desc">Taxable eligible dividends (T1 line 12000 — grossed-up amount)</div>
+    <div class="line-num">12000</div>
+    <div class="line-amount">
+      <input class="amount-field" type="number" id="fDiv12000" min="0" step="0.01" value="0" inputmode="decimal">
+    </div>
+  </div>
+  <div class="form-line" id="row-div2">
+    <div class="line-desc">Taxable other-than-eligible dividends (T1 line 12010 — grossed-up amount)</div>
+    <div class="line-num">12010</div>
+    <div class="line-amount">
+      <input class="amount-field" type="number" id="fDiv12010" min="0" step="0.01" value="0" inputmode="decimal">
+    </div>
+  </div>
+
+  {{ fl("bcTax", "BC tax on taxable income", type="calc",
+        note="2024 brackets: 5.06% / 7.70% / 10.50% / 12.29% / 14.70% / 16.80% / 20.50%") }}
+
+  <!-- ══ PART 2: BC Non-Refundable Tax Credits ══════════════════════════════ -->
+  <div class="form-section">Part 2 — BC Non-Refundable Tax Credits</div>
+  <div class="form-subsection">Personal amounts</div>
+  {{ fl("58040", "BC basic personal amount",
+        note="2024: $11,981.00 — enter this amount") }}
+  {{ fl("58080", "BC age amount (if born before January 1, 1960)", type="calc",
+        note="Auto-computed from taxable income — 2024 max $4,965") }}
+  {{ fl("58120", "Spouse or common-law partner amount") }}
+  {{ fl("58160", "Amount for an eligible dependant") }}
+  {{ fl("58200", "Canada caregiver amount for spouse or common-law partner") }}
+
+  <div class="form-subsection">Employment amounts</div>
+  {{ fl("58240", "CPP or QPP contributions through employment (from T1 line 31000)") }}
+  {{ fl("58280", "Employment insurance premiums through employment (from T1 line 31200)") }}
+  {{ fl("58300", "BC employment amount", type="calc",
+        note="Auto-computed — min(CPP paid + EI paid, $1,146)") }}
+
+  <div class="form-subsection">Pension and disability amounts</div>
+  {{ fl("bcPensionSrc", "Eligible pension income (source for BC pension amount)") }}
+  {{ fl("bcPensionAmt", "BC pension income amount", type="calc",
+        note="Auto-computed — min(eligible pension income, $1,000)") }}
+  {{ fl("58360", "BC disability amount for self") }}
+  {{ fl("58400", "BC disability amount transferred from a dependant") }}
+
+  <div class="form-subsection">Education and medical amounts</div>
+  {{ fl("58440", "Interest paid on student loans") }}
+  {{ fl("58480", "Tuition and education amounts") }}
+  {{ fl("58560", "Tuition transferred from a child or grandchild") }}
+  {{ fl("58640", "Amounts transferred from your spouse or common-law partner") }}
+  {{ fl("58689", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later") }}
+  {{ fl("58729", "Allowable amount of medical expenses for other dependants") }}
+
+  <div class="form-subsection">Donations and gifts</div>
+  {{ fl("58800", "Donations and gifts (Schedule 9)") }}
+
+  {{ fl("59090", "Total BC non-refundable tax credit amounts", type="calc",
+        note="Sum of lines 58040 – 58800") }}
+  {{ fl("bcCredits", "BC non-refundable tax credit (line 59090 × 5.06%)", type="calc") }}
+
+  <!-- ══ PART 3: BC Tax ══════════════════════════════════════════════════════ -->
+  <div class="form-section">Part 3 — Net BC Tax</div>
+  <div class="form-subsection">BC dividend tax credit</div>
+  {{ fl("bcDTC", "BC dividend tax credit", type="calc",
+        note="Auto-computed from lines 12000 and 12010") }}
+  <div class="form-subsection">Other BC tax credits</div>
+  {{ fl("61520", "BC political contribution tax credit") }}
+  {{ fl("61600", "BC mining exploration tax credit") }}
+
+  {{ fl("42800", "BC tax — enter on line 42000 of your T1 return", type="total",
+        note="BC tax on income minus BC credits and BC DTC") }}
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()">← Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
+    <button class="btn btn-outline" onclick="clearForm()">Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── 2024 BC tax brackets ──────────────────────────────────────────────────────
+const BC_BRACKETS = [
+  [45654, 0.0506],[91310, 0.0770],[104835, 0.1050],
+  [127299, 0.1229],[172602, 0.1470],[240716, 0.1680],[Infinity, 0.2050]
+];
+const BC_BASIC_PERSONAL = 11981;
+const BC_EMPLOYMENT_MAX = 1146;
+const BC_PENSION_MAX    = 1000;
+const BC_AGE_MAX        = 4965;
+const BC_AGE_LO         = 35985;
+const BC_AGE_HI         = 75885;
+const BC_CREDIT_RATE    = 0.0506;
+const BC_ELIG_DTC_RATE  = 0.12 / 1.38;
+const BC_NELIG_DTC_RATE = 0.024674 / 1.15;
+
+function applyBrackets(income, brackets) {
+  income = Math.max(0, income);
+  let tax = 0, prev = 0;
+  for (const [lim, rate] of brackets) {
+    if (income <= prev) break;
+    tax += (Math.min(income, lim) - prev) * rate;
+    prev = lim;
+  }
+  return tax;
+}
+
+function g(id)  { const el = document.getElementById(id); return el ? Math.max(0, parseFloat(el.value) || 0) : 0; }
+function gId(id) { return g('f' + id); }
+function s(id, v) {
+  const el = document.getElementById('f' + id);
+  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+function sEl(elId, v) {
+  const el = document.getElementById(elId);
+  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function recalcBC428() {
+  const ti    = g('fTaxableIncome');
+  const div1  = g('fDiv12000');
+  const div2  = g('fDiv12010');
+  const isOld = document.getElementById('age65bc').checked;
+
+  // Part 1
+  const bcTax = applyBrackets(ti, BC_BRACKETS);
+  sEl('fbcTax', bcTax);
+
+  // Age amount
+  let age58080 = 0;
+  if (isOld) {
+    if (ti <= BC_AGE_LO) age58080 = BC_AGE_MAX;
+    else if (ti < BC_AGE_HI) age58080 = Math.max(0, BC_AGE_MAX - (ti - BC_AGE_LO) * 0.15);
+  }
+  s(58080, age58080);
+
+  // Employment amount
+  const emp58300 = Math.min(gId(58240) + gId(58280), BC_EMPLOYMENT_MAX);
+  s(58300, emp58300);
+
+  // Pension amount
+  const pen = Math.min(g('fbcPensionSrc'), BC_PENSION_MAX);
+  sEl('fbcPensionAmt', pen);
+
+  // Total credits (59090)
+  const total59090 = gId(58040) + age58080 + gId(58120) + gId(58160) + gId(58200)
+    + gId(58240) + gId(58280) + emp58300
+    + pen + gId(58360) + gId(58400) + gId(58440) + gId(58480)
+    + gId(58560) + gId(58640) + gId(58689) + gId(58729) + gId(58800);
+  s(59090, total59090);
+
+  const bcCredits = total59090 * BC_CREDIT_RATE;
+  sEl('fbcCredits', bcCredits);
+
+  // BC dividend tax credit
+  const bcDTC = div1 * BC_ELIG_DTC_RATE + div2 * BC_NELIG_DTC_RATE;
+  sEl('fbcDTC', bcDTC);
+
+  // Net BC tax (42800)
+  const net42800 = Math.max(0, bcTax - bcCredits - bcDTC - gId(61520) - gId(61600));
+  s(42800, net42800);
+
+  // Store in localStorage for T1 to read
+  localStorage.setItem('cra_bc428_net_tax', net42800.toString());
+
+  autoSave();
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcBC428();
+  const el = document.getElementById('f42800');
+  const net = el ? parseFloat(el.value.replace(/,/g,'')) || 0 : 0;
+  localStorage.setItem('cra_bc428_net_tax', net.toString());
+  // Navigate back to T1 with the BC net tax as a query param
+  window.location.href = ROOT + '/tax/t1?bc_net_tax=' + net.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────
+const BC428_INPUTS_IDS = [
+  'f58040','f58120','f58160','f58200','f58240','f58280',
+  'f58360','f58400','f58440','f58480','f58560','f58640',
+  'f58689','f58729','f58800','f61520','f61600',
+  'fbcPensionSrc','fTaxableIncome','fDiv12000','fDiv12010'
+];
+
+function getFormData() {
+  const data = { age65bc: document.getElementById('age65bc').checked };
+  BC428_INPUTS_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = parseFloat(el.value) || 0;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  if (data.age65bc !== undefined) document.getElementById('age65bc').checked = data.age65bc;
+  BC428_INPUTS_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = data[id];
+    }
+  });
+  recalcBC428();
+}
+
+function autoSave() {
+  localStorage.setItem('cra_bc428_autosave', JSON.stringify(getFormData()));
+}
+
+function saveSnapshot() {
+  const name = 'BC428 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  const computed = {};
+  ['fbcTax','fbcCredits','fbcDTC','f42800'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) computed[id] = parseFloat(el.value.replace(/,/g,'')) || 0;
+  });
+  data._computed = computed;
+  data._form = 'bc428';
+  data._name = name;
+  data._ts = Date.now();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'bc428');
+  if (!snap) { toast('No BC428 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  BC428_INPUTS_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = id === 'f58040' ? BC_BASIC_PERSONAL : 0;
+  });
+  document.getElementById('age65bc').checked = false;
+  recalcBC428();
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Pre-fill from URL params (passed from T1 "Open BC428" button)
+  const urlP = new URLSearchParams(location.search);
+  if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) el.value = urlP.get('ti'); }
+  if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) el.value = urlP.get('d1'); }
+  if (urlP.has('d2'))  { const el = document.getElementById('fDiv12010');      if (el) el.value = urlP.get('d2'); }
+
+  // Then restore autosave (URL params take priority for the three fields above)
+  const saved = localStorage.getItem('cra_bc428_autosave');
+  if (saved && !urlP.has('ti')) {
+    try { loadFormData(JSON.parse(saved)); return; } catch(e) {}
+  }
+
+  // Set defaults
+  const el = document.getElementById('f58040');
+  if (el && !parseFloat(el.value)) el.value = BC_BASIC_PERSONAL;
+
+  recalcBC428();
+
+  // Show last snapshot time
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'bc428');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  // Wire inputs
+  document.querySelectorAll('.cra-form input[type="number"]').forEach(el => {
+    el.addEventListener('input', recalcBC428);
+  });
+  document.getElementById('age65bc').addEventListener('change', recalcBC428);
+});
+</script>
+{% endblock %}

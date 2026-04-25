@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}CRA Tax Helper{% endblock %}</title>
+  <style>
+    /* ── CRA / Government of Canada colour palette ── */
+    :root {
+      --gc-red:        #af3c43;
+      --cra-navy:      #26374a;
+      --cra-blue:      #284162;
+      --cra-mid:       #335075;
+      --cra-light:     #dce9f5;
+      --cra-pale:      #eef4fb;
+      --cra-section:   #26374a;
+      --cra-sub:       #dce9f5;
+      --cra-border:    #96a8be;
+      --cra-row-even:  #f9fafb;
+      --cra-calc-bg:   #f0f4f8;
+      --cra-total-bg:  #dce9f5;
+      --cra-input-bd:  #333;
+      --white:         #fff;
+      --text:          #333;
+      --muted:         #666;
+      --green:         #278400;
+      --red:           #d3080c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Sans", "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    /* ── Government of Canada top bar ── */
+    .gc-topbar {
+      background: var(--cra-navy);
+      color: #fff;
+      padding: 6px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .gc-topbar .flag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
+    .gc-topbar .flag svg { width: 20px; height: 20px; fill: #fff; }
+    .gc-topbar .wordmark { font-size: 12px; color: #afc9e1; margin-left: auto; }
+
+    /* ── App header / nav ── */
+    .app-header {
+      background: var(--cra-blue);
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .app-header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .app-header h1 small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #afc9e1;
+      margin-top: 2px;
+    }
+    .app-nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .app-nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 14px;
+      border-radius: 3px;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,.35);
+      transition: background .15s;
+    }
+    .app-nav a:hover, .app-nav a.active {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.7);
+    }
+
+    /* ── Page layout ── */
+    .page-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* ── Form shell ── */
+    .cra-form {
+      background: var(--white);
+      border: 1px solid var(--cra-border);
+      border-radius: 2px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+
+    /* ── Form header ── */
+    .form-header {
+      background: var(--cra-navy);
+      color: #fff;
+      padding: 14px 16px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+    }
+    .form-header .form-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .form-header .form-subtitle {
+      font-size: 11px;
+      color: #afc9e1;
+      margin-top: 3px;
+    }
+    .form-header .form-number {
+      text-align: right;
+      font-size: 11px;
+      color: #afc9e1;
+    }
+    .form-header .form-number strong {
+      display: block;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    /* ── Protected / year badge ── */
+    .form-meta-bar {
+      background: var(--cra-mid);
+      color: #fff;
+      padding: 4px 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    /* ── Section / sub-section headers ── */
+    .form-section {
+      background: var(--cra-section);
+      color: #fff;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      margin-top: 1px;
+    }
+    .form-subsection {
+      background: var(--cra-sub);
+      color: var(--cra-navy);
+      padding: 5px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--cra-border);
+    }
+
+    /* ── Form lines ── */
+    .form-line {
+      display: grid;
+      grid-template-columns: 1fr 72px 190px;
+      min-height: 34px;
+      border-bottom: 1px solid #e4e9ef;
+      align-items: stretch;
+    }
+    .form-line:nth-child(even) { background: var(--cra-row-even); }
+    .form-line.calc  { background: var(--cra-calc-bg) !important; }
+    .form-line.total { background: var(--cra-total-bg) !important; font-weight: 700; }
+
+    .line-desc {
+      padding: 6px 10px 6px 16px;
+      font-size: 13px;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+    }
+    .line-desc.indent1 { padding-left: 30px; }
+    .line-desc.indent2 { padding-left: 44px; }
+    .line-desc .note {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .line-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cra-navy);
+      border-left: 1px solid #d4dce8;
+      border-right: 1px solid #d4dce8;
+      background: rgba(220,233,245,.4);
+      padding: 0 4px;
+      text-align: center;
+    }
+
+    .line-amount {
+      display: flex;
+      align-items: center;
+      padding: 3px 8px;
+      position: relative;
+    }
+    .line-amount::before {
+      content: "$";
+      font-size: 12px;
+      color: var(--muted);
+      margin-right: 3px;
+      flex-shrink: 0;
+    }
+    .amount-field {
+      width: 100%;
+      text-align: right;
+      border: 1.5px solid var(--cra-input-bd);
+      padding: 4px 7px;
+      font-size: 13px;
+      font-family: "Courier New", monospace;
+      border-radius: 1px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .amount-field:focus {
+      border-color: #1a5296;
+      box-shadow: 0 0 0 2px rgba(26,82,150,.2);
+    }
+    .amount-field[readonly] {
+      background: var(--cra-calc-bg);
+      border-color: var(--cra-border);
+      color: var(--cra-navy);
+      cursor: default;
+    }
+    .form-line.total .amount-field[readonly] {
+      background: var(--cra-total-bg);
+      border-color: var(--cra-mid);
+      font-weight: 700;
+    }
+
+    /* ── Action toolbar ── */
+    .form-toolbar {
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      border-top: 2px solid var(--cra-border);
+      background: var(--cra-pale);
+    }
+    .btn {
+      padding: 6px 16px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-family: inherit;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: opacity .15s, background .15s;
+    }
+    .btn-primary   { background: var(--cra-blue);  color: #fff; }
+    .btn-secondary { background: #6c757d; color: #fff; }
+    .btn-success   { background: var(--green); color: #fff; }
+    .btn-outline   { background: #fff; color: var(--cra-navy); border: 1.5px solid var(--cra-border); }
+    .btn:hover     { opacity: .85; }
+
+    /* ── Summary box ── */
+    .summary-box {
+      margin: 0 16px 16px;
+      border: 2px solid var(--cra-border);
+      border-radius: 2px;
+    }
+    .summary-row {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      border-bottom: 1px solid #d4dce8;
+      min-height: 38px;
+      align-items: center;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-label {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .summary-value {
+      padding: 8px 12px;
+      text-align: right;
+      font-size: 16px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      border-left: 1px solid #d4dce8;
+    }
+    .summary-value.refund  { color: var(--green); }
+    .summary-value.balance { color: var(--red); }
+
+    /* ── Diff / comparison colours ── */
+    .diff-pos { color: var(--green); font-weight: 700; }
+    .diff-neg { color: var(--red);   font-weight: 700; }
+    .diff-zero{ color: var(--muted); }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; top: 14px; right: 14px;
+      padding: 8px 16px; border-radius: 3px;
+      font-size: 13px; font-weight: 600;
+      z-index: 999; display: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    #toast.ok  { background: #d5edda; color: #155724; border: 1px solid #c3e6cb; }
+    #toast.err { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+    @media (max-width: 660px) {
+      .form-line { grid-template-columns: 1fr 60px 130px; }
+      .line-desc { padding-left: 10px; font-size: 12px; }
+      .form-header { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Government of Canada top bar -->
+<div class="gc-topbar">
+  <div class="flag">
+    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <rect width="20" height="20" fill="#af3c43"/>
+      <rect x="5" y="0" width="10" height="20" fill="#fff"/>
+      <polygon points="10,4 11.5,8 15.5,8 12.5,10.5 13.5,14.5 10,12 6.5,14.5 7.5,10.5 4.5,8 8.5,8" fill="#af3c43"/>
+    </svg>
+    Canada
+  </div>
+  <span class="wordmark">Canada Revenue Agency &nbsp;/&nbsp; Agence du revenu du Canada</span>
+</div>
+
+<!-- App header -->
+<div class="app-header">
+  <h1>
+    CRA Tax Helper
+    <small>Interactive calculator — 2024 Tax Year</small>
+  </h1>
+  <nav class="app-nav">
+    <a href="{{ root_path }}/" {% if request.url.path == root_path + '/' or request.url.path == root_path %}class="active"{% endif %}>Home</a>
+    <a href="{{ root_path }}/tax/t1"    {% if '/tax/t1' in request.url.path and 'bc428' not in request.url.path %}class="active"{% endif %}>T1 General</a>
+    <a href="{{ root_path }}/tax/bc428" {% if 'bc428' in request.url.path %}class="active"{% endif %}>BC428</a>
+    <a href="{{ root_path }}/tax/compare" {% if 'compare' in request.url.path %}class="active"{% endif %}>Compare</a>
+  </nav>
+</div>
+
+<!-- Page content -->
+<div class="page-wrap">
+  {% block content %}{% endblock %}
+</div>
+
+<div id="toast"></div>
+
+<script>
+  const ROOT = "{{ root_path }}";
+
+  function toast(msg, ok = true) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = ok ? 'ok' : 'err';
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }
+
+  function fmt(v) {
+    if (v === null || v === undefined || isNaN(v)) return '0.00';
+    return parseFloat(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function fmtDiff(v) {
+    if (!v || v === 0) return '<span class="diff-zero">—</span>';
+    const s = (v > 0 ? '+' : '') + fmt(v);
+    return v > 0
+      ? `<span class="diff-pos">${s}</span>`
+      : `<span class="diff-neg">${s}</span>`;
+  }
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

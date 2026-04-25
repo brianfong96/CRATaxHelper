@@ -1,0 +1,528 @@
+{% extends "base.html" %}
+{% block title %}T1 General 2024 — CRA Tax Helper{% endblock %}
+
+{% block content %}
+{# ── Macro: one form line ─────────────────────────────────────────────── #}
+{% macro fl(num, label, type="input", indent="", note="") %}
+<div class="form-line {{ type }}" id="row-{{ num }}">
+  <div class="line-desc {{ indent }}">
+    {{ label }}{% if note %}<span class="note">{{ note }}</span>{% endif %}
+  </div>
+  <div class="line-num">{{ num }}</div>
+  <div class="line-amount">
+    {% if type in ("calc","total") %}
+    <input class="amount-field" type="text" id="f{{ num }}" readonly value="0.00" tabindex="-1">
+    {% else %}
+    <input class="amount-field" type="number" id="f{{ num }}" min="0" step="0.01" value="0" inputmode="decimal">
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+<div class="cra-form">
+
+  <!-- Form header -->
+  <div class="form-header">
+    <div>
+      <div class="form-title">T1 General — Income Tax and Benefit Return</div>
+      <div class="form-subtitle">Steps 2, 3, 4 and 5 &nbsp;·&nbsp; British Columbia resident</div>
+    </div>
+    <div class="form-number">
+      <strong>T1-2024</strong>
+      Canada Revenue Agency
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2024 tax year</span>
+    <span>
+      <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="age65" onchange="recalcT1()">
+        Age 65 or older on Dec 31, 2024
+      </label>
+    </span>
+  </div>
+
+  <!-- ══ STEP 2: Total income ══════════════════════════════════════════════ -->
+  <div class="form-section">Step 2 — Total Income</div>
+  <div class="form-subsection">Employment income</div>
+  {{ fl("10100", "Employment income (box 14 of all T4 slips)") }}
+  {{ fl("10400", "Other employment income") }}
+
+  <div class="form-subsection">Pension and other income</div>
+  {{ fl("11300", "Old age security (OAS) pension (T4A(OAS), box 18)") }}
+  {{ fl("11400", "CPP or QPP benefits (T4A(P), box 20)") }}
+  {{ fl("11500", "Other pensions and superannuation") }}
+  {{ fl("11700", "RDSP income") }}
+  {{ fl("11900", "Employment insurance and other benefits (T4E, box 14)") }}
+
+  <div class="form-subsection">Investment income</div>
+  {{ fl("12000", "Taxable amount of eligible dividends from Canadian corporations",
+        note="Grossed-up amount (actual × 1.38) — see T5 / T3") }}
+  {{ fl("12010", "Taxable amount of dividends other than eligible",
+        note="Grossed-up amount (actual × 1.15) — see T5 / T3") }}
+  {{ fl("12100", "Interest and other investment income (T5, T3, T5013)") }}
+  {{ fl("12200", "Net partnership income: limited or non-active partners only") }}
+  {{ fl("12500", "Registered disability savings plan income") }}
+
+  <div class="form-subsection">Rental, capital gains and other income</div>
+  {{ fl("12600", "Net rental income (loss)") }}
+  {{ fl("12700", "Taxable capital gains (from Schedule 3)") }}
+  {{ fl("12900", "RRSP income (T4RSP, box 16)") }}
+  {{ fl("13000", "Other income") }}
+  {{ fl("13010", "Taxable scholarships, fellowships, bursaries, and artists' project grants") }}
+
+  <div class="form-subsection">Self-employment income (from T2125 / T2042 / T2121)</div>
+  {{ fl("13500", "Business income (loss)") }}
+  {{ fl("13700", "Professional income (loss)") }}
+  {{ fl("13900", "Commission income (loss)") }}
+  {{ fl("14100", "Farming income (loss)") }}
+  {{ fl("14300", "Fishing income (loss)") }}
+
+  <div class="form-subsection">Workers' compensation and other payments</div>
+  {{ fl("14400", "Workers' compensation benefits (T5007, box 10)") }}
+  {{ fl("14500", "Social assistance payments") }}
+  {{ fl("14600", "Net federal supplements") }}
+
+  {{ fl("15000", "Total income", type="total") }}
+
+  <!-- ══ STEP 3: Net income ════════════════════════════════════════════════ -->
+  <div class="form-section">Step 3 — Net Income</div>
+  <div class="form-subsection">Deductions</div>
+  {{ fl("20600", "Pension adjustment (box 52 of all T4 slips and box 34 of all T4A slips)") }}
+  {{ fl("20700", "Registered pension plan (RPP) deduction (box 20 of all T4 slips, box 32 of T4A)") }}
+  {{ fl("20800", "RRSP/PRPP deduction (see Schedule 7 and attach receipts)") }}
+  {{ fl("20810", "First Home Savings Account (FHSA) deduction") }}
+  {{ fl("21000", "Deduction for elected split-pension amount (T1032)") }}
+  {{ fl("21200", "Annual union, professional, or like dues (T4, box 44; receipts)") }}
+  {{ fl("21300", "Universal child care benefit (UCCB) repayment (T4A, box 12)") }}
+  {{ fl("21400", "Child care expenses (Form T778)") }}
+  {{ fl("21500", "Disability supports deduction (T929)") }}
+  {{ fl("21699", "Business investment loss") }}
+  {{ fl("21900", "Moving expenses (T1-M)") }}
+  {{ fl("22000", "Support payments made (T1158)") }}
+  {{ fl("22100", "Carrying charges and interest expenses (Schedule 4)") }}
+  {{ fl("22200", "Deductible CPP/QPP contributions on self-employment and other earnings (Schedule 8 or RC381)") }}
+  {{ fl("22215", "Deduction for CPP enhanced contributions on self-employment income") }}
+  {{ fl("22400", "Exploration and development expenses (T1229)") }}
+  {{ fl("22900", "Other employment expenses (T777)") }}
+  {{ fl("23100", "Clergy residence deduction (T1223)") }}
+  {{ fl("23200", "Other deductions") }}
+  {{ fl("23300", "Total deductions before adjustments", type="calc",
+        note="Sum of lines 20600 – 23200") }}
+  {{ fl("23400", "Line 15000 minus line 23300 (if negative, enter '0')", type="calc") }}
+  {{ fl("23500", "Social benefits repayment (if applicable — see line 23500 guide)") }}
+  {{ fl("23600", "Net income", type="total",
+        note="Line 23400 minus line 23500") }}
+
+  <!-- ══ STEP 4: Taxable income ════════════════════════════════════════════ -->
+  <div class="form-section">Step 4 — Taxable Income</div>
+  <div class="form-subsection">Deductions from net income</div>
+  {{ fl("24400", "Employee home relocation loan deduction (T1E)") }}
+  {{ fl("24900", "Security options deductions (T1212)") }}
+  {{ fl("25000", "Other payments deduction (workers' compensation, social assistance — lines 14400 + 14500 + 14600)") }}
+  {{ fl("25100", "Limited partnership losses of other years") }}
+  {{ fl("25200", "Non-capital losses of other years") }}
+  {{ fl("25300", "Net capital losses of other years") }}
+  {{ fl("25400", "Capital gains deduction (T657)") }}
+  {{ fl("25500", "Northern residents deductions (T2222)") }}
+  {{ fl("25600", "Additional deductions") }}
+  {{ fl("26000", "Taxable income", type="total",
+        note="Line 23600 minus total of lines 24400 – 25600") }}
+
+  <!-- ══ STEP 5a: Federal Non-Refundable Tax Credits (Schedule 1) ════════════ -->
+  <div class="form-section">Step 5 — Federal Tax (Schedule 1 – Non-Refundable Tax Credits)</div>
+  <div class="form-subsection">Personal amounts</div>
+  {{ fl("30000", "Basic personal amount",
+        note="2024: $15,705.00 — enter this amount") }}
+  {{ fl("30100", "Age amount (if born before January 1, 1960)", type="calc",
+        note="Auto-computed from net income — 2024 max $8,790") }}
+  {{ fl("30300", "Spouse or common-law partner amount (attach Schedule 5)") }}
+  {{ fl("30400", "Amount for an eligible dependant (attach Schedule 5)") }}
+  {{ fl("30425", "Canada caregiver amount for spouse or common-law partner (Schedule 5)") }}
+  {{ fl("30450", "Canada caregiver amount for other infirm dependants age 18 or older (Schedule 5)") }}
+  {{ fl("30500", "Canada caregiver amount for infirm children under 18 (Schedule 5)") }}
+
+  <div class="form-subsection">Employment amounts</div>
+  {{ fl("31000", "CPP or QPP contributions through employment (enter the amount from box 16 or box 17 of all T4 slips)") }}
+  {{ fl("31200", "Employment insurance premiums through employment (T4, box 18)") }}
+  {{ fl("31205", "CPP2 contributions through employment (T4, box 16A)") }}
+  {{ fl("31217", "Employment insurance premiums on self-employment income (RC381)") }}
+  {{ fl("31220", "CPP or QPP contributions on self-employment income (Schedule 8 or RC381)") }}
+  {{ fl("31260", "Canada employment amount", type="calc",
+        note="Auto-computed — min(employment income, $1,433)") }}
+
+  <div class="form-subsection">Home and other credits</div>
+  {{ fl("31270", "Home buyers' amount (attach T1028)") }}
+  {{ fl("31285", "Home accessibility expenses (T1030; max $20,000)") }}
+  {{ fl("31300", "Adoption expenses (max $18,210 per adoption)") }}
+  {{ fl("31350", "Digital news subscription expenses (max $500)") }}
+
+  <div class="form-subsection">Pension and disability amounts</div>
+  {{ fl("31401", "Eligible pension income (source — enter to auto-compute line 31400)") }}
+  {{ fl("31400", "Pension income amount", type="calc",
+        note="Auto-computed — min(line 31401, $2,000)") }}
+  {{ fl("31600", "Disability amount for self (T2201)") }}
+  {{ fl("31800", "Disability amount transferred from a dependant (T2201)") }}
+
+  <div class="form-subsection">Education and medical amounts</div>
+  {{ fl("31900", "Interest paid on your student loans") }}
+  {{ fl("32300", "Your tuition and education amounts (T2202, TL11A, TL11C)") }}
+  {{ fl("32400", "Tuition amount transferred from a child or grandchild") }}
+  {{ fl("32600", "Amounts transferred from your spouse or common-law partner (Schedule 2)") }}
+  {{ fl("33099", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later") }}
+  {{ fl("33199", "Allowable amount of medical expenses for other dependants (Schedule 5)") }}
+
+  <div class="form-subsection">Donations and gifts</div>
+  {{ fl("34900", "Donations and gifts (Schedule 9)") }}
+
+  {{ fl("35000", "Total federal non-refundable tax credit amounts", type="calc",
+        note="Sum of lines 30000 – 34900") }}
+  {{ fl("35100", "Federal non-refundable tax credit (line 35000 × 15%)", type="calc") }}
+
+  <!-- ══ STEP 5b: Federal Tax ═══════════════════════════════════════════════ -->
+  <div class="form-section">Step 5 — Federal Tax Calculation</div>
+  {{ fl("38000", "Federal tax on taxable income (Schedule 1, applied to line 26000)", type="calc",
+        note="2024 brackets: 15% / 20.5% / 26% / 29% / 33%") }}
+  {{ fl("40425", "Federal dividend tax credit", type="calc",
+        note="Auto-computed from lines 12000 and 12010") }}
+  {{ fl("40427", "Minimum tax carryover (Form T691)") }}
+  {{ fl("40600", "Federal political contribution tax credit (Schedule 1)") }}
+  {{ fl("40900", "Investment tax credit (Form T2038(IND))") }}
+  {{ fl("40424", "Net federal tax", type="total",
+        note="Line 38000 minus 35100, 40425, 40427, 40600, 40900") }}
+
+  <!-- ══ Provincial tax ════════════════════════════════════════════════════ -->
+  <div class="form-section">Step 5 — Provincial Tax</div>
+  <div class="form-subsection">BC provincial tax — from BC428 (5010-C)</div>
+  <div class="form-line" id="row-bc428-link">
+    <div class="line-desc">
+      British Columbia tax (from BC428)
+      <span class="note">Complete BC428 and enter the result here, or use the button below to open BC428 in a new window.</span>
+    </div>
+    <div class="line-num">42000</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="f42000" readonly value="0.00" tabindex="-1">
+    </div>
+  </div>
+
+  <!-- ══ Other taxes ══════════════════════════════════════════════════════ -->
+  <div class="form-subsection">Other taxes</div>
+  {{ fl("44800", "CPP contributions payable on self-employment and other earnings (Schedule 8 / RC381)") }}
+  {{ fl("45200", "Social benefits repayment (amount from line 23500)") }}
+
+  <!-- ══ Credits and payments ══════════════════════════════════════════════ -->
+  <div class="form-section">Step 5 — Credits Applied and Refund / Balance Owing</div>
+  <div class="form-subsection">Amounts already paid / credits</div>
+  {{ fl("43700", "Total income tax deducted (from all T4, T4A slips)") }}
+  {{ fl("47600", "CPP overpayment (Schedule 8 / RC381)") }}
+  {{ fl("47900", "Provincial or territorial credits (Form 479)") }}
+
+  {{ fl("48200", "Total payable", type="total",
+        note="Line 40424 + 42000 + 44800 + 45200") }}
+
+  <!-- ══ Refund / Balance owing ══════════════════════════════════════════ -->
+  <div class="form-section">Result</div>
+  <div class="form-line total" id="row-48400">
+    <div class="line-desc" style="color:var(--green); font-weight:700;">Refund</div>
+    <div class="line-num">48400</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="f48400" readonly value="0.00" tabindex="-1"
+             style="color:var(--green); font-weight:700;">
+    </div>
+  </div>
+  <div class="form-line total" id="row-48500">
+    <div class="line-desc" style="color:var(--red); font-weight:700;">Balance owing</div>
+    <div class="line-num">48500</div>
+    <div class="line-amount">
+      <input class="amount-field" type="text" id="f48500" readonly value="0.00" tabindex="-1"
+             style="color:var(--red); font-weight:700;">
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <a class="btn btn-primary" href="{{ root_path }}/tax/bc428" id="bc428-link">Open BC428 →</a>
+    <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
+    <button class="btn btn-outline" onclick="clearForm()">Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── 2024 Federal tax brackets ────────────────────────────────────────────────
+const FEDERAL_BRACKETS = [[55867,.15],[111733,.205],[154906,.26],[220000,.29],[Infinity,.33]];
+const FEDERAL_BASIC_PERSONAL = 15705;
+const FEDERAL_EMPLOYMENT_MAX = 1433;
+const FEDERAL_PENSION_MAX    = 2000;
+
+// Federal DTC rates
+const FED_ELIG_DTC_RATE = (6/11) * (0.38/1.38);
+const FED_NELIG_DTC_RATE = (9/13) * (0.15/1.15);
+
+// Age amount (2024)
+const FED_AGE_MAX  = 8790;
+const FED_AGE_LO   = 42335;
+const FED_AGE_HI   = 98309;
+
+function applyBrackets(income, brackets) {
+  income = Math.max(0, income);
+  let tax = 0, prev = 0;
+  for (const [lim, rate] of brackets) {
+    if (income <= prev) break;
+    tax += (Math.min(income, lim) - prev) * rate;
+    prev = lim;
+  }
+  return tax;
+}
+
+// ── Field helpers ─────────────────────────────────────────────────────────────
+function g(id)  { const el = document.getElementById('f' + id); return el ? Math.max(0, parseFloat(el.value) || 0) : 0; }
+function gRaw(id) { const el = document.getElementById('f' + id); return el ? (parseFloat(el.value) || 0) : 0; }
+function s(id, v) {
+  const el = document.getElementById('f' + id);
+  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+function sum(ids) { return ids.reduce((a,id) => a + g(id), 0); }
+
+// ── Main recalculation ────────────────────────────────────────────────────────
+function recalcT1() {
+  // ── Step 2 ──────────────────────────────────────────────────────────────
+  const income15000 = sum([10100,10400,11300,11400,11500,11700,11900,
+                           12000,12010,12100,12200,12500,12600,12700,12900,
+                           13000,13010,13500,13700,13900,14100,14300,
+                           14400,14500,14600]);
+  s(15000, income15000);
+
+  // ── Step 3 ──────────────────────────────────────────────────────────────
+  const deduct23300 = sum([20600,20700,20800,20810,21000,21200,21300,21400,
+                            21500,21699,21900,22000,22100,22200,22215,22400,
+                            22900,23100,23200]);
+  s(23300, deduct23300);
+  const line23400 = Math.max(0, income15000 - deduct23300);
+  s(23400, line23400);
+  const line23600 = Math.max(0, line23400 - g(23500));
+  s(23600, line23600);
+
+  // ── Step 4 ──────────────────────────────────────────────────────────────
+  const step4ded = sum([24400,24900,25000,25100,25200,25300,25400,25500,25600]);
+  const line26000 = Math.max(0, line23600 - step4ded);
+  s(26000, line26000);
+
+  // ── Schedule 1 credits ──────────────────────────────────────────────────
+  // Age amount (30100)
+  const isOld = document.getElementById('age65').checked;
+  let age30100 = 0;
+  if (isOld) {
+    if (line23600 <= FED_AGE_LO) age30100 = FED_AGE_MAX;
+    else if (line23600 < FED_AGE_HI) age30100 = Math.max(0, FED_AGE_MAX - (line23600 - FED_AGE_LO) * 0.15);
+  }
+  s(30100, age30100);
+  if (!document.getElementById('f30100').closest('.form-line').classList.contains('calc')) {
+    // keep it readonly
+  }
+
+  // Canada employment amount (31260)
+  const empl31260 = Math.min(g(10100) + g(10400), FEDERAL_EMPLOYMENT_MAX);
+  s(31260, empl31260);
+
+  // Pension income amount (31400)
+  const pens31400 = Math.min(g(31401), FEDERAL_PENSION_MAX);
+  s(31400, pens31400);
+
+  // Total credit base (35000)
+  const total35000 = sum([30000,30300,30400,30425,30450,30500,
+                          31000,31200,31205,31217,31220,31270,31285,
+                          31300,31350,31600,31800,31900,32300,32400,
+                          32600,33099,33199,34900])
+                   + age30100 + empl31260 + pens31400 + g(30000) - g(30000); // avoid double-add
+
+  // Correctly sum all credit lines:
+  const line35000 = g(30000) + age30100 + g(30300) + g(30400) + g(30425) + g(30450) + g(30500)
+    + g(31000) + g(31200) + g(31205) + g(31217) + g(31220) + empl31260 + g(31270) + g(31285)
+    + g(31300) + g(31350) + pens31400 + g(31600) + g(31800) + g(31900)
+    + g(32300) + g(32400) + g(32600) + g(33099) + g(33199) + g(34900);
+  s(35000, line35000);
+
+  const line35100 = line35000 * 0.15;
+  s(35100, line35100);
+
+  // ── Federal tax ──────────────────────────────────────────────────────────
+  const line38000 = applyBrackets(line26000, FEDERAL_BRACKETS);
+  s(38000, line38000);
+
+  // Dividend tax credit (40425)
+  const dtc40425 = g(12000) * FED_ELIG_DTC_RATE + g(12010) * FED_NELIG_DTC_RATE;
+  s(40425, dtc40425);
+
+  // Net federal tax (40424)
+  const line40424 = Math.max(0, line38000 - line35100 - dtc40425 - g(40427) - g(40600) - g(40900));
+  s(40424, line40424);
+
+  // BC provincial tax from BC428 (stored in localStorage)
+  const bc42000 = parseFloat(localStorage.getItem('cra_bc428_net_tax') || '0') || 0;
+  s(42000, bc42000);
+
+  // Sync 45200 = 23500 if not overridden
+  if (!g(45200) && g(23500)) s(45200, g(23500));
+
+  // Total payable (48200)
+  const line48200 = line40424 + bc42000 + g(44800) + g(45200);
+  s(48200, line48200);
+
+  // Refund / balance owing
+  const totalPaid = g(43700) + g(47600) + g(47900);
+  const diff = totalPaid - line48200;
+  s(48400, Math.max(0,  diff));
+  s(48500, Math.max(0, -diff));
+
+  // Style result rows
+  document.getElementById('f48400').style.color = diff >= 0 ? 'var(--green)' : '';
+  document.getElementById('f48500').style.color = diff <  0 ? 'var(--red)' : '';
+
+  // Keep persistent state
+  autoSave();
+}
+
+// ── Persistence ───────────────────────────────────────────────────────────────
+const T1_INPUTS = [
+  10100,10400,11300,11400,11500,11700,11900,
+  12000,12010,12100,12200,12500,12600,12700,12900,13000,13010,
+  13500,13700,13900,14100,14300,14400,14500,14600,
+  20600,20700,20800,20810,21000,21200,21300,21400,21500,21699,
+  21900,22000,22100,22200,22215,22400,22900,23100,23200,23500,
+  24400,24900,25000,25100,25200,25300,25400,25500,25600,
+  30000,30300,30400,30425,30450,30500,
+  31000,31200,31205,31217,31220,31270,31285,31300,31350,31401,
+  31600,31800,31900,32300,32400,32600,33099,33199,34900,
+  40427,40600,40900,43700,44800,45200,47600,47900
+];
+
+function getFormData() {
+  const data = { age65: document.getElementById('age65').checked };
+  T1_INPUTS.forEach(id => {
+    const el = document.getElementById('f' + id);
+    if (el) data[id] = parseFloat(el.value) || 0;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  if (data.age65 !== undefined) document.getElementById('age65').checked = data.age65;
+  T1_INPUTS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById('f' + id);
+      if (el) el.value = data[id];
+    }
+  });
+  recalcT1();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem('cra_t1_autosave', JSON.stringify(data));
+}
+
+function saveSnapshot() {
+  const name = 'T1 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  // Attach computed lines for comparison
+  const computed = {};
+  [15000,23300,23400,23600,26000,35000,35100,38000,40425,40424,42000,48200,48400,48500]
+    .forEach(id => {
+      const el = document.getElementById('f' + id);
+      if (el) computed[id] = parseFloat(el.value.replace(/,/g,'')) || 0;
+    });
+  data._computed = computed;
+  data._form = 't1';
+  data._name = name;
+  data._ts = Date.now();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const t1snap = snaps.find(s => s.data._form === 't1');
+  if (!t1snap) { toast('No T1 snapshot found', false); return; }
+  loadFormData(t1snap.data);
+  toast('Loaded: ' + t1snap.name);
+}
+
+function clearForm() {
+  T1_INPUTS.forEach(id => {
+    const el = document.getElementById('f' + id);
+    if (el) el.value = id === 30000 ? 15705 : 0;
+  });
+  document.getElementById('age65').checked = false;
+  recalcT1();
+}
+
+// ── Update BC428 link with current line 26000 ──────────────────────────────
+function updateBC428Link() {
+  const taxableIncome = document.getElementById('f26000')?.value?.replace(/,/g, '') || '0';
+  const el12000 = g(12000), el12010 = g(12010);
+  const params = new URLSearchParams({
+    ti: taxableIncome,
+    d1: el12000,
+    d2: el12010
+  });
+  document.getElementById('bc428-link').href = ROOT + '/tax/bc428?' + params.toString();
+}
+
+// ── Wire up all inputs ─────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore autosave
+  const saved = localStorage.getItem('cra_t1_autosave');
+  if (saved) {
+    try { loadFormData(JSON.parse(saved)); }
+    catch(e) { recalcT1(); }
+  } else {
+    recalcT1();
+  }
+
+  // Check if returning from BC428 with updated net tax
+  const urlP = new URLSearchParams(location.search);
+  if (urlP.has('bc_net_tax')) {
+    const v = parseFloat(urlP.get('bc_net_tax')) || 0;
+    localStorage.setItem('cra_bc428_net_tax', v);
+    toast('BC428 provincial tax updated: $' + v.toFixed(2));
+    recalcT1();
+    // Clean URL
+    history.replaceState({}, '', location.pathname);
+  }
+
+  // Attach change listeners
+  document.querySelectorAll('.cra-form input[type="number"]').forEach(el => {
+    el.addEventListener('input', recalcT1);
+  });
+  document.getElementById('age65').addEventListener('change', recalcT1);
+
+  // Make read-only computed fields display comma-formatted on blur
+  // Update BC428 link whenever taxable income changes
+  new MutationObserver(updateBC428Link).observe(
+    document.getElementById('f26000'), { attributes: true, attributeFilter: ['value'] }
+  );
+  // Also poll since mutation observer may not fire on programmatic .value =
+  setInterval(updateBC428Link, 500);
+
+  // Show last snapshot time
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const t1snap = snaps.find(s => s.data?._form === 't1');
+  if (t1snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(t1snap.data._ts).toLocaleDateString();
+  }
+});
+</script>
+{% endblock %}

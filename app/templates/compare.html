@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% block title %}Scenario Comparison — CRA Tax Helper{% endblock %}
+
+{% block content %}
+<h2 style="font-size:18px;color:var(--cra-navy);margin-bottom:8px;">Scenario Comparison</h2>
+<p style="color:var(--muted);font-size:13px;margin-bottom:20px;max-width:680px;line-height:1.6;">
+  Compare up to two saved snapshots side-by-side.
+  Save snapshots from the <a href="{{ root_path }}/tax/t1">T1</a> or
+  <a href="{{ root_path }}/tax/bc428">BC428</a> forms using the
+  <strong>Save Snapshot</strong> button, then select them below.
+</p>
+
+<!-- Snapshot selectors -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;" id="selectors">
+  <div>
+    <label style="font-size:12px;font-weight:700;color:var(--cra-navy);display:block;margin-bottom:6px;">Scenario A</label>
+    <select id="selA" onchange="renderComparison()"
+            style="width:100%;padding:6px 10px;border:1.5px solid var(--cra-border);
+                   border-radius:2px;font-size:13px;font-family:inherit;">
+      <option value="">— choose snapshot —</option>
+    </select>
+  </div>
+  <div>
+    <label style="font-size:12px;font-weight:700;color:var(--cra-navy);display:block;margin-bottom:6px;">Scenario B</label>
+    <select id="selB" onchange="renderComparison()"
+            style="width:100%;padding:6px 10px;border:1.5px solid var(--cra-border);
+                   border-radius:2px;font-size:13px;font-family:inherit;">
+      <option value="">— choose snapshot —</option>
+    </select>
+  </div>
+</div>
+
+<div id="compare-output"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const T1_COMPARE_LINES = [
+  { id: 15000, label: "Total income" },
+  { id: 23300, label: "Total deductions (Step 3)" },
+  { id: 23600, label: "Net income" },
+  { id: 26000, label: "Taxable income" },
+  { id: 35000, label: "Total federal credit amounts" },
+  { id: 35100, label: "Federal non-refundable tax credit" },
+  { id: 38000, label: "Federal tax on taxable income" },
+  { id: 40425, label: "Federal dividend tax credit" },
+  { id: 40424, label: "Net federal tax" },
+  { id: 42000, label: "BC provincial tax (line 42000)" },
+  { id: 48200, label: "Total payable" },
+  { id: 48400, label: "Refund", highlight: 'refund' },
+  { id: 48500, label: "Balance owing", highlight: 'balance' },
+];
+
+const BC428_COMPARE_LINES = [
+  { id: 'fbcTax',      label: "BC tax on taxable income" },
+  { id: 'f59090',      label: "Total BC credit amounts" },
+  { id: 'fbcCredits',  label: "BC non-refundable tax credit (× 5.06%)" },
+  { id: 'fbcDTC',      label: "BC dividend tax credit" },
+  { id: 'f42800',      label: "Net BC tax (line 42800)", highlight: 'balance' },
+];
+
+function fmtC(v) {
+  if (v === null || v === undefined || isNaN(v)) return '$0.00';
+  const n = parseFloat(v);
+  return '$' + Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function diffCell(a, b) {
+  if (a === null || b === null) return '<span class="diff-zero">—</span>';
+  const d = b - a;
+  if (Math.abs(d) < 0.005) return '<span class="diff-zero">no change</span>';
+  const sign = d > 0 ? '+' : '';
+  const cls  = d > 0 ? 'diff-pos' : 'diff-neg';
+  return `<span class="${cls}">${sign}$${Math.abs(d).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>`;
+}
+
+function getVal(data, key) {
+  // Check _computed first (attached when snapshot was saved)
+  if (data._computed) {
+    const k = typeof key === 'number' ? key : key;
+    if (data._computed[k] !== undefined) return data._computed[k];
+    // try string key
+    if (data._computed['f' + k] !== undefined) return data._computed['f' + k];
+  }
+  // Fallback: input field
+  if (data[key] !== undefined) return data[key];
+  if (data['f' + key] !== undefined) return data['f' + key];
+  return null;
+}
+
+function buildTable(lines, snapA, snapB) {
+  const rows = lines.map(line => {
+    const va = getVal(snapA, line.id);
+    const vb = getVal(snapB, line.id);
+    const hlA = line.highlight === 'refund'  ? 'color:var(--green);font-weight:700' :
+                line.highlight === 'balance' ? 'color:var(--red);font-weight:700'   : '';
+    const hlB = hlA;
+    return `
+    <tr>
+      <td style="padding:6px 12px;font-size:13px;">${line.label}</td>
+      <td style="padding:6px 12px;text-align:right;font-family:monospace;font-size:13px;${hlA}">${fmtC(va)}</td>
+      <td style="padding:6px 12px;text-align:right;font-family:monospace;font-size:13px;${hlB}">${fmtC(vb)}</td>
+      <td style="padding:6px 12px;text-align:right;font-size:13px;">${va !== null && vb !== null ? diffCell(va, vb) : '—'}</td>
+    </tr>`;
+  }).join('');
+  return rows;
+}
+
+function renderComparison() {
+  const snapshots = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const idxA = document.getElementById('selA').value;
+  const idxB = document.getElementById('selB').value;
+  const out  = document.getElementById('compare-output');
+
+  if (!idxA || !idxB) { out.innerHTML = ''; return; }
+
+  const snapA = snapshots[parseInt(idxA)]?.data;
+  const snapB = snapshots[parseInt(idxB)]?.data;
+  if (!snapA || !snapB) { out.innerHTML = ''; return; }
+
+  const nameA = snapshots[parseInt(idxA)]?.name || 'Scenario A';
+  const nameB = snapshots[parseInt(idxB)]?.name || 'Scenario B';
+
+  // T1 comparison
+  const t1SnapA = snapA._form === 't1' ? snapA : null;
+  const t1SnapB = snapB._form === 't1' ? snapB : null;
+
+  // BC428 comparison
+  const bcSnapA = snapA._form === 'bc428' ? snapA : null;
+  const bcSnapB = snapB._form === 'bc428' ? snapB : null;
+
+  // Allow cross-form comparison of key bottom-line figures
+  const bothT1 = t1SnapA && t1SnapB;
+  const bothBC = bcSnapA && bcSnapB;
+  const crossForm = !bothT1 && !bothBC;
+
+  let html = `
+  <div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--cra-border);">
+    <thead>
+      <tr style="background:var(--cra-navy);color:#fff;">
+        <th style="padding:8px 12px;text-align:left;font-size:13px;">Line / Description</th>
+        <th style="padding:8px 12px;text-align:right;font-size:13px;max-width:200px;">${nameA}</th>
+        <th style="padding:8px 12px;text-align:right;font-size:13px;max-width:200px;">${nameB}</th>
+        <th style="padding:8px 12px;text-align:right;font-size:13px;">Change (B − A)</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  if (bothT1) {
+    html += `<tr><td colspan="4" style="background:var(--cra-sub);color:var(--cra-navy);
+      font-weight:700;padding:5px 12px;font-size:12px;">T1 General — Key Lines</td></tr>`;
+    html += buildTable(T1_COMPARE_LINES, snapA, snapB);
+  } else if (bothBC) {
+    html += `<tr><td colspan="4" style="background:var(--cra-sub);color:var(--cra-navy);
+      font-weight:700;padding:5px 12px;font-size:12px;">BC428 — Key Lines</td></tr>`;
+    html += buildTable(BC428_COMPARE_LINES, snapA, snapB);
+  } else {
+    // Cross-form: show whatever computed lines are available in both
+    html += `<tr><td colspan="4" style="background:var(--cra-sub);color:var(--cra-navy);
+      font-weight:700;padding:5px 12px;font-size:12px;">
+      Cross-form comparison — showing available computed values</td></tr>`;
+    const allLines = [...T1_COMPARE_LINES, ...BC428_COMPARE_LINES];
+    html += buildTable(allLines, snapA, snapB);
+  }
+
+  // Input-level diff section (show fields that changed)
+  const allKeys = new Set([...Object.keys(snapA), ...Object.keys(snapB)]);
+  const inputDiffs = [];
+  allKeys.forEach(k => {
+    if (k.startsWith('_')) return;
+    const va = snapA[k], vb = snapB[k];
+    if (typeof va === 'number' && typeof vb === 'number' && Math.abs(va - vb) >= 0.01) {
+      inputDiffs.push({ k, va, vb });
+    }
+  });
+
+  if (inputDiffs.length > 0) {
+    html += `<tr><td colspan="4" style="background:var(--cra-sub);color:var(--cra-navy);
+      font-weight:700;padding:5px 12px;font-size:12px;">
+      Changed Input Fields (${inputDiffs.length} field${inputDiffs.length !== 1 ? 's' : ''})</td></tr>`;
+    inputDiffs.sort((a,b) => a.k.localeCompare(b.k)).forEach(({k, va, vb}) => {
+      html += `<tr>
+        <td style="padding:5px 12px;font-size:12px;color:var(--muted);">
+          ${k.replace(/^f?/,'Line ')}
+        </td>
+        <td style="padding:5px 12px;text-align:right;font-family:monospace;font-size:12px;">${fmtC(va)}</td>
+        <td style="padding:5px 12px;text-align:right;font-family:monospace;font-size:12px;">${fmtC(vb)}</td>
+        <td style="padding:5px 12px;text-align:right;font-size:12px;">${diffCell(va, vb)}</td>
+      </tr>`;
+    });
+  }
+
+  html += `</tbody></table></div>`;
+
+  // Bottom-line impact card
+  const refA = getVal(snapA, 48400) || 0;
+  const refB = getVal(snapB, 48400) || 0;
+  const balA = getVal(snapA, 48500) || 0;
+  const balB = getVal(snapB, 48500) || 0;
+  if (refA || refB || balA || balB) {
+    const netA = refA - balA;
+    const netB = refB - balB;
+    const impact = netB - netA;
+    const impactLabel = impact > 0
+      ? `<span class="diff-pos">+${fmtC(impact)} better refund</span>`
+      : impact < 0
+      ? `<span class="diff-neg">${fmtC(impact)} worse</span>`
+      : '<span class="diff-zero">no change</span>';
+    html += `
+    <div style="margin-top:16px;background:#fff;border:2px solid var(--cra-border);
+                border-radius:2px;padding:16px;max-width:500px;">
+      <div style="font-size:13px;font-weight:700;color:var(--cra-navy);margin-bottom:10px;">
+        Net Impact on Bottom Line
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="font-size:12px;color:var(--muted);">
+          <strong style="display:block;color:var(--text);">${nameA}</strong>
+          Refund: <span style="color:var(--green)">${fmtC(refA)}</span><br>
+          Balance owing: <span style="color:var(--red)">${fmtC(balA)}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);">
+          <strong style="display:block;color:var(--text);">${nameB}</strong>
+          Refund: <span style="color:var(--green)">${fmtC(refB)}</span><br>
+          Balance owing: <span style="color:var(--red)">${fmtC(balB)}</span>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--cra-border);font-size:13px;">
+        Scenario B vs A: ${impactLabel}
+      </div>
+    </div>`;
+  }
+
+  out.innerHTML = html;
+}
+
+function populateSelects() {
+  const snapshots = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const selA = document.getElementById('selA');
+  const selB = document.getElementById('selB');
+  [selA, selB].forEach(sel => {
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— choose snapshot —</option>';
+    snapshots.forEach((snap, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      const ts = snap.data?._ts ? new Date(snap.data._ts).toLocaleString() : '';
+      opt.textContent = snap.name + (ts ? ' (' + ts + ')' : '');
+      sel.appendChild(opt);
+    });
+    if (cur) sel.value = cur;
+  });
+  // Auto-select first two if available
+  if (snapshots.length >= 1 && !selA.value) selA.value = '0';
+  if (snapshots.length >= 2 && !selB.value) selB.value = '1';
+  renderComparison();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateSelects();
+  // Refresh snapshots if user navigates back
+  window.addEventListener('focus', populateSelects);
+});
+</script>
+{% endblock %}
