@@ -401,6 +401,65 @@
       .line-desc { padding-left: 10px; font-size: 12px; }
       .form-header { grid-template-columns: 1fr; }
     }
+
+    /* ── Two-column credit / summary panels ── */
+    .form-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid #ccc;
+    }
+    .form-2col > .col-half {
+      border-right: 1px solid #d0d0d0;
+      min-width: 0;
+    }
+    .form-2col > .col-half:last-child { border-right: none; }
+    .form-2col .form-section,
+    .form-2col .form-subsection { border-right: none; }
+    @media (max-width: 700px) {
+      .form-2col { grid-template-columns: 1fr; }
+      .form-2col > .col-half { border-right: none; }
+    }
+
+    /* ── CRA original link badge in form header ── */
+    .cra-orig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,.35);
+      text-decoration: none;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .cra-orig-badge:hover { background: rgba(255,255,255,.28); }
+
+    /* ── Print / PDF ── */
+    @media print {
+      .gc-topbar, .app-header, .app-nav, .form-toolbar,
+      .formula-btn, .formula-panel, #toast,
+      .cra-orig-badge { display: none !important; }
+
+      body { background: #fff; font-size: 11px; }
+      .page-wrap { max-width: 100%; padding: 0; margin: 0; }
+      .cra-form { box-shadow: none; border: 1px solid #999; }
+
+      .amount-field {
+        border: 1px solid #bbb !important;
+        background: transparent !important;
+        -webkit-appearance: none;
+        appearance: none;
+        font-size: 11px;
+      }
+      .amount-field::-webkit-inner-spin-button,
+      .amount-field::-webkit-outer-spin-button { display: none; }
+
+      .form-line { page-break-inside: avoid; }
+      .form-section { page-break-before: auto; }
+    }
   </style>
 </head>
 <body>

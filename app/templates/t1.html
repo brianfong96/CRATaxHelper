@@ -37,9 +37,14 @@
       <div class="form-title">T1 General — Income Tax and Benefit Return</div>
       <div class="form-subtitle">Steps 2, 3, 4 and 5 &nbsp;·&nbsp; British Columbia resident</div>
     </div>
-    <div class="form-number">
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
       <strong>T1-2025</strong>
       Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5006-r/5006-r-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA T1 General 2025 PDF">
+        📄 Official CRA form
+      </a>
     </div>
   </div>
   <div class="form-meta-bar">
@@ -144,49 +149,57 @@
 
   <!-- ══ STEP 5a: Federal Non-Refundable Tax Credits (Schedule 1) ════════════ -->
   <div class="form-section">Step 5 — Federal Tax (Schedule 1 – Non-Refundable Tax Credits)</div>
-  <div class="form-subsection">Personal amounts</div>
-  {{ fl("30000", "Basic personal amount", op="+",
-        note="2025: $16,129.00 — enter this amount") }}
-  {{ fl("30100", "Age amount (if born before January 1, 1960)", type="calc",
-        formula="max(0, $9,028 − (net_income − $45,522) × 15%)  •  Zero if net income ≥ $105,709  •  Full $9,028 if net income ≤ $45,522") }}
-  {{ fl("30300", "Spouse or common-law partner amount (attach Schedule 5)", op="+") }}
-  {{ fl("30400", "Amount for an eligible dependant (attach Schedule 5)", op="+") }}
-  {{ fl("30425", "Canada caregiver amount for spouse or common-law partner (Schedule 5)", op="+") }}
-  {{ fl("30450", "Canada caregiver amount for other infirm dependants age 18 or older (Schedule 5)", op="+") }}
-  {{ fl("30500", "Canada caregiver amount for infirm children under 18 (Schedule 5)", op="+") }}
 
-  <div class="form-subsection">Employment amounts</div>
-  {{ fl("31000", "CPP or QPP contributions through employment (enter the amount from box 16 or box 17 of all T4 slips)", op="+") }}
-  {{ fl("31200", "Employment insurance premiums through employment (T4, box 18)", op="+") }}
-  {{ fl("31205", "CPP2 contributions through employment (T4, box 16A)", op="+") }}
-  {{ fl("31217", "Employment insurance premiums on self-employment income (RC381)", op="+") }}
-  {{ fl("31220", "CPP or QPP contributions on self-employment income (Schedule 8 or RC381)", op="+") }}
-  {{ fl("31260", "Canada employment amount", type="calc",
-        formula="min(line 10100 + line 10400, $1,471)") }}
+  <!-- Two-column credits layout matching the CRA paper form spread -->
+  <div class="form-2col">
+    <div class="col-half">
+      <div class="form-subsection">Personal amounts</div>
+      {{ fl("30000", "Basic personal amount", op="+",
+            note="2025: $16,129.00 — enter this amount") }}
+      {{ fl("30100", "Age amount (if born before January 1, 1960)", type="calc",
+            formula="max(0, $9,028 − (net_income − $45,522) × 15%)  •  Zero if net income ≥ $105,709  •  Full $9,028 if net income ≤ $45,522") }}
+      {{ fl("30300", "Spouse or common-law partner amount (attach Schedule 5)", op="+") }}
+      {{ fl("30400", "Amount for an eligible dependant (attach Schedule 5)", op="+") }}
+      {{ fl("30425", "Canada caregiver amount for spouse or common-law partner (Schedule 5)", op="+") }}
+      {{ fl("30450", "Canada caregiver amount for other infirm dependants age 18 or older (Schedule 5)", op="+") }}
+      {{ fl("30500", "Canada caregiver amount for infirm children under 18 (Schedule 5)", op="+") }}
 
-  <div class="form-subsection">Home and other credits</div>
-  {{ fl("31270", "Home buyers' amount (attach T1028)", op="+") }}
-  {{ fl("31285", "Home accessibility expenses (T1030; max $20,000)", op="+") }}
-  {{ fl("31300", "Adoption expenses (max $18,210 per adoption)", op="+") }}
-  {{ fl("31350", "Digital news subscription expenses (max $500)", op="+") }}
+      <div class="form-subsection">Employment amounts</div>
+      {{ fl("31000", "CPP or QPP contributions through employment (box 16 or 17 of all T4 slips)", op="+") }}
+      {{ fl("31200", "Employment insurance premiums through employment (T4, box 18)", op="+") }}
+      {{ fl("31205", "CPP2 contributions through employment (T4, box 16A)", op="+") }}
+      {{ fl("31217", "Employment insurance premiums on self-employment income (RC381)", op="+") }}
+      {{ fl("31220", "CPP or QPP contributions on self-employment income (Schedule 8 or RC381)", op="+") }}
+      {{ fl("31260", "Canada employment amount", type="calc",
+            formula="min(line 10100 + line 10400, $1,471)") }}
 
-  <div class="form-subsection">Pension and disability amounts</div>
-  {{ fl("31401", "Eligible pension income (source — enter to auto-compute line 31400)", op="+") }}
-  {{ fl("31400", "Pension income amount", type="calc",
-        formula="min(line 31401, $2,000)") }}
-  {{ fl("31600", "Disability amount for self (T2201)", op="+") }}
-  {{ fl("31800", "Disability amount transferred from a dependant (T2201)", op="+") }}
+      <div class="form-subsection">Home and other credits</div>
+      {{ fl("31270", "Home buyers' amount (attach T1028)", op="+") }}
+      {{ fl("31285", "Home accessibility expenses (T1030; max $20,000)", op="+") }}
+      {{ fl("31300", "Adoption expenses (max $18,210 per adoption)", op="+") }}
+      {{ fl("31350", "Digital news subscription expenses (max $500)", op="+") }}
+    </div>
 
-  <div class="form-subsection">Education and medical amounts</div>
-  {{ fl("31900", "Interest paid on your student loans", op="+") }}
-  {{ fl("32300", "Your tuition and education amounts (T2202, TL11A, TL11C)", op="+") }}
-  {{ fl("32400", "Tuition amount transferred from a child or grandchild", op="+") }}
-  {{ fl("32600", "Amounts transferred from your spouse or common-law partner (Schedule 2)", op="+") }}
-  {{ fl("33099", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later", op="+") }}
-  {{ fl("33199", "Allowable amount of medical expenses for other dependants (Schedule 5)", op="+") }}
+    <div class="col-half">
+      <div class="form-subsection">Pension and disability amounts</div>
+      {{ fl("31401", "Eligible pension income (source — enter to auto-compute line 31400)", op="+") }}
+      {{ fl("31400", "Pension income amount", type="calc",
+            formula="min(line 31401, $2,000)") }}
+      {{ fl("31600", "Disability amount for self (T2201)", op="+") }}
+      {{ fl("31800", "Disability amount transferred from a dependant (T2201)", op="+") }}
 
-  <div class="form-subsection">Donations and gifts</div>
-  {{ fl("34900", "Donations and gifts (Schedule 9)", op="+") }}
+      <div class="form-subsection">Education and medical amounts</div>
+      {{ fl("31900", "Interest paid on your student loans", op="+") }}
+      {{ fl("32300", "Your tuition and education amounts (T2202, TL11A, TL11C)", op="+") }}
+      {{ fl("32400", "Tuition amount transferred from a child or grandchild", op="+") }}
+      {{ fl("32600", "Amounts transferred from your spouse or common-law partner (Schedule 2)", op="+") }}
+      {{ fl("33099", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later", op="+") }}
+      {{ fl("33199", "Allowable amount of medical expenses for other dependants (Schedule 5)", op="+") }}
+
+      <div class="form-subsection">Donations and gifts</div>
+      {{ fl("34900", "Donations and gifts (Schedule 9)", op="+") }}
+    </div>
+  </div>
 
   {{ fl("35000", "Total federal non-refundable tax credit amounts", type="calc",
         formula="30000 + 30100 + 30300 + 30400 + 30425 + 30450 + 30500 + 31000 + 31200 + 31205 + 31217 + 31220 + 31260 + 31270 + 31285 + 31300 + 31350 + 31400 + 31600 + 31800 + 31900 + 32300 + 32400 + 32600 + 33099 + 33199 + 34900") }}
@@ -237,43 +250,127 @@
 
   <!-- ══ Refund / Balance owing ══════════════════════════════════════════ -->
   <div class="form-section">Result</div>
-  <div class="form-line total" id="row-48400">
-    <div class="line-desc" style="color:var(--green); font-weight:700;">
-      <span>Refund</span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+
+  <!-- Two-column summary matching the CRA paper form bottom section -->
+  <div class="form-2col">
+    <div class="col-half">
+      <div class="form-subsection">Tax payable breakdown</div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>Net federal tax</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">40424</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f40424_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>BC provincial tax (from BC428)</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">42000</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f42000_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>CPP payable on self-employment</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">44800</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f44800_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>Social benefits repayment</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">45200</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f45200_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line total">
+        <div class="line-desc">
+          <span>Total payable</span>
+          <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+        </div>
+        <div class="line-op">=</div>
+        <div class="line-num">48200</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f48200" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="formula-panel" id="fp-48200-r" style="grid-column:1/-1;">
+        <strong>Total payable:</strong><br>
+        <span class="formula-expr">line 40424 + line 42000 + line 44800 + line 45200</span>
+      </div>
     </div>
-    <div class="line-op">=</div>
-    <div class="line-num">48400</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="f48400" readonly value="0.00" tabindex="-1"
-             style="color:var(--green); font-weight:700;">
+
+    <div class="col-half">
+      <div class="form-subsection">Payments and credits</div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>Total income tax deducted (all T slips)</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">43700</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f43700_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>CPP overpayment</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">47600</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f47600_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;">
+        <div class="line-desc"><span>Provincial or territorial credits</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">47900</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f47900_r" readonly value="0.00" tabindex="-1">
+        </div>
+      </div>
+      <div class="form-line total" id="row-48400" style="border-top:2px solid #278400;">
+        <div class="line-desc" style="color:var(--green); font-weight:700;">
+          <span>Refund</span>
+          <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+        </div>
+        <div class="line-op">=</div>
+        <div class="line-num">48400</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f48400" readonly value="0.00" tabindex="-1"
+                 style="color:var(--green); font-weight:700;">
+        </div>
+      </div>
+      <div class="formula-panel" id="fp-48400" style="grid-column:1/-1;">
+        <strong>How line 48400 is calculated:</strong><br>
+        <span class="formula-expr">max(0,  line 43700 + line 47600 + line 47900  −  line 48200)</span>
+      </div>
+      <div class="form-line total" id="row-48500" style="border-top:2px solid #d3080c;">
+        <div class="line-desc" style="color:var(--red); font-weight:700;">
+          <span>Balance owing</span>
+          <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+        </div>
+        <div class="line-op">=</div>
+        <div class="line-num">48500</div>
+        <div class="line-amount">
+          <input class="amount-field" type="text" id="f48500" readonly value="0.00" tabindex="-1"
+                 style="color:var(--red); font-weight:700;">
+        </div>
+      </div>
+      <div class="formula-panel" id="fp-48500" style="grid-column:1/-1;">
+        <strong>How line 48500 is calculated:</strong><br>
+        <span class="formula-expr">max(0,  line 48200  −  line 43700 − line 47600 − line 47900)</span>
+      </div>
     </div>
-  </div>
-  <div class="formula-panel" id="fp-48400">
-    <strong>How line 48400 is calculated:</strong><br>
-    <span class="formula-expr">max(0,  line 43700 + line 47600 + line 47900  −  line 48200)</span>
-  </div>
-  <div class="form-line total" id="row-48500">
-    <div class="line-desc" style="color:var(--red); font-weight:700;">
-      <span>Balance owing</span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    </div>
-    <div class="line-op">=</div>
-    <div class="line-num">48500</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="f48500" readonly value="0.00" tabindex="-1"
-             style="color:var(--red); font-weight:700;">
-    </div>
-  </div>
-  <div class="formula-panel" id="fp-48500">
-    <strong>How line 48500 is calculated:</strong><br>
-    <span class="formula-expr">max(0,  line 48200  −  line 43700 − line 47600 − line 47900)</span>
   </div>
 
   <!-- Toolbar -->
   <div class="form-toolbar">
     <a class="btn btn-primary" href="{{ root_path }}/tax/bc428" id="bc428-link">Open BC428 →</a>
     <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
+    <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
+    <button class="btn btn-outline" onclick="window.print()">🖨 Print</button>
     <button class="btn btn-outline" onclick="clearForm()">Clear</button>
     <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
     <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
@@ -397,6 +494,15 @@ function recalcT1() {
   const line48200 = line40424 + bc42000 + g(44800) + g(45200);
   s(48200, line48200);
 
+  // Mirror values into summary panel read-only copies
+  const mirror = { '40424_r': line40424, '42000_r': bc42000,
+                   '44800_r': g(44800), '45200_r': g(45200),
+                   '43700_r': g(43700), '47600_r': g(47600), '47900_r': g(47900) };
+  Object.entries(mirror).forEach(([k, v]) => {
+    const el = document.getElementById('f' + k);
+    if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  });
+
   // Refund / balance owing
   const totalPaid = g(43700) + g(47600) + g(47900);
   const diff = totalPaid - line48200;
@@ -489,6 +595,40 @@ function clearForm() {
   });
   document.getElementById('age65').checked = false;
   recalcT1();
+}
+
+// ── Export PDF ─────────────────────────────────────────────────────────────
+async function exportPDF() {
+  const lines = {};
+  // Collect all user-input fields
+  T1_INPUTS.forEach(id => {
+    const el = document.getElementById('f' + id);
+    if (el) lines[id] = parseFloat(el.value.replace(/,/g, '')) || 0;
+  });
+  // Collect all calculated fields
+  [15000,23300,23400,23600,26000,30100,31260,31400,
+   35000,35100,38000,40425,40424,42000,48200,48400,48500
+  ].forEach(id => {
+    const el = document.getElementById('f' + id);
+    if (el) lines[id] = parseFloat(el.value.replace(/,/g, '')) || 0;
+  });
+
+  try {
+    const resp = await fetch(ROOT + '/tax/t1/pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lines, age_65: document.getElementById('age65').checked }),
+    });
+    if (!resp.ok) throw new Error('Server error ' + resp.status);
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'T1-2025.pdf'; a.click();
+    URL.revokeObjectURL(url);
+    toast('T1-2025.pdf downloaded ✓');
+  } catch (e) {
+    toast('PDF export failed — try Print instead', false);
+  }
 }
 
 // ── Update BC428 link with current line 26000 ──────────────────────────────

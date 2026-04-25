@@ -1,66 +1,164 @@
 {% extends "base.html" %}
 {% block title %}CRA Tax Helper — Home{% endblock %}
 {% block content %}
-<h2 style="font-size:20px; color:var(--cra-navy); margin-bottom:16px;">2024 Tax Year Calculator</h2>
-<p style="margin-bottom:24px; color:var(--muted); max-width:680px; line-height:1.6;">
-  Enter your tax information below. All calculations use the 2024 CRA rates and follow
-  the official form structure.  Values are computed locally — nothing is sent to a server.
-</p>
 
-<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-bottom:32px;">
+<style>
+  .year-group { margin-bottom: 24px; }
 
-  <a href="{{ root_path }}/tax/t1" style="text-decoration:none;">
-    <div style="background:#fff; border:2px solid var(--cra-border); border-radius:3px;
-                padding:20px; transition:border-color .15s; cursor:pointer;"
-         onmouseover="this.style.borderColor='var(--cra-blue)'"
-         onmouseout="this.style.borderColor='var(--cra-border)'">
-      <div style="font-size:11px; color:var(--muted); font-weight:600; margin-bottom:6px;">FEDERAL FORM</div>
-      <div style="font-size:17px; font-weight:700; color:var(--cra-navy); margin-bottom:4px;">T1 General</div>
-      <div style="font-size:12px; color:var(--muted); margin-bottom:12px;">Income Tax and Benefit Return — 2024</div>
-      <div style="font-size:12px; color:var(--cra-blue); font-weight:600;">
-        Steps 2 – 5 &nbsp;·&nbsp; ~60 lines &nbsp;·&nbsp; Auto-calculation ›
-      </div>
+  .year-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cra-navy);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    letter-spacing: .2px;
+  }
+  .year-header:hover { background: var(--cra-blue); }
+  .year-toggle { font-size: 18px; transition: transform .2s; }
+  .year-toggle.closed { transform: rotate(-90deg); }
+
+  .year-forms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 12px;
+    padding: 14px;
+    background: #f0f4f8;
+    border: 1px solid var(--cra-border);
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+  }
+  .year-forms.hidden { display: none; }
+
+  .form-card-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+  .form-card {
+    background: #fff;
+    border: 2px solid var(--cra-border);
+    border-radius: 3px;
+    padding: 16px 18px 14px;
+    transition: border-color .15s, box-shadow .15s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .form-card:hover {
+    border-color: var(--cra-blue);
+    box-shadow: 0 2px 8px rgba(40,65,98,.15);
+  }
+  .card-cat  { font-size: 10px; color: var(--muted); font-weight: 700; margin-bottom: 4px; letter-spacing: .5px; }
+  .card-name { font-size: 17px; font-weight: 700; color: var(--cra-navy); margin-bottom: 3px; }
+  .card-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .card-meta { font-size: 12px; color: var(--cra-blue); font-weight: 600; }
+
+  .cra-orig-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--cra-blue);
+    text-decoration: none;
+    padding: 3px 0;
+  }
+  .cra-orig-link:hover { text-decoration: underline; }
+
+  .add-form-btn {
+    background: #fff;
+    border: 2px dashed var(--cra-border);
+    border-radius: 3px;
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .how-to-box {
+    background: #fff;
+    border: 1px solid var(--cra-border);
+    border-radius: 3px;
+    padding: 16px;
+    max-width: 720px;
+    margin-top: 8px;
+  }
+</style>
+
+<h2 style="font-size:19px; color:var(--cra-navy); margin-bottom:18px;">
+  CRA Tax Forms — 2025
+</h2>
+
+{% for year, forms in forms_by_year | dictsort(reverse=True) %}
+<div class="year-group">
+  <button class="year-header" onclick="toggleYear('{{ year }}')" id="btn-{{ year }}">
+    <span>📋 {{ year }} Tax Year</span>
+    <span class="year-toggle" id="toggle-{{ year }}">▾</span>
+  </button>
+  <div class="year-forms" id="forms-{{ year }}">
+
+    {% for form in forms %}
+    <div class="form-card-wrap">
+      <a href="{{ root_path }}{{ form.url }}" class="form-card">
+        <div class="card-cat">{{ form.category }}</div>
+        <div class="card-name">{{ form.name }}</div>
+        <div class="card-desc">{{ form.description }} — {{ year }}</div>
+        <div class="card-meta">{{ form.lines_summary }} ›</div>
+      </a>
+      <a href="{{ form.cra_url }}" target="_blank" rel="noopener" class="cra-orig-link">
+        📄 View official CRA form (PDF)
+      </a>
     </div>
-  </a>
+    {% endfor %}
 
-  <a href="{{ root_path }}/tax/bc428" style="text-decoration:none;">
-    <div style="background:#fff; border:2px solid var(--cra-border); border-radius:3px;
-                padding:20px; transition:border-color .15s; cursor:pointer;"
-         onmouseover="this.style.borderColor='var(--cra-blue)'"
-         onmouseout="this.style.borderColor='var(--cra-border)'">
-      <div style="font-size:11px; color:var(--muted); font-weight:600; margin-bottom:6px;">PROVINCIAL FORM — 5010-C</div>
-      <div style="font-size:17px; font-weight:700; color:var(--cra-navy); margin-bottom:4px;">BC428</div>
-      <div style="font-size:12px; color:var(--muted); margin-bottom:12px;">British Columbia Tax — 2024</div>
-      <div style="font-size:12px; color:var(--cra-blue); font-weight:600;">
-        Parts 1 – 3 &nbsp;·&nbsp; ~20 lines &nbsp;·&nbsp; Links back to T1 ›
-      </div>
+    <div class="add-form-btn">
+      ＋ More forms coming soon
     </div>
-  </a>
 
-  <a href="{{ root_path }}/tax/compare" style="text-decoration:none;">
-    <div style="background:#fff; border:2px solid var(--cra-border); border-radius:3px;
-                padding:20px; transition:border-color .15s; cursor:pointer;"
-         onmouseover="this.style.borderColor='var(--cra-blue)'"
-         onmouseout="this.style.borderColor='var(--cra-border)'">
-      <div style="font-size:11px; color:var(--muted); font-weight:600; margin-bottom:6px;">TOOL</div>
-      <div style="font-size:17px; font-weight:700; color:var(--cra-navy); margin-bottom:4px;">Scenario Compare</div>
-      <div style="font-size:12px; color:var(--muted); margin-bottom:12px;">Side-by-side diff of saved snapshots</div>
-      <div style="font-size:12px; color:var(--cra-blue); font-weight:600;">
-        Save scenarios on any form, compare here ›
-      </div>
-    </div>
-  </a>
-
+  </div>
 </div>
+{% endfor %}
 
-<div style="background:#fff; border:1px solid var(--cra-border); border-radius:3px; padding:16px; max-width:680px;">
+<a href="{{ root_path }}/tax/compare" style="text-decoration:none;">
+  <div style="background:#fff; border:2px solid var(--cra-border); border-radius:3px;
+              padding:16px 18px; max-width:340px; margin-bottom:24px;
+              transition:border-color .15s;"
+       onmouseover="this.style.borderColor='var(--cra-blue)'"
+       onmouseout="this.style.borderColor='var(--cra-border)'">
+    <div style="font-size:10px; color:var(--muted); font-weight:700; margin-bottom:4px; letter-spacing:.5px;">TOOL</div>
+    <div style="font-size:17px; font-weight:700; color:var(--cra-navy); margin-bottom:3px;">Scenario Compare</div>
+    <div style="font-size:12px; color:var(--muted); margin-bottom:10px;">Side-by-side diff of saved snapshots</div>
+    <div style="font-size:12px; color:var(--cra-blue); font-weight:600;">Save scenarios on any form, compare here ›</div>
+  </div>
+</a>
+
+<div class="how-to-box">
   <h3 style="font-size:13px; font-weight:700; color:var(--cra-navy); margin-bottom:8px;">How to use</h3>
   <ol style="font-size:13px; color:var(--muted); line-height:1.8; padding-left:20px;">
     <li>Open the <strong>T1 General</strong> form and enter your income and deduction amounts.</li>
-    <li>Click <strong>"Open BC428"</strong> on the T1 form — your taxable income (line 26000) transfers automatically.</li>
-    <li>Complete the BC428 provincial credits and click <strong>"Save &amp; return to T1"</strong>.</li>
-    <li>The T1 summary updates with your provincial tax and shows your refund or balance owing.</li>
-    <li>Use <strong>"Save Snapshot"</strong> on either form to save a scenario, then visit <strong>Compare</strong> to see side-by-side differences.</li>
+    <li>Click <strong>"Open BC428 →"</strong> — your taxable income (line 26000) transfers automatically.</li>
+    <li>Complete the BC428 credits and click <strong>"← Save &amp; Return to T1"</strong>.</li>
+    <li>The T1 updates with your BC provincial tax and shows your refund or balance owing.</li>
+    <li>Click <strong>"📄 Export PDF"</strong> on any form to download a filled summary PDF.</li>
+    <li>Click the <strong>ⓘ formula button</strong> on any calculated line to see how it is computed.</li>
+    <li>Use <strong>"💾 Save Snapshot"</strong> to save a scenario, then visit <strong>Compare</strong> to see differences.</li>
   </ol>
 </div>
+
+<script>
+function toggleYear(year) {
+  const panel  = document.getElementById('forms-' + year);
+  const toggle = document.getElementById('toggle-' + year);
+  const isOpen = !panel.classList.contains('hidden');
+  panel.classList.toggle('hidden', isOpen);
+  toggle.classList.toggle('closed', isOpen);
+}
+</script>
 {% endblock %}
+

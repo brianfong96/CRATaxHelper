@@ -2,22 +2,26 @@
 CRA Tax Helper — FastAPI application.
 
 Routes:
-  GET  /                       Landing page
+  GET  /                       Landing page (year-grouped form registry)
   GET  /health                 Health check
-  GET  /tax/t1                 T1 General 2024 form
-  GET  /tax/bc428              BC428 2024 form
+  GET  /tax/t1                 T1 General 2025 form
+  GET  /tax/bc428              BC428 2025 form
   GET  /tax/compare            Side-by-side scenario comparison
   POST /tax/t1/calculate       JSON API – compute all T1 derived lines
   POST /tax/bc428/calculate    JSON API – compute all BC428 derived lines
+  POST /tax/t1/pdf             Generate a filled T1 PDF from submitted values
+  POST /tax/bc428/pdf          Generate a filled BC428 PDF from submitted values
 """
 
 from __future__ import annotations
 
+import io
 import logging
 from pathlib import Path
+from typing import Dict
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -28,6 +32,7 @@ from app.calculator import (
     calculate_t1,
 )
 from app.config import settings
+from app.forms_registry import FORMS_BY_YEAR
 
 logging.basicConfig(
     level=settings.LOG_LEVEL,
@@ -66,7 +71,9 @@ def _ctx(request: Request, **extra):
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", _ctx(request))
+    return templates.TemplateResponse(
+        "index.html", _ctx(request, forms_by_year=FORMS_BY_YEAR)
+    )
 
 
 @app.get("/tax/t1", response_class=HTMLResponse)
@@ -106,7 +113,7 @@ class T1CalcRequest(BaseModel):
     line_24400: float = 0; line_24900: float = 0; line_25000: float = 0
     line_25100: float = 0; line_25200: float = 0; line_25300: float = 0
     line_25400: float = 0; line_25500: float = 0; line_25600: float = 0
-    line_30000: float = 15705; line_30100: float = 0; line_30300: float = 0
+    line_30000: float = 16129; line_30100: float = 0; line_30300: float = 0
     line_30400: float = 0; line_30425: float = 0; line_30450: float = 0
     line_30500: float = 0; line_31000: float = 0; line_31200: float = 0
     line_31205: float = 0; line_31217: float = 0; line_31220: float = 0
@@ -127,7 +134,7 @@ class BC428CalcRequest(BaseModel):
     taxable_income: float = 0         # T1 line 26000
     eligible_div_taxable: float = 0   # T1 line 12000
     non_eligible_div_taxable: float = 0  # T1 line 12010
-    line_58040: float = 11981; line_58080: float = 0; line_58120: float = 0
+    line_58040: float = 12932; line_58080: float = 0; line_58120: float = 0
     line_58160: float = 0; line_58200: float = 0; line_58240: float = 0
     line_58280: float = 0; line_58300: float = 0; line_58360: float = 0
     line_58400: float = 0; line_58440: float = 0; line_58480: float = 0
@@ -153,6 +160,236 @@ async def calculate_bc428_api(body: BC428CalcRequest):
     inp = BC428Input(**data)
     result = calculate_bc428(inp, taxable_income, eligible_div, non_eligible)
     return result.__dict__
+
+
+# ── PDF export ────────────────────────────────────────────────────────────────
+
+# Line labels used when generating PDF printouts
+_T1_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
+    ("Step 2 — Total Income", [
+        ("10100","Employment income"), ("10400","Other employment income"),
+        ("11300","OAS pension"), ("11400","CPP/QPP benefits"),
+        ("11500","Other pensions"), ("11700","RDSP income"),
+        ("11900","Employment insurance"), ("12000","Eligible dividends (grossed-up)"),
+        ("12010","Other dividends (grossed-up)"), ("12100","Interest income"),
+        ("12200","Net partnership income"), ("12500","RDSP income"),
+        ("12600","Net rental income"), ("12700","Taxable capital gains"),
+        ("12900","RRSP income"), ("13000","Other income"),
+        ("13500","Business income"), ("13700","Professional income"),
+        ("13900","Commission income"), ("14100","Farming income"),
+        ("14300","Fishing income"), ("14400","Workers' compensation"),
+        ("14500","Social assistance"), ("14600","Net federal supplements"),
+        ("15000","Total income ←"),
+    ]),
+    ("Step 3 — Net Income", [
+        ("20800","RRSP/PRPP deduction"), ("21200","Union/professional dues"),
+        ("20700","RPP deduction"), ("21000","Split-pension deduction"),
+        ("22100","Carrying charges"), ("22200","CPP/QPP (self-employment)"),
+        ("23300","Total deductions"), ("23400","Line 15000 − 23300"),
+        ("23500","Social benefits repayment"), ("23600","Net income ←"),
+    ]),
+    ("Step 4 — Taxable Income", [
+        ("25000","Other payments deduction"), ("25200","Non-capital losses"),
+        ("25300","Net capital losses"), ("26000","Taxable income ←"),
+    ]),
+    ("Schedule 1 — Federal Credits", [
+        ("30000","Basic personal amount"), ("30100","Age amount"),
+        ("31000","CPP contributions"), ("31200","EI premiums"),
+        ("31260","Canada employment amount"), ("31400","Pension income amount"),
+        ("31600","Disability amount"), ("32300","Tuition amounts"),
+        ("33099","Medical expenses"), ("34900","Donations and gifts"),
+        ("35000","Total federal credit amounts"), ("35100","Federal non-refundable credit (×14.5%)"),
+    ]),
+    ("Step 5 — Federal Tax", [
+        ("38000","Federal tax on taxable income"), ("40425","Federal dividend tax credit"),
+        ("40424","Net federal tax"), ("42000","BC provincial tax"),
+        ("44800","CPP payable on self-employment"), ("48200","Total payable ←"),
+        ("43700","Total income tax deducted"), ("47600","CPP overpayment"),
+        ("47900","Provincial credits"), ("48400","Refund ←"),
+        ("48500","Balance owing ←"),
+    ]),
+]
+
+_BC428_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
+    ("Part 1 — BC Tax on Taxable Income", [
+        ("taxableIncome","Taxable income (from T1 line 26000)"),
+        ("bcTax","BC tax on taxable income"),
+    ]),
+    ("Part 2 — BC Non-Refundable Tax Credits", [
+        ("58040","BC basic personal amount"), ("58080","BC age amount"),
+        ("58120","Spouse/partner amount"), ("58160","Eligible dependant"),
+        ("58240","CPP contributions"), ("58280","EI premiums"),
+        ("58300","Volunteer firefighter / SAR amount"),
+        ("bcPensionAmt","BC pension income amount"),
+        ("58360","BC disability amount"), ("58400","Disability (dependant)"),
+        ("58440","Student loan interest"), ("58480","Tuition amounts"),
+        ("58689","Medical expenses"), ("58800","Donations and gifts"),
+        ("59090","Total BC credit amounts"), ("bcCredits","BC non-refundable credit (×5.06%)"),
+    ]),
+    ("Part 3 — Net BC Tax", [
+        ("bcDTC","BC dividend tax credit"), ("61520","BC political contribution credit"),
+        ("42800","BC tax ← (enter on T1 line 42000)"),
+    ]),
+]
+
+
+def _build_pdf(
+    title: str,
+    subtitle: str,
+    form_num: str,
+    sections: list[tuple[str, list[tuple[str, str]]]],
+    lines: dict[str, float],
+) -> bytes:
+    """Generate a filled-form PDF using fpdf2."""
+    from fpdf import FPDF
+    from fpdf.enums import XPos, YPos
+
+    NL = {"new_x": XPos.LMARGIN, "new_y": YPos.NEXT}
+
+    def _safe(s: str) -> str:
+        """Replace characters outside Latin-1 with ASCII equivalents."""
+        return (
+            s.replace("\u2014", "-").replace("\u2013", "-")   # em/en dash
+             .replace("\u2019", "'").replace("\u2018", "'")   # curly apostrophes
+             .replace("\u201c", '"').replace("\u201d", '"')   # curly quotes
+             .replace("\u00e9", "e").replace("\u00e8", "e")   # accents
+             .replace("\u00e0", "a").replace("\u00f9", "u")
+             .encode("latin-1", errors="replace").decode("latin-1")
+        )
+
+    MARGIN = 12
+    ROW_H  = 6
+    HDR_H  = 8
+
+    pdf = FPDF()
+    pdf.set_margins(MARGIN, MARGIN, MARGIN)
+    pdf.set_auto_page_break(auto=True, margin=MARGIN)
+    pdf.add_page()
+
+    eff_w  = pdf.epw   # effective page width after margins
+
+    # ── Form header ──────────────────────────────────────────────────────────
+    pdf.set_fill_color(38, 55, 74)
+    pdf.set_text_color(255, 255, 255)
+    pdf.set_font("Helvetica", "B", 12)
+    pdf.cell(eff_w, HDR_H + 2, _safe(f"  {title}"), fill=True, **NL)
+    pdf.set_font("Helvetica", "", 8)
+    pdf.cell(eff_w, 5, _safe(f"  {subtitle}"), fill=True, **NL)
+
+    pdf.set_fill_color(51, 80, 117)
+    pdf.set_font("Helvetica", "I", 7)
+    pdf.cell(eff_w, 5,
+             f"  Protected B when completed   .   2025 tax year   .   {form_num}",
+             fill=True, **NL)
+    pdf.ln(3)
+
+    # column widths
+    desc_w = eff_w * 0.62
+    line_w = eff_w * 0.12
+    amt_w  = eff_w - desc_w - line_w
+
+    # ── Sections ─────────────────────────────────────────────────────────────
+    for sec_title, items in sections:
+        # Section header
+        pdf.set_fill_color(28, 28, 28)
+        pdf.set_text_color(255, 255, 255)
+        pdf.set_font("Helvetica", "B", 8)
+        pdf.cell(eff_w, ROW_H, _safe(f"  {sec_title.upper()}"), fill=True, **NL)
+
+        # Column headers
+        pdf.set_fill_color(210, 210, 210)
+        pdf.set_text_color(0, 0, 0)
+        pdf.set_font("Helvetica", "B", 7)
+        pdf.cell(desc_w, ROW_H - 1, " Description",  border="B", fill=True)
+        pdf.cell(line_w, ROW_H - 1, "Line",  border="B", fill=True, align="C")
+        pdf.cell(amt_w,  ROW_H - 1, "Amount ($)",  border="B", fill=True,
+                 align="R", **NL)
+
+        # Data rows
+        for line_id, label in items:
+            val      = lines.get(str(line_id), 0.0)
+            is_total = label.endswith("←")
+            disp     = _safe(label.rstrip(" ←"))
+
+            if is_total:
+                pdf.set_font("Helvetica", "B", 7)
+                pdf.set_fill_color(225, 225, 225)
+                fill = True
+                pdf.set_text_color(0, 0, 128)
+            else:
+                pdf.set_font("Helvetica", "", 7)
+                pdf.set_fill_color(255, 255, 255)
+                fill = False
+                pdf.set_text_color(0, 0, 0)
+
+            amt_str = f"{val:,.2f}" if val else "0.00"
+
+            pdf.cell(desc_w, ROW_H, f" {disp}", border="B", fill=fill)
+            pdf.set_text_color(0, 0, 0)
+            pdf.cell(line_w, ROW_H, str(line_id), border="B", fill=fill, align="C")
+            if is_total:
+                pdf.set_text_color(0, 0, 128)
+            pdf.cell(amt_w, ROW_H, f"{amt_str} ", border="B", fill=fill,
+                     align="R", **NL)
+            pdf.set_text_color(0, 0, 0)
+
+        pdf.ln(2)
+
+    # Footer
+    pdf.set_y(-10)
+    pdf.set_font("Helvetica", "I", 6)
+    pdf.set_text_color(140, 140, 140)
+    pdf.cell(0, 4,
+             "Generated by CRA Tax Helper  .  2025 tax year  .  All calculations are estimates.",
+             align="C")
+
+    buf = io.BytesIO()
+    pdf.output(buf)
+    return buf.getvalue()
+
+
+class T1PDFBody(BaseModel):
+    """All T1 line values (user-entered + calculated) for PDF generation."""
+    lines: Dict[str, float] = {}
+    age_65: bool = False
+
+
+class BC428PDFBody(BaseModel):
+    """All BC428 line values for PDF generation."""
+    lines: Dict[str, float] = {}
+    age_65: bool = False
+
+
+@app.post("/tax/t1/pdf")
+async def t1_pdf(body: T1PDFBody):
+    pdf_bytes = _build_pdf(
+        title="T1 General — Income Tax and Benefit Return",
+        subtitle="Steps 2, 3, 4 and 5  ·  British Columbia resident",
+        form_num="T1-2025",
+        sections=_T1_SECTIONS,
+        lines=body.lines,
+    )
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="T1-2025.pdf"'},
+    )
+
+
+@app.post("/tax/bc428/pdf")
+async def bc428_pdf(body: BC428PDFBody):
+    pdf_bytes = _build_pdf(
+        title="BC428 — British Columbia Tax",
+        subtitle="Form 5010-C  ·  British Columbia residents",
+        form_num="BC428-2025",
+        sections=_BC428_SECTIONS,
+        lines=body.lines,
+    )
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="BC428-2025.pdf"'},
+    )
 
 
 # ── Health ────────────────────────────────────────────────────────────────────

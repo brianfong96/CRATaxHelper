@@ -35,9 +35,14 @@
       <div class="form-title">BC428 — British Columbia Tax</div>
       <div class="form-subtitle">Form 5010-C &nbsp;·&nbsp; British Columbia residents</div>
     </div>
-    <div class="form-number">
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
       <strong>BC428-2025</strong>
       Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5010-c/5010-c-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA BC428 2025 PDF">
+        📄 Official CRA form
+      </a>
     </div>
   </div>
   <div class="form-meta-bar">
@@ -211,6 +216,8 @@
   <div class="form-toolbar">
     <button class="btn btn-primary" onclick="saveAndReturnToT1()">← Save &amp; Return to T1</button>
     <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
+    <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
+    <button class="btn btn-outline" onclick="window.print()">🖨 Print</button>
     <button class="btn btn-outline" onclick="clearForm()">Clear</button>
     <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
     <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
@@ -382,6 +389,43 @@ function clearForm() {
   });
   document.getElementById('age65bc').checked = false;
   recalcBC428();
+}
+
+// ── Export PDF ──────────────────────────────────────────────────────────────
+async function exportPDF() {
+  const lines = {};
+  BC428_INPUTS_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const key = id.startsWith('f') ? id.slice(1) : id;
+      lines[key] = parseFloat(el.value.replace(/,/g, '')) || 0;
+    }
+  });
+  // Calculated fields
+  ['fbcTax','fbcCredits','fbcDTC','f42800','f58080','f59090','fbcPensionAmt'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const key = id.startsWith('f') ? id.slice(1) : id;
+      lines[key] = parseFloat(el.value.replace(/,/g, '')) || 0;
+    }
+  });
+
+  try {
+    const resp = await fetch(ROOT + '/tax/bc428/pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lines, age_65: document.getElementById('age65bc').checked }),
+    });
+    if (!resp.ok) throw new Error('Server error ' + resp.status);
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'BC428-2025.pdf'; a.click();
+    URL.revokeObjectURL(url);
+    toast('BC428-2025.pdf downloaded ✓');
+  } catch (e) {
+    toast('PDF export failed — try Print instead', false);
+  }
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
