@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .env
 .pytest_cache/
+
+# Official CRA fillable PDFs — downloaded by user; not committed to source
+# Keep the directory (tracked via .gitkeep)
+app/static/forms/*.pdf

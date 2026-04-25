@@ -2,15 +2,19 @@
 CRA Tax Helper — FastAPI application.
 
 Routes:
-  GET  /                       Landing page (year-grouped form registry)
-  GET  /health                 Health check
-  GET  /tax/t1                 T1 General 2025 form
-  GET  /tax/bc428              BC428 2025 form
-  GET  /tax/compare            Side-by-side scenario comparison
-  POST /tax/t1/calculate       JSON API – compute all T1 derived lines
-  POST /tax/bc428/calculate    JSON API – compute all BC428 derived lines
-  POST /tax/t1/pdf             Generate a filled T1 PDF from submitted values
-  POST /tax/bc428/pdf          Generate a filled BC428 PDF from submitted values
+  GET  /                           Landing page (year-grouped form registry)
+  GET  /health                     Health check
+  GET  /tax/t1                     T1 General 2025 form
+  GET  /tax/bc428                  BC428 2025 form
+  GET  /tax/compare                Side-by-side scenario comparison
+  POST /tax/t1/calculate           JSON API – compute all T1 derived lines
+  POST /tax/bc428/calculate        JSON API – compute all BC428 derived lines
+  POST /tax/t1/pdf                 Export filled T1 PDF (official CRA form if installed)
+  POST /tax/bc428/pdf              Export filled BC428 PDF (official CRA form if installed)
+  GET  /admin/setup                Setup page – install official CRA PDF templates
+  GET  /admin/forms-status         JSON – which official PDFs are installed
+  GET  /admin/list-fields/{name}   JSON – AcroForm field names in an installed PDF
+  POST /admin/upload-form/{name}   Upload an official CRA fillable PDF
 """
 
 from __future__ import annotations
@@ -20,7 +24,7 @@ import logging
 from pathlib import Path
 from typing import Dict
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request, UploadFile, File
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -32,6 +36,12 @@ from app.calculator import (
     calculate_t1,
 )
 from app.config import settings
+from app.form_filler import (
+    fill_official_pdf,
+    forms_status,
+    list_fields,
+    save_uploaded_form,
+)
 from app.forms_registry import FORMS_BY_YEAR
 
 logging.basicConfig(
@@ -89,6 +99,40 @@ async def bc428_form(request: Request):
 @app.get("/tax/compare", response_class=HTMLResponse)
 async def compare(request: Request):
     return templates.TemplateResponse("compare.html", _ctx(request))
+
+
+# ── Admin / setup routes ──────────────────────────────────────────────────────
+
+@app.get("/admin/setup", response_class=HTMLResponse)
+async def admin_setup(request: Request):
+    status = forms_status()
+    return templates.TemplateResponse(
+        "setup.html", _ctx(request, forms=status)
+    )
+
+
+@app.get("/admin/forms-status")
+async def admin_forms_status():
+    return forms_status()
+
+
+@app.get("/admin/list-fields/{form_name}")
+async def admin_list_fields(form_name: str):
+    if form_name not in ("t1-2025.pdf", "bc428-2025.pdf"):
+        raise HTTPException(status_code=400, detail="Unknown form name")
+    return {"form": form_name, "fields": list_fields(form_name)}
+
+
+@app.post("/admin/upload-form/{form_name}")
+async def admin_upload_form(form_name: str, file: UploadFile = File(...)):
+    if form_name not in ("t1-2025.pdf", "bc428-2025.pdf"):
+        raise HTTPException(status_code=400, detail="Unknown form name")
+    content = await file.read()
+    try:
+        result = save_uploaded_form(form_name, content)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    return result
 
 
 # ── JSON calculation API ──────────────────────────────────────────────────────
@@ -362,6 +406,16 @@ class BC428PDFBody(BaseModel):
 
 @app.post("/tax/t1/pdf")
 async def t1_pdf(body: T1PDFBody):
+    # ── Preferred: fill the official CRA fillable PDF ─────────────────────────
+    str_lines = {k: v for k, v in body.lines.items()}
+    official = fill_official_pdf("t1-2025.pdf", str_lines)
+    if official:
+        return Response(
+            content=official,
+            media_type="application/pdf",
+            headers={"Content-Disposition": 'attachment; filename="T1-2025-filled.pdf"'},
+        )
+    # ── Fallback: generated summary PDF ───────────────────────────────────────
     pdf_bytes = _build_pdf(
         title="T1 General — Income Tax and Benefit Return",
         subtitle="Steps 2, 3, 4 and 5  ·  British Columbia resident",
@@ -372,12 +426,25 @@ async def t1_pdf(body: T1PDFBody):
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
-        headers={"Content-Disposition": 'attachment; filename="T1-2025.pdf"'},
+        headers={
+            "Content-Disposition": 'attachment; filename="T1-2025.pdf"',
+            "X-Pdf-Source": "generated-summary",
+        },
     )
 
 
 @app.post("/tax/bc428/pdf")
 async def bc428_pdf(body: BC428PDFBody):
+    # ── Preferred: fill the official CRA fillable PDF ─────────────────────────
+    str_lines = {k: v for k, v in body.lines.items()}
+    official = fill_official_pdf("bc428-2025.pdf", str_lines)
+    if official:
+        return Response(
+            content=official,
+            media_type="application/pdf",
+            headers={"Content-Disposition": 'attachment; filename="BC428-2025-filled.pdf"'},
+        )
+    # ── Fallback: generated summary PDF ───────────────────────────────────────
     pdf_bytes = _build_pdf(
         title="BC428 — British Columbia Tax",
         subtitle="Form 5010-C  ·  British Columbia residents",
@@ -388,7 +455,10 @@ async def bc428_pdf(body: BC428PDFBody):
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
-        headers={"Content-Disposition": 'attachment; filename="BC428-2025.pdf"'},
+        headers={
+            "Content-Disposition": 'attachment; filename="BC428-2025.pdf"',
+            "X-Pdf-Source": "generated-summary",
+        },
     )
 
 

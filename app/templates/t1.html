@@ -369,12 +369,17 @@
   <div class="form-toolbar">
     <a class="btn btn-primary" href="{{ root_path }}/tax/bc428" id="bc428-link">Open BC428 →</a>
     <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
-    <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
+    <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA T1 form with your values">📄 Export PDF</button>
     <button class="btn btn-outline" onclick="window.print()">🖨 Print</button>
     <a class="btn btn-outline" href="{{ root_path }}/tax/compare">⇄ Compare</a>
     <button class="btn btn-outline" onclick="clearForm()">Clear</button>
     <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
     <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+  <div id="pdf-source-banner" style="display:none; font-size:.77rem; padding:4px 12px;
+       background:#fff8e1; border-bottom:1px solid #ffe082; color:#795548;">
+    ⚠ Official CRA PDF not installed — export will be a summary document.
+    <a href="{{ root_path }}/admin/setup" style="font-weight:600;">Install now →</a>
   </div>
 
 </div>{# /.cra-form #}
@@ -621,16 +626,35 @@ async function exportPDF() {
       body: JSON.stringify({ lines, age_65: document.getElementById('age65').checked }),
     });
     if (!resp.ok) throw new Error('Server error ' + resp.status);
+    const src = resp.headers.get('X-Pdf-Source');
     const blob = await resp.blob();
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
-    a.href = url; a.download = 'T1-2025.pdf'; a.click();
+    const fname = src === 'generated-summary' ? 'T1-2025-summary.pdf' : 'T1-2025-filled.pdf';
+    a.href = url; a.download = fname; a.click();
     URL.revokeObjectURL(url);
-    toast('T1-2025.pdf downloaded ✓');
+    if (src === 'generated-summary') {
+      toast('Downloaded summary PDF (install official form in Setup for the real CRA form)', false);
+    } else {
+      toast('T1-2025-filled.pdf downloaded ✓  (official CRA form)');
+    }
   } catch (e) {
     toast('PDF export failed — try Print instead', false);
   }
 }
+
+// ── Check whether official PDF is installed and show banner if not ──────────
+(async () => {
+  try {
+    const r = await fetch(ROOT + '/admin/forms-status');
+    const d = await r.json();
+    if (!d['t1-2025.pdf']?.available) {
+      document.getElementById('pdf-source-banner').style.display = 'block';
+      const btn = document.getElementById('btn-export-pdf');
+      if (btn) btn.title = '⚠ Official CRA PDF not installed — will export summary';
+    }
+  } catch(_) {}
+})();
 
 // ── Update BC428 link with current line 26000 ──────────────────────────────
 function updateBC428Link() {

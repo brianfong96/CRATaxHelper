@@ -486,6 +486,10 @@
   <nav class="app-nav">
     <a href="{{ root_path }}/" {% if request.url.path == root_path + '/' or request.url.path == root_path %}class="active"{% endif %}>Home</a>
     <a href="#" style="opacity:.55; cursor:default;" title="Profile — coming soon">Profile</a>
+    <a href="{{ root_path }}/admin/setup"
+       {% if 'setup' in request.url.path %}class="active"{% endif %}
+       title="Install official CRA PDFs for Export PDF"
+       style="margin-left:auto; font-size:.8rem;">⚙ Setup</a>
   </nav>
 </div>
 
