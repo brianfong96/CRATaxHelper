@@ -41,6 +41,25 @@
 }
 /* Page 1 / 2 identification fields */
 .pdf-input.text-left { text-align: left; font-size: 0.55em; }
+/* Individual character boxes (SIN, DOB, dates, postal) */
+.pdf-char {
+  position: absolute;
+  background: rgba(255,255,200,0.7);
+  border: none;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  font-size: 0.62em;
+  padding: 0;
+  line-height: 1;
+  color: #222;
+  outline: none;
+}
+.pdf-char:focus {
+  background: rgba(200,230,255,0.9);
+  box-shadow: inset 0 0 0 1px #0066cc;
+  z-index: 10;
+}
 .pdf-select {
   position: absolute;
   font-size: 0.55em;
@@ -118,11 +137,11 @@
     <!-- Identification -->
     <input type="text" id="id_first_name" class="pdf-input text-left" placeholder="First name/initials" style="left:4.897%;top:24.244%;width:21.569%;height:1.424%;">
     <input type="text" id="id_last_name" class="pdf-input text-left" placeholder="Last name" style="left:27.444%;top:24.244%;width:22.549%;height:1.424%;">
-    <input type="text" id="id_sin" class="pdf-input text-left" placeholder="SIN" style="left:51.541%;top:25.407%;width:22.059%;height:1.342%;">
+    <input type="text" id="id_sin" class="pdf-input text-left" data-charboxes="9" style="left:51.541%;top:25.407%;width:22.059%;height:1.342%;">
     <input type="text" id="id_address" class="pdf-input text-left" placeholder="Mailing address (apt/street)" style="left:4.897%;top:28.030%;width:45.098%;height:1.426%;">
     <input type="text" id="id_pobox" class="pdf-input text-left" placeholder="P.O. Box" style="left:4.897%;top:32.009%;width:21.451%;height:1.424%;">
     <input type="text" id="id_rural" class="pdf-input text-left" placeholder="Rural route" style="left:27.608%;top:32.009%;width:22.386%;height:1.424%;">
-    <input type="text" id="id_dob" class="pdf-input text-left" placeholder="YYYYMMDD" style="left:54.523%;top:31.611%;width:15.451%;height:1.540%;">
+    <input type="text" id="id_dob" class="pdf-input text-left" data-charboxes="8" style="left:54.523%;top:31.611%;width:15.451%;height:1.540%;">
     <input type="text" id="id_city" class="pdf-input text-left" placeholder="City/town" style="left:4.897%;top:35.985%;width:21.569%;height:1.426%;">
     <select id="id_province_mail" class="pdf-select" style="left:27.444%;top:35.985%;width:9.804%;height:1.800%;">
       <option value=""></option>
@@ -130,12 +149,12 @@
       <option>NL</option><option>NS</option><option>NT</option><option>NU</option>
       <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
     </select>
-    <input type="text" id="id_postal" class="pdf-input text-left" placeholder="Postal code" style="left:38.346%;top:35.985%;width:11.529%;height:1.426%;">
+    <input type="text" id="id_postal" class="pdf-input text-left" data-charboxes="6" data-inputmode="text" style="left:38.346%;top:35.985%;width:11.529%;height:1.426%;">
     <input type="email" id="id_email" class="pdf-input text-left" placeholder="Email address" style="left:4.897%;top:39.963%;width:45.098%;height:1.424%;">
     <!-- Date of death (if applicable) -->
-    <input type="text" id="id_dod" class="pdf-input text-left" placeholder="YYYYMMDD" style="left:54.523%;top:41.269%;width:15.451%;height:1.424%;">
+    <input type="text" id="id_dod" class="pdf-input text-left" data-charboxes="8" style="left:54.523%;top:41.269%;width:15.451%;height:1.424%;">
     <!-- Date of election (MMDD) -->
-    <input type="text" id="id_elect_date" class="pdf-input text-left" placeholder="MMDD" style="left:80.575%;top:41.755%;width:9.078%;height:1.424%;">
+    <input type="text" id="id_elect_date" class="pdf-input text-left" data-charboxes="4" style="left:80.575%;top:41.755%;width:9.078%;height:1.424%;">
     <!-- Marital status — radio group (CRA: 1=Married 2=Common-law 3=Widowed 4=Divorced 5=Separated 6=Single) -->
     <input type="radio" name="marital" id="ms_1" value="1" class="pdf-radio" style="left:77.444%;top:23.499%;width:1.634%;height:1.263%;">
     <input type="radio" name="marital" id="ms_2" value="2" class="pdf-radio" style="left:77.444%;top:25.413%;width:1.634%;height:1.263%;">
@@ -154,7 +173,7 @@
       <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
     </select>
     <!-- Date entered province (MMDD) -->
-    <input type="text" id="id_prov_date" class="pdf-input text-left" placeholder="MMDD" style="left:83.920%;top:57.088%;width:9.078%;height:1.424%;">
+    <input type="text" id="id_prov_date" class="pdf-input text-left" data-charboxes="4" style="left:83.920%;top:57.088%;width:9.078%;height:1.424%;">
     <!-- Province of self-employment -->
     <select id="id_province_biz" class="pdf-select" style="left:4.881%;top:65.994%;width:45.098%;height:1.800%;">
       <option value=""></option>
@@ -162,10 +181,10 @@
       <option>NL</option><option>NS</option><option>NT</option><option>NU</option>
       <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
     </select>
-    <input type="text" id="id_biz_date" class="pdf-input text-left" placeholder="MMDD" style="left:83.920%;top:65.316%;width:9.078%;height:1.424%;">
+    <input type="text" id="id_biz_date" class="pdf-input text-left" data-charboxes="4" style="left:83.920%;top:65.316%;width:9.078%;height:1.424%;">
     <!-- Spouse / partner info -->
     <input type="text" id="id_spouse_name" class="pdf-input text-left" placeholder="Spouse/partner first name" style="left:4.902%;top:73.597%;width:21.569%;height:1.424%;">
-    <input type="text" id="id_spouse_sin" class="pdf-input text-left" placeholder="Spouse SIN" style="left:27.920%;top:73.597%;width:22.059%;height:1.420%;">
+    <input type="text" id="id_spouse_sin" class="pdf-input text-left" data-charboxes="9" style="left:27.920%;top:73.597%;width:22.059%;height:1.420%;">
     <!-- Spouse self-employed checkbox -->
     <input type="checkbox" id="id_spouse_selfemp" class="pdf-checkbox" style="left:82.190%;top:76.275%;width:1.634%;height:1.263%;">
     <!-- Net income of spouse/dependants -->
@@ -698,8 +717,12 @@ function loadFormData(data) {
    'id_city','id_postal','id_email','id_dod','id_elect_date','id_spouse_name','id_spouse_sin',
    'id_prov_date','id_biz_date'].forEach(id => {
     if (data[id] !== undefined) {
-      const el = document.getElementById(id);
-      if (el) el.value = data[id];
+      if (CHAR_GROUPS[id]) {
+        loadCharGroup(id, String(data[id]));
+      } else {
+        const el = document.getElementById(id);
+        if (el) el.value = data[id];
+      }
     }
   });
   ['id_province_mail','id_province_res','id_province_biz'].forEach(id => {
@@ -852,6 +875,85 @@ function updateBC428Link() {
 }
 
 // ── Format helpers for numeric text inputs ────────────────────────────────────
+// ── Char-box groups (SIN, DOB, dates, postal) ────────────────────────────────
+const CHAR_GROUPS = {
+  id_sin: 9, id_dob: 8, id_dod: 8, id_elect_date: 4,
+  id_postal: 6, id_prov_date: 4, id_biz_date: 4, id_spouse_sin: 9
+};
+
+function initCharBoxes() {
+  document.querySelectorAll('.pdf-input[data-charboxes]').forEach(orig => {
+    const count  = parseInt(orig.dataset.charboxes);
+    const id     = orig.id;
+    const imode  = orig.dataset.inputmode || 'numeric';
+    const top    = orig.style.top;
+    const left   = parseFloat(orig.style.left);
+    const total  = parseFloat(orig.style.width);
+    const h      = orig.style.height;
+    const parent = orig.parentNode;
+
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.id   = id;
+    parent.insertBefore(hidden, orig);
+
+    const boxes = [];
+    for (let i = 0; i < count; i++) {
+      const b = document.createElement('input');
+      b.type = 'text';
+      b.maxLength = 1;
+      b.autocomplete = 'off';
+      b.spellcheck = false;
+      b.id = id + '_' + i;
+      b.className = 'pdf-char';
+      b.setAttribute('inputmode', imode);
+      b.style.cssText = `left:${(left + i * total/count).toFixed(3)}%;top:${top};width:${(total/count).toFixed(3)}%;height:${h};`;
+      parent.insertBefore(b, orig);
+      boxes.push(b);
+    }
+    orig.remove();
+
+    const sync = () => {
+      hidden.value = boxes.map(b => b.value).join('');
+      autoSave();
+    };
+    boxes.forEach((b, i) => {
+      b.addEventListener('input', () => {
+        if (b.value.length > 1) b.value = b.value.slice(-1);
+        if (imode !== 'text') b.value = b.value.replace(/\D/g, '');
+        sync();
+        if (b.value && i < count - 1) boxes[i + 1].focus();
+      });
+      b.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && !b.value && i > 0) {
+          e.preventDefault(); boxes[i - 1].value = ''; boxes[i - 1].focus(); sync();
+        }
+        if (e.key === 'ArrowRight' && i < count - 1) { e.preventDefault(); boxes[i + 1].focus(); }
+        if (e.key === 'ArrowLeft'  && i > 0)         { e.preventDefault(); boxes[i - 1].focus(); }
+      });
+      b.addEventListener('paste', e => {
+        e.preventDefault();
+        const txt = (e.clipboardData.getData('text') || '').replace(/[\s\-]/g, '');
+        for (let j = 0; j < txt.length && i + j < count; j++) boxes[i + j].value = txt[j];
+        sync();
+        boxes[Math.min(i + txt.length, count - 1)].focus();
+      });
+    });
+  });
+}
+
+function loadCharGroup(baseId, value) {
+  const count = CHAR_GROUPS[baseId];
+  if (!count) return;
+  value = (value || '').replace(/[\s\-]/g, '');
+  for (let i = 0; i < count; i++) {
+    const b = document.getElementById(baseId + '_' + i);
+    if (b) b.value = value[i] || '';
+  }
+  const h = document.getElementById(baseId);
+  if (h) h.value = value.slice(0, count);
+}
+
 function fmtInput(el) {
   const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
   el.setAttribute('data-raw', String(raw));
@@ -865,6 +967,9 @@ function editInput(el) {
 
 // ── Wire up all inputs ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+  // Build char-box inputs before loading any data
+  initCharBoxes();
+
   // Try server data first; fall back to localStorage
   let loaded = false;
   try {
@@ -921,9 +1026,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('.pdf-select').forEach(el => el.addEventListener('change', autoSave));
   document.querySelectorAll('.pdf-checkbox').forEach(el => el.addEventListener('change', autoSave));
   document.querySelectorAll('.pdf-radio').forEach(el => el.addEventListener('change', autoSave));
-  ['id_first_name','id_last_name','id_sin','id_address','id_pobox','id_rural','id_dob',
-   'id_city','id_postal','id_email','id_dod','id_elect_date','id_spouse_name','id_spouse_sin',
-   'id_prov_date','id_biz_date'].forEach(id => {
+  // Wire non-char-group text fields to autoSave
+  // (char-group fields like id_sin, id_dob, etc. auto-save via initCharBoxes sync)
+  ['id_first_name','id_last_name','id_address','id_pobox','id_rural',
+   'id_city','id_email','id_spouse_name'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', autoSave);
   });
