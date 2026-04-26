@@ -96,8 +96,7 @@
         <div class="line-op">+</div>
         <div class="line-num">26000</div>
         <div class="line-amount">
-          <input class="amount-field" type="number" id="fTaxableIncome_supp"
-                 min="0" step="0.01" value="0" inputmode="decimal"
+          <input class="amount-field" type="text" data-numeric="1" id="fTaxableIncome_supp" value="" inputmode="decimal"
                  oninput="document.getElementById('fTaxableIncome') && (document.getElementById('fTaxableIncome').value=this.value); recalcBC428();">
         </div>
       </div>
@@ -106,8 +105,7 @@
         <div class="line-op">+</div>
         <div class="line-num">12000</div>
         <div class="line-amount">
-          <input class="amount-field" type="number" id="fDiv12000"
-                 min="0" step="0.01" value="0" inputmode="decimal">
+          <input class="amount-field" type="text" data-numeric="1" id="fDiv12000" value="" inputmode="decimal">
         </div>
       </div>
       <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
@@ -115,8 +113,7 @@
         <div class="line-op">+</div>
         <div class="line-num">12010</div>
         <div class="line-amount">
-          <input class="amount-field" type="number" id="fDiv12010"
-                 min="0" step="0.01" value="0" inputmode="decimal">
+          <input class="amount-field" type="text" data-numeric="1" id="fDiv12010" value="" inputmode="decimal">
         </div>
       </div>
     </div>
@@ -125,68 +122,68 @@
   <div id="pg-anchor-1"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page1.png" alt="BC428 Page 1">
-    <input type="number" id="fTaxableIncome" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:15.530%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L2_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:32.843%;top:24.242%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:48.529%;top:24.242%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:24.242%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:24.242%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L3_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:26.136%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:26.136%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:26.136%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:26.136%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L4_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:28.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:28.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:28.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L5_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:29.924%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:29.924%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:29.924%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L6_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:31.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:31.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:31.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L7_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:33.712%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:33.712%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:33.712%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:33.712%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L8_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:35.606%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:35.606%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:35.606%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:35.606%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L9_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:48.529%;top:46.212%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L9_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:46.212%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L9_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:46.212%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L10_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:48.106%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:48.106%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:48.106%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L11_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:50.000%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L11_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:50.000%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L11_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:50.000%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L12_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:51.894%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L12_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:51.894%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L12_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:51.894%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L13_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:53.788%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L13_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:53.788%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L13_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:53.788%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L14_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:55.682%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:55.682%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:55.682%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L?_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:57.576%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L15_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:57.576%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L15_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:57.576%;width:11.275%;height:2.939%;">
-    <input type="number" id="f58040" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:67.424%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="fTaxableIncome" class="pdf-input" value="" inputmode="decimal" style="left:79.902%;top:15.530%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L2_Amount" class="pdf-input" value="" tabindex="-1" style="left:32.843%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L2_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:48.529%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L2_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L2_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:79.902%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L3_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L4_Amount" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L4_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L4_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L4_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L5_Amt" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L5_Amt_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L5_Amt_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L5_Amt_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L6_Amount" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L6_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L6_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L6_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L7_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L8_Amount" class="pdf-input" value="" tabindex="-1" style="left:34.804%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L8_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L8_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L8_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L9_Amount" class="pdf-input" value="" tabindex="-1" style="left:48.529%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L9_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L9_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:79.902%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L10_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L11_Amount" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L11_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L11_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L12_Amt" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L12_Amt_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L12_Amt_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L13_Amount" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L13_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L13_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L14_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L?_Amount" class="pdf-input" value="" tabindex="-1" style="left:50.490%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L15_Amount" class="pdf-input" value="" tabindex="-1" style="left:66.176%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L15_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f58040" class="pdf-input" value="" inputmode="decimal" style="left:79.902%;top:67.424%;width:13.235%;height:1.424%;">
     <input type="text" id="f58080" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:69.318%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L18_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:72.727%;width:13.235%;height:1.515%;">
-    <input type="number" id="f_bc_L19_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:74.621%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L20_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:78.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58120" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:78.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L21_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:81.439%;width:13.235%;height:1.515%;">
-    <input type="number" id="f_bc_L22_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:83.333%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L23_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:85.227%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58160" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:85.227%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58200" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:87.121%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L25_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:89.015%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L18_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:72.727%;width:13.235%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L19_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:74.621%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L20_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:78.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58120" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:78.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L21_Amount_Eligible_Dependant" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:81.439%;width:13.235%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L22_Amount_Eligible_Dependant" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:83.333%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L23_Amount_Eligible_Dependant" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:85.227%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58160" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:85.227%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58200" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:87.121%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L25_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:89.015%;width:11.275%;height:1.424%;">
   </div>
 
   <!-- BC Tax bracket tables -->
@@ -339,44 +336,44 @@
   <div id="pg-anchor-2"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page2.png" alt="BC428 Page 2">
-    <input type="number" id="f_bc_L26_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
-    <input type="number" id="f58240" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:62.255%;top:8.333%;width:13.235%;height:2.939%;">
-    <input type="number" id="f58280" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:11.742%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L29_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:13.636%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L30_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:17.045%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L31_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:18.939%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L32_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L33_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:22.727%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58300" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
-    <input type="number" id="fbcPensionSrc" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:24.621%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L26_Amount" class="pdf-input" value="" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58240" class="pdf-input" value="" inputmode="decimal" style="left:62.255%;top:8.333%;width:13.235%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f58280" class="pdf-input" value="" inputmode="decimal" style="left:64.216%;top:11.742%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L29_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:13.636%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L30_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:17.045%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L31_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:18.939%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L32_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L33_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58300" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="fbcPensionSrc" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:24.621%;width:11.275%;height:1.424%;">
     <input type="text" id="fbcPensionAmt" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:26.515%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58360" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:28.409%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58400" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58440" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:32.197%;width:11.275%;height:2.939%;">
-    <input type="number" id="f58480" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:35.606%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L40_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:37.500%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L41_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L42_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58560" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58640" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:45.076%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L45_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:46.970%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L46_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:50.379%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L47_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:44.608%;top:52.273%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L48_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:54.167%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L49_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:56.061%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L50_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:57.955%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L51_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:59.848%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58729" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:61.742%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L53_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:65.152%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58689" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:65.152%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58360" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:28.409%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58400" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58440" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:32.197%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f58480" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:35.606%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L40_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:37.500%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L41_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L42_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58560" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58640" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:45.076%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L45_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:46.970%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L46_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:50.379%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L47_Amount" class="pdf-input" value="" tabindex="-1" style="left:44.608%;top:52.273%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L48_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:54.167%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L49_Amount" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:56.061%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L50_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:57.955%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L51_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:59.848%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58729" class="pdf-input" value="" inputmode="decimal" style="left:64.216%;top:61.742%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L53_Amount1" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:65.152%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58689" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:65.152%;width:11.275%;height:1.424%;">
     <input type="text" id="f59090" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:67.045%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L55_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:68.939%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L56_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;">
-    <input type="number" id="f58800" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L58_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L59_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:76.515%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L59_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:52.941%;top:78.030%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L60_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L55_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:68.939%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L56_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f58800" class="pdf-input" value="" inputmode="decimal" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L58_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L59_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:76.515%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L59_Amount_b" class="pdf-input" value="" tabindex="-1" style="left:52.941%;top:78.030%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L60_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:2.939%;">
   </div>
 
   <!-- BC computed fields summary (shown as readonly) -->
@@ -407,8 +404,7 @@
           <div class="line-op">+</div>
           <div class="line-num">61520</div>
           <div class="line-amount">
-            <input class="amount-field" type="number" id="f61520_supp"
-                   min="0" step="0.01" value="0" inputmode="decimal"
+            <input class="amount-field" type="text" data-numeric="1" id="f61520_supp" value="" inputmode="decimal"
                    oninput="var s=document.getElementById('f61520'); if(s) s.value=this.value; recalcBC428();">
           </div>
         </div>
@@ -417,8 +413,7 @@
           <div class="line-op">+</div>
           <div class="line-num">61600</div>
           <div class="line-amount">
-            <input class="amount-field" type="number" id="f61600_supp"
-                   min="0" step="0.01" value="0" inputmode="decimal"
+            <input class="amount-field" type="text" data-numeric="1" id="f61600_supp" value="" inputmode="decimal"
                    oninput="var s=document.getElementById('f61600'); if(s) s.value=this.value; recalcBC428();">
           </div>
         </div>
@@ -429,45 +424,45 @@
   <div id="pg-anchor-3"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page3.png" alt="BC428 Page 3">
-    <input type="number" id="f_bc_L61_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L62_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:8.333%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L63_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:10.227%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L64_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:12.121%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L65_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:14.015%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L66_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:15.909%;width:11.275%;height:4.455%;">
-    <input type="number" id="f61520" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:34.804%;top:17.424%;width:13.235%;height:2.939%;">
-    <input type="number" id="f61600" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L67_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:20.833%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L68_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L61_Amount" class="pdf-input" value="" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L62_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:8.333%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L63_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:10.227%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L64_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:12.121%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L65_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:14.015%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L66_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:15.909%;width:11.275%;height:4.455%;">
+    <input type="text" data-numeric="1" id="f61520" class="pdf-input" value="" inputmode="decimal" style="left:34.804%;top:17.424%;width:13.235%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f61600" class="pdf-input" value="" inputmode="decimal" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L67_Amount2" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L68_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
     <input type="text" id="f42800" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:24.621%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L69_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:52.451%;top:26.136%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L70_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L71_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L72_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L73_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:40.909%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L74_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:44.608%;top:42.803%;width:13.235%;height:2.939%;">
-    <input type="number" id="f_bc_L75_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:46.212%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L76_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:48.106%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L77_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:50.000%;width:11.275%;height:1.515%;">
-    <input type="number" id="f_bc_L78_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:51.894%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L78_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:51.894%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L79_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:53.788%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L79_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:55.303%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L80_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:57.197%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L81_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:59.091%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L82_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:60.985%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L83_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:62.879%;width:13.235%;height:1.424%;">
-    <input type="number" id="f_bc_L84_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L85_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:66.667%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L86_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:70.076%;width:13.235%;height:2.939%;">
-    <input type="number" id="f_bc_L86_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:18.301%;top:71.591%;width:12.908%;height:1.389%;">
-    <input type="number" id="f_bc_L87_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:73.485%;width:11.275%;height:4.455%;">
-    <input type="number" id="f_bc_L87_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:18.301%;top:76.515%;width:12.908%;height:1.389%;">
-    <input type="number" id="f_bc_L88_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:78.409%;width:11.275%;height:2.939%;">
-    <input type="number" id="f_bc_L88_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L89_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:81.818%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L90_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;">
-    <input type="number" id="f_bc_L91_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:85.697%;width:11.275%;height:2.848%;">
+    <input type="text" data-numeric="1" id="f_bc_L69_Amount" class="pdf-input" value="" tabindex="-1" style="left:52.451%;top:26.136%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L70_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L71_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L72_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L73_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:40.909%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L74_Amount" class="pdf-input" value="" tabindex="-1" style="left:44.608%;top:42.803%;width:13.235%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L75_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:46.212%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L76_Amount" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:48.106%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L77_Amount_ReadOnly" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:50.000%;width:11.275%;height:1.515%;">
+    <input type="text" data-numeric="1" id="f_bc_L78_Amount1" class="pdf-input" value="" tabindex="-1" style="left:46.569%;top:51.894%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L78_Amount2" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:51.894%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L79_Amount1" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:53.788%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L79_Amount2" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:55.303%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L80_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:57.197%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L81_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:59.091%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L82_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:60.985%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L83_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:62.879%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L84_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L85_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:66.667%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L86_Amount" class="pdf-input" value="" tabindex="-1" style="left:62.255%;top:70.076%;width:13.235%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L86_Amt" class="pdf-input" value="" tabindex="-1" style="left:18.301%;top:71.591%;width:12.908%;height:1.389%;">
+    <input type="text" data-numeric="1" id="f_bc_L87_Amount" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:73.485%;width:11.275%;height:4.455%;">
+    <input type="text" data-numeric="1" id="f_bc_L87_Amt" class="pdf-input" value="" tabindex="-1" style="left:18.301%;top:76.515%;width:12.908%;height:1.389%;">
+    <input type="text" data-numeric="1" id="f_bc_L88_Amount1" class="pdf-input" value="" tabindex="-1" style="left:64.216%;top:78.409%;width:11.275%;height:2.939%;">
+    <input type="text" data-numeric="1" id="f_bc_L88_Amount2" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L89_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:81.818%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L90_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc_L91_Amount" class="pdf-input" value="" tabindex="-1" style="left:81.863%;top:85.697%;width:11.275%;height:2.848%;">
   </div>
 
   <!-- Toolbar -->
@@ -517,11 +512,22 @@ function applyBrackets(income, brackets) {
   return tax;
 }
 
-function g(id)  { const el = document.getElementById(id); return el ? Math.max(0, parseFloat(el.value) || 0) : 0; }
+function g(id)  { const el = document.getElementById(id); return el ? Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
 function gId(id) { return g('f' + id); }
 function s(id, v) {
   const el = document.getElementById('f' + id);
   if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const hasCents = Math.abs(raw % 1) > 0.004;
+  el.value = raw.toLocaleString('en-CA', { minimumFractionDigits: hasCents ? 2 : 0, maximumFractionDigits: 2 });
+}
+function editInput(el) {
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value).replace(/,/g, '')) || 0;
+  el.value = raw === 0 ? '' : String(raw);
 }
 function sEl(elId, v) {
   const el = document.getElementById(elId);
@@ -665,7 +671,7 @@ function getFormData() {
   const data = { age65bc: document.getElementById('age65bc').checked };
   BC428_INPUTS_IDS.forEach(id => {
     const el = document.getElementById(id);
-    if (el) data[id] = parseFloat(el.value) || 0;
+    if (el) data[id] = parseFloat((el.value || '').replace(/,/g, '')) || 0;
   });
   return data;
 }
@@ -676,7 +682,13 @@ function loadFormData(data) {
   BC428_INPUTS_IDS.forEach(id => {
     if (data[id] !== undefined) {
       const el = document.getElementById(id);
-      if (el) el.value = data[id];
+      if (!el) return;
+      if (el.dataset.numeric) {
+        el.value = String(data[id]);
+        fmtInput(el);
+      } else {
+        el.value = data[id];
+      }
     }
   });
   recalcBC428();
@@ -784,9 +796,9 @@ async function exportPDF() {
 document.addEventListener('DOMContentLoaded', () => {
   // Pre-fill from URL params (passed from T1 "Open BC428" button)
   const urlP = new URLSearchParams(location.search);
-  if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) el.value = urlP.get('ti'); }
-  if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) el.value = urlP.get('d1'); }
-  if (urlP.has('d2'))  { const el = document.getElementById('fDiv12010');      if (el) el.value = urlP.get('d2'); }
+  if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) { el.value = urlP.get('ti'); fmtInput(el); } }
+  if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) { el.value = urlP.get('d1'); fmtInput(el); } }
+  if (urlP.has('d2'))  { const el = document.getElementById('fDiv12010');      if (el) { el.value = urlP.get('d2'); fmtInput(el); } }
 
   // Then restore autosave (URL params take priority for the three fields above)
   const saved = localStorage.getItem('cra_bc428_autosave');
@@ -808,9 +820,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
   }
 
-  // Wire inputs
-  document.querySelectorAll('.cra-form input[type="number"]').forEach(el => {
-    el.addEventListener('input', recalcBC428);
+  // Wire inputs: blur formats, focus strips, input recalcs + autosaves
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcBC428(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcBC428());
   });
   document.getElementById('age65bc').addEventListener('change', recalcBC428);
 });
