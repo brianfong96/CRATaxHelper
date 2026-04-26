@@ -499,15 +499,21 @@ function applyBrackets(income, brackets) {
 function g(id) {
   const el = document.getElementById('f' + id);
   if (!el) return 0;
-  return Math.max(0, parseFloat((el.value || '0').replace(/,/g, '')) || 0);
+  const dollars = Math.max(0, parseFloat((el.value||'0').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="f'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
 }
-function gRaw(id) { const el = document.getElementById('f' + id); return el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0; }
+function gRaw(id) {
+  const el = document.getElementById('f' + id);
+  if (!el) return 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="f'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
 function updateCents(el, cents) {
   if (!el || !el.id) return;
-  const span = el.parentElement
-    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
-    : null;
-  if (span) span.textContent = '.' + cents;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci && ci !== document.activeElement) ci.value = String(cents).padStart(2,'0').slice(0,2);
 }
 function s(id, v) {
   const el = document.getElementById('f' + id);
@@ -675,7 +681,10 @@ function getFormData() {
   const data = { age65: document.getElementById('age65').checked };
   T1_INPUTS.forEach(id => {
     const el = document.getElementById('f' + id);
-    if (el) data[id] = parseFloat((el.value || '0').replace(/,/g, '')) || 0;
+    if (!el) return;
+    const dollars = parseFloat((el.value || '0').replace(/,/g,'')) || 0;
+    const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="f'+id+'"]') : null;
+    data[id] = dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
   });
   // Identification fields (pages 1-2)
   const textIds = ['id_first_name','id_last_name','id_sin','id_address','id_pobox',
@@ -990,22 +999,38 @@ function initAmountBoxes() {
     inp.style.width = (w * 0.80).toFixed(3) + '%';
     inp.style.borderRight = 'none';
 
-    // Build cents span covering right 20%
-    const span = document.createElement('span');
-    span.className = 'cents-display';
-    span.dataset.for = inp.id;
     const isRO = inp.readOnly;
     const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
     const bdr = isRO ? '#888' : '#0066cc';
-    span.style.cssText =
+
+    const ci = document.createElement('input');
+    ci.type = 'text';
+    ci.className = 'cents-input';
+    ci.dataset.for = inp.id;
+    ci.value = initCents;
+    ci.maxLength = 2;
+    ci.setAttribute('inputmode', 'numeric');
+    if (isRO) ci.readOnly = true;
+    ci.style.cssText =
       `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
       `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
-      `background:${bg};border:1px solid ${bdr};border-left:none;` +
-      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
-      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
-      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
-    span.textContent = '.' + initCents;
-    inp.parentElement.appendChild(span);
+      `background:${bg};border:1px solid ${bdr};border-left:2px solid ${bdr};` +
+      `text-align:center;font-family:"Courier New",monospace;font-size:0.60em;` +
+      `box-sizing:border-box;color:#222;line-height:1;z-index:1;outline:none;padding:0;`;
+    if (!isRO) {
+      ci.addEventListener('focus', () => ci.select());
+      ci.addEventListener('input', () => { ci.value = ci.value.replace(/\D/g,'').slice(0,2); });
+      ci.addEventListener('blur', () => {
+        ci.value = ci.value.replace(/\D/g,'').padStart(2,'0').slice(0,2);
+        inp.dispatchEvent(new Event('change', {bubbles:true}));
+      });
+      ci.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && ci.selectionStart === 0 && ci.selectionEnd === 0) {
+          inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); e.preventDefault();
+        }
+      });
+    }
+    inp.insertAdjacentElement('afterend', ci);
   });
 }
 
@@ -1023,8 +1048,11 @@ function fmtInput(el) {
   updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 function editInput(el) {
-  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
-  el.value = raw === 0 ? '' : String(raw);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  const cents = ci ? (parseInt(ci.value,10)||0) : 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const full = dollars + cents/100;
+  el.value = full === 0 ? '' : full.toFixed(2);
 }
 
 // ── Wire up all inputs ─────────────────────────────────────────────────────
