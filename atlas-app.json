@@ -8,6 +8,8 @@
   "cpu_limit": "0.5",
   "memory_limit": "256m",
   "env": {
-    "ROOT_PATH": "/app/cra-taxhelper"
+    "ROOT_PATH": "",
+    "AUTH_ENABLED": "true",
+    "GATEWAY_URL": "https://api.aether-data.net"
   }
 }

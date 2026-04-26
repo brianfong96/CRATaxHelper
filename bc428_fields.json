@@ -1,0 +1,1706 @@
+[
+  {
+    "page": 1,
+    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      123.0,
+      570.0,
+      134.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      201.0,
+      192.0,
+      282.0,
+      203.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line3[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      207.0,
+      282.0,
+      219.0
+    ],
+    "value": " 0.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      222.0,
+      282.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line5[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      237.0,
+      282.0,
+      249.0
+    ],
+    "value": "5.06%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      252.0,
+      282.0,
+      263.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line7[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      267.0,
+      282.0,
+      279.0
+    ],
+    "value": " 0.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column1[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      282.0,
+      282.0,
+      305.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      297.0,
+      192.0,
+      378.0,
+      203.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line3[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      207.0,
+      378.0,
+      219.0
+    ],
+    "value": " 49,279.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      222.0,
+      378.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line5[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      237.0,
+      378.0,
+      249.0
+    ],
+    "value": "7.7%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      252.0,
+      378.0,
+      263.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line7[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      267.0,
+      378.0,
+      279.0
+    ],
+    "value": " 2,493.52"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column2[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      282.0,
+      378.0,
+      305.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      192.0,
+      474.0,
+      203.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line3[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      207.0,
+      474.0,
+      219.0
+    ],
+    "value": " 98,560.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      222.0,
+      474.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line5[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      237.0,
+      474.0,
+      249.0
+    ],
+    "value": "10.5%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      252.0,
+      474.0,
+      263.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line7[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      267.0,
+      474.0,
+      279.0
+    ],
+    "value": " 6,288.15"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column3[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      282.0,
+      474.0,
+      305.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      192.0,
+      570.0,
+      203.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line3[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      207.0,
+      570.0,
+      219.0
+    ],
+    "value": " 113,158.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      222.0,
+      570.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line5[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      237.0,
+      570.0,
+      249.0
+    ],
+    "value": "12.29%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      252.0,
+      570.0,
+      263.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line7[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      267.0,
+      570.0,
+      279.0
+    ],
+    "value": " 7,820.94"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column4[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      282.0,
+      570.0,
+      305.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      297.0,
+      366.0,
+      378.0,
+      377.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line10[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      381.0,
+      378.0,
+      393.0
+    ],
+    "value": "137,407.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      396.0,
+      378.0,
+      407.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line12[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      411.0,
+      378.0,
+      423.0
+    ],
+    "value": "14.7%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line13[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      426.0,
+      378.0,
+      437.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].Line14[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      441.0,
+      378.0,
+      453.0
+    ],
+    "value": "10,801.15"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column5[0].LIne15[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      309.0,
+      456.0,
+      378.0,
+      479.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      366.0,
+      474.0,
+      377.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line10[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      381.0,
+      474.0,
+      393.0
+    ],
+    "value": "186,306.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      396.0,
+      474.0,
+      407.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line12[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      411.0,
+      474.0,
+      423.0
+    ],
+    "value": "16.8%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line13[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      426.0,
+      474.0,
+      437.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line14[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      441.0,
+      474.0,
+      453.0
+    ],
+    "value": "17,989.30"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column6[0].Line15[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      405.0,
+      456.0,
+      474.0,
+      479.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      366.0,
+      570.0,
+      377.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line10[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      381.0,
+      570.0,
+      393.0
+    ],
+    "value": "259,829.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      396.0,
+      570.0,
+      407.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line12[0].Percent_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      411.0,
+      570.0,
+      423.0
+    ],
+    "value": "20.5%"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line13[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      426.0,
+      570.0,
+      437.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line14[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      441.0,
+      570.0,
+      453.0
+    ],
+    "value": "30,341.16"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartA[0].Column7[0].Line15[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      456.0,
+      570.0,
+      479.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Line16[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      534.0,
+      570.0,
+      545.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Line17[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      549.0,
+      570.0,
+      560.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Spouse_CPL_Amount[0].Line18[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      576.0,
+      462.0,
+      588.0
+    ],
+    "value": " 12,181.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Spouse_CPL_Amount[0].Line19[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      591.0,
+      462.0,
+      614.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Spouse_CPL_Amount[0].Line20[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      618.0,
+      462.0,
+      629.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Spouse_CPL_Amount[0].Line20[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      618.0,
+      570.0,
+      629.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Amount_Eligible_Dependant[0].Line21[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      645.0,
+      462.0,
+      657.0
+    ],
+    "value": " 12,181.00"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Amount_Eligible_Dependant[0].Line22[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      660.0,
+      462.0,
+      671.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Amount_Eligible_Dependant[0].Line23[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      675.0,
+      462.0,
+      686.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Amount_Eligible_Dependant[0].Line23[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      675.0,
+      570.0,
+      686.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Line24[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      690.0,
+      570.0,
+      701.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].PartB[0].Line25[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      705.0,
+      570.0,
+      716.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line26[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      51.0,
+      570.0,
+      62.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line27[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      66.0,
+      462.0,
+      89.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line28[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      93.0,
+      462.0,
+      104.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line29[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      108.0,
+      462.0,
+      131.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      135.0,
+      462.0,
+      146.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line31[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      150.0,
+      462.0,
+      161.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line32[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      165.0,
+      462.0,
+      176.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line33[0].I1[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      180.0,
+      462.0,
+      191.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line33[0].I2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      180.0,
+      570.0,
+      191.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line34[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      195.0,
+      570.0,
+      206.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line35[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      210.0,
+      570.0,
+      221.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line36[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      225.0,
+      570.0,
+      236.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line37[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      240.0,
+      570.0,
+      251.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line38[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      255.0,
+      570.0,
+      278.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line39[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      282.0,
+      570.0,
+      293.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line40[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      297.0,
+      570.0,
+      308.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line41[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      312.0,
+      570.0,
+      323.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line42[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      327.0,
+      570.0,
+      338.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line43[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      342.0,
+      570.0,
+      353.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line44[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      357.0,
+      570.0,
+      368.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line45[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      372.0,
+      570.0,
+      383.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line46[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      399.0,
+      462.0,
+      410.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line47[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      414.0,
+      354.0,
+      425.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line48[0].PercentAmount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      429.0,
+      354.0,
+      441.0
+    ],
+    "value": "3%"
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line49[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      444.0,
+      354.0,
+      455.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line50[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      459.0,
+      462.0,
+      470.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].MedicalExp[0].Line51[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      474.0,
+      462.0,
+      485.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line52[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      489.0,
+      462.0,
+      512.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line53[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      516.0,
+      462.0,
+      527.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line53[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      516.0,
+      570.0,
+      527.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line54[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      531.0,
+      570.0,
+      542.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line55[0].PercentAmount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      546.0,
+      570.0,
+      558.0
+    ],
+    "value": "5.06%"
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line56[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      561.0,
+      570.0,
+      572.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line57[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      576.0,
+      570.0,
+      587.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line58[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      591.0,
+      570.0,
+      602.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line59[0].Gifts_from_57[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      324.0,
+      618.0,
+      405.0,
+      629.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line59[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      606.0,
+      570.0,
+      629.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line60[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      633.0,
+      570.0,
+      656.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line61[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      51.0,
+      570.0,
+      62.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line62[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      66.0,
+      570.0,
+      77.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line63[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      81.0,
+      570.0,
+      92.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line64[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      96.0,
+      462.0,
+      107.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line65[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      111.0,
+      462.0,
+      122.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line66[0].Line40427[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      213.0,
+      138.0,
+      294.0,
+      161.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line66[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      126.0,
+      462.0,
+      161.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line67[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      165.0,
+      462.0,
+      176.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line67[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      165.0,
+      570.0,
+      176.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line68[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      180.0,
+      570.0,
+      191.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line69[0].Line120[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      321.0,
+      207.0,
+      402.0,
+      218.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line69[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      195.0,
+      570.0,
+      218.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line70[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      222.0,
+      570.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line71[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      237.0,
+      570.0,
+      248.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line72[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      252.0,
+      570.0,
+      263.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line73[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      324.0,
+      462.0,
+      335.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line74[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      339.0,
+      354.0,
+      362.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line75[0].Amount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      366.0,
+      354.0,
+      378.0
+    ],
+    "value": " 25,020.00"
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line76[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      381.0,
+      354.0,
+      392.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line77[0].PercentAmount_ReadOnly[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      396.0,
+      354.0,
+      408.0
+    ],
+    "value": "3.56%"
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line78[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      285.0,
+      411.0,
+      354.0,
+      422.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line78[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      411.0,
+      462.0,
+      422.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line79[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      426.0,
+      462.0,
+      449.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line79[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      438.0,
+      570.0,
+      449.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line80[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      453.0,
+      570.0,
+      464.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line81[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      468.0,
+      570.0,
+      479.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line82[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      483.0,
+      570.0,
+      494.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line83[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      498.0,
+      462.0,
+      509.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line84[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      513.0,
+      570.0,
+      524.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line85[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      528.0,
+      570.0,
+      539.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line86[0].Certificatenumber[0].Certificat-no[0]",
+    "type": "Text",
+    "rect": [
+      112.0,
+      567.0,
+      191.0,
+      578.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line86[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      555.0,
+      462.0,
+      578.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line87[0].Certificatenumber[0].Certificat-no[0]",
+    "type": "Text",
+    "rect": [
+      112.0,
+      606.0,
+      191.0,
+      617.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line87[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      582.0,
+      462.0,
+      617.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line88[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      621.0,
+      462.0,
+      644.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line88[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      633.0,
+      570.0,
+      644.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line89[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      648.0,
+      570.0,
+      659.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line90[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      663.0,
+      570.0,
+      674.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line91[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      678.72,
+      570.0,
+      701.28
+    ],
+    "value": ""
+  }
+]

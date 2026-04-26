@@ -1,39 +1,64 @@
 {% extends "base.html" %}
-{% block title %}BC428 — British Columbia Tax 2025{% endblock %}
+{% block title %}BC428 &mdash; British Columbia Tax 2025{% endblock %}
 
 {% block content %}
-{% macro fl(num, label, type="input", op="+", indent="", note="", formula="") %}
-<div class="form-line {{ type }}" id="row-{{ num }}">
-  <div class="line-desc {{ indent }}">
-    <span>{{ label }}{% if note %}<span class="note">{{ note }}</span>{% endif %}</span>
-    {% if type in ("calc","total") and formula %}
-    <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    {% endif %}
-  </div>
-  <div class="line-op">{% if type in ("calc","total") %}={% elif op %}{{ op }}{% endif %}</div>
-  <div class="line-num">{{ num }}</div>
-  <div class="line-amount">
-    {% if type in ("calc","total") %}
-    <input class="amount-field" type="text" id="f{{ num }}" readonly value="0.00" tabindex="-1">
-    {% else %}
-    <input class="amount-field" type="number" id="f{{ num }}" min="0" step="0.01" value="0" inputmode="decimal">
-    {% endif %}
-  </div>
-</div>
-{% if type in ("calc","total") and formula %}
-<div class="formula-panel" id="fp-{{ num }}">
-  <strong>How line {{ num }} is calculated:</strong><br>
-  <span class="formula-expr">{{ formula }}</span>
-</div>
-{% endif %}
-{% endmacro %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.bracket-section {
+  background: #fff;
+  border: 2px solid #335075;
+  border-radius: 2px;
+  margin: 4px 0 8px;
+  padding: 8px;
+}
+.bracket-section-title {
+  font-size: 12px; font-weight: 700;
+  background: #26374a; color: #fff;
+  padding: 4px 10px; margin: -8px -8px 8px;
+}
+</style>
 
-<div class="cra-form">
+<div class="cra-form pdf-form-container">
 
   <div class="form-header">
     <div>
-      <div class="form-title">BC428 — British Columbia Tax</div>
-      <div class="form-subtitle">Form 5010-C &nbsp;·&nbsp; British Columbia residents</div>
+      <div class="form-title">BC428 &mdash; British Columbia Tax</div>
+      <div class="form-subtitle">Form 5010-C &nbsp;&middot;&nbsp; British Columbia residents</div>
     </div>
     <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
       <strong>BC428-2025</strong>
@@ -41,7 +66,7 @@
       <a class="cra-orig-badge"
          href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5010-c/5010-c-25e.pdf"
          target="_blank" rel="noopener" title="Open official CRA BC428 2025 PDF">
-        📄 Official CRA form
+        &#128196; Official CRA form
       </a>
     </div>
   </div>
@@ -56,177 +81,410 @@
     </span>
   </div>
 
-  <!-- Taxable income imported from T1 -->
-  <div class="form-section">Part 1 — BC Tax on Taxable Income</div>
-  <div class="form-subsection">Taxable income (from T1 line 26000)</div>
-  <div class="form-line" id="row-taxable">
-    <div class="line-desc">
-      <span>Taxable income — enter amount from T1 line 26000
-      <span class="note">Use the "Open BC428 →" button on the T1 form to pre-fill this field.</span></span>
-    </div>
-    <div class="line-op">+</div>
-    <div class="line-num">26000</div>
-    <div class="line-amount">
-      <input class="amount-field" type="number" id="fTaxableIncome"
-             min="0" step="0.01" value="0" inputmode="decimal">
-    </div>
-  </div>
-  <div class="form-line" id="row-div1">
-    <div class="line-desc"><span>Taxable eligible dividends (T1 line 12000 — grossed-up amount)</span></div>
-    <div class="line-op">+</div>
-    <div class="line-num">12000</div>
-    <div class="line-amount">
-      <input class="amount-field" type="number" id="fDiv12000" min="0" step="0.01" value="0" inputmode="decimal">
-    </div>
-  </div>
-  <div class="form-line" id="row-div2">
-    <div class="line-desc"><span>Taxable other-than-eligible dividends (T1 line 12010 — grossed-up amount)</span></div>
-    <div class="line-op">+</div>
-    <div class="line-num">12010</div>
-    <div class="line-amount">
-      <input class="amount-field" type="number" id="fDiv12010" min="0" step="0.01" value="0" inputmode="decimal">
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+  </nav>
+
+  <!-- Supplementary inputs not directly on the PDF pages -->
+  <div class="bracket-section" style="margin-bottom:4px;">
+    <div class="bracket-section-title">Taxable Income &amp; Dividend Inputs (from T1)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;padding:4px 0;">
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+        <div class="line-desc"><span>Taxable income (T1 line 26000)</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">26000</div>
+        <div class="line-amount">
+          <input class="amount-field" type="number" id="fTaxableIncome_supp"
+                 min="0" step="0.01" value="0" inputmode="decimal"
+                 oninput="document.getElementById('fTaxableIncome') && (document.getElementById('fTaxableIncome').value=this.value); recalcBC428();">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+        <div class="line-desc"><span>Eligible dividends grossed-up (T1 line 12000)</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">12000</div>
+        <div class="line-amount">
+          <input class="amount-field" type="number" id="fDiv12000"
+                 min="0" step="0.01" value="0" inputmode="decimal">
+        </div>
+      </div>
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+        <div class="line-desc"><span>Other dividends grossed-up (T1 line 12010)</span></div>
+        <div class="line-op">+</div>
+        <div class="line-num">12010</div>
+        <div class="line-amount">
+          <input class="amount-field" type="number" id="fDiv12010"
+                 min="0" step="0.01" value="0" inputmode="decimal">
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="form-line calc" id="row-bcTax">
-    <div class="line-desc">
-      <span>BC tax on taxable income
-      <span class="note">2025 brackets: 5.06% / 7.70% / 10.50% / 12.29% / 14.70% / 16.80% / 20.50%</span></span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    </div>
-    <div class="line-op">=</div>
-    <div class="line-num">bcTax</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="fbcTax" readonly value="0.00" tabindex="-1">
-    </div>
-  </div>
-  <div class="formula-panel" id="fp-bcTax">
-    <strong>How BC tax on income is calculated:</strong><br>
-    <span class="formula-expr">Apply 2025 BC tax brackets to taxable income (line 26000):  5.06% on first $49,279 · 7.70% on $49,279–$98,560 · 10.50% on $98,560–$113,158 · 12.29% on $113,158–$137,407 · 14.70% on $137,407–$186,306 · 16.80% on $186,306–$259,829 · 20.50% above $259,829</span>
-  </div>
-
-  <!-- ══ PART 2: BC Non-Refundable Tax Credits ══════════════════════════════ -->
-  <div class="form-section">Part 2 — BC Non-Refundable Tax Credits</div>
-  <div class="form-subsection">Personal amounts</div>
-  {{ fl("58040", "BC basic personal amount", op="+",
-        note="2025: $12,932.00 — enter this amount") }}
-  {{ fl("58080", "BC age amount (if born before January 1, 1960)", type="calc",
-        formula="max(0, $5,799 − (net_income − $43,169) × 15%)  •  Zero if net income ≥ $81,829  •  Full $5,799 if net income ≤ $43,169") }}
-  {{ fl("58120", "Spouse or common-law partner amount", op="+") }}
-  {{ fl("58160", "Amount for an eligible dependant", op="+") }}
-  {{ fl("58200", "Canada caregiver amount for spouse or common-law partner", op="+") }}
-
-  <div class="form-subsection">Employment amounts</div>
-  {{ fl("58240", "CPP or QPP contributions through employment (from T1 line 31000)", op="+") }}
-  {{ fl("58280", "Employment insurance premiums through employment (from T1 line 31200)", op="+") }}
-  {{ fl("58300", "Volunteer firefighter / search and rescue volunteer amount (user-entered, max $3,000)", op="+") }}
-
-  <div class="form-subsection">Pension and disability amounts</div>
-  {{ fl("bcPensionSrc", "Eligible pension income (source for BC pension amount)", op="+") }}
-  <div class="form-line calc" id="row-bcPensionAmt">
-    <div class="line-desc">
-      <span>BC pension income amount
-      <span class="note">Auto-computed — min(eligible pension income, $1,000)</span></span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    </div>
-    <div class="line-op">=</div>
-    <div class="line-num">bcPensionAmt</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="fbcPensionAmt" readonly value="0.00" tabindex="-1">
-    </div>
-  </div>
-  <div class="formula-panel" id="fp-bcPensionAmt">
-    <strong>How BC pension income amount is calculated:</strong><br>
-    <span class="formula-expr">min(eligible pension income, $1,000)</span>
-  </div>
-  {{ fl("58360", "BC disability amount for self", op="+") }}
-  {{ fl("58400", "BC disability amount transferred from a dependant", op="+") }}
-
-  <div class="form-subsection">Education and medical amounts</div>
-  {{ fl("58440", "Interest paid on student loans", op="+") }}
-  {{ fl("58480", "Tuition and education amounts", op="+") }}
-  {{ fl("58560", "Tuition transferred from a child or grandchild", op="+") }}
-  {{ fl("58640", "Amounts transferred from your spouse or common-law partner", op="+") }}
-  {{ fl("58689", "Medical expenses for self, spouse or common-law partner, and dependent children born in 2007 or later", op="+") }}
-  {{ fl("58729", "Allowable amount of medical expenses for other dependants", op="+") }}
-
-  <div class="form-subsection">Donations and gifts</div>
-  {{ fl("58800", "Donations and gifts (Schedule 9)", op="+") }}
-
-  {{ fl("59090", "Total BC non-refundable tax credit amounts", type="calc",
-        formula="58040 + 58080 + 58120 + 58160 + 58200 + 58240 + 58280 + 58300 + pension + 58360 + 58400 + 58440 + 58480 + 58560 + 58640 + 58689 + 58729 + 58800") }}
-
-  <div class="form-line calc" id="row-bcCredits">
-    <div class="line-desc">
-      <span>BC non-refundable tax credit (line 59090 × 5.06%)</span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    </div>
-    <div class="line-op">=</div>
-    <div class="line-num">bcCredits</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="fbcCredits" readonly value="0.00" tabindex="-1">
-    </div>
-  </div>
-  <div class="formula-panel" id="fp-bcCredits">
-    <strong>How BC credits are calculated:</strong><br>
-    <span class="formula-expr">line 59090 × 5.06%  (BC non-refundable tax credit rate)</span>
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page1.png" alt="BC428 Page 1">
+    <input type="number" id="fTaxableIncome" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:15.530%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L2_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:32.843%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:48.529%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L2_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:24.242%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L3_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L3_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:26.136%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L4_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L4_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L5_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L5_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L6_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L6_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L7_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L7_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:33.712%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L8_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:34.804%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L8_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:35.606%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L9_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:48.529%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L9_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L9_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:46.212%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L10_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L10_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:48.106%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L11_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L11_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L11_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:50.000%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L12_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L12_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L12_Amt_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:51.894%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L13_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L13_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L13_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:53.788%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L14_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L14_Amount_ReadOnly_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:55.682%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L?_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:50.490%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L15_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:66.176%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L15_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:57.576%;width:11.275%;height:2.939%;">
+    <input type="number" id="f58040" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:67.424%;width:13.235%;height:1.424%;">
+    <input type="text" id="f58080" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:69.318%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L18_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:72.727%;width:13.235%;height:1.515%;">
+    <input type="number" id="f_bc_L19_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:74.621%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L20_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:78.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58120" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:78.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L21_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:81.439%;width:13.235%;height:1.515%;">
+    <input type="number" id="f_bc_L22_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:83.333%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L23_Amount_Eligible_Dependant" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:85.227%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58160" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:85.227%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58200" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:87.121%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L25_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:89.015%;width:11.275%;height:1.424%;">
   </div>
 
-  <!-- ══ PART 3: BC Tax ══════════════════════════════════════════════════════ -->
-  <div class="form-section">Part 3 — Net BC Tax</div>
-  <div class="form-subsection">BC dividend tax credit</div>
-  <div class="form-line calc" id="row-bcDTC">
-    <div class="line-desc">
-      <span>BC dividend tax credit
-      <span class="note">Auto-computed from lines 12000 and 12010</span></span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
+  <!-- BC Tax bracket tables -->
+  <div class="bracket-section">
+    <div class="bracket-section-title">Part A &mdash; BC Tax on Taxable Income</div>
+    <p style="font-size:11px;color:#555;margin:0 0 6px;">Use the amount from line 1 to complete the appropriate column below.</p>
+  
+    <div class="bracket-table-wrap">
+      <table class="bracket-table" id="bc-bracket-table-1">
+        <thead>
+          <tr>
+            <th class="bt-label-col"></th>
+            <th class="bt-data-col">Line 1 is<br>$49,279 or less</th>
+            <th class="bt-data-col">Line 1 is more than $49,279 but not more than $98,560</th>
+            <th class="bt-data-col">Line 1 is more than $98,560 but not more than $113,158</th>
+            <th class="bt-data-col">Line 1 is more than $113,158 but not more than $137,407</th>
+            <th class="bt-rownum-col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bt-label">Amount from line 1</td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f2-c1" readonly></td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f2-c2" readonly></td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f2-c3" readonly></td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f2-c4" readonly></td>
+            <td class="bt-rownum">2</td>
+          </tr>
+          <tr>
+            <td class="bt-label">Line 2 minus line 3<br><span class="bt-note">(cannot be negative)</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">0.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">49,279.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">98,560.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">113,158.00</span></td>
+            <td class="bt-rownum">3</td>
+          </tr>
+          <tr>
+            <td class="bt-label"></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f4-c1" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f4-c2" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f4-c3" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f4-c4" readonly></td>
+            <td class="bt-rownum">4</td>
+          </tr>
+          <tr>
+            <td class="bt-label">Line 4 multiplied by<br>the percentage from line 5</td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">5.06%</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">7.70%</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">10.50%</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">12.29%</span></td>
+            <td class="bt-rownum">5</td>
+          </tr>
+          <tr>
+            <td class="bt-label"></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f6-c1" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f6-c2" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f6-c3" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f6-c4" readonly></td>
+            <td class="bt-rownum">6</td>
+          </tr>
+          <tr>
+            <td class="bt-label"><strong>Line 6 plus line 7</strong></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">0.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">2,493.52</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">6,288.15</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">7,820.94</span></td>
+            <td class="bt-rownum">7</td>
+          </tr>
+          <tr class="bt-result-row">
+            <td class="bt-label"><strong>British Columbia tax<br>on taxable income</strong></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f8-c1" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f8-c2" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f8-c3" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f8-c4" readonly></td>
+            <td class="bt-rownum">8</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="line-op">=</div>
-    <div class="line-num">bcDTC</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="fbcDTC" readonly value="0.00" tabindex="-1">
+    <p class="part-a-note">If you completed lines 2 to 8 for a column above, enter the amount from line 8 on line 61 and continue on line 16.</p>
+  
+    <div class="bracket-table-wrap" style="margin-top:12px;">
+      <table class="bracket-table" id="bc-bracket-table-2">
+        <thead>
+          <tr>
+            <th class="bt-label-col"></th>
+            <th class="bt-data-col">Line 1 is more than $137,407 but not more than $186,306</th>
+            <th class="bt-data-col">Line 1 is more than $186,306 but not more than $259,829</th>
+            <th class="bt-data-col">Line 1 is more than $259,829</th>
+            <th class="bt-rownum-col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bt-label">Amount from line 1</td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f9-c5" readonly></td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f9-c6" readonly></td>
+            <td class="bt-input-cell"><input class="bt-input" id="bc-bt-f9-c7" readonly></td>
+            <td class="bt-rownum">9</td>
+          </tr>
+          <tr>
+            <td class="bt-label">Line 9 minus line 10<br><span class="bt-note">(cannot be negative)</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">137,407.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">186,306.00</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">259,829.00</span></td>
+            <td class="bt-rownum">10</td>
+          </tr>
+          <tr>
+            <td class="bt-label"></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f11-c5" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f11-c6" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f11-c7" readonly></td>
+            <td class="bt-rownum">11</td>
+          </tr>
+          <tr>
+            <td class="bt-label">Line 11 multiplied by<br>the percentage from line 12</td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">14.7%</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">16.8%</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">20.5%</span></td>
+            <td class="bt-rownum">12</td>
+          </tr>
+          <tr>
+            <td class="bt-label"></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f13-c5" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f13-c6" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bc-bt-f13-c7" readonly></td>
+            <td class="bt-rownum">13</td>
+          </tr>
+          <tr>
+            <td class="bt-label"><strong>Line 13 plus line 14</strong></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">10,801.15</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">17,989.30</span></td>
+            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">30,341.16</span></td>
+            <td class="bt-rownum">14</td>
+          </tr>
+          <tr class="bt-result-row">
+            <td class="bt-label"><strong>British Columbia tax<br>on taxable income</strong></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f15-c5" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f15-c6" readonly></td>
+            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bc-bt-f15-c7" readonly></td>
+            <td class="bt-rownum">15</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <p class="part-a-note">If you completed lines 9 to 15 for a column above, enter the amount from line 15 on line 61 and continue on line 16.</p>
+    <input type="hidden" id="fbcTax" value="0">
   </div>
-  <div class="formula-panel" id="fp-bcDTC">
-    <strong>How BC dividend tax credit is calculated:</strong><br>
-    <span class="formula-expr">line 12000 × 12%  +  line 12010 × 1.96%  (BC dividend tax credit on grossed-up taxable amounts)</span>
-  </div>
-  <div class="form-subsection">Other BC tax credits</div>
-  {{ fl("61520", "BC political contribution tax credit", op="+") }}
-  {{ fl("61600", "BC mining exploration tax credit", op="+") }}
 
-  <div class="form-line total" id="row-42800">
-    <div class="line-desc">
-      <span>BC tax — enter on line 42000 of your T1 return
-      <span class="note">BC tax on income minus BC credits and BC DTC</span></span>
-      <button class="formula-btn" onclick="toggleFormula(this)" title="Show formula">i</button>
-    </div>
-    <div class="line-op">=</div>
-    <div class="line-num">42800</div>
-    <div class="line-amount">
-      <input class="amount-field" type="text" id="f42800" readonly value="0.00" tabindex="-1">
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page2.png" alt="BC428 Page 2">
+    <input type="number" id="f_bc_L26_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
+    <input type="number" id="f58240" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:62.255%;top:8.333%;width:13.235%;height:2.939%;">
+    <input type="number" id="f58280" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:11.742%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L29_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:13.636%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L30_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:17.045%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L31_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:18.939%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L32_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L33_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58300" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="number" id="fbcPensionSrc" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:24.621%;width:11.275%;height:1.424%;">
+    <input type="text" id="fbcPensionAmt" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:26.515%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58360" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:28.409%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58400" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58440" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:32.197%;width:11.275%;height:2.939%;">
+    <input type="number" id="f58480" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:35.606%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L40_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:37.500%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L41_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L42_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58560" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58640" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:45.076%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L45_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:46.970%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L46_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:50.379%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L47_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:44.608%;top:52.273%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L48_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:54.167%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L49_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:56.061%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L50_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:57.955%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L51_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:59.848%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58729" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:61.742%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L53_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:65.152%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58689" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:65.152%;width:11.275%;height:1.424%;">
+    <input type="text" id="f59090" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:67.045%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L55_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:68.939%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L56_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;">
+    <input type="number" id="f58800" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L58_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L59_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:76.515%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L59_Amount_b" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:52.941%;top:78.030%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L60_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:2.939%;">
+  </div>
+
+  <!-- BC computed fields summary (shown as readonly) -->
+  <div class="bracket-section">
+    <div class="bracket-section-title">Part 3 &mdash; BC Tax Calculation Summary</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div>
+        <div class="form-line" style="background:#fff;">
+          <div class="line-desc"><span>BC dividend tax credit (auto-computed)</span></div>
+          <div class="line-op">=</div>
+          <div class="line-num">bcDTC</div>
+          <div class="line-amount">
+            <input class="amount-field" type="text" id="fbcDTC" readonly value="0.00" tabindex="-1">
+          </div>
+        </div>
+        <div class="form-line" style="background:#fff;">
+          <div class="line-desc"><span>BC non-refundable tax credits (total × 5.06%)</span></div>
+          <div class="line-op">=</div>
+          <div class="line-num">bcCred</div>
+          <div class="line-amount">
+            <input class="amount-field" type="text" id="fbcCredits" readonly value="0.00" tabindex="-1">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-line" style="background:#fff;">
+          <div class="line-desc"><span>BC political contribution credit (61520)</span></div>
+          <div class="line-op">+</div>
+          <div class="line-num">61520</div>
+          <div class="line-amount">
+            <input class="amount-field" type="number" id="f61520_supp"
+                   min="0" step="0.01" value="0" inputmode="decimal"
+                   oninput="var s=document.getElementById('f61520'); if(s) s.value=this.value; recalcBC428();">
+          </div>
+        </div>
+        <div class="form-line" style="background:#fff;">
+          <div class="line-desc"><span>BC mining exploration credit (61600)</span></div>
+          <div class="line-op">+</div>
+          <div class="line-num">61600</div>
+          <div class="line-amount">
+            <input class="amount-field" type="number" id="f61600_supp"
+                   min="0" step="0.01" value="0" inputmode="decimal"
+                   oninput="var s=document.getElementById('f61600'); if(s) s.value=this.value; recalcBC428();">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="formula-panel" id="fp-42800">
-    <strong>How line 42800 is calculated:</strong><br>
-    <span class="formula-expr">BC tax on income − BC non-refundable credits − BC dividend tax credit − line 61520 − line 61600 (minimum 0)</span>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page3.png" alt="BC428 Page 3">
+    <input type="number" id="f_bc_L61_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:79.902%;top:6.439%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L62_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:8.333%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L63_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:10.227%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L64_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:12.121%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L65_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:14.015%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L66_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:15.909%;width:11.275%;height:4.455%;">
+    <input type="number" id="f61520" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:34.804%;top:17.424%;width:13.235%;height:2.939%;">
+    <input type="number" id="f61600" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L67_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:20.833%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L68_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;">
+    <input type="text" id="f42800" class="pdf-input" readonly value="0.00" tabindex="-1" style="left:81.863%;top:24.621%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L69_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:52.451%;top:26.136%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L70_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:28.030%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L71_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:29.924%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L72_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L73_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:40.909%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L74_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:44.608%;top:42.803%;width:13.235%;height:2.939%;">
+    <input type="number" id="f_bc_L75_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:46.212%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L76_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:48.106%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L77_Amount_ReadOnly" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:50.000%;width:11.275%;height:1.515%;">
+    <input type="number" id="f_bc_L78_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:46.569%;top:51.894%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L78_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:51.894%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L79_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:53.788%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L79_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:55.303%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L80_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:57.197%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L81_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:59.091%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L82_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:60.985%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L83_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:62.879%;width:13.235%;height:1.424%;">
+    <input type="number" id="f_bc_L84_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L85_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:66.667%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L86_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:62.255%;top:70.076%;width:13.235%;height:2.939%;">
+    <input type="number" id="f_bc_L86_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:18.301%;top:71.591%;width:12.908%;height:1.389%;">
+    <input type="number" id="f_bc_L87_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:73.485%;width:11.275%;height:4.455%;">
+    <input type="number" id="f_bc_L87_Amt" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:18.301%;top:76.515%;width:12.908%;height:1.389%;">
+    <input type="number" id="f_bc_L88_Amount1" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:64.216%;top:78.409%;width:11.275%;height:2.939%;">
+    <input type="number" id="f_bc_L88_Amount2" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L89_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:81.818%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L90_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;">
+    <input type="number" id="f_bc_L91_Amount" class="pdf-input" min="0" step="0.01" value="0" tabindex="-1" style="left:81.863%;top:85.697%;width:11.275%;height:2.848%;">
   </div>
 
   <!-- Toolbar -->
   <div class="form-toolbar">
-    <button class="btn btn-primary" onclick="saveAndReturnToT1()">← Save &amp; Return to T1</button>
-    <button class="btn btn-success" onclick="saveSnapshot()">💾 Save Snapshot</button>
-    <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA BC428 form with your values">📄 Export PDF</button>
-    <button class="btn btn-outline" onclick="window.print()">🖨 Print</button>
-    <a class="btn btn-outline" href="{{ root_path }}/tax/compare">⇄ Compare</a>
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()">&#8592; Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()">&#128190; Save Snapshot</button>
+    <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA BC428 form with your values">&#128196; Export PDF</button>
+    <button class="btn btn-outline" onclick="window.print()">&#128424; Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/compare">&#8644; Compare</a>
     <button class="btn btn-outline" onclick="clearForm()">Clear</button>
-    <button class="btn btn-outline" onclick="loadLastSnapshot()">↩ Load Last Snapshot</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()">&#8617; Load Last Snapshot</button>
     <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
   </div>
   <div id="pdf-source-banner" style="display:none; font-size:.77rem; padding:4px 12px;
        background:#fff8e1; border-bottom:1px solid #ffe082; color:#795548;">
-    ⚠ Official CRA BC428 PDF not installed — export will be a summary document.
-    <a href="{{ root_path }}/admin/setup" style="font-weight:600;">Install now →</a>
+    &#9888; Official CRA BC428 PDF not installed &mdash; export will be a summary document.
+    <a href="{{ root_path }}/admin/setup" style="font-weight:600;">Install now &rarr;</a>
   </div>
 
 </div>{# /.cra-form #}
@@ -270,15 +528,84 @@ function sEl(elId, v) {
   if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+function fmt(v) {
+  if (v === null || v === undefined) return '';
+  return Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function fillBCBracketTable(taxableIncome) {
+  const BC_BR = [
+    { max: 49279,    base: 0,       rate: 0.0506, baseTax: 0        },
+    { max: 98560,    base: 49279,   rate: 0.077,  baseTax: 2493.52  },
+    { max: 113158,   base: 98560,   rate: 0.105,  baseTax: 6288.15  },
+    { max: 137407,   base: 113158,  rate: 0.1229, baseTax: 7820.94  },
+    { max: 186306,   base: 137407,  rate: 0.147,  baseTax: 10801.15 },
+    { max: 259829,   base: 186306,  rate: 0.168,  baseTax: 17989.30 },
+    { max: Infinity, base: 259829,  rate: 0.205,  baseTax: 30341.16 },
+  ];
+  let activeCol = 1;
+  if      (taxableIncome > 259829) activeCol = 7;
+  else if (taxableIncome > 186306) activeCol = 6;
+  else if (taxableIncome > 137407) activeCol = 5;
+  else if (taxableIncome > 113158) activeCol = 4;
+  else if (taxableIncome > 98560)  activeCol = 3;
+  else if (taxableIncome > 49279)  activeCol = 2;
+  else                             activeCol = 1;
+
+  let bcTax = 0;
+
+  // Section 1: columns 1-4 (lines 2-8)
+  for (let c = 1; c <= 4; c++) {
+    const br = BC_BR[c - 1];
+    const isActive = (c === activeCol);
+    const line2 = isActive ? taxableIncome : null;
+    const line4 = isActive ? Math.max(0, taxableIncome - br.base) : null;
+    const line6 = isActive ? line4 * br.rate : null;
+    const line8 = isActive ? (line6 + br.baseTax) : null;
+    const setV = (id, val) => { const el = document.getElementById(id); if (el) el.value = fmt(val); };
+    setV(`bc-bt-f2-c${c}`, line2);
+    setV(`bc-bt-f4-c${c}`, line4);
+    setV(`bc-bt-f6-c${c}`, line6);
+    setV(`bc-bt-f8-c${c}`, line8);
+    for (const ln of ['f2','f4','f6','f8']) {
+      const el = document.getElementById(`bc-bt-${ln}-c${c}`);
+      if (el) el.style.background = isActive ? '#e8f5e9' : '#f5f5f5';
+    }
+    if (isActive) bcTax = line8;
+  }
+
+  // Section 2: columns 5-7 (lines 9-15)
+  for (let c = 5; c <= 7; c++) {
+    const br = BC_BR[c - 1];
+    const isActive = (c === activeCol);
+    const line9  = isActive ? taxableIncome : null;
+    const line11 = isActive ? Math.max(0, taxableIncome - br.base) : null;
+    const line13 = isActive ? line11 * br.rate : null;
+    const line15 = isActive ? (line13 + br.baseTax) : null;
+    const setV = (id, val) => { const el = document.getElementById(id); if (el) el.value = fmt(val); };
+    setV(`bc-bt-f9-c${c}`,  line9);
+    setV(`bc-bt-f11-c${c}`, line11);
+    setV(`bc-bt-f13-c${c}`, line13);
+    setV(`bc-bt-f15-c${c}`, line15);
+    for (const ln of ['f9','f11','f13','f15']) {
+      const el = document.getElementById(`bc-bt-${ln}-c${c}`);
+      if (el) el.style.background = isActive ? '#e8f5e9' : '#f5f5f5';
+    }
+    if (isActive) bcTax = line15;
+  }
+
+  return bcTax;
+}
+
 function recalcBC428() {
   const ti    = g('fTaxableIncome');
   const div1  = g('fDiv12000');
   const div2  = g('fDiv12010');
   const isOld = document.getElementById('age65bc').checked;
 
-  // Part 1
-  const bcTax = applyBrackets(ti, BC_BRACKETS);
-  sEl('fbcTax', bcTax);
+  // Part 1 — BC tax via bracket table
+  const bcTax = fillBCBracketTable(ti);
+  document.getElementById('fbcTax').value = bcTax;
 
   // Age amount
   let age58080 = 0;

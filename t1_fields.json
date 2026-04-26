@@ -1,0 +1,3494 @@
+[
+  {
+    "page": 1,
+    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_FirstNameInitial[0]",
+    "type": "Text",
+    "rect": [
+      29.97,
+      192.01,
+      161.97,
+      203.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_LastName[0]",
+    "type": "Text",
+    "rect": [
+      167.96,
+      192.01,
+      305.96,
+      203.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_MailingAddress[0]",
+    "type": "Text",
+    "rect": [
+      29.97,
+      222.0,
+      305.97,
+      233.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_POBox[0]",
+    "type": "Text",
+    "rect": [
+      29.97,
+      253.51,
+      161.25,
+      264.79
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_RuralRoute[0]",
+    "type": "Text",
+    "rect": [
+      168.96,
+      253.51,
+      305.96,
+      264.79
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].ID_City[0]",
+    "type": "Text",
+    "rect": [
+      29.97,
+      285.0,
+      161.97,
+      296.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].Prov_DropDown[0]",
+    "type": "ComboBox",
+    "rect": [
+      167.96,
+      285.0,
+      227.96,
+      296.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].PostalCode_Comb_BordersAll[0].PostalCode[0]",
+    "type": "Text",
+    "rect": [
+      234.68,
+      285.0,
+      305.24,
+      296.29
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].EmailAddress[0]",
+    "type": "Text",
+    "rect": [
+      29.97,
+      316.51,
+      305.97,
+      327.79
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].NumericField_Comb9_CaptionTop[0].NumericField_Comb9_CaptionTop_Field[0]",
+    "type": "Text",
+    "rect": [
+      315.43,
+      201.22,
+      450.43,
+      211.85
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].DateBirth_Comb_BordersAll[0].DateBirth_Comb[0]",
+    "type": "Text",
+    "rect": [
+      333.68,
+      250.36,
+      428.24,
+      262.56
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].DateDeath_Comb_BordersAll[0].DateDeath_Comb[0]",
+    "type": "Text",
+    "rect": [
+      333.68,
+      326.85,
+      428.24,
+      338.13
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[0]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      186.11,
+      483.96,
+      196.11
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[1]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      201.27,
+      483.96,
+      211.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[2]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      216.45,
+      483.96,
+      226.45
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[3]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      231.61,
+      483.96,
+      241.61
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[4]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      246.79,
+      483.96,
+      256.79
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].MaritalStatus_Checkbox[0].MaritalStatus[5]",
+    "type": "CheckBox",
+    "rect": [
+      473.96,
+      261.95,
+      483.96,
+      271.95
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].DateMMDD_Comb_BordersAll_Std[0].DateMMDD_Comb[0]",
+    "type": "Text",
+    "rect": [
+      493.12,
+      330.7,
+      548.68,
+      341.98
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].Your_Language[0].RadioButtonlanguaget[0]",
+    "type": "RadioButton",
+    "rect": [
+      512.46,
+      361.53,
+      522.46,
+      371.53
+    ],
+    "value": "Off"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Identification[0].Your_Language[0].RadioButtonlanguaget[0]",
+    "type": "RadioButton",
+    "rect": [
+      512.46,
+      376.53,
+      522.46,
+      386.53
+    ],
+    "value": "Off"
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Residence_Info[0].Prov_DropDown-Residence[0]",
+    "type": "ComboBox",
+    "rect": [
+      29.87,
+      438.67,
+      305.87,
+      449.95
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Residence_Info[0].Prov_DropDown[0]",
+    "type": "ComboBox",
+    "rect": [
+      29.87,
+      480.67,
+      305.87,
+      491.95
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Residence_Info[0].Prov_DropDown-Business[0]",
+    "type": "ComboBox",
+    "rect": [
+      29.87,
+      522.67,
+      305.87,
+      533.95
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Residence_Info[0].Date_Entry[0].DateMMDD_Comb_BordersAll_Std[0].DateMMDD_Comb[0]",
+    "type": "Text",
+    "rect": [
+      513.59,
+      452.14,
+      569.15,
+      463.42
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Residence_Info[0].Date_Departure[0].DateMMDD_Comb_BordersAll_Std[0].DateMMDD_Comb[0]",
+    "type": "Text",
+    "rect": [
+      513.59,
+      517.3,
+      569.15,
+      528.58
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].Spouse_First_Name[0]",
+    "type": "Text",
+    "rect": [
+      30.0,
+      582.89,
+      162.0,
+      594.17
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].NumericField_Comb9_CaptionTop[0].NumericField_Comb9_CaptionTop_Field[0]",
+    "type": "Text",
+    "rect": [
+      170.87,
+      582.89,
+      305.87,
+      594.14
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].Self-employment[0].Checkbox[0]",
+    "type": "CheckBox",
+    "rect": [
+      503.0,
+      604.1,
+      513.0,
+      614.1
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].Line23600[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      616.6,
+      570.0,
+      639.88
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].Line11700[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      642.1,
+      570.0,
+      653.38
+    ],
+    "value": ""
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Info_Spouse_CLP[0].Line21300[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      655.6,
+      570.0,
+      666.88
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].ElectionsCanada[0].LineA[0].Option1[0].A_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      501.0,
+      118.0,
+      511.0,
+      128.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].ElectionsCanada[0].LineA[0].Option2[0].A_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      549.0,
+      118.0,
+      559.0,
+      128.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].ElectionsCanada[0].LineB[0].Option1[0].B_Authorize_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      501.0,
+      157.0,
+      511.0,
+      167.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].ElectionsCanada[0].LineB[0].Option2[0].B_Authorize_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      549.0,
+      157.0,
+      559.0,
+      167.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Tax_exempt[0].Exempt[0].Spouse_SelfEmployed[0]",
+    "type": "CheckBox",
+    "rect": [
+      503.0,
+      329.5,
+      513.0,
+      339.5
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Foreign_property[0].Line26600[0].Option1[0].ForeignProperty_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      501.0,
+      443.5,
+      511.0,
+      453.5
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Foreign_property[0].Line26600[0].Option2[0].ForeignProperty_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      549.0,
+      443.5,
+      559.0,
+      453.5
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Organ_donor[0].Question[0].Option1[0].OrganDonor_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      501.0,
+      551.5,
+      511.0,
+      561.5
+    ],
+    "value": ""
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Organ_donor[0].Question[0].Option2[0].OrganDonor_CheckBox[0]",
+    "type": "CheckBox",
+    "rect": [
+      549.0,
+      551.5,
+      559.0,
+      561.5
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line1[0].Line_10100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      114.0,
+      570.0,
+      125.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line10105[0].Line_10105_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      127.5,
+      462.0,
+      138.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line10120[0].Line_10120_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      141.0,
+      462.0,
+      152.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line10130[0].Line_10130_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      154.5,
+      462.0,
+      165.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line10400[0].Line_10400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      168.0,
+      570.0,
+      179.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11300[0].Line_11300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      181.5,
+      570.0,
+      192.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11400[0].Line_11400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      195.0,
+      570.0,
+      206.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11410[0].Line_11410_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      208.5,
+      462.0,
+      219.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11500[0].Line_11500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      222.0,
+      570.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11600[0].Line_11600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      235.5,
+      570.0,
+      246.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11700[0].Line_11700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      249.0,
+      570.0,
+      260.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11701[0].Line_11701_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      262.5,
+      462.0,
+      273.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11900[0].Line_11900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      276.0,
+      570.0,
+      287.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line11905[0].Line_11905_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      289.5,
+      462.0,
+      312.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12000[0].Line_12000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      327.0,
+      570.0,
+      338.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12010[0].Line_12010_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      340.5,
+      462.0,
+      351.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12100[0].Line_12100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      354.0,
+      570.0,
+      365.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12200[0].Line_12200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      367.5,
+      570.0,
+      378.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12500[0].Line_12500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      381.0,
+      570.0,
+      392.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12600[0].Line12599[0].Line_12599_Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      394.5,
+      354.0,
+      405.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12600[0].Line_12600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      394.5,
+      570.0,
+      405.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12700[0].Line_12700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.4,
+      408.0,
+      570.4,
+      419.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12800[0].Line_12799[0].Line_12799_Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      433.76,
+      354.0,
+      445.04
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12800[0].Line_12800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      421.97,
+      570.0,
+      445.25
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12900[0].Line_12900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      448.0,
+      570.0,
+      459.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12905[0].Line_12905_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      461.5,
+      570.0,
+      472.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line12906[0].Line_12906_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      475.0,
+      570.0,
+      486.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13000[0].Line_13000_Specify[0]",
+    "type": "Text",
+    "rect": [
+      132.0,
+      488.5,
+      459.0,
+      500.3
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13000[0].Line_13000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      488.5,
+      570.0,
+      499.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13010[0].Line_13010_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      502.0,
+      570.0,
+      513.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line23[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      515.5,
+      570.0,
+      526.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13500[0].Line13499[0].Line_13499_Amount[0]",
+    "type": "Text",
+    "rect": [
+      216.0,
+      542.5,
+      297.0,
+      553.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13500[0].Line_13500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      542.5,
+      462.0,
+      553.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13700[0].Line13699[0].Line_13699_Amount[0]",
+    "type": "Text",
+    "rect": [
+      216.0,
+      556.0,
+      297.0,
+      567.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13700[0].Line_13700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      556.0,
+      462.0,
+      567.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13900[0].Line13899[0].Line_13899_Amount[0]",
+    "type": "Text",
+    "rect": [
+      216.0,
+      569.5,
+      297.0,
+      580.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line13900[0].Line_13900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      569.5,
+      462.0,
+      580.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14100[0].Line14099[0].Line_14099_Amount[0]",
+    "type": "Text",
+    "rect": [
+      216.0,
+      583.0,
+      297.0,
+      594.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14100[0].Line_14100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      583.0,
+      462.0,
+      594.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14300[0].Line14299[0].Line_14299_Amount[0]",
+    "type": "Text",
+    "rect": [
+      216.0,
+      596.5,
+      297.0,
+      607.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14300[0].Line_14300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      596.5,
+      462.0,
+      607.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line29[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      610.0,
+      462.0,
+      621.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line29[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      610.0,
+      570.0,
+      621.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      623.5,
+      570.0,
+      634.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14400[0].Line_14400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      637.0,
+      462.0,
+      648.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14500[0].Line_14500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      650.5,
+      462.0,
+      661.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14600[0].Line_14600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      664.0,
+      462.0,
+      675.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14700[0].Line_14700_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      677.5,
+      462.0,
+      688.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line14700[0].Line_14700_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      677.5,
+      570.0,
+      688.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line15000[0].Line_15000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      691.0,
+      570.0,
+      702.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line36[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      51.0,
+      570.0,
+      62.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line20600[0].Line_20600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      76.5,
+      354.0,
+      87.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line20700[0].Line_20700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      90.0,
+      462.0,
+      113.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line20800[0].Line_20800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      115.5,
+      462.0,
+      126.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line20805[0].Line_20805_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      129.0,
+      462.0,
+      140.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line20810[0].Line_20810_Amount[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      154.5,
+      354.0,
+      165.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21000[0].Line_21000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      168.0,
+      462.0,
+      179.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21200[0].Line_21200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      181.5,
+      462.0,
+      192.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21300[0].Line_21300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      195.0,
+      462.0,
+      206.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21400[0].Line_21400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      208.5,
+      462.0,
+      219.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21500[0].Line_21500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      222.0,
+      462.0,
+      233.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line45[0].Line21699[0].Line_21699_Amount[0]",
+    "type": "Text",
+    "rect": [
+      165.4,
+      248.26,
+      246.4,
+      259.54
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line45[0].Line_21900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      247.7,
+      462.0,
+      258.97
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line21900[0].Line_21900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      262.0,
+      462.0,
+      273.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22000[0].Line21999[0].Line_21999_Amount[0]",
+    "type": "Text",
+    "rect": [
+      165.0,
+      287.49,
+      246.0,
+      298.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22000[0].Line_22000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      275.5,
+      462.0,
+      298.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22100[0].Line_22100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      301.0,
+      462.0,
+      324.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22200[0].Line_22200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      326.5,
+      462.0,
+      349.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22215[0].Line_22215_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      352.0,
+      462.0,
+      387.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22400[0].Line_22400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      389.5,
+      462.0,
+      400.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line22900[0].Line_22900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      403.0,
+      462.0,
+      414.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23100[0].Line_23100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      416.5,
+      462.0,
+      427.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23200[0].Line_23200_Specify[0]",
+    "type": "Text",
+    "rect": [
+      147.0,
+      430.0,
+      351.0,
+      441.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23200[0].Line_23200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      430.0,
+      462.0,
+      441.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23300[0].Line_23300_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      443.5,
+      462.0,
+      454.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23300[0].Line_23300_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      443.5,
+      570.0,
+      454.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23400[0].Line19Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      457.0,
+      570.0,
+      468.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23500[0].Line_23500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      548.49,
+      570.0,
+      571.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line23600[0].Line_23600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      574.0,
+      570.0,
+      609.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].#pageSet[0].Page1[4].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line59[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      51.0,
+      570.0,
+      62.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line24400[0].Line_24400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      64.5,
+      462.0,
+      75.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line24900[0].Line_24900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      78.0,
+      462.0,
+      101.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25000[0].Line_25000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      103.52,
+      462.0,
+      126.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25100[0].Line_25100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      129.03,
+      462.0,
+      140.3
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25200[0].Line_25200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      142.52,
+      462.0,
+      153.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25300[0].Line_25300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      156.03,
+      462.0,
+      167.3
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25395[0].Line_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      169.52,
+      462.0,
+      192.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25400[0].Line_25400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      195.02,
+      462.0,
+      206.3
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25500[0].Line_25500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      208.53,
+      462.0,
+      219.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25600[0].Line_25600_Specify[0]",
+    "type": "Text",
+    "rect": [
+      168.0,
+      222.02,
+      351.0,
+      233.82
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25600[0].Line_25600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      222.02,
+      462.0,
+      233.3
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25700[0].Line_25700_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      235.53,
+      462.0,
+      246.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line25700[0].Line_25700_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      235.53,
+      570.0,
+      246.8
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Step4[0].Line26000[0].Line_26000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      249.49,
+      570.0,
+      260.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line36Amount1[0]",
+    "type": "Text",
+    "rect": [
+      141.0,
+      369.49,
+      222.0,
+      380.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line37Amount1[0]",
+    "type": "Text",
+    "rect": [
+      153.0,
+      382.99,
+      222.0,
+      394.27
+    ],
+    "value": " 0.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line38Amount1[0]",
+    "type": "Text",
+    "rect": [
+      153.0,
+      396.49,
+      222.0,
+      407.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line39Rate2[0]",
+    "type": "Text",
+    "rect": [
+      152.61,
+      410.15,
+      221.61,
+      421.43
+    ],
+    "value": "14.5%"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line40Amount1[0]",
+    "type": "Text",
+    "rect": [
+      153.0,
+      423.49,
+      222.0,
+      434.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line41Amount1[0]",
+    "type": "Text",
+    "rect": [
+      153.0,
+      436.99,
+      222.0,
+      448.27
+    ],
+    "value": " 0.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column1[0].Line42Amount1[0]",
+    "type": "Text",
+    "rect": [
+      153.0,
+      451.21,
+      222.0,
+      473.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line36Amount2[0]",
+    "type": "Text",
+    "rect": [
+      228.0,
+      369.49,
+      309.0,
+      380.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line37Amount2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      382.99,
+      309.0,
+      394.27
+    ],
+    "value": " 57,375.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line38Amount2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      396.49,
+      309.0,
+      407.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line39Rate2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      409.99,
+      309.0,
+      421.27
+    ],
+    "value": "20.5%"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line40Amount2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      423.49,
+      309.0,
+      434.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line41Amount2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      436.99,
+      309.0,
+      448.27
+    ],
+    "value": " 8,319.38"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column2[0].Line42Amount2[0]",
+    "type": "Text",
+    "rect": [
+      240.0,
+      451.21,
+      309.0,
+      473.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line36Amount3[0]",
+    "type": "Text",
+    "rect": [
+      315.0,
+      369.49,
+      396.0,
+      380.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line37Amount3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      382.99,
+      396.0,
+      394.27
+    ],
+    "value": " 114,750.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line38Amount3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      396.49,
+      396.0,
+      407.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line39Rate3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      409.99,
+      396.0,
+      421.27
+    ],
+    "value": "26%"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line40Amount3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      423.49,
+      396.0,
+      434.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line41Amount3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      436.99,
+      396.0,
+      448.27
+    ],
+    "value": " 20,081.25"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column3[0].Line42Amount3[0]",
+    "type": "Text",
+    "rect": [
+      327.0,
+      451.21,
+      396.0,
+      473.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line36Amount4[0]",
+    "type": "Text",
+    "rect": [
+      402.0,
+      369.49,
+      483.0,
+      380.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line37Amount4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      382.99,
+      483.0,
+      394.27
+    ],
+    "value": " 177,882.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line38Amount4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      396.49,
+      483.0,
+      407.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line39Rate4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      409.99,
+      483.0,
+      421.27
+    ],
+    "value": "29%"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line40Amount4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      423.49,
+      483.0,
+      434.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line41Amount4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      436.99,
+      483.0,
+      448.27
+    ],
+    "value": " 36,495.57"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column4[0].Line42Amount4[0]",
+    "type": "Text",
+    "rect": [
+      414.0,
+      451.21,
+      483.0,
+      473.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line36Amount5[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      369.49,
+      570.0,
+      380.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line37Amount5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      382.99,
+      570.0,
+      394.27
+    ],
+    "value": " 253,414.00"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line38Amount5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      396.49,
+      570.0,
+      407.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line39Rate5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      409.99,
+      570.0,
+      421.27
+    ],
+    "value": "33%"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line40Amount5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      423.49,
+      570.0,
+      434.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line41Amount5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      436.99,
+      570.0,
+      448.27
+    ],
+    "value": " 58,399.85"
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartA[0].Column5[0].Line42Amount5[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      451.21,
+      570.0,
+      473.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30000[0].Line_30000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      544.99,
+      570.0,
+      568.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30100[0].Line_30100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      570.49,
+      570.0,
+      581.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30300[0].Line_30300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      583.99,
+      570.0,
+      595.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30400[0].Line_30400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      597.49,
+      570.0,
+      608.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30425[0].Line_30425_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      610.99,
+      570.0,
+      634.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30450[0].Line_30450_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      636.49,
+      570.0,
+      647.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30500[0].Line30499[0].Numeric_NoDecimal_BordersAll[0]",
+    "type": "Text",
+    "rect": [
+      354.0,
+      661.99,
+      381.0,
+      673.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line30500[0].Line_30500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      649.99,
+      570.0,
+      673.27
+    ],
+    "value": ""
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].PartB[0].Line89[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      675.49,
+      570.0,
+      686.77
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].#pageSet[0].Page1[5].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line90[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      48.0,
+      570.0,
+      59.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line30800[0].Line_30800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      73.5,
+      462.0,
+      84.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31000[0].Line_31000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      87.0,
+      462.0,
+      98.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31200[0].Line_31200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      100.5,
+      462.0,
+      123.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31217[0].Line_31217_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      126.0,
+      462.0,
+      137.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31220[0].Line_31220_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      139.5,
+      462.0,
+      150.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31240[0].Line_31240_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      153.0,
+      462.0,
+      164.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31260[0].Line_31260_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      166.5,
+      462.0,
+      189.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31270[0].Line_31270_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      192.0,
+      462.0,
+      203.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31285[0].Line_31285_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      205.5,
+      462.0,
+      216.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31300[0].Line_31300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      219.0,
+      462.0,
+      230.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line102[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      232.74,
+      462.0,
+      244.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line102[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      232.74,
+      570.0,
+      244.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31400[0].Line_31400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      246.23,
+      570.0,
+      257.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line104[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      259.74,
+      570.0,
+      271.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31600[0].Line_31600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      273.23,
+      570.0,
+      296.52
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31800[0].Line_31800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      298.73,
+      570.0,
+      310.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line107[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      312.23,
+      570.0,
+      323.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line31900[0].Line_31900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      325.73,
+      570.0,
+      337.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line32300[0].Line_32300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      339.23,
+      570.0,
+      350.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line32400[0].Line_32400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      352.73,
+      570.0,
+      364.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line32600[0].Line_32600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      366.23,
+      570.0,
+      377.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line112[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      379.73,
+      570.0,
+      391.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33099[0].Line_33099_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      393.23,
+      462.0,
+      416.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line114[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      141.0,
+      418.73,
+      222.0,
+      430.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line114[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      273.0,
+      418.73,
+      354.0,
+      430.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line115[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      432.23,
+      462.0,
+      443.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line116[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      445.73,
+      462.0,
+      457.01
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33199[0].Line_33199_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      459.23,
+      462.0,
+      482.52
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33200[0].Line_33200_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      484.74,
+      462.0,
+      496.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33200[0].Line_33200_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      484.74,
+      570.0,
+      496.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33500[0].Line_33500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      498.23,
+      570.0,
+      509.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line120[0].Rate[0]",
+    "type": "Text",
+    "rect": [
+      501.26,
+      511.74,
+      570.26,
+      523.02
+    ],
+    "value": "14.5%"
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line33800[0].Line_33800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      525.23,
+      570.0,
+      536.51
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line34900[0].Line_34900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      538.74,
+      570.0,
+      550.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line34990[0].Line_34990_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      552.24,
+      570.0,
+      563.52
+    ],
+    "value": ""
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].PartB[0].Line35000[0].Line_35000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      565.74,
+      570.0,
+      577.02
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].#pageSet[0].Page1[6].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line124[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      48.0,
+      570.0,
+      59.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40424[0].Line_40424_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      61.5,
+      570.0,
+      72.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40400[0].Line_40400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      75.0,
+      570.0,
+      86.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line127[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      88.5,
+      462.0,
+      99.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40425[0].Line_40425_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      102.0,
+      462.0,
+      113.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40427[0].Line_40427_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      115.5,
+      462.0,
+      126.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line130[0].Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      129.0,
+      462.0,
+      140.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line130[0].Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      129.0,
+      570.0,
+      140.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line42900[0].Line_42900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      142.5,
+      570.0,
+      153.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line132[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      156.0,
+      570.0,
+      167.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line133[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      169.5,
+      570.0,
+      180.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40500[0].Line_40500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      183.0,
+      570.0,
+      194.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line135[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      196.5,
+      570.0,
+      207.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line136[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      210.0,
+      570.0,
+      221.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line137[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      223.5,
+      570.0,
+      234.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line138[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      237.0,
+      570.0,
+      248.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line40600[0].Line_40600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      250.5,
+      570.0,
+      261.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41000[0].Line40900[0].Line_40900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      165.0,
+      288.0,
+      246.0,
+      299.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41000[0].Line_41000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      276.0,
+      462.0,
+      299.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41200[0].Line_41200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      301.5,
+      462.0,
+      312.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41400[0].Line41300[0].Line_41300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      165.0,
+      339.0,
+      246.0,
+      350.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41400[0].Line_41400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      315.0,
+      462.0,
+      350.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41600[0].Line_41600_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      352.5,
+      462.0,
+      363.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41600[0].Line_41600_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      352.5,
+      570.0,
+      363.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41700[0].Line_41700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      366.0,
+      570.0,
+      377.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41500[0].Line_41500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      379.5,
+      570.0,
+      390.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line41800[0].Line_41800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      393.0,
+      570.0,
+      404.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].PartC[0].Line42000[0].Line_42000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      406.5,
+      570.0,
+      417.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line148[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      450.0,
+      570.0,
+      461.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line42100[0].Line_42100_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      463.5,
+      570.0,
+      486.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line42120[0].Line_42120_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      489.0,
+      570.0,
+      512.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line42200[0].Line_42200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      514.5,
+      570.0,
+      525.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line42800[0].Line_42800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      528.0,
+      570.0,
+      551.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Step6[0].Line43500[0].Line_43500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      553.5,
+      570.0,
+      564.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].#pageSet[0].Page1[7].ClearData_EN[0]",
+    "type": "Button",
+    "rect": [
+      492.0,
+      3.0,
+      588.0,
+      18.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line154[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      51.0,
+      570.0,
+      62.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line43700[0].Line_43700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      381.0,
+      64.5,
+      462.0,
+      75.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line44000[0].Line_44000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      78.0,
+      462.0,
+      89.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line44800[0].Line_44800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      91.5,
+      462.0,
+      102.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45000[0].Line_45000_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      105.0,
+      462.0,
+      116.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45200[0].Line_45200_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      118.5,
+      462.0,
+      129.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45300[0].Line_45300_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      132.0,
+      462.0,
+      143.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45350[0].Line_45350_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      145.5,
+      462.0,
+      156.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45355[0].Line_45355_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      159.0,
+      462.0,
+      182.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45400[0].Line_45400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      184.5,
+      462.0,
+      195.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45600[0].Line_45600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      198.0,
+      462.0,
+      209.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line45700[0].Line_45700_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      211.5,
+      462.0,
+      222.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line46900[0].Line46800[0].Line_46800_Amount[0]",
+    "type": "Text",
+    "rect": [
+      237.0,
+      237.0,
+      306.0,
+      248.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line46900[0].Line_46900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      225.0,
+      462.0,
+      248.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line47555[0].Line_47600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      250.5,
+      462.0,
+      261.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line47556[0].Line_47556_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      264.0,
+      462.0,
+      275.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line47600[0].Line_47600_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      277.5,
+      462.0,
+      288.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line47900[0].Line_47900_Amount[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      291.0,
+      462.0,
+      302.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line48200[0].Line_48200_Amount1[0]",
+    "type": "Text",
+    "rect": [
+      393.0,
+      304.5,
+      462.0,
+      315.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line48200[0].Line_48200_Amount2[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      304.5,
+      570.0,
+      315.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Step6-Continued[0].Line172[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      320.22,
+      570.0,
+      354.78
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Refund_or_Balance-owing[0].Line48400[0].Line_48400_Amount[0]",
+    "type": "Text",
+    "rect": [
+      159.0,
+      372.0,
+      240.0,
+      383.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Refund_or_Balance-owing[0].Line48500[0].Line_48500_Amount[0]",
+    "type": "Text",
+    "rect": [
+      468.0,
+      372.0,
+      549.0,
+      383.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].ONOpportunitiesFund2[0].Line_1[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      489.0,
+      444.0,
+      570.0,
+      455.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].ONOpportunitiesFund2[0].Line_2[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      459.0,
+      570.0,
+      482.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].ONOpportunitiesFund2[0].Line_3[0].Amount[0]",
+    "type": "Text",
+    "rect": [
+      501.0,
+      486.0,
+      570.0,
+      497.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Certification[0].Telephone[0]",
+    "type": "Text",
+    "rect": [
+      120.0,
+      576.0,
+      297.0,
+      587.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Certification[0].Date[0]",
+    "type": "Text",
+    "rect": [
+      60.0,
+      591.0,
+      297.0,
+      602.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line_49000_IfFeeWasCharged[0].Line49000_CheckBoxGroup[0].Line49000_CheckBox_EN[0]",
+    "type": "CheckBox",
+    "rect": [
+      501.0,
+      541.0,
+      511.0,
+      551.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line_49000_IfFeeWasCharged[0].Line49000_CheckBoxGroup[0].Line49000_CheckBox_EN[1]",
+    "type": "CheckBox",
+    "rect": [
+      549.0,
+      541.0,
+      559.0,
+      551.0
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line_49000_IfFeeWasCharged[0].EFileNumber_Comb[0].EFile[0]",
+    "type": "Text",
+    "rect": [
+      489.72,
+      555.0,
+      563.28,
+      566.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line_49000_IfFeeWasCharged[0].NameOfPreparer[0]",
+    "type": "Text",
+    "rect": [
+      429.0,
+      576.0,
+      579.0,
+      587.28
+    ],
+    "value": ""
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line_49000_IfFeeWasCharged[0].TelephoneOfPreparer[0]",
+    "type": "Text",
+    "rect": [
+      402.0,
+      591.0,
+      579.0,
+      602.28
+    ],
+    "value": ""
+  }
+]

@@ -42,6 +42,12 @@ docker build -t $ImageName $RepoRoot
 if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 $AppConfig = Get-Content "$RepoRoot\atlas-app.json" | ConvertFrom-Json
+
+# Inject the SESSION_SECRET so the app can validate Aether session cookies
+if ($InternalSecret) {
+    $AppConfig.env | Add-Member -NotePropertyName "SESSION_SECRET" -NotePropertyValue $InternalSecret -Force
+}
+
 $Body = $AppConfig | ConvertTo-Json -Depth 5
 
 Write-Host "==> Checking if '$Slug' is already registered with Atlas..." -ForegroundColor Cyan

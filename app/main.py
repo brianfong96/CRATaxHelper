@@ -26,6 +26,7 @@ from typing import Dict
 
 from fastapi import FastAPI, HTTPException, Request, UploadFile, File
 from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -35,6 +36,7 @@ from app.calculator import (
     calculate_bc428,
     calculate_t1,
 )
+from app.auth import get_current_user, require_auth_response
 from app.config import settings
 from app.form_filler import (
     fill_official_pdf,
@@ -70,6 +72,25 @@ app = FastAPI(
 
 _TMPL_DIR = Path(__file__).parent / "templates"
 templates = Jinja2Templates(directory=str(_TMPL_DIR))
+
+app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
+
+
+# ── Auth middleware ───────────────────────────────────────────────────────────
+
+@app.middleware("http")
+async def taxhelper_auth_middleware(request: Request, call_next):
+    """Require valid Aether session for all routes except /health."""
+    path = request.url.path
+    if path.endswith("/health"):
+        return await call_next(request)
+    if not settings.AUTH_ENABLED or not settings.SESSION_SECRET:
+        return await call_next(request)
+    user = get_current_user(request)
+    if user:
+        request.state.user = user
+        return await call_next(request)
+    return require_auth_response(request)
 
 
 def _ctx(request: Request, **extra):
