@@ -856,12 +856,7 @@ function fmtInput(el) {
   const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
   el.setAttribute('data-raw', String(raw));
   if (raw === 0) { el.value = ''; return; }
-  // Smart decimals: show cents only when non-zero (e.g. 85000 → "85,000", 85000.5 → "85,000.50")
-  const hasCents = Math.abs(raw % 1) > 0.004;
-  el.value = raw.toLocaleString('en-CA', {
-    minimumFractionDigits: hasCents ? 2 : 0,
-    maximumFractionDigits: 2
-  });
+  el.value = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 function editInput(el) {
   const raw = parseFloat((el.getAttribute('data-raw') || el.value).replace(/,/g, '')) || 0;
