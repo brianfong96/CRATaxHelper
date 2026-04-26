@@ -87,7 +87,7 @@
       <a class="cra-orig-badge"
          href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5006-r/5006-r-25e.pdf"
          target="_blank" rel="noopener" title="Open official CRA T1 General 2025 PDF">
-        &#128196; Official CRA form
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
       </a>
     </div>
   </div>
@@ -425,17 +425,17 @@
   <!-- Toolbar -->
   <div class="form-toolbar">
     <a class="btn btn-primary" href="{{ root_path }}/tax/bc428" id="bc428-link">Open BC428 &rarr;</a>
-    <button class="btn btn-success" onclick="saveSnapshot()">&#128190; Save Snapshot</button>
-    <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA T1 form with your values">&#128196; Export PDF</button>
-    <button class="btn btn-outline" onclick="window.print()">&#128424; Print</button>
-    <a class="btn btn-outline" href="{{ root_path }}/tax/compare">&#8644; Compare</a>
-    <button class="btn btn-outline" onclick="clearForm()">Clear</button>
-    <button class="btn btn-outline" onclick="loadLastSnapshot()">&#8617; Load Last Snapshot</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA T1 form with your values"><svg class="icon"><use href="#ic-download"/></svg> Export PDF</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/compare"><svg class="icon"><use href="#ic-compare"/></svg> Compare</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
     <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
   </div>
   <div id="pdf-source-banner" style="display:none; font-size:.77rem; padding:4px 12px;
        background:#fff8e1; border-bottom:1px solid #ffe082; color:#795548;">
-    &#9888; Official CRA PDF not installed &mdash; export will be a summary document.
+    <svg class="icon" style="color:#b45309; vertical-align:-3px"><use href="#ic-alert"/></svg> Official CRA PDF not installed &mdash; export will be a summary document.
     <a href="{{ root_path }}/admin/setup" style="font-weight:600;">Install now &rarr;</a>
   </div>
 
@@ -834,7 +834,7 @@ async function exportPDF() {
     if (!d['t1-2025.pdf']?.available) {
       document.getElementById('pdf-source-banner').style.display = 'block';
       const btn = document.getElementById('btn-export-pdf');
-      if (btn) btn.title = '⚠ Official CRA PDF not installed — will export summary';
+      if (btn) btn.title = 'Official CRA PDF not installed — will export summary';
     }
   } catch(_) {}
 })();

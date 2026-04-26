@@ -98,7 +98,7 @@
 {% for year, forms in forms_by_year | dictsort(reverse=True) %}
 <div class="year-group">
   <button class="year-header" onclick="toggleYear('{{ year }}')" id="btn-{{ year }}">
-    <span>📋 {{ year }} Tax Year</span>
+    <span><svg class="icon"><use href="#ic-calendar"/></svg> {{ year }} Tax Year</span>
     <span class="year-toggle" id="toggle-{{ year }}">▾</span>
   </button>
   <div class="year-forms" id="forms-{{ year }}">
@@ -112,13 +112,13 @@
         <div class="card-meta">{{ form.lines_summary }} ›</div>
       </a>
       <a href="{{ form.cra_url }}" target="_blank" rel="noopener" class="cra-orig-link">
-        📄 View official CRA form (PDF)
+        <svg class="icon" style="opacity:.55"><use href="#ic-external"/></svg> View CRA form (PDF)
       </a>
     </div>
     {% endfor %}
 
     <div class="add-form-btn">
-      ＋ More forms coming soon
+      <svg class="icon" style="opacity:.35"><use href="#ic-plus"/></svg> More forms coming soon
     </div>
 
   </div>
@@ -145,9 +145,9 @@
     <li>Click <strong>"Open BC428 →"</strong> — your taxable income (line 26000) transfers automatically.</li>
     <li>Complete the BC428 credits and click <strong>"← Save &amp; Return to T1"</strong>.</li>
     <li>The T1 updates with your BC provincial tax and shows your refund or balance owing.</li>
-    <li>Click <strong>"📄 Export PDF"</strong> on any form to download a filled summary PDF.</li>
-    <li>Click the <strong>ⓘ formula button</strong> on any calculated line to see how it is computed.</li>
-    <li>Use <strong>"💾 Save Snapshot"</strong> to save a scenario, then visit <strong>Compare</strong> to see differences.</li>
+    <li>Click <strong>"Export PDF"</strong> on any form to download a filled summary PDF.</li>
+    <li>Click the <strong>i formula button</strong> on any calculated line to see how it is computed.</li>
+    <li>Use <strong>"Save Snapshot"</strong> to save a scenario, then visit <strong>Compare</strong> to see differences.</li>
   </ol>
 </div>
 
