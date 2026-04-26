@@ -11,7 +11,21 @@ class Settings(BaseSettings):
     # URL of the Aether API gateway (used for login redirects)
     GATEWAY_URL: str = "https://api.aether-data.net"
 
+    # Per-app RBAC: comma-separated list of allowed email addresses.
+    # Empty string (default) = any whitelisted Aether user may access this app.
+    ALLOWED_EMAILS: str = ""
+
+    # Aether Archive service URL for server-side per-user data persistence.
+    ARCHIVE_URL: str = "http://archive:7000"
+
     model_config = {"env_file": ".env", "extra": "ignore"}
+
+    @property
+    def allowed_emails(self) -> set[str]:
+        """Set of lowercase emails allowed to use this app. Empty = unrestricted."""
+        if not self.ALLOWED_EMAILS:
+            return set()
+        return {e.strip().lower() for e in self.ALLOWED_EMAILS.split(",") if e.strip()}
 
 
 settings = Settings()

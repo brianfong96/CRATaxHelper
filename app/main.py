@@ -4,6 +4,7 @@ CRA Tax Helper — FastAPI application.
 Routes:
   GET  /                           Landing page (year-grouped form registry)
   GET  /health                     Health check
+  GET  /profile                    User profile page
   GET  /tax/t1                     T1 General 2025 form
   GET  /tax/bc428                  BC428 2025 form
   GET  /tax/compare                Side-by-side scenario comparison
@@ -11,6 +12,8 @@ Routes:
   POST /tax/bc428/calculate        JSON API – compute all BC428 derived lines
   POST /tax/t1/pdf                 Export filled T1 PDF (official CRA form if installed)
   POST /tax/bc428/pdf              Export filled BC428 PDF (official CRA form if installed)
+  GET  /api/userdata/{form}        Fetch server-saved form data for logged-in user
+  POST /api/userdata/{form}        Upsert server-saved form data for logged-in user
   GET  /admin/setup                Setup page – install official CRA PDF templates
   GET  /admin/forms-status         JSON – which official PDFs are installed
   GET  /admin/list-fields/{name}   JSON – AcroForm field names in an installed PDF
@@ -19,6 +22,7 @@ Routes:
 
 from __future__ import annotations
 
+import asyncio
 import io
 import logging
 from pathlib import Path
@@ -45,6 +49,12 @@ from app.form_filler import (
     save_uploaded_form,
 )
 from app.forms_registry import FORMS_BY_YEAR
+from app.userdata import (
+    ensure_archive_project,
+    get_form_data,
+    grant_user_access,
+    save_form_data,
+)
 
 logging.basicConfig(
     level=settings.LOG_LEVEL,
@@ -60,14 +70,23 @@ try:
 except Exception:  # noqa: BLE001
     pass
 
+from contextlib import asynccontextmanager
+
 # ── App & templates ───────────────────────────────────────────────────────────
+
+@asynccontextmanager
+async def _lifespan(app):
+    """Initialise Archive project/table/RLS on startup (idempotent, non-fatal)."""
+    asyncio.create_task(ensure_archive_project())
+    yield
+
 
 app = FastAPI(
     title="CRA Tax Helper",
     description="Interactive CRA T1 General and BC428 tax calculator",
     version="1.0.0",
-    # When deployed behind Atlas the root path is /app/cra-taxhelper
     root_path=settings.ROOT_PATH,
+    lifespan=_lifespan,
 )
 
 _TMPL_DIR = Path(__file__).parent / "templates"
@@ -78,24 +97,62 @@ app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")
 
 # ── Auth middleware ───────────────────────────────────────────────────────────
 
+_FORBIDDEN_TMPL = """\
+<!doctype html><html><head><meta charset=utf-8>
+<title>Access Restricted — CRA Tax Helper</title>
+<style>
+  body{{font-family:Arial,sans-serif;background:#f5f5f5;display:flex;align-items:center;
+        justify-content:center;min-height:100vh;margin:0}}
+  .box{{background:#fff;border:1px solid #ccc;border-radius:4px;padding:40px 48px;
+        max-width:420px;text-align:center}}
+  h1{{color:#af3c43;font-size:22px;margin-bottom:12px}}
+  p{{color:#555;font-size:14px;margin:8px 0}}
+  a{{color:#26374a;font-size:13px}}
+</style></head><body>
+<div class="box">
+  <h1>&#128274; Access Restricted</h1>
+  <p>Your account (<strong>{email}</strong>) is not authorised to access CRA Tax Helper.</p>
+  <p>Contact the administrator to request access.</p>
+  <p style="margin-top:20px"><a href="https://api.aether-data.net/logout">Sign out</a></p>
+</div></body></html>"""
+
+
 @app.middleware("http")
 async def taxhelper_auth_middleware(request: Request, call_next):
-    """Require valid Aether session for all routes except /health."""
+    """Require valid Aether session; enforce per-app RBAC if ALLOWED_EMAILS is set."""
     path = request.url.path
     if path.endswith("/health"):
         return await call_next(request)
     if not settings.AUTH_ENABLED or not settings.SESSION_SECRET:
         return await call_next(request)
+
     user = get_current_user(request)
-    if user:
-        request.state.user = user
-        return await call_next(request)
-    return require_auth_response(request)
+    if not user:
+        return require_auth_response(request)
+
+    email = (user.get("email") or "").lower()
+
+    # Per-app RBAC: if ALLOWED_EMAILS is configured, gate access
+    allowed = settings.allowed_emails
+    if allowed and email not in allowed:
+        return HTMLResponse(
+            content=_FORBIDDEN_TMPL.format(email=email),
+            status_code=403,
+        )
+
+    request.state.user = user
+
+    # Grant Archive access once per process lifetime (fire-and-forget)
+    if email:
+        asyncio.create_task(grant_user_access(email))
+
+    return await call_next(request)
 
 
 def _ctx(request: Request, **extra):
-    """Build a base template context."""
-    return {"request": request, "root_path": settings.ROOT_PATH, **extra}
+    """Build a base template context including the logged-in user."""
+    user = getattr(request.state, "user", None)
+    return {"request": request, "root_path": settings.ROOT_PATH, "user": user, **extra}
 
 
 # ── Pages ─────────────────────────────────────────────────────────────────────
@@ -104,6 +161,16 @@ def _ctx(request: Request, **extra):
 async def index(request: Request):
     return templates.TemplateResponse(
         "index.html", _ctx(request, forms_by_year=FORMS_BY_YEAR)
+    )
+
+
+@app.get("/profile", response_class=HTMLResponse)
+async def profile(request: Request):
+    user = getattr(request.state, "user", {}) or {}
+    archive_enabled = bool(settings.ARCHIVE_URL and settings.SESSION_SECRET)
+    return templates.TemplateResponse(
+        "profile.html",
+        _ctx(request, archive_enabled=archive_enabled),
     )
 
 
@@ -120,6 +187,43 @@ async def bc428_form(request: Request):
 @app.get("/tax/compare", response_class=HTMLResponse)
 async def compare(request: Request):
     return templates.TemplateResponse("compare.html", _ctx(request))
+
+
+# ── User data API (server-side per-user persistence via Archive) ──────────────
+
+_ALLOWED_FORMS = {"t1", "bc428"}
+
+
+@app.get("/api/userdata/{form}")
+async def userdata_get(form: str, request: Request):
+    """Return the logged-in user's saved form data from Archive."""
+    if form not in _ALLOWED_FORMS:
+        raise HTTPException(400, f"Unknown form '{form}'")
+    cookie = request.cookies.get("aether_session", "")
+    data = await get_form_data(cookie, form)
+    if data is None:
+        raise HTTPException(404, "No saved data found")
+    return data
+
+
+@app.post("/api/userdata/{form}")
+async def userdata_post(form: str, request: Request):
+    """Upsert the logged-in user's form data to Archive."""
+    if form not in _ALLOWED_FORMS:
+        raise HTTPException(400, f"Unknown form '{form}'")
+    user = getattr(request.state, "user", {}) or {}
+    email = user.get("email", "")
+    if not email:
+        raise HTTPException(401, "Not authenticated")
+    cookie = request.cookies.get("aether_session", "")
+    try:
+        body = await request.json()
+    except Exception:
+        raise HTTPException(400, "Invalid JSON body")
+    ok = await save_form_data(cookie, email, form, body)
+    if not ok:
+        raise HTTPException(502, "Archive save failed; data kept in localStorage")
+    return {"saved": True}
 
 
 # ── Admin / setup routes ──────────────────────────────────────────────────────

@@ -10,6 +10,8 @@
   "env": {
     "ROOT_PATH": "",
     "AUTH_ENABLED": "true",
-    "GATEWAY_URL": "https://api.aether-data.net"
+    "GATEWAY_URL": "https://api.aether-data.net",
+    "ALLOWED_EMAILS": "",
+    "ARCHIVE_URL": "http://archive:7000"
   }
 }

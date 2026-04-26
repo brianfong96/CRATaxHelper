@@ -733,6 +733,17 @@ function loadFormData(data) {
 function autoSave() {
   const data = getFormData();
   localStorage.setItem('cra_t1_autosave', JSON.stringify(data));
+  serverSave('t1', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
 }
 
 function saveSnapshot() {
@@ -858,15 +869,29 @@ function editInput(el) {
 }
 
 // ── Wire up all inputs ─────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  // Restore autosave
-  const saved = localStorage.getItem('cra_t1_autosave');
-  if (saved) {
-    try { loadFormData(JSON.parse(saved)); }
-    catch(e) { recalcT1(); }
-  } else {
-    recalcT1();
+document.addEventListener('DOMContentLoaded', async () => {
+  // Try server data first; fall back to localStorage
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/t1');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem('cra_t1_autosave', JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem('cra_t1_autosave');
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; }
+      catch(e) {}
+    }
   }
+  if (!loaded) recalcT1();
 
   // Check if returning from BC428 with updated net tax
   const urlP = new URLSearchParams(location.search);

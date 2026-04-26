@@ -695,7 +695,19 @@ function loadFormData(data) {
 }
 
 function autoSave() {
-  localStorage.setItem('cra_bc428_autosave', JSON.stringify(getFormData()));
+  const data = getFormData();
+  localStorage.setItem('cra_bc428_autosave', JSON.stringify(data));
+  serverSave('bc428', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
 }
 
 function saveSnapshot() {
@@ -793,24 +805,43 @@ async function exportPDF() {
 })();
 
 // ── Init ────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Pre-fill from URL params (passed from T1 "Open BC428" button)
   const urlP = new URLSearchParams(location.search);
   if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) { el.value = urlP.get('ti'); fmtInput(el); } }
   if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) { el.value = urlP.get('d1'); fmtInput(el); } }
   if (urlP.has('d2'))  { const el = document.getElementById('fDiv12010');      if (el) { el.value = urlP.get('d2'); fmtInput(el); } }
 
-  // Then restore autosave (URL params take priority for the three fields above)
-  const saved = localStorage.getItem('cra_bc428_autosave');
-  if (saved && !urlP.has('ti')) {
-    try { loadFormData(JSON.parse(saved)); return; } catch(e) {}
+  // Try server data first (skip if URL params provided — T1 is launching a fresh calculation)
+  let loaded = false;
+  if (!urlP.has('ti')) {
+    try {
+      const r = await fetch(ROOT + '/api/userdata/bc428');
+      if (r.ok) {
+        const sd = await r.json();
+        if (sd && Object.keys(sd).length > 0) {
+          loadFormData(sd);
+          localStorage.setItem('cra_bc428_autosave', JSON.stringify(sd));
+          loaded = true;
+        }
+      }
+    } catch(_) {}
   }
 
-  // Set defaults
-  const el = document.getElementById('f58040');
-  if (el && !parseFloat(el.value)) el.value = BC_BASIC_PERSONAL;
+  // Fall back to localStorage
+  if (!loaded) {
+    const saved = localStorage.getItem('cra_bc428_autosave');
+    if (saved && !urlP.has('ti')) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
 
-  recalcBC428();
+  if (!loaded) {
+    // Set defaults
+    const el = document.getElementById('f58040');
+    if (el && !parseFloat(el.value)) el.value = BC_BASIC_PERSONAL;
+    recalcBC428();
+  }
 
   // Show last snapshot time
   const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Profile — CRA Tax Helper{% endblock %}
+
+{% block content %}
+<div class="cra-form" style="max-width:640px;margin:0 auto;">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">My Profile</div>
+      <div class="form-subtitle">Account &amp; data storage settings</div>
+    </div>
+  </div>
+
+  {% if user %}
+  <!-- ── Account info ─────────────────────────────────────── -->
+  <div class="form-section">Account</div>
+  <div style="padding:16px 20px;background:#fff;border-bottom:1px solid #e0e0e0;">
+    <table style="border-collapse:collapse;width:100%;font-size:14px;">
+      <tr>
+        <td style="padding:6px 0;color:#666;width:140px;">Name</td>
+        <td style="padding:6px 0;font-weight:600;">{{ user.name or "—" }}</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 0;color:#666;">Email</td>
+        <td style="padding:6px 0;">{{ user.email or "—" }}</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 0;color:#666;">Role</td>
+        <td style="padding:6px 0;">
+          {% if user.is_admin %}
+            <span style="background:#26374a;color:#fff;padding:2px 8px;border-radius:3px;font-size:12px;">Admin</span>
+          {% else %}
+            <span style="background:#6c757d;color:#fff;padding:2px 8px;border-radius:3px;font-size:12px;">User</span>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ── Data storage ────────────────────────────────────── -->
+  <div class="form-section">Data Storage</div>
+  <div style="padding:16px 20px;background:#fff;border-bottom:1px solid #e0e0e0;font-size:14px;">
+    {% if archive_enabled %}
+    <p style="margin-bottom:10px;">
+      <span style="color:#278400;font-weight:700;">&#10003; Server sync enabled.</span>
+      Your form data is saved to your account and restored automatically on any device.
+    </p>
+    <ul style="margin:8px 0 8px 20px;color:#555;line-height:1.8;">
+      <li>T1 General — saved to your account</li>
+      <li>BC428 — saved to your account</li>
+      <li>Changes sync on every field blur</li>
+      <li>Local browser cache (<code>localStorage</code>) used as offline fallback</li>
+    </ul>
+    {% else %}
+    <p style="margin-bottom:10px;">
+      <span style="color:#d3080c;font-weight:700;">&#9888; Browser-only storage.</span>
+      Your form data is saved in this browser only (<code>localStorage</code>).
+      It will be lost if you clear site data or switch devices.
+    </p>
+    {% endif %}
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-outline" onclick="clearLocalData()">&#128465; Clear browser cache</button>
+    </div>
+  </div>
+
+  <!-- ── Platform ────────────────────────────────────────── -->
+  <div class="form-section">Platform</div>
+  <div style="padding:14px 20px;background:#fff;font-size:13px;color:#555;">
+    <p>
+      Authenticated via <strong>Aether</strong> OAuth (Google account).
+      To manage your Aether account or sign out, visit
+      <a href="https://api.aether-data.net/profile" target="_blank" rel="noopener">api.aether-data.net/profile</a>.
+    </p>
+    <p style="margin-top:10px;">
+      <a href="https://api.aether-data.net/logout" style="color:#af3c43;">Sign out</a>
+    </p>
+  </div>
+
+  {% else %}
+  <div style="padding:24px 20px;text-align:center;color:#666;">
+    Not signed in. <a href="{{ root_path }}/">Return home</a>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+function clearLocalData() {
+  if (!confirm('Clear all locally cached form data from this browser? Your server-saved data will not be affected.')) return;
+  ['cra_t1_autosave','cra_bc428_autosave','cra_snapshots','cra_bc428_net_tax'].forEach(k => localStorage.removeItem(k));
+  toast('Local browser cache cleared ✓');
+}
+</script>
+{% endblock %}
