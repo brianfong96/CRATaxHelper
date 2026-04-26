@@ -39,6 +39,26 @@
   border-color: #888;
   cursor: default;
 }
+/* Page 1 / 2 identification fields */
+.pdf-input.text-left { text-align: left; font-size: 0.55em; }
+.pdf-select {
+  position: absolute;
+  font-size: 0.55em;
+  padding: 0 1px;
+  box-sizing: border-box;
+  background: rgba(255,255,200,0.85);
+  border: 1px solid #0066cc;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+.pdf-select:focus { border-color: #003399; outline: 2px solid rgba(0,51,153,0.4); z-index:10; }
+.pdf-checkbox, .pdf-radio {
+  position: absolute;
+  accent-color: #0066cc;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
 .bracket-section {
   background: #fff;
   border: 2px solid #335075;
@@ -95,12 +115,84 @@
   <div id="pg-anchor-1"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page1.png" alt="T1 Page 1">
+    <!-- Identification -->
+    <input type="text" id="id_first_name" class="pdf-input text-left" placeholder="First name/initials" style="left:4.897%;top:24.244%;width:21.569%;height:1.424%;">
+    <input type="text" id="id_last_name" class="pdf-input text-left" placeholder="Last name" style="left:27.444%;top:24.244%;width:22.549%;height:1.424%;">
+    <input type="text" id="id_sin" class="pdf-input text-left" placeholder="SIN" style="left:51.541%;top:25.407%;width:22.059%;height:1.342%;">
+    <input type="text" id="id_address" class="pdf-input text-left" placeholder="Mailing address (apt/street)" style="left:4.897%;top:28.030%;width:45.098%;height:1.426%;">
+    <input type="text" id="id_pobox" class="pdf-input text-left" placeholder="P.O. Box" style="left:4.897%;top:32.009%;width:21.451%;height:1.424%;">
+    <input type="text" id="id_rural" class="pdf-input text-left" placeholder="Rural route" style="left:27.608%;top:32.009%;width:22.386%;height:1.424%;">
+    <input type="text" id="id_dob" class="pdf-input text-left" placeholder="YYYYMMDD" style="left:54.523%;top:31.611%;width:15.451%;height:1.540%;">
+    <input type="text" id="id_city" class="pdf-input text-left" placeholder="City/town" style="left:4.897%;top:35.985%;width:21.569%;height:1.426%;">
+    <select id="id_province_mail" class="pdf-select" style="left:27.444%;top:35.985%;width:9.804%;height:1.800%;">
+      <option value=""></option>
+      <option>AB</option><option selected>BC</option><option>MB</option><option>NB</option>
+      <option>NL</option><option>NS</option><option>NT</option><option>NU</option>
+      <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
+    </select>
+    <input type="text" id="id_postal" class="pdf-input text-left" placeholder="Postal code" style="left:38.346%;top:35.985%;width:11.529%;height:1.426%;">
+    <input type="email" id="id_email" class="pdf-input text-left" placeholder="Email address" style="left:4.897%;top:39.963%;width:45.098%;height:1.424%;">
+    <!-- Date of death (if applicable) -->
+    <input type="text" id="id_dod" class="pdf-input text-left" placeholder="YYYYMMDD" style="left:54.523%;top:41.269%;width:15.451%;height:1.424%;">
+    <!-- Date of election (MMDD) -->
+    <input type="text" id="id_elect_date" class="pdf-input text-left" placeholder="MMDD" style="left:80.575%;top:41.755%;width:9.078%;height:1.424%;">
+    <!-- Marital status — radio group (CRA: 1=Married 2=Common-law 3=Widowed 4=Divorced 5=Separated 6=Single) -->
+    <input type="radio" name="marital" id="ms_1" value="1" class="pdf-radio" style="left:77.444%;top:23.499%;width:1.634%;height:1.263%;">
+    <input type="radio" name="marital" id="ms_2" value="2" class="pdf-radio" style="left:77.444%;top:25.413%;width:1.634%;height:1.263%;">
+    <input type="radio" name="marital" id="ms_3" value="3" class="pdf-radio" style="left:77.444%;top:27.330%;width:1.634%;height:1.263%;">
+    <input type="radio" name="marital" id="ms_4" value="4" class="pdf-radio" style="left:77.444%;top:29.244%;width:1.634%;height:1.263%;">
+    <input type="radio" name="marital" id="ms_5" value="5" class="pdf-radio" style="left:77.444%;top:31.160%;width:1.634%;height:1.263%;">
+    <input type="radio" name="marital" id="ms_6" value="6" class="pdf-radio" style="left:77.444%;top:33.074%;width:1.634%;height:1.263%;">
+    <!-- Language preference: English / French -->
+    <input type="radio" name="lang_pref" id="lang_en" value="en" class="pdf-radio" checked style="left:83.735%;top:45.648%;width:1.634%;height:1.263%;">
+    <input type="radio" name="lang_pref" id="lang_fr" value="fr" class="pdf-radio" style="left:83.735%;top:47.542%;width:1.634%;height:1.263%;">
+    <!-- Province of residence on Dec 31 -->
+    <select id="id_province_res" class="pdf-select" style="left:4.881%;top:55.388%;width:45.098%;height:1.800%;">
+      <option value=""></option>
+      <option>AB</option><option selected>BC</option><option>MB</option><option>NB</option>
+      <option>NL</option><option>NS</option><option>NT</option><option>NU</option>
+      <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
+    </select>
+    <!-- Date entered province (MMDD) -->
+    <input type="text" id="id_prov_date" class="pdf-input text-left" placeholder="MMDD" style="left:83.920%;top:57.088%;width:9.078%;height:1.424%;">
+    <!-- Province of self-employment -->
+    <select id="id_province_biz" class="pdf-select" style="left:4.881%;top:65.994%;width:45.098%;height:1.800%;">
+      <option value=""></option>
+      <option>AB</option><option selected>BC</option><option>MB</option><option>NB</option>
+      <option>NL</option><option>NS</option><option>NT</option><option>NU</option>
+      <option>ON</option><option>PE</option><option>QC</option><option>SK</option><option>YT</option>
+    </select>
+    <input type="text" id="id_biz_date" class="pdf-input text-left" placeholder="MMDD" style="left:83.920%;top:65.316%;width:9.078%;height:1.424%;">
+    <!-- Spouse / partner info -->
+    <input type="text" id="id_spouse_name" class="pdf-input text-left" placeholder="Spouse/partner first name" style="left:4.902%;top:73.597%;width:21.569%;height:1.424%;">
+    <input type="text" id="id_spouse_sin" class="pdf-input text-left" placeholder="Spouse SIN" style="left:27.920%;top:73.597%;width:22.059%;height:1.420%;">
+    <!-- Spouse self-employed checkbox -->
+    <input type="checkbox" id="id_spouse_selfemp" class="pdf-checkbox" style="left:82.190%;top:76.275%;width:1.634%;height:1.263%;">
+    <!-- Net income of spouse/dependants -->
+    <input type="number" id="id_spouse_income" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:77.854%;width:13.235%;height:2.939%;">
+    <input type="number" id="id_line_dep1" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:81.073%;width:13.235%;height:1.424%;">
+    <input type="number" id="id_line_dep2" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:79.902%;top:82.778%;width:13.235%;height:1.424%;">
   </div>
 
   <div id="pg-anchor-2"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page2.png" alt="T1 Page 2">
+    <!-- Section A: CRA online mail consent — Yes / No -->
+    <input type="radio" name="consent_a" id="consent_a_yes" value="yes" class="pdf-radio" style="left:81.863%;top:14.899%;width:1.634%;height:1.263%;">
+    <input type="radio" name="consent_a" id="consent_a_no"  value="no"  class="pdf-radio" style="left:89.706%;top:14.899%;width:1.634%;height:1.263%;">
+    <!-- Section B: Authorize representative — Yes / No -->
+    <input type="radio" name="consent_b" id="consent_b_yes" value="yes" class="pdf-radio" style="left:81.863%;top:19.823%;width:1.634%;height:1.263%;">
+    <input type="radio" name="consent_b" id="consent_b_no"  value="no"  class="pdf-radio" style="left:89.706%;top:19.823%;width:1.634%;height:1.263%;">
+    <!-- Spouse self-employed (p.2 repeat) -->
+    <input type="checkbox" id="p2_spouse_selfemp" class="pdf-checkbox" style="left:82.190%;top:41.604%;width:1.634%;height:1.263%;">
+    <!-- Foreign property — Yes / No -->
+    <input type="radio" name="foreign_prop" id="fp_yes" value="yes" class="pdf-radio" style="left:81.863%;top:55.997%;width:1.634%;height:1.263%;">
+    <input type="radio" name="foreign_prop" id="fp_no"  value="no"  class="pdf-radio" style="left:89.706%;top:55.997%;width:1.634%;height:1.263%;">
+    <!-- Organ donor — Yes / No -->
+    <input type="radio" name="organ_donor" id="od_yes" value="yes" class="pdf-radio" style="left:81.863%;top:69.634%;width:1.634%;height:1.263%;">
+    <input type="radio" name="organ_donor" id="od_no"  value="no"  class="pdf-radio" style="left:89.706%;top:69.634%;width:1.634%;height:1.263%;">
   </div>
+
 
   <div id="pg-anchor-3"></div>
   <div class="pdf-page">
@@ -763,6 +855,34 @@ function getFormData() {
     const el = document.getElementById('f' + id);
     if (el) data[id] = parseFloat(el.value) || 0;
   });
+  // Identification fields (pages 1-2)
+  const textIds = ['id_first_name','id_last_name','id_sin','id_address','id_pobox',
+                   'id_rural','id_dob','id_city','id_postal','id_email','id_dod',
+                   'id_elect_date','id_spouse_name','id_spouse_sin','id_prov_date','id_biz_date'];
+  textIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  const selectIds = ['id_province_mail','id_province_res','id_province_biz'];
+  selectIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  // Radio groups
+  ['marital','lang_pref','consent_a','consent_b','foreign_prop','organ_donor'].forEach(name => {
+    const checked = document.querySelector('input[name="' + name + '"]:checked');
+    if (checked) data['radio_' + name] = checked.value;
+  });
+  // Checkboxes (page 1-2)
+  ['id_spouse_selfemp','p2_spouse_selfemp'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.checked;
+  });
+  // Numeric identity fields
+  ['id_spouse_income','id_line_dep1','id_line_dep2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = parseFloat(el.value) || 0;
+  });
   return data;
 }
 
@@ -772,6 +892,40 @@ function loadFormData(data) {
   T1_INPUTS.forEach(id => {
     if (data[id] !== undefined) {
       const el = document.getElementById('f' + id);
+      if (el) el.value = data[id];
+    }
+  });
+  // Identification text/select fields
+  ['id_first_name','id_last_name','id_sin','id_address','id_pobox','id_rural','id_dob',
+   'id_city','id_postal','id_email','id_dod','id_elect_date','id_spouse_name','id_spouse_sin',
+   'id_prov_date','id_biz_date'].forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = data[id];
+    }
+  });
+  ['id_province_mail','id_province_res','id_province_biz'].forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = data[id];
+    }
+  });
+  ['marital','lang_pref','consent_a','consent_b','foreign_prop','organ_donor'].forEach(name => {
+    const val = data['radio_' + name];
+    if (val) {
+      const btn = document.querySelector('input[name="' + name + '"][value="' + val + '"]');
+      if (btn) btn.checked = true;
+    }
+  });
+  ['id_spouse_selfemp','p2_spouse_selfemp'].forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.checked = !!data[id];
+    }
+  });
+  ['id_spouse_income','id_line_dep1','id_line_dep2'].forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
       if (el) el.value = data[id];
     }
   });
@@ -915,6 +1069,26 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('input', recalcT1);
   });
   document.getElementById('age65').addEventListener('change', recalcT1);
+
+  // Wire up identification fields (pages 1-2) to autoSave only
+  const idFields = document.querySelectorAll(
+    '#pg-anchor-1 ~ .pdf-page input, #pg-anchor-2 ~ .pdf-page input, ' +
+    '.pdf-page .pdf-select, .pdf-page .pdf-checkbox, .pdf-page .pdf-radio'
+  );
+  // Simpler: grab by class
+  document.querySelectorAll('.pdf-select').forEach(el => el.addEventListener('change', autoSave));
+  document.querySelectorAll('.pdf-checkbox').forEach(el => el.addEventListener('change', autoSave));
+  document.querySelectorAll('.pdf-radio').forEach(el => el.addEventListener('change', autoSave));
+  ['id_first_name','id_last_name','id_sin','id_address','id_pobox','id_rural','id_dob',
+   'id_city','id_postal','id_email','id_dod','id_elect_date','id_spouse_name','id_spouse_sin',
+   'id_prov_date','id_biz_date'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', autoSave);
+  });
+  ['id_spouse_income','id_line_dep1','id_line_dep2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', autoSave);
+  });
 
   // Make read-only computed fields display comma-formatted on blur
   // Update BC428 link whenever taxable income changes
