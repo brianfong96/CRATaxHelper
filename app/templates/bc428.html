@@ -349,28 +349,87 @@ function applyBrackets(income, brackets) {
 
 function g(id)  { const el = document.getElementById(id); return el ? Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
 function gId(id) { return g('f' + id); }
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const span = el.parentElement
+    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
+    : null;
+  if (span) span.textContent = '.' + cents;
+}
 function s(id, v) {
   const el = document.getElementById('f' + id);
-  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 function fmtInput(el) {
   const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
   el.setAttribute('data-raw', String(raw));
-  if (raw === 0) { el.value = ''; return; }
-  el.value = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (raw === 0) {
+    el.value = '';
+    updateCents(el, '00');
+    return;
+  }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 function editInput(el) {
-  const raw = parseFloat((el.getAttribute('data-raw') || el.value).replace(/,/g, '')) || 0;
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
   el.value = raw === 0 ? '' : String(raw);
 }
 function sEl(elId, v) {
   const el = document.getElementById(elId);
-  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 
 function fmt(v) {
   if (v === null || v === undefined) return '';
   return Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// Split each amount input into a dollar portion (80%) + cents span (20%)
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const span = document.createElement('span');
+    span.className = 'cents-display';
+    span.dataset.for = inp.id;
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+    span.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:none;` +
+      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
+      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
+      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
+    span.textContent = '.' + initCents;
+    inp.parentElement.appendChild(span);
+  });
 }
 
 function fillBCBracketTable(taxableIncome) {
@@ -402,14 +461,27 @@ function fillBCBracketTable(taxableIncome) {
     const line4 = isActive ? Math.max(0, taxableIncome - br.base) : null;
     const line6 = isActive ? line4 * br.rate : null;
     const line8 = isActive ? (line6 + br.baseTax) : null;
-    const setV = (id, val) => { const el = document.getElementById(id); if (el) el.value = fmt(val); };
+    const setV = (id, val) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const fmtd = (val === null || val === undefined) ? '' : fmt(val);
+      const dot = fmtd.indexOf('.');
+      el.value = dot >= 0 ? fmtd.slice(0, dot) : fmtd;
+      updateCents(el, dot >= 0 ? fmtd.slice(dot + 1) : '00');
+    };
     setV(`bc-bt-f2-c${c}`, line2);
     setV(`bc-bt-f4-c${c}`, line4);
     setV(`bc-bt-f6-c${c}`, line6);
     setV(`bc-bt-f8-c${c}`, line8);
     for (const ln of ['f2','f4','f6','f8']) {
-      const el = document.getElementById(`bc-bt-${ln}-c${c}`);
-      if (el) el.style.background = isActive ? 'rgba(180,240,180,0.75)' : 'rgba(220,220,220,0.4)';
+      const id = `bc-bt-${ln}-c${c}`;
+      const el = document.getElementById(id);
+      if (el) {
+        const bg = isActive ? 'rgba(180,240,180,0.75)' : 'rgba(220,220,220,0.4)';
+        el.style.background = bg;
+        const sp = el.parentElement?.querySelector(`.cents-display[data-for="${id}"]`);
+        if (sp) sp.style.background = bg;
+      }
     }
     if (isActive) bcTax = line8;
   }
@@ -422,14 +494,27 @@ function fillBCBracketTable(taxableIncome) {
     const line11 = isActive ? Math.max(0, taxableIncome - br.base) : null;
     const line13 = isActive ? line11 * br.rate : null;
     const line15 = isActive ? (line13 + br.baseTax) : null;
-    const setV = (id, val) => { const el = document.getElementById(id); if (el) el.value = fmt(val); };
+    const setV = (id, val) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const fmtd = (val === null || val === undefined) ? '' : fmt(val);
+      const dot = fmtd.indexOf('.');
+      el.value = dot >= 0 ? fmtd.slice(0, dot) : fmtd;
+      updateCents(el, dot >= 0 ? fmtd.slice(dot + 1) : '00');
+    };
     setV(`bc-bt-f9-c${c}`,  line9);
     setV(`bc-bt-f11-c${c}`, line11);
     setV(`bc-bt-f13-c${c}`, line13);
     setV(`bc-bt-f15-c${c}`, line15);
     for (const ln of ['f9','f11','f13','f15']) {
-      const el = document.getElementById(`bc-bt-${ln}-c${c}`);
-      if (el) el.style.background = isActive ? 'rgba(180,240,180,0.75)' : 'rgba(220,220,220,0.4)';
+      const id = `bc-bt-${ln}-c${c}`;
+      const el = document.getElementById(id);
+      if (el) {
+        const bg = isActive ? 'rgba(180,240,180,0.75)' : 'rgba(220,220,220,0.4)';
+        el.style.background = bg;
+        const sp = el.parentElement?.querySelector(`.cents-display[data-for="${id}"]`);
+        if (sp) sp.style.background = bg;
+      }
     }
     if (isActive) bcTax = line15;
   }
@@ -640,6 +725,9 @@ async function exportPDF() {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+  // Build dollar/cents split for all amount inputs before any data is loaded
+  initAmountBoxes();
+
   // Pre-fill from URL params (passed from T1 "Open BC428" button)
   const urlP = new URLSearchParams(location.search);
   if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) { el.value = urlP.get('ti'); fmtInput(el); } }
@@ -673,7 +761,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!loaded) {
     // Set defaults
     const el = document.getElementById('f58040');
-    if (el && !parseFloat(el.value)) el.value = BC_BASIC_PERSONAL;
+    if (el && !parseFloat(el.value)) { el.value = BC_BASIC_PERSONAL; fmtInput(el); }
     recalcBC428();
   }
 

@@ -498,10 +498,21 @@ function g(id) {
   if (!el) return 0;
   return Math.max(0, parseFloat((el.value || '0').replace(/,/g, '')) || 0);
 }
-function gRaw(id) { const el = document.getElementById('f' + id); return el ? (parseFloat(el.value) || 0) : 0; }
+function gRaw(id) { const el = document.getElementById('f' + id); return el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0; }
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const span = el.parentElement
+    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
+    : null;
+  if (span) span.textContent = '.' + cents;
+}
 function s(id, v) {
   const el = document.getElementById('f' + id);
-  if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 function sum(ids) { return ids.reduce((a,id) => a + g(id), 0); }
 
@@ -954,21 +965,70 @@ function loadCharGroup(baseId, value) {
   if (h) h.value = value.slice(0, count);
 }
 
+// Split each amount input into a dollar portion (80%) + cents span (20%)
+// so the '.00' always appears in the right-side of the box, after the PDF separator line.
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    // Pull existing decimal out of value (e.g. "0.00" → "0")
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    // Shrink input to cover only the dollar portion (left 80%)
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    // Build cents span covering right 20%
+    const span = document.createElement('span');
+    span.className = 'cents-display';
+    span.dataset.for = inp.id;
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+    span.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:none;` +
+      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
+      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
+      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
+    span.textContent = '.' + initCents;
+    inp.parentElement.appendChild(span);
+  });
+}
+
 function fmtInput(el) {
   const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
   el.setAttribute('data-raw', String(raw));
-  if (raw === 0) { el.value = ''; return; }
-  el.value = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (raw === 0) {
+    el.value = '';
+    updateCents(el, '00');
+    return;
+  }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
 }
 function editInput(el) {
-  const raw = parseFloat((el.getAttribute('data-raw') || el.value).replace(/,/g, '')) || 0;
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
   el.value = raw === 0 ? '' : String(raw);
 }
 
 // ── Wire up all inputs ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  // Build char-box inputs before loading any data
+  // Build char-box inputs and split amount boxes before loading any data
   initCharBoxes();
+  initAmountBoxes();
 
   // Try server data first; fall back to localStorage
   let loaded = false;
