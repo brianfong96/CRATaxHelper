@@ -1,0 +1,475 @@
+{% extends "base.html" %}
+{% block title %}Schedule 9 &mdash; Donations and Gifts 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 9 &mdash; Donations and Gifts</div>
+      <div class="form-subtitle">Form 5000-S9 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5000-S9-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5000-s9/5000-s9-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 9 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule9_page1.png" alt="Schedule 9 Page 1">
+
+    <!-- Line 1: current year charity donations -->
+    <input type="text" data-numeric="1" id="f_s9_l1" class="pdf-input" value="" inputmode="decimal"
+           style="left:79.902%;top:36.364%;width:13.235%;height:2.94%;">
+    <!-- Line 2: govt/municipality -->
+    <input type="text" data-numeric="1" id="f_s9_l2" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:39.773%;width:11.275%;height:2.94%;">
+    <!-- Line 3: outside Canada universities -->
+    <input type="text" data-numeric="1" id="f_s9_l3" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;">
+    <!-- Line 4: UN and foreign charities -->
+    <input type="text" data-numeric="1" id="f_s9_l4" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:45.076%;width:11.275%;height:2.94%;">
+    <!-- Line 5: sum 1+2+3+4 (readonly) -->
+    <input type="text" id="f_s9_l5" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:48.485%;width:11.275%;height:1.424%;">
+
+    <!-- Line 6 A: net income input -->
+    <input type="text" data-numeric="1" id="f_s9_l6A" class="pdf-input" value="" inputmode="decimal"
+           style="left:49.02%;top:51.136%;width:13.235%;height:1.424%;">
+    <!-- Line 6 result: net income × 75% -->
+    <input type="text" id="f_s9_l6" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:51.136%;width:13.235%;height:1.424%;">
+
+    <!-- Amt B: capital depreciable property -->
+    <input type="text" data-numeric="1" id="f_s9_amtB" class="pdf-input" value="" inputmode="decimal"
+           style="left:49.02%;top:53.03%;width:13.235%;height:2.94%;">
+    <!-- Amt C: capital property -->
+    <input type="text" data-numeric="1" id="f_s9_amtC" class="pdf-input" value="" inputmode="decimal"
+           style="left:50.981%;top:56.44%;width:11.275%;height:2.94%;">
+    <!-- Line 7 D input: (B+C)×25% -->
+    <input type="text" id="f_s9_l7D" class="pdf-input" readonly value="0.00"
+           style="left:50.981%;top:59.849%;width:11.275%;height:1.424%;">
+    <!-- Line 7 result -->
+    <input type="text" id="f_s9_l7" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:59.849%;width:11.275%;height:1.424%;">
+
+    <!-- Line 8: 6+7 -->
+    <input type="text" id="f_s9_l8" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:61.742%;width:11.275%;height:1.424%;">
+    <!-- Line 9: min(6A, 8) -->
+    <input type="text" id="f_s9_l9" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:64.394%;width:13.235%;height:1.424%;">
+    <!-- Line 10: min(5, 9) -->
+    <input type="text" id="f_s9_l10" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:67.045%;width:13.235%;height:1.424%;">
+    <!-- Line 11: ecological/cultural gifts -->
+    <input type="text" data-numeric="1" id="f_s9_l11" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:68.94%;width:11.275%;height:1.424%;">
+    <!-- Line 12: 10+11 -->
+    <input type="text" id="f_s9_l12" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;">
+    <!-- Line 13: min(12, 200) -->
+    <input type="text" id="f_s9_l13" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;">
+    <!-- Line 14: 12-13 -->
+    <input type="text" id="f_s9_l14" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;">
+    <!-- Line 15: ecological gifts 2014-2016 -->
+    <input type="text" data-numeric="1" id="f_s9_l15" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:76.515%;width:11.275%;height:2.94%;">
+    <!-- Line 16: 14-15 -->
+    <input type="text" id="f_s9_l16" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;">
+    <!-- Line 17: taxable income -->
+    <input type="text" data-numeric="1" id="f_s9_l17" class="pdf-input" value="" inputmode="decimal"
+           style="left:79.902%;top:82.576%;width:13.235%;height:1.424%;">
+    <!-- Line 18: threshold $253,414 (readonly, pre-filled) -->
+    <input type="text" id="f_s9_l18" class="pdf-input" readonly value="253,414"
+           style="left:81.863%;top:84.47%;width:11.275%;height:1.424%;">
+    <!-- Line 19: 17-18 -->
+    <input type="text" id="f_s9_l19" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:86.364%;width:11.275%;height:1.424%;">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule9_page2.png" alt="Schedule 9 Page 2">
+
+    <!-- Amt E: carry from line 14 -->
+    <input type="text" id="f_s9_amtE" class="pdf-input" readonly value="0.00"
+           style="left:49.02%;top:6.818%;width:13.235%;height:1.424%;">
+    <!-- Line 20 F: min(line16, line19) -->
+    <input type="text" id="f_s9_l20F" class="pdf-input" readonly value="0.00"
+           style="left:50.981%;top:8.712%;width:11.275%;height:1.424%;">
+    <!-- Line 20 result: F × 33% -->
+    <input type="text" id="f_s9_l20" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:8.712%;width:13.235%;height:1.424%;">
+    <!-- Line 21 G: E minus F -->
+    <input type="text" id="f_s9_l21G" class="pdf-input" readonly value="0.00"
+           style="left:50.981%;top:10.606%;width:11.275%;height:1.424%;">
+    <!-- Line 21 result: G × 29% -->
+    <input type="text" id="f_s9_l21" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:10.606%;width:11.275%;height:1.424%;">
+    <!-- Line 22 H: line 13 -->
+    <input type="text" id="f_s9_l22H" class="pdf-input" readonly value="0.00"
+           style="left:49.02%;top:12.5%;width:13.235%;height:1.424%;">
+    <!-- Line 22 result: H × 14.5% -->
+    <input type="text" id="f_s9_l22" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:12.5%;width:11.275%;height:1.424%;">
+    <!-- Line 23: total (→ T1 line 34900) -->
+    <input type="text" id="f_s9_l23" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:14.485%;width:11.275%;height:2.849%;">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id)  { const el = document.getElementById(id); return el ? Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
+function gRaw(id) { const el = document.getElementById(id); return el ? (parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
+
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const span = el.parentElement
+    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
+    : null;
+  if (span) span.textContent = '.' + cents;
+}
+
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function editInput(el) {
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
+  el.value = raw === 0 ? '' : String(raw);
+}
+
+// Split each amount input into dollar portion (80%) + cents span (20%)
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const span = document.createElement('span');
+    span.className = 'cents-display';
+    span.dataset.for = inp.id;
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+    span.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:none;` +
+      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
+      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
+      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
+    span.textContent = '.' + initCents;
+    inp.parentElement.appendChild(span);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcS9() {
+  const l1 = g('f_s9_l1'), l2 = g('f_s9_l2'), l3 = g('f_s9_l3'), l4 = g('f_s9_l4');
+  const l5 = l1 + l2 + l3 + l4;
+  s('f_s9_l5', l5);
+
+  const netIncome = g('f_s9_l6A');
+  const l6A = netIncome * 0.75;
+  s('f_s9_l6', l6A);
+
+  const amtB = g('f_s9_amtB'), amtC = g('f_s9_amtC');
+  const l7D = (amtB + amtC) * 0.25;
+  s('f_s9_l7D', l7D);
+  s('f_s9_l7', l7D);
+
+  const l8 = l6A + l7D;
+  s('f_s9_l8', l8);
+
+  const l9 = Math.min(l6A, l8);
+  s('f_s9_l9', l9);
+
+  const l10 = Math.min(l5, l9);
+  s('f_s9_l10', l10);
+
+  const l11 = g('f_s9_l11');
+  const l12 = l10 + l11;
+  s('f_s9_l12', l12);
+
+  const l13 = Math.min(l12, 200);
+  s('f_s9_l13', l13);
+
+  const l14 = l12 - l13;
+  s('f_s9_l14', l14);
+
+  const l15 = g('f_s9_l15');
+  const l16 = Math.max(0, l14 - l15);
+  s('f_s9_l16', l16);
+
+  const l17 = g('f_s9_l17');
+  const l19 = Math.max(0, l17 - 253414);
+  s('f_s9_l19', l19);
+
+  // Page 2
+  const amtE = l14;
+  s('f_s9_amtE', amtE);
+
+  const F = Math.min(l16, l19);
+  s('f_s9_l20F', F);
+  const l20 = F * 0.33;
+  s('f_s9_l20', l20);
+
+  const G = amtE - F;
+  s('f_s9_l21G', G);
+  const l21 = G * 0.29;
+  s('f_s9_l21', l21);
+
+  s('f_s9_l22H', l13);
+  const l22 = l13 * 0.145;
+  s('f_s9_l22', l22);
+
+  const l23 = l20 + l21 + l22;
+  s('f_s9_l23', l23);
+
+  localStorage.setItem('cra_s9_donations', l23.toString());
+  autoSave();
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcS9();
+  const el = document.getElementById('f_s9_l23');
+  const val = el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0;
+  localStorage.setItem('cra_s9_donations', val.toString());
+  window.location.href = ROOT + '/tax/t1?s9_donations=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+const S9_INPUT_IDS = ['f_s9_l1','f_s9_l2','f_s9_l3','f_s9_l4','f_s9_l11','f_s9_l15',
+                      'f_s9_amtB','f_s9_amtC','f_s9_l6A','f_s9_l17'];
+
+function getFormData() {
+  const data = {};
+  S9_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  S9_INPUT_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = String(data[id]);
+      fmtInput(el);
+    }
+  });
+  recalcS9();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem('cra_s9_autosave', JSON.stringify(data));
+  serverSave('schedule9', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'Schedule 9 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 'schedule9'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'schedule9');
+  if (!snap) { toast('No Schedule 9 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  S9_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  recalcS9();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  // Pre-fill net income from T1 localStorage if available
+  const urlP = new URLSearchParams(location.search);
+  if (urlP.has('net_income')) {
+    const el = document.getElementById('f_s9_l6A');
+    if (el) { el.value = urlP.get('net_income'); fmtInput(el); }
+  }
+  if (urlP.has('taxable_income')) {
+    const el = document.getElementById('f_s9_l17');
+    if (el) { el.value = urlP.get('taxable_income'); fmtInput(el); }
+  }
+
+  let loaded = false;
+  if (!urlP.has('net_income')) {
+    try {
+      const r = await fetch(ROOT + '/api/userdata/schedule9');
+      if (r.ok) {
+        const sd = await r.json();
+        if (sd && Object.keys(sd).length > 0) {
+          loadFormData(sd);
+          localStorage.setItem('cra_s9_autosave', JSON.stringify(sd));
+          loaded = true;
+        }
+      }
+    } catch(_) {}
+  }
+
+  if (!loaded) {
+    // Try to pre-fill from T1 localStorage
+    const t1data = JSON.parse(localStorage.getItem('cra_t1_autosave') || 'null');
+    if (t1data) {
+      const ni = document.getElementById('f_s9_l6A');
+      if (ni && !parseFloat(ni.value)) { ni.value = String(t1data[23600] || 0); fmtInput(ni); }
+      const ti = document.getElementById('f_s9_l17');
+      if (ti && !parseFloat(ti.value)) { ti.value = String(t1data[26000] || 0); fmtInput(ti); }
+    }
+    const saved = localStorage.getItem('cra_s9_autosave');
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcS9();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'schedule9');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcS9(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcS9());
+  });
+});
+</script>
+{% endblock %}

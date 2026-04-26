@@ -399,6 +399,252 @@ class BC428Result:
     line_42800:       float = 0.0    # Net BC tax
 
 
+# ── Schedule 9 Data Model ─────────────────────────────────────────────────────
+
+@dataclass
+class Schedule9Input:
+    """User-supplied fields on the 2025 Schedule 9 (5000-S9)."""
+
+    line_1: float = 0.0    # charitable org donations (current year)
+    line_2: float = 0.0    # govt/municipality donations
+    line_3: float = 0.0    # outside-Canada universities
+    line_4: float = 0.0    # UN/foreign charities
+    line_11: float = 0.0   # ecological/cultural gifts
+    line_15: float = 0.0   # ecological gifts 2014-2016
+    amt_B: float = 0.0     # depreciable capital property gifts
+    amt_C: float = 0.0     # other capital property gifts
+    net_income_23600: float = 0.0        # T1 line 23600
+    taxable_income_26000: float = 0.0   # T1 line 26000
+
+
+def calculate_schedule9(inp: Schedule9Input) -> dict[str, float]:
+    """
+    Compute all derived Schedule 9 lines from *inp*.
+
+    Returns a dict keyed by line identifier (matching the form).
+    line23 is the total charitable donations credit → T1 line 34900.
+    """
+    line5  = round(inp.line_1 + inp.line_2 + inp.line_3 + inp.line_4, 2)
+    line6A = round(inp.net_income_23600 * 0.75, 2)
+    line7D = round((inp.amt_B + inp.amt_C) * 0.25, 2)
+    line8  = round(line6A + line7D, 2)
+    line9  = round(min(line6A, line8), 2)
+    line10 = round(min(line5, line9), 2)
+    line12 = round(line10 + inp.line_11, 2)
+    line13 = round(min(line12, 200.0), 2)
+    line14 = round(line12 - line13, 2)
+    line16 = round(max(0.0, line14 - inp.line_15), 2)
+    line19 = round(max(0.0, inp.taxable_income_26000 - 253_414.0), 2)
+    f      = min(line16, line19)
+    line20 = round(f * 0.33, 2)
+    line21 = round((line14 - f) * 0.29, 2)
+    line22 = round(line13 * 0.145, 2)
+    line23 = round(line20 + line21 + line22, 2)
+
+    return {
+        "line5":  line5,
+        "line6A": line6A,
+        "line7D": line7D,
+        "line8":  line8,
+        "line9":  line9,
+        "line10": line10,
+        "line12": line12,
+        "line13": line13,
+        "line14": line14,
+        "line16": line16,
+        "line19": line19,
+        "line20": line20,
+        "line21": line21,
+        "line22": line22,
+        "line23": line23,
+    }
+
+
+# ── BC479 Data Model ──────────────────────────────────────────────────────────
+
+@dataclass
+class BC479Input:
+    """User-supplied fields on the 2025 BC479 (5010-TC)."""
+
+    # Sales tax credit — two-column income chart
+    line1_col1: float = 0.0   # net income (you)
+    line1_col2: float = 0.0   # net income (spouse)
+    line2_col1: float = 0.0   # UCCB/RDSP repayments (you)
+    line2_col2: float = 0.0   # UCCB/RDSP repayments (spouse)
+    line4_col1: float = 0.0   # UCCB/RDSP income (you)
+    line4_col2: float = 0.0   # UCCB/RDSP income (spouse)
+    has_spouse: bool = False   # True → $18,000 threshold; False → $15,000
+    # Home renovation (senior/disability)
+    line14_input: float = 0.0   # home renovation eligible expenses (max $10,000)
+    # Venture capital (simplified totals)
+    line17: float = 0.0
+    line18: float = 0.0
+    line21: float = 0.0
+    line23: float = 0.0
+    # Mining exploration
+    line26: float = 0.0
+    line27: float = 0.0
+    # Clean buildings
+    line28: float = 0.0
+    line29: float = 0.0
+    # Training tax credit
+    line31: float = 0.0
+    line32: float = 0.0
+    line33: float = 0.0
+    # Renter's tax credit
+    rental_months: int = 0
+    line39: float = 0.0   # adjusted family net income for renter's credit
+
+
+def calculate_bc479(inp: BC479Input) -> dict[str, float]:
+    """
+    Compute all derived BC479 lines from *inp*.
+
+    line45 is the total BC credits → T1 line 47900.
+    """
+    # ── Sales tax credit ─────────────────────────────────────────────
+    line3_col1 = round(inp.line1_col1 + inp.line2_col1, 2)
+    line3_col2 = round(inp.line1_col2 + inp.line2_col2, 2)
+    line5_col1 = round(max(0.0, line3_col1 - inp.line4_col1), 2)
+    line5_col2 = round(max(0.0, line3_col2 - inp.line4_col2), 2)
+    line6  = round(line5_col1 + line5_col2, 2)
+    line7  = 18_000.0 if inp.has_spouse else 15_000.0
+    line8  = round(max(0.0, line6 - line7), 2)
+    line9  = 75.0
+    line10 = 75.0 if inp.has_spouse else 0.0
+    line11 = round(line9 + line10, 2)
+    line12_credit = round(line8 * 0.02, 2)
+    line13 = round(max(0.0, line11 - line12_credit), 2)
+
+    # ── Home renovation (10 %) ────────────────────────────────────────
+    line14_result = round(min(inp.line14_input, 10_000.0) * 0.10, 2)
+    line15 = round(line13 + line14_result, 2)
+
+    # ── Carry-forward ────────────────────────────────────────────────
+    line16 = line15
+
+    # ── Venture capital (simplified: sum up input credits) ────────────
+    line25 = round(inp.line17 + inp.line18 + inp.line21 + inp.line23, 2)
+
+    # ── Mining exploration ────────────────────────────────────────────
+    line26 = inp.line26
+    line27 = inp.line27
+
+    # ── Clean buildings ───────────────────────────────────────────────
+    line30 = round(inp.line28 + inp.line29, 2)
+
+    # ── Training tax credit ───────────────────────────────────────────
+    line34 = round(inp.line31 + inp.line32 + inp.line33, 2)
+
+    # ── Subtotal ──────────────────────────────────────────────────────
+    line35 = round(line16 + line25 + line26 + line30 + line34, 2)
+
+    # ── Renter's tax credit ───────────────────────────────────────────
+    line36 = line35
+    line40 = 64_764.0
+    line41 = round(max(0.0, inp.line39 - line40), 2)
+    line43 = round(line41 * 0.02, 2)
+    line44 = round(max(0.0, 400.0 - line43), 2) if inp.rental_months > 0 else 0.0
+
+    # ── Total BC credits ──────────────────────────────────────────────
+    line45 = round(line36 + line44, 2)
+
+    return {
+        "line3_col1":  line3_col1,
+        "line3_col2":  line3_col2,
+        "line5_col1":  line5_col1,
+        "line5_col2":  line5_col2,
+        "line6":       line6,
+        "line7":       line7,
+        "line8":       line8,
+        "line9":       line9,
+        "line10":      line10,
+        "line11":      line11,
+        "line12_credit": line12_credit,
+        "line13":      line13,
+        "line14_result": line14_result,
+        "line15":      line15,
+        "line16":      line16,
+        "line25":      line25,
+        "line26":      line26,
+        "line27":      line27,
+        "line30":      line30,
+        "line34":      line34,
+        "line35":      line35,
+        "line36":      line36,
+        "line41":      line41,
+        "line43":      line43,
+        "line44":      line44,
+        "line45":      line45,
+    }
+
+
+# ── Schedule 3 Data Model ─────────────────────────────────────────────────────
+
+@dataclass
+class Schedule3Input:
+    """User-supplied fields on the 2025 Schedule 3 (5000-S3)."""
+
+    # 10 disposition rows: proceeds, adjusted cost base, outlays/expenses
+    proceeds: list[float] = field(default_factory=lambda: [0.0] * 10)
+    cost:     list[float] = field(default_factory=lambda: [0.0] * 10)
+    outlays:  list[float] = field(default_factory=lambda: [0.0] * 10)
+
+    # Part 4 additional gains/losses from other schedules
+    line13: float = 0.0   # additional gains (add)
+    line14: float = 0.0   # deductions (subtract)
+    line15: float = 0.0   # additional gains (add)
+    line16: float = 0.0   # deductions (subtract)
+    line17: float = 0.0   # additional gains (add)
+    line18: float = 0.0   # deductions (subtract)
+    line19: float = 0.0   # additional gains (add)
+    line20: float = 0.0   # deductions (subtract)
+
+    # Part 5
+    line23_deduction: float = 0.0   # capital gains deduction
+    line24_employee:  float = 0.0   # employee stock option deduction
+
+
+def calculate_schedule3(inp: Schedule3Input) -> dict[str, float]:
+    """
+    Compute all derived Schedule 3 lines from *inp*.
+
+    line26 is taxable capital gains (50 % inclusion) → T1 line 12700.
+    """
+    # ── Part 3: per-row gain/loss ─────────────────────────────────────
+    gain_loss = [
+        round(inp.proceeds[i] - inp.cost[i] - inp.outlays[i], 2)
+        for i in range(10)
+    ]
+    line11 = round(sum(gain_loss), 2)
+
+    # ── Part 4: net capital gains/losses ─────────────────────────────
+    line12 = line11
+    line21 = round(
+        line12
+        + inp.line13 - inp.line14
+        + inp.line15 - inp.line16
+        + inp.line17 - inp.line18
+        + inp.line19 - inp.line20,
+        2,
+    )
+
+    # ── Part 5: taxable capital gains ────────────────────────────────
+    line22 = round(max(0.0, line21), 2)
+    line25 = round(max(0.0, line22 - inp.line23_deduction - inp.line24_employee), 2)
+    line26 = round(line25 * 0.5, 2)
+
+    return {
+        "gain_loss": gain_loss,
+        "line11":    line11,
+        "line12":    line12,
+        "line21":    line21,
+        "line22":    line22,
+        "line25":    line25,
+        "line26":    line26,
+    }
+
+
 def calculate_bc428(
     inp: BC428Input,
     taxable_income: float,

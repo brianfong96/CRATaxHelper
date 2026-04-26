@@ -39,6 +39,12 @@ from app.calculator import (
     T1Input,
     calculate_bc428,
     calculate_t1,
+    Schedule9Input,
+    BC479Input,
+    Schedule3Input,
+    calculate_schedule9,
+    calculate_bc479,
+    calculate_schedule3,
 )
 from app.auth import get_current_user, require_auth_response
 from app.config import settings
@@ -184,6 +190,21 @@ async def bc428_form(request: Request):
     return templates.TemplateResponse("bc428.html", _ctx(request))
 
 
+@app.get("/tax/schedule9", response_class=HTMLResponse)
+async def schedule9_form(request: Request):
+    return templates.TemplateResponse("schedule9.html", _ctx(request))
+
+
+@app.get("/tax/bc479", response_class=HTMLResponse)
+async def bc479_form(request: Request):
+    return templates.TemplateResponse("bc479.html", _ctx(request))
+
+
+@app.get("/tax/schedule3", response_class=HTMLResponse)
+async def schedule3_form(request: Request):
+    return templates.TemplateResponse("schedule3.html", _ctx(request))
+
+
 @app.get("/tax/compare", response_class=HTMLResponse)
 async def compare(request: Request):
     return templates.TemplateResponse("compare.html", _ctx(request))
@@ -191,7 +212,7 @@ async def compare(request: Request):
 
 # ── User data API (server-side per-user persistence via Archive) ──────────────
 
-_ALLOWED_FORMS = {"t1", "bc428"}
+_ALLOWED_FORMS = {"t1", "bc428", "schedule9", "bc479", "schedule3"}
 
 
 @app.get("/api/userdata/{form}")

@@ -1,0 +1,686 @@
+[
+  {
+    "page": 1,
+    "count": 24,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line1[0].NumWithoutCurrency[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 28.409,
+        "width_pct": 13.235,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line1[0].NumWithoutCurrency2[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 28.409,
+        "width_pct": 13.235,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line2[0].Col1_Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 33.333,
+        "width_pct": 11.275,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line2[0].Col2_Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 33.333,
+        "width_pct": 11.275,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line3[0].Col1_Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 38.257,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line3[0].Col2_Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 38.257,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line4[0].Col1_Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 40.151,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line4[0].Col2_Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 40.151,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line5[0].Col1_Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 43.56,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line5[0].Col2_Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 43.56,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Chart[0].Line6[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 46.212,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line7[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 50.0,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line8[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 53.409,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line9[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 56.06,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line10[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 57.955,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line11[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 59.849,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line12[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 53.432,
+        "top_pct": 61.742,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line12[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 61.742,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line13[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 63.636,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].BCSHRTC[0].Line60890[0].CheckBox[0]",
+        "type": "CheckBox",
+        "left_pct": 73.366,
+        "top_pct": 73.8,
+        "width_pct": 2.124,
+        "height_pct": 1.641,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].BCSHRTC[0].Line14[0].Line60480[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 53.432,
+        "top_pct": 78.03,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].BCSHRTC[0].Line14[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 76.515,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].BCSHRTC[0].Line15[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 79.924,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      }
+    ]
+  },
+  {
+    "page": 2,
+    "count": 27,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line16[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 5.303,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line17[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 10.227,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line18[0].Note1[0]",
+        "type": "Button",
+        "left_pct": 22.059,
+        "top_pct": 16.288,
+        "width_pct": 5.882,
+        "height_pct": 1.515,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line18[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 13.636,
+        "width_pct": 11.275,
+        "height_pct": 5.97,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line19[0].Account_Number[0]",
+        "type": "Text",
+        "left_pct": 40.36,
+        "top_pct": 20.076,
+        "width_pct": 17.32,
+        "height_pct": 1.389,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line20[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 21.97,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line21[0].Note1[0]",
+        "type": "Button",
+        "left_pct": 41.176,
+        "top_pct": 25.379,
+        "width_pct": 5.882,
+        "height_pct": 1.515,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line21[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 23.864,
+        "width_pct": 13.235,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line22[0].Account_Number[0]",
+        "type": "Text",
+        "left_pct": 40.36,
+        "top_pct": 28.788,
+        "width_pct": 17.32,
+        "height_pct": 1.389,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line23[0].Note1[0]",
+        "type": "Button",
+        "left_pct": 50.981,
+        "top_pct": 31.818,
+        "width_pct": 5.882,
+        "height_pct": 1.515,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line23[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 30.682,
+        "width_pct": 11.275,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line24[0].Account_Number[0]",
+        "type": "Text",
+        "left_pct": 40.36,
+        "top_pct": 35.606,
+        "width_pct": 17.32,
+        "height_pct": 1.389,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line25[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 37.5,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCVCTC[0].Line25[0].I2[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 37.5,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCMETC[0].Line26[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 45.076,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCMETC[0].Line27[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 46.97,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCCBTC[0].Line28[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 51.894,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCCBTC[0].Line29[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 55.303,
+        "width_pct": 11.275,
+        "height_pct": 4.455,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCCBTC[0].Line30[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 60.227,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCCBTC[0].Line30[0].I2[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 60.227,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line31[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 66.667,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line32[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 68.561,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line33[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 70.455,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line34[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 73.864,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line34[0].I2[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 73.864,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].BCTTC[0].Line35[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 75.849,
+        "width_pct": 11.275,
+        "height_pct": 1.333,
+        "value": ""
+      }
+    ]
+  },
+  {
+    "page": 3,
+    "count": 23,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line36[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 5.303,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Headers[0].Note2[0]",
+        "type": "Button",
+        "left_pct": 28.432,
+        "top_pct": 22.727,
+        "width_pct": 5.882,
+        "height_pct": 1.515,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Headers[0].Note3[0]",
+        "type": "Button",
+        "left_pct": 41.667,
+        "top_pct": 22.727,
+        "width_pct": 5.882,
+        "height_pct": 1.515,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row1[0].Rentaladdress[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 24.712,
+        "width_pct": 21.333,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row1[0].Rentpaid[0]",
+        "type": "Text",
+        "left_pct": 25.608,
+        "top_pct": 24.712,
+        "width_pct": 11.039,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row1[0].Numberofmonths[0]",
+        "type": "Text",
+        "left_pct": 36.882,
+        "top_pct": 24.712,
+        "width_pct": 15.941,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row1[0].Nameoflandlord[0]",
+        "type": "Text",
+        "left_pct": 53.059,
+        "top_pct": 24.712,
+        "width_pct": 22.314,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row2[0].Rentaladdress[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 26.227,
+        "width_pct": 21.333,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row2[0].Rentpaid[0]",
+        "type": "Text",
+        "left_pct": 25.608,
+        "top_pct": 26.227,
+        "width_pct": 11.039,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row2[0].Numberofmonths[0]",
+        "type": "Text",
+        "left_pct": 36.882,
+        "top_pct": 26.227,
+        "width_pct": 15.941,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Declaration-For-Renters[0].Table[0].Row2[0].Nameoflandlord[0]",
+        "type": "Text",
+        "left_pct": 53.059,
+        "top_pct": 26.227,
+        "width_pct": 22.314,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line37[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 33.712,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line38[0].Amount_ReadOnly[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 44.697,
+        "width_pct": 13.235,
+        "height_pct": 1.515,
+        "value": " 400.00"
+      },
+      {
+        "name": "form1[0].Page3[0].Line39[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 44.608,
+        "top_pct": 46.591,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line40[0].AmountRead_Only[0]",
+        "type": "Text",
+        "left_pct": 46.569,
+        "top_pct": 50.0,
+        "width_pct": 11.275,
+        "height_pct": 1.515,
+        "value": " 64,764.00"
+      },
+      {
+        "name": "form1[0].Page3[0].Line41[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 46.569,
+        "top_pct": 51.894,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line42[0].PercentAmount_ReadOnly[0]",
+        "type": "Text",
+        "left_pct": 46.569,
+        "top_pct": 53.788,
+        "width_pct": 11.275,
+        "height_pct": 1.515,
+        "value": "2%"
+      },
+      {
+        "name": "form1[0].Page3[0].Line43[0].L1[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 46.569,
+        "top_pct": 55.682,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line43[0].L2[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 55.682,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line44[0].I1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 64.216,
+        "top_pct": 57.576,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line44[0].I2[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 57.576,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line45[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 59.56,
+        "width_pct": 11.275,
+        "height_pct": 2.849,
+        "value": ""
+      }
+    ]
+  }
+]

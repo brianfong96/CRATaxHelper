@@ -407,3 +407,232 @@ class TestIntegration:
             line_10100=80_000, line_20800=15_000, line_30000=16_129
         ))
         assert with_rrsp.line_40424 <= base.line_40424
+
+
+# ── Schedule 9 calculate_schedule9 ────────────────────────────────────────────
+
+from app.calculator import Schedule9Input, calculate_schedule9
+
+
+class TestCalculateSchedule9:
+    def _calc(self, **kwargs):
+        return calculate_schedule9(Schedule9Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["line5"]  == 0.0
+        assert r["line23"] == 0.0
+
+    def test_line5_sum(self):
+        r = self._calc(line_1=100, line_2=200, line_3=50, line_4=150)
+        assert r["line5"] == pytest.approx(500.0, abs=0.01)
+
+    def test_line6A_is_75pct_of_net_income(self):
+        r = self._calc(net_income_23600=80_000)
+        assert r["line6A"] == pytest.approx(60_000.0, abs=0.01)
+
+    def test_line7D_is_25pct_of_b_plus_c(self):
+        r = self._calc(amt_B=10_000, amt_C=6_000)
+        assert r["line7D"] == pytest.approx(4_000.0, abs=0.01)
+
+    def test_line13_capped_at_200(self):
+        # With a small donation (e.g. $100), line12 < 200 → line13 = line12
+        r = self._calc(line_1=100, net_income_23600=50_000)
+        assert r["line13"] == pytest.approx(100.0, abs=0.01)
+        # Larger: always capped at 200
+        r2 = self._calc(line_1=1000, net_income_23600=50_000)
+        assert r2["line13"] == pytest.approx(200.0, abs=0.01)
+
+    def test_line19_excess_over_threshold(self):
+        # Taxable income = 300,000 → 300,000 - 253,414 = 46,586
+        r = self._calc(taxable_income_26000=300_000)
+        assert r["line19"] == pytest.approx(46_586.0, abs=0.01)
+
+    def test_line19_zero_when_below_threshold(self):
+        r = self._calc(taxable_income_26000=100_000)
+        assert r["line19"] == 0.0
+
+    def test_line23_composite_calculation(self):
+        """$1,000 charity donation, $80,000 net income, $90,000 taxable income."""
+        r = self._calc(
+            line_1=1_000,
+            net_income_23600=80_000,
+            taxable_income_26000=90_000,
+        )
+        # line5=1000, line6A=60000, line8=60000, line9=min(60000,60000)=60000
+        # line10=min(1000,60000)=1000, line12=1000, line13=200, line14=800
+        # line16=max(0,800-0)=800, line19=0 (90000<253414)
+        # F=min(800,0)=0 → line20=0×0.33=0
+        # G=800-0=800 → line21=800×0.29=232
+        # line22=200×0.145=29, line23=0+232+29=261
+        assert r["line23"] == pytest.approx(261.0, abs=0.01)
+
+    def test_line23_high_income_uses_33pct_rate(self):
+        """With taxable income above threshold, some of line14 is taxed at 33%."""
+        r = self._calc(
+            line_1=50_000,
+            net_income_23600=400_000,
+            taxable_income_26000=400_000,
+        )
+        # line19 = 400000 - 253414 = 146586
+        # line6A = 300000, line10 = min(50000, 300000) = 50000
+        # line12 = 50000, line13 = 200, line14 = 49800
+        # line16 = 49800 (no line15), F = min(49800, 146586) = 49800
+        # line20 = 49800 × 0.33 = 16434
+        # G = 49800 - 49800 = 0 → line21 = 0
+        # line22 = 200 × 0.145 = 29
+        assert r["line20"] == pytest.approx(49_800 * 0.33, abs=0.01)
+        assert r["line21"] == pytest.approx(0.0, abs=0.01)
+
+
+# ── BC479 calculate_bc479 ──────────────────────────────────────────────────────
+
+from app.calculator import BC479Input, calculate_bc479
+
+
+class TestCalculateBC479:
+    def _calc(self, **kwargs):
+        return calculate_bc479(BC479Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["line13"] == pytest.approx(75.0, abs=0.01)  # basic $75, no reduction
+        assert r["line45"] == pytest.approx(75.0, abs=0.01)
+
+    def test_sales_tax_credit_no_spouse(self):
+        # Single, $15,000 threshold; line6=0 → line8=0 → line12=0 → line13=75
+        r = self._calc(has_spouse=False)
+        assert r["line9"]  == pytest.approx(75.0, abs=0.01)
+        assert r["line10"] == pytest.approx(0.0,  abs=0.01)
+        assert r["line11"] == pytest.approx(75.0, abs=0.01)
+
+    def test_sales_tax_credit_with_spouse(self):
+        r = self._calc(has_spouse=True)
+        assert r["line10"] == pytest.approx(75.0, abs=0.01)
+        assert r["line11"] == pytest.approx(150.0, abs=0.01)
+
+    def test_line13_reduces_when_income_high(self):
+        # line6 = 50,000 (single, threshold 15,000) → line8=35,000 → line12=700
+        # line13 = max(0, 75 - 700) = 0
+        r = self._calc(line1_col1=50_000, has_spouse=False)
+        assert r["line13"] == pytest.approx(0.0, abs=0.01)
+
+    def test_home_reno_10pct(self):
+        r = self._calc(line14_input=5_000)
+        assert r["line14_result"] == pytest.approx(500.0, abs=0.01)
+
+    def test_home_reno_capped_at_10000(self):
+        r = self._calc(line14_input=20_000)
+        assert r["line14_result"] == pytest.approx(1_000.0, abs=0.01)
+
+    def test_renter_credit_no_months(self):
+        r = self._calc(rental_months=0, line39=40_000)
+        assert r["line44"] == pytest.approx(0.0, abs=0.01)
+
+    def test_renter_credit_low_income(self):
+        # income 40,000 < 64,764 → line41=0 → line43=0 → line44=400
+        r = self._calc(rental_months=12, line39=40_000)
+        assert r["line44"] == pytest.approx(400.0, abs=0.01)
+
+    def test_renter_credit_partial_reduction(self):
+        # income 74,764 → line41=10,000 → line43=200 → line44=200
+        r = self._calc(rental_months=12, line39=74_764)
+        assert r["line44"] == pytest.approx(200.0, abs=0.01)
+
+    def test_line45_sums_credits(self):
+        r = self._calc(rental_months=12, line39=40_000)
+        assert r["line45"] == pytest.approx(r["line36"] + r["line44"], abs=0.01)
+
+
+# ── Schedule 3 calculate_schedule3 ────────────────────────────────────────────
+
+from app.calculator import Schedule3Input, calculate_schedule3
+
+
+class TestCalculateSchedule3:
+    def test_zero_input(self):
+        r = calculate_schedule3(Schedule3Input())
+        assert r["line11"] == 0.0
+        assert r["line26"] == 0.0
+
+    def test_single_row_gain(self):
+        inp = Schedule3Input(
+            proceeds=[10_000] + [0]*9,
+            cost=[6_000] + [0]*9,
+            outlays=[500] + [0]*9,
+        )
+        r = calculate_schedule3(inp)
+        assert r["gain_loss"][0] == pytest.approx(3_500.0, abs=0.01)
+        assert r["line11"] == pytest.approx(3_500.0, abs=0.01)
+
+    def test_single_row_loss(self):
+        inp = Schedule3Input(
+            proceeds=[5_000] + [0]*9,
+            cost=[8_000] + [0]*9,
+            outlays=[200] + [0]*9,
+        )
+        r = calculate_schedule3(inp)
+        assert r["gain_loss"][0] == pytest.approx(-3_200.0, abs=0.01)
+        assert r["line11"] == pytest.approx(-3_200.0, abs=0.01)
+
+    def test_multiple_rows_summed(self):
+        inp = Schedule3Input(
+            proceeds=[10_000, 20_000] + [0]*8,
+            cost=[6_000, 12_000] + [0]*8,
+            outlays=[0, 0] + [0]*8,
+        )
+        r = calculate_schedule3(inp)
+        assert r["line11"] == pytest.approx(12_000.0, abs=0.01)
+
+    def test_line21_net_with_part4_entries(self):
+        inp = Schedule3Input(
+            proceeds=[10_000] + [0]*9,
+            cost=[0]*10,
+            outlays=[0]*10,
+            line13=2_000,
+            line14=500,
+        )
+        r = calculate_schedule3(inp)
+        # line12=10000, line21=10000+2000-500=11500
+        assert r["line21"] == pytest.approx(11_500.0, abs=0.01)
+
+    def test_line22_floored_at_zero(self):
+        # Net loss: line21 < 0 → line22 = 0
+        inp = Schedule3Input(
+            proceeds=[0]*10,
+            cost=[10_000] + [0]*9,
+            outlays=[0]*10,
+        )
+        r = calculate_schedule3(inp)
+        assert r["line22"] == 0.0
+
+    def test_line26_taxable_at_50pct(self):
+        inp = Schedule3Input(
+            proceeds=[20_000] + [0]*9,
+            cost=[0]*10,
+            outlays=[0]*10,
+        )
+        r = calculate_schedule3(inp)
+        assert r["line26"] == pytest.approx(10_000.0, abs=0.01)
+
+    def test_deductions_reduce_line25(self):
+        inp = Schedule3Input(
+            proceeds=[20_000] + [0]*9,
+            cost=[0]*10,
+            outlays=[0]*10,
+            line23_deduction=5_000,
+        )
+        r = calculate_schedule3(inp)
+        assert r["line25"] == pytest.approx(15_000.0, abs=0.01)
+        assert r["line26"] == pytest.approx(7_500.0, abs=0.01)
+
+    def test_line25_floored_at_zero(self):
+        inp = Schedule3Input(
+            proceeds=[20_000] + [0]*9,
+            cost=[0]*10,
+            outlays=[0]*10,
+            line23_deduction=30_000,
+        )
+        r = calculate_schedule3(inp)
+        assert r["line25"] == 0.0
+        assert r["line26"] == 0.0

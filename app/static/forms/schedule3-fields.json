@@ -1,0 +1,1124 @@
+[
+  {
+    "page": 1,
+    "count": 3,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].LIine17905[0].Line17905[0].RadioButtonGroup[0]",
+        "type": "RadioButton",
+        "left_pct": 81.863,
+        "top_pct": 71.402,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": "Off"
+      },
+      {
+        "name": "form1[0].Page1[0].LIine17905[0].Line17905[0].RadioButtonGroup[0]",
+        "type": "RadioButton",
+        "left_pct": 89.216,
+        "top_pct": 71.402,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": "Off"
+      }
+    ]
+  },
+  {
+    "page": 2,
+    "count": 13,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[0]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 9.47,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[1]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 11.364,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[2]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 14.773,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[3]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 17.929,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[4]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 19.823,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[5]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 21.591,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[6]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 26.263,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[7]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 28.157,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line17906[0].CheckBox[8]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 29.924,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Part2[0].line17900[0].Line17900[0].Line179_CheckBox[0]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 66.667,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Part2[0].line17900[0].Line17900[0].Line179_CheckBox[1]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 70.202,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Part2[0].line17900[0].Line17900[0].Line179_CheckBox[2]",
+        "type": "CheckBox",
+        "left_pct": 12.255,
+        "top_pct": 72.096,
+        "width_pct": 1.634,
+        "height_pct": 1.263,
+        "value": ""
+      }
+    ]
+  },
+  {
+    "page": 3,
+    "count": 90,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_Number[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 17.515,
+        "width_pct": 6.137,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_NameOfCorp[0]",
+        "type": "Text",
+        "left_pct": 10.412,
+        "top_pct": 17.515,
+        "width_pct": 24.275,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_AcquisitionYear1[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 17.515,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 17.515,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 17.515,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 17.515,
+        "width_pct": 12.51,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Table[0].S1_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 17.515,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Line10699[0].S1_Line10699Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 19.318,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line1[0].Line1[0].S3_Line10700Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 19.318,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_Address[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 25.091,
+        "width_pct": 23.784,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].Province_EN1[0].S2_Province_Comb[0]",
+        "type": "Text",
+        "left_pct": 28.059,
+        "top_pct": 25.091,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_AcquisitionYear1[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 25.091,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_ProceedsOfDisposition1[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 25.091,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_CostBaseLine1[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 25.091,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_Outlays1[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 25.091,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Table[0].S2_GainOrLoss1[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 25.091,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Line10999[0].S2_Line10999Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 26.894,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line2[0].Line2[0].S2_Line11000Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 26.894,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2A_Address[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 32.666,
+        "width_pct": 23.784,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].Province_EN2[0].S2A_Province_Comb[0]",
+        "type": "Text",
+        "left_pct": 28.059,
+        "top_pct": 32.666,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2_AcquisitionYear3[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 32.666,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2_ProceedsOfDisposition3[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 32.666,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2_CostBase3[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 32.666,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2_Outlays3[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 32.666,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Table[0].S2_GainOrLoss3[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 32.666,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Line12399[0].S2A_Line12399Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 34.47,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line3[0].Line3[0].S3_Line12400Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 34.47,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_Number[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 40.242,
+        "width_pct": 6.137,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_NameOfFund[0]",
+        "type": "Text",
+        "left_pct": 10.412,
+        "top_pct": 40.242,
+        "width_pct": 24.275,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 40.242,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 40.242,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 40.242,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 40.242,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Table[0].S3_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 40.242,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Line13199[0].S3_Line13199Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 42.045,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line4[0].Line4[0].S3_Line13200Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 42.045,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_Address[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 47.818,
+        "width_pct": 23.784,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].Province_EN[0].S4_Province_Comb[0]",
+        "type": "Text",
+        "left_pct": 28.059,
+        "top_pct": 47.818,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 47.818,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 47.818,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 47.818,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 47.818,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Table[0].S4_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 47.818,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Line13599[0].S4_Line13599Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 49.621,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line5[0].Line5[0].S4_Line13800Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 49.621,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_FaceValue[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 55.394,
+        "width_pct": 8.588,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_Maturitydate[0]",
+        "type": "Text",
+        "left_pct": 12.863,
+        "top_pct": 55.394,
+        "width_pct": 10.549,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_NameOfIssuer[0]",
+        "type": "Text",
+        "left_pct": 23.647,
+        "top_pct": 55.394,
+        "width_pct": 11.039,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 55.394,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 55.394,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 55.394,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 55.394,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Table[0].S5_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 55.394,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Line15199[0].S5_Line15199Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 57.197,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line6[0].Line6[0].S5_Line15300Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 57.197,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S6_Address[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 62.97,
+        "width_pct": 19.372,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S3_Number[0]",
+        "type": "Text",
+        "left_pct": 23.647,
+        "top_pct": 62.97,
+        "width_pct": 11.039,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S5_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 62.97,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S5_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 62.97,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S5_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 62.97,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S5_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 62.97,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Table[0].S5_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 62.97,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Line15199[0].S5_Line15199Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 64.773,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line7[0].Line6[0].S5_Line15300Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 64.773,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_Address[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 70.545,
+        "width_pct": 23.784,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].Province_EN[0].S6_Province_Comb[0]",
+        "type": "Text",
+        "left_pct": 28.059,
+        "top_pct": 70.545,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 70.545,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 70.545,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 70.545,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 70.545,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Table[0].S6_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 70.545,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Line15499[0].S6_Line15499Amount[0]",
+        "type": "Text",
+        "left_pct": 41.667,
+        "top_pct": 72.348,
+        "width_pct": 12.745,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line8[0].Line7[0].S6_Line15500Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 72.348,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_Description[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 78.121,
+        "width_pct": 30.647,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 78.121,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 78.121,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 78.121,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 78.121,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Table[0].S7_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 78.121,
+        "width_pct": 13.0,
+        "height_pct": 1.333,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line9[0].Line8[0].S7_Line15800Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 79.924,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_Description[0]",
+        "type": "Text",
+        "left_pct": 4.039,
+        "top_pct": 85.697,
+        "width_pct": 30.647,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_AcquisitionYear[0]",
+        "type": "Text",
+        "left_pct": 34.922,
+        "top_pct": 85.697,
+        "width_pct": 6.628,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_ProceedsOfDisposition[0]",
+        "type": "Text",
+        "left_pct": 41.785,
+        "top_pct": 85.697,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_CostBase[0]",
+        "type": "Text",
+        "left_pct": 54.529,
+        "top_pct": 85.697,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_Outlays[0]",
+        "type": "Text",
+        "left_pct": 67.275,
+        "top_pct": 85.697,
+        "width_pct": 12.51,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Table[0].S9_GainOrLoss[0]",
+        "type": "Text",
+        "left_pct": 80.02,
+        "top_pct": 85.697,
+        "width_pct": 13.0,
+        "height_pct": 1.334,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Losses[0].S9_LPPLoss[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 87.5,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line10[0].Line10[0].S9_Line15900Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 89.394,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page3[0].Line11[0].Line10Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 91.288,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      }
+    ]
+  },
+  {
+    "page": 4,
+    "count": 16,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line12[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 9.47,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line13[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 11.364,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line14[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 14.773,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line15[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 16.667,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line16[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 18.561,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line17[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 20.455,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line18[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 22.349,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line19[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 24.243,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].line20[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 27.652,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part4[0].Line21[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 29.545,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part5[0].Line22[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 37.5,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part5[0].Line23[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 39.394,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": "50%"
+      },
+      {
+        "name": "form1[0].Page4[0].Part5[0].Line24[0].Amount2[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 41.288,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part5[0].Line25[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 43.182,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page4[0].Part5[0].Line26[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 46.682,
+        "width_pct": 11.275,
+        "height_pct": 4.364,
+        "value": ""
+      }
+    ]
+  }
+]

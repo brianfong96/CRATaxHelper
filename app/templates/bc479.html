@@ -1,0 +1,607 @@
+{% extends "base.html" %}
+{% block title %}BC479 &mdash; British Columbia Credits 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-checkbox {
+  position: absolute;
+  width: 2.124%;
+  height: 1.641%;
+}
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">BC479 &mdash; British Columbia Credits</div>
+      <div class="form-subtitle">Form 5010-TC &nbsp;&middot;&nbsp; BC residents</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5010-TC-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5010-tc/5010-tc-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA BC479 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+    <span>
+      <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="has_spouse" onchange="recalcBC479()">
+        Married or common-law partner
+      </label>
+    </span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc479_page1.png" alt="BC479 Page 1">
+
+    <!-- Line 1: net income — you / spouse -->
+    <input type="text" data-numeric="1" id="f_bc479_l1c1" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:28.409%;width:13.235%;height:4.455%;">
+    <input type="text" data-numeric="1" id="f_bc479_l1c2" class="pdf-input" value="" inputmode="decimal"
+           style="left:79.902%;top:28.409%;width:13.235%;height:4.455%;">
+
+    <!-- Line 2: UCCB/RDSP repayments — you / spouse -->
+    <input type="text" data-numeric="1" id="f_bc479_l2c1" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:33.333%;width:11.275%;height:4.455%;">
+    <input type="text" data-numeric="1" id="f_bc479_l2c2" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:33.333%;width:11.275%;height:4.455%;">
+
+    <!-- Line 3: subtotal (1+2) — readonly -->
+    <input type="text" id="f_bc479_l3c1" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:38.257%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l3c2" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:38.257%;width:11.275%;height:1.424%;">
+
+    <!-- Line 4: UCCB/RDSP income — you / spouse -->
+    <input type="text" data-numeric="1" id="f_bc479_l4c1" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:40.151%;width:11.275%;height:2.94%;">
+    <input type="text" data-numeric="1" id="f_bc479_l4c2" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:40.151%;width:11.275%;height:2.94%;">
+
+    <!-- Line 5: adjusted (3-4) — readonly -->
+    <input type="text" id="f_bc479_l5c1" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:43.56%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l5c2" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:43.56%;width:11.275%;height:1.424%;">
+
+    <!-- Line 6: sum of col1+col2 line5 — readonly -->
+    <input type="text" id="f_bc479_l6" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:46.212%;width:13.235%;height:1.424%;">
+
+    <!-- Line 7: household threshold (user enters $15,000 or $18,000) -->
+    <input type="text" data-numeric="1" id="f_bc479_l7" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:50.0%;width:11.275%;height:2.94%;">
+
+    <!-- Line 8: 6-7 — readonly -->
+    <input type="text" id="f_bc479_l8" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:53.409%;width:11.275%;height:1.424%;">
+
+    <!-- Line 9: basic $75 credit — readonly pre-filled -->
+    <input type="text" id="f_bc479_l9" class="pdf-input" readonly value="75"
+           style="left:79.902%;top:56.06%;width:13.235%;height:1.424%;">
+
+    <!-- Line 10: spouse $75 — readonly -->
+    <input type="text" id="f_bc479_l10" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:57.955%;width:11.275%;height:1.424%;">
+
+    <!-- Line 11: 9+10 — readonly -->
+    <input type="text" id="f_bc479_l11" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:59.849%;width:11.275%;height:1.424%;">
+
+    <!-- Line 12: 2% calc input + result -->
+    <input type="text" id="f_bc479_l12inp" class="pdf-input" readonly value="0.00"
+           style="left:53.432%;top:61.742%;width:13.235%;height:1.424%;">
+    <input type="text" id="f_bc479_l12" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:61.742%;width:11.275%;height:1.424%;">
+
+    <!-- Line 13: sales tax credit 11-12 — readonly -->
+    <input type="text" id="f_bc479_l13" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:63.636%;width:11.275%;height:1.424%;">
+
+    <!-- 60890 checkbox: home renovation seniors/disability -->
+    <input type="checkbox" id="f_bc479_60890" class="pdf-checkbox" onchange="recalcBC479()"
+           style="left:73.366%;top:73.8%;">
+
+    <!-- Line 14: home renovation expenses input + 10% result -->
+    <input type="text" data-numeric="1" id="f_bc479_l14inp" class="pdf-input" value="" inputmode="decimal"
+           style="left:53.432%;top:78.03%;width:13.235%;height:1.424%;">
+    <input type="text" id="f_bc479_l14" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:76.515%;width:11.275%;height:2.94%;">
+
+    <!-- Line 15: 13+14 — readonly -->
+    <input type="text" id="f_bc479_l15" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc479_page2.png" alt="BC479 Page 2">
+
+    <!-- Line 16: carry from 15 — readonly -->
+    <input type="text" id="f_bc479_l16" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:5.303%;width:13.235%;height:1.424%;">
+
+    <!-- BCVCTC — venture capital credits -->
+    <input type="text" data-numeric="1" id="f_bc479_l17" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:10.227%;width:13.235%;height:2.94%;">
+    <input type="text" data-numeric="1" id="f_bc479_l18" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:13.636%;width:11.275%;height:5.97%;">
+    <input type="text" data-numeric="1" id="f_bc479_l21" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:23.864%;width:13.235%;height:4.455%;">
+    <input type="text" data-numeric="1" id="f_bc479_l23" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:30.682%;width:11.275%;height:4.455%;">
+    <!-- Line 25: venture capital subtotal -->
+    <input type="text" id="f_bc479_l25inp" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:37.5%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l25" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:37.5%;width:11.275%;height:1.424%;">
+
+    <!-- BCMETC — mining exploration -->
+    <input type="text" data-numeric="1" id="f_bc479_l26" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:45.076%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc479_l27" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:46.97%;width:13.235%;height:1.424%;">
+
+    <!-- BCCBTC — clean buildings -->
+    <input type="text" data-numeric="1" id="f_bc479_l28" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:51.894%;width:13.235%;height:2.94%;">
+    <input type="text" data-numeric="1" id="f_bc479_l29" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:55.303%;width:11.275%;height:4.455%;">
+    <!-- Line 30: clean buildings subtotal -->
+    <input type="text" id="f_bc479_l30inp" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:60.227%;width:11.275%;height:2.94%;">
+    <input type="text" id="f_bc479_l30" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:60.227%;width:11.275%;height:2.94%;">
+
+    <!-- BCTTC — training tax credit -->
+    <input type="text" data-numeric="1" id="f_bc479_l31" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:66.667%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc479_l32" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:68.561%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_bc479_l33" class="pdf-input" value="" inputmode="decimal"
+           style="left:64.216%;top:70.455%;width:11.275%;height:2.94%;">
+    <!-- Line 34: training subtotal -->
+    <input type="text" id="f_bc479_l34inp" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:73.864%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l34" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:73.864%;width:11.275%;height:1.424%;">
+
+    <!-- Line 35: page subtotal — readonly -->
+    <input type="text" id="f_bc479_l35" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:75.849%;width:11.275%;height:1.333%;">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc479_page3.png" alt="BC479 Page 3">
+
+    <!-- Line 36: carry from 35 — readonly -->
+    <input type="text" id="f_bc479_l36" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:5.303%;width:13.235%;height:1.424%;">
+
+    <!-- Line 37: total months rented -->
+    <input type="text" data-numeric="1" id="f_bc479_l37" class="pdf-input" value="" inputmode="decimal"
+           style="left:62.255%;top:33.712%;width:13.235%;height:2.94%;">
+
+    <!-- Line 38: max $400 credit — readonly -->
+    <input type="text" id="f_bc479_l38" class="pdf-input" readonly value="400"
+           style="left:62.255%;top:44.697%;width:13.235%;height:1.515%;">
+
+    <!-- Line 39: adjusted family net income -->
+    <input type="text" data-numeric="1" id="f_bc479_l39" class="pdf-input" value="" inputmode="decimal"
+           style="left:44.608%;top:46.591%;width:13.235%;height:2.94%;">
+
+    <!-- Line 40: income threshold $64,764 — readonly -->
+    <input type="text" id="f_bc479_l40" class="pdf-input" readonly value="64,764"
+           style="left:46.569%;top:50.0%;width:11.275%;height:1.515%;">
+
+    <!-- Line 41: 39-40 — readonly -->
+    <input type="text" id="f_bc479_l41" class="pdf-input" readonly value="0.00"
+           style="left:46.569%;top:51.894%;width:11.275%;height:1.424%;">
+
+    <!-- Line 42: 2% rate — readonly -->
+    <input type="text" id="f_bc479_l42" class="pdf-input" readonly value="2%"
+           style="left:46.569%;top:53.788%;width:11.275%;height:1.515%;">
+
+    <!-- Line 43: 41×2% -->
+    <input type="text" id="f_bc479_l43inp" class="pdf-input" readonly value="0.00"
+           style="left:46.569%;top:55.682%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l43" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:55.682%;width:11.275%;height:1.424%;">
+
+    <!-- Line 44: actual renter credit -->
+    <input type="text" id="f_bc479_l44inp" class="pdf-input" readonly value="0.00"
+           style="left:64.216%;top:57.576%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_bc479_l44" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:57.576%;width:11.275%;height:1.424%;">
+
+    <!-- Line 45: total BC credits → T1 line 47900 — readonly -->
+    <input type="text" id="f_bc479_l45" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:59.56%;width:11.275%;height:2.849%;">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) { const el = document.getElementById(id); return el ? Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
+
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const span = el.parentElement
+    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
+    : null;
+  if (span) span.textContent = '.' + cents;
+}
+
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function editInput(el) {
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
+  el.value = raw === 0 ? '' : String(raw);
+}
+
+// Split each amount input into dollar portion (80%) + cents span (20%)
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const span = document.createElement('span');
+    span.className = 'cents-display';
+    span.dataset.for = inp.id;
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+    span.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:none;` +
+      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
+      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
+      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
+    span.textContent = '.' + initCents;
+    inp.parentElement.appendChild(span);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcBC479() {
+  const hasSpouse = document.getElementById('has_spouse').checked;
+
+  // Sales tax credit — two-column chart
+  const l1c1 = g('f_bc479_l1c1'), l1c2 = g('f_bc479_l1c2');
+  const l2c1 = g('f_bc479_l2c1'), l2c2 = g('f_bc479_l2c2');
+  const l3c1 = l1c1 + l2c1, l3c2 = l1c2 + l2c2;
+  s('f_bc479_l3c1', l3c1); s('f_bc479_l3c2', l3c2);
+
+  const l4c1 = g('f_bc479_l4c1'), l4c2 = g('f_bc479_l4c2');
+  const l5c1 = Math.max(0, l3c1 - l4c1), l5c2 = Math.max(0, l3c2 - l4c2);
+  s('f_bc479_l5c1', l5c1); s('f_bc479_l5c2', l5c2);
+
+  const l6 = l5c1 + l5c2;
+  s('f_bc479_l6', l6);
+
+  // Auto-set line 7 threshold if user hasn't entered one
+  const l7El = document.getElementById('f_bc479_l7');
+  let l7 = g('f_bc479_l7');
+  if (l7 === 0) {
+    l7 = hasSpouse ? 18000 : 15000;
+    if (l7El) { l7El.value = String(l7); fmtInput(l7El); }
+  }
+
+  const l8 = Math.max(0, l6 - l7);
+  s('f_bc479_l8', l8);
+
+  const l9 = 75;
+  s('f_bc479_l9', l9);
+  const l10 = hasSpouse ? 75 : 0;
+  s('f_bc479_l10', l10);
+  const l11 = l9 + l10;
+  s('f_bc479_l11', l11);
+
+  s('f_bc479_l12inp', l8);
+  const l12 = l8 * 0.02;
+  s('f_bc479_l12', l12);
+
+  const l13 = Math.max(0, l11 - l12);
+  s('f_bc479_l13', l13);
+
+  // Home renovation (10%)
+  const reno60890 = document.getElementById('f_bc479_60890').checked;
+  const l14inp = reno60890 ? g('f_bc479_l14inp') : 0;
+  const l14 = Math.min(l14inp, 10000) * 0.10;
+  s('f_bc479_l14', l14);
+
+  const l15 = l13 + l14;
+  s('f_bc479_l15', l15);
+
+  // Page 2
+  const l16 = l15;
+  s('f_bc479_l16', l16);
+
+  // Venture capital
+  const l17 = g('f_bc479_l17'), l18 = g('f_bc479_l18');
+  const l21 = g('f_bc479_l21'), l23 = g('f_bc479_l23');
+  const l25 = l17 + l18 + l21 + l23;
+  s('f_bc479_l25inp', l25); s('f_bc479_l25', l25);
+
+  // Mining
+  const l26 = g('f_bc479_l26');
+  const l27 = g('f_bc479_l27');
+
+  // Clean buildings
+  const l28 = g('f_bc479_l28'), l29 = g('f_bc479_l29');
+  const l30 = l28 + l29;
+  s('f_bc479_l30inp', l30); s('f_bc479_l30', l30);
+
+  // Training
+  const l31 = g('f_bc479_l31'), l32 = g('f_bc479_l32'), l33 = g('f_bc479_l33');
+  const l34 = l31 + l32 + l33;
+  s('f_bc479_l34inp', l34); s('f_bc479_l34', l34);
+
+  const l35 = l16 + l25 + l26 + l30 + l34;
+  s('f_bc479_l35', l35);
+
+  // Page 3 — Renter's credit
+  const l36 = l35;
+  s('f_bc479_l36', l36);
+
+  const rentalMonths = g('f_bc479_l37');
+  const l39 = g('f_bc479_l39');
+  const l40 = 64764;
+  const l41 = Math.max(0, l39 - l40);
+  s('f_bc479_l41', l41);
+
+  const l43 = l41 * 0.02;
+  s('f_bc479_l43inp', l43); s('f_bc479_l43', l43);
+
+  const l44 = (rentalMonths > 0) ? Math.max(0, 400 - l43) : 0;
+  s('f_bc479_l44inp', l44); s('f_bc479_l44', l44);
+
+  const l45 = l36 + l44;
+  s('f_bc479_l45', l45);
+
+  localStorage.setItem('cra_bc479_credits', l45.toString());
+  autoSave();
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcBC479();
+  const el = document.getElementById('f_bc479_l45');
+  const val = el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0;
+  localStorage.setItem('cra_bc479_credits', val.toString());
+  window.location.href = ROOT + '/tax/t1?bc479_credits=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+const BC479_INPUT_IDS = [
+  'f_bc479_l1c1','f_bc479_l1c2','f_bc479_l2c1','f_bc479_l2c2',
+  'f_bc479_l4c1','f_bc479_l4c2','f_bc479_l7','f_bc479_l14inp',
+  'f_bc479_l17','f_bc479_l18','f_bc479_l21','f_bc479_l23',
+  'f_bc479_l26','f_bc479_l27','f_bc479_l28','f_bc479_l29',
+  'f_bc479_l31','f_bc479_l32','f_bc479_l33',
+  'f_bc479_l37','f_bc479_l39'
+];
+
+function getFormData() {
+  const data = {
+    has_spouse: document.getElementById('has_spouse').checked,
+    reno60890: document.getElementById('f_bc479_60890').checked,
+  };
+  BC479_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  if (data.has_spouse !== undefined) document.getElementById('has_spouse').checked = data.has_spouse;
+  if (data.reno60890 !== undefined) document.getElementById('f_bc479_60890').checked = data.reno60890;
+  BC479_INPUT_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = String(data[id]);
+      fmtInput(el);
+    }
+  });
+  recalcBC479();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem('cra_bc479_autosave', JSON.stringify(data));
+  serverSave('bc479', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'BC479 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 'bc479'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'bc479');
+  if (!snap) { toast('No BC479 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  BC479_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('has_spouse').checked = false;
+  document.getElementById('f_bc479_60890').checked = false;
+  recalcBC479();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  // Pre-fill from URL params
+  const urlP = new URLSearchParams(location.search);
+  if (urlP.has('net_income')) {
+    const ni = document.getElementById('f_bc479_l1c1');
+    if (ni) { ni.value = urlP.get('net_income'); fmtInput(ni); }
+    const ni39 = document.getElementById('f_bc479_l39');
+    if (ni39) { ni39.value = urlP.get('net_income'); fmtInput(ni39); }
+  }
+
+  let loaded = false;
+  if (!urlP.has('net_income')) {
+    try {
+      const r = await fetch(ROOT + '/api/userdata/bc479');
+      if (r.ok) {
+        const sd = await r.json();
+        if (sd && Object.keys(sd).length > 0) {
+          loadFormData(sd);
+          localStorage.setItem('cra_bc479_autosave', JSON.stringify(sd));
+          loaded = true;
+        }
+      }
+    } catch(_) {}
+  }
+
+  if (!loaded) {
+    const saved = localStorage.getItem('cra_bc479_autosave');
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcBC479();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'bc479');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcBC479(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcBC479());
+  });
+  document.getElementById('has_spouse').addEventListener('change', recalcBC479);
+  document.getElementById('f_bc479_60890').addEventListener('change', recalcBC479);
+});
+</script>
+{% endblock %}

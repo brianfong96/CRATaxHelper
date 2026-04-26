@@ -1,0 +1,487 @@
+{% extends "base.html" %}
+{% block title %}Schedule 3 &mdash; Capital Gains or Losses 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 3 &mdash; Capital Gains or Losses</div>
+      <div class="form-subtitle">Form 5000-S3 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5000-S3-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5000-s3/5000-s3-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 3 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+    <span style="color:#555;font-size:12px;">Inclusion rate: 1/2 (50%) for most gains</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3 (Part 3)</a>
+    <a href="#pg-anchor-4">Page 4 (Parts 4–5)</a>
+  </nav>
+
+  <!-- Pages 1-2: display-only (no interactive fields) -->
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page1.png" alt="Schedule 3 Page 1">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page2.png" alt="Schedule 3 Page 2">
+  </div>
+
+  <!-- Page 3: Part 3 — 10 disposition rows -->
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page3.png" alt="Schedule 3 Page 3">
+
+    <!-- Row offsets: each row's top for totals: 19.318%, 26.894%, 34.470%, 42.045%, 49.621%, 57.197%, 64.773%, 72.348%, 79.924%, 87.500% -->
+
+    <!-- Line 1: publicly traded stocks/bonds -->
+    <input type="text" data-numeric="1" id="f_s3_p1"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:17.515%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc1" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:17.515%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost1" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:17.515%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl1" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:17.515%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain1" class="pdf-input" readonly value="0.00" style="left:80.02%;top:17.515%;width:13.0%;height:1.334%;">
+
+    <!-- Line 2: real estate -->
+    <input type="text" data-numeric="1" id="f_s3_p2"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:25.091%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc2" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:25.091%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost2" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:25.091%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl2" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:25.091%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain2" class="pdf-input" readonly value="0.00" style="left:80.02%;top:25.091%;width:13.0%;height:1.334%;">
+
+    <!-- Line 3: principal residence real estate -->
+    <input type="text" data-numeric="1" id="f_s3_p3"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:32.666%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc3" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:32.666%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost3" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:32.666%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl3" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:32.666%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain3" class="pdf-input" readonly value="0.00" style="left:80.02%;top:32.666%;width:13.0%;height:1.334%;">
+
+    <!-- Line 4: mutual funds -->
+    <input type="text" data-numeric="1" id="f_s3_p4"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:40.242%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc4" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:40.242%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost4" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:40.242%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl4" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:40.242%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain4" class="pdf-input" readonly value="0.00" style="left:80.02%;top:40.242%;width:13.0%;height:1.334%;">
+
+    <!-- Line 5: non-principal residence real estate -->
+    <input type="text" data-numeric="1" id="f_s3_p5"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:47.818%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc5" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:47.818%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost5" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:47.818%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl5" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:47.818%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain5" class="pdf-input" readonly value="0.00" style="left:80.02%;top:47.818%;width:13.0%;height:1.334%;">
+
+    <!-- Line 6: bonds/debentures -->
+    <input type="text" data-numeric="1" id="f_s3_p6"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:55.394%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc6" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:55.394%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost6" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:55.394%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl6" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:55.394%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain6" class="pdf-input" readonly value="0.00" style="left:80.02%;top:55.394%;width:13.0%;height:1.334%;">
+
+    <!-- Line 7: other property -->
+    <input type="text" data-numeric="1" id="f_s3_p7"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:62.970%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc7" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:62.970%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost7" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:62.970%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl7" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:62.970%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain7" class="pdf-input" readonly value="0.00" style="left:80.02%;top:62.970%;width:13.0%;height:1.334%;">
+
+    <!-- Line 8: other real estate -->
+    <input type="text" data-numeric="1" id="f_s3_p8"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:70.545%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc8" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:70.545%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost8" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:70.545%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl8" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:70.545%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain8" class="pdf-input" readonly value="0.00" style="left:80.02%;top:70.545%;width:13.0%;height:1.334%;">
+
+    <!-- Line 9: other -->
+    <input type="text" data-numeric="1" id="f_s3_p9"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:78.121%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc9" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:78.121%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost9" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:78.121%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl9" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:78.121%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain9" class="pdf-input" readonly value="0.00" style="left:80.02%;top:78.121%;width:13.0%;height:1.334%;">
+
+    <!-- Line 10: listed personal property (LPP) -->
+    <input type="text" data-numeric="1" id="f_s3_p10"   class="pdf-input text-left" value="" placeholder="Description" style="left:10.412%;top:85.697%;width:24.275%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_proc10" class="pdf-input" value="" inputmode="decimal" style="left:41.785%;top:85.697%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_cost10" class="pdf-input" value="" inputmode="decimal" style="left:54.529%;top:85.697%;width:12.51%;height:1.334%;">
+    <input type="text" data-numeric="1" id="f_s3_outl10" class="pdf-input" value="" inputmode="decimal" style="left:67.275%;top:85.697%;width:12.51%;height:1.334%;">
+    <input type="text" id="f_s3_gain10" class="pdf-input" readonly value="0.00" style="left:80.02%;top:85.697%;width:13.0%;height:1.334%;">
+
+    <!-- Line 11: total gain/loss from Part 3 -->
+    <input type="text" id="f_s3_l11" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:91.288%;width:11.275%;height:2.94%;">
+  </div>
+
+  <!-- Page 4: Parts 4 and 5 -->
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page4.png" alt="Schedule 3 Page 4">
+
+    <!-- Part 4 -->
+    <input type="text" id="f_s3_l12" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:9.47%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l13" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:11.364%;width:11.275%;height:2.94%;">
+    <input type="text" data-numeric="1" id="f_s3_l14" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:14.773%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l15" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:16.667%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l16" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:18.561%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l17" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:20.455%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l18" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:22.349%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l19" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:24.243%;width:11.275%;height:2.94%;">
+    <input type="text" data-numeric="1" id="f_s3_l20" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:27.652%;width:11.275%;height:1.424%;">
+    <!-- Line 21: net capital gains -->
+    <input type="text" id="f_s3_l21" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:29.545%;width:11.275%;height:2.94%;">
+
+    <!-- Part 5 -->
+    <input type="text" id="f_s3_l22" class="pdf-input" readonly value="0.00"
+           style="left:79.902%;top:37.5%;width:13.235%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l23" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;">
+    <input type="text" data-numeric="1" id="f_s3_l24" class="pdf-input" value="" inputmode="decimal"
+           style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;">
+    <input type="text" id="f_s3_l25" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:43.182%;width:11.275%;height:2.94%;">
+    <!-- Line 26: taxable capital gains → T1 line 12700 -->
+    <input type="text" id="f_s3_l26" class="pdf-input" readonly value="0.00"
+           style="left:81.863%;top:46.682%;width:11.275%;height:4.364%;">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) { const el = document.getElementById(id); return el ? Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
+function gSigned(id) { const el = document.getElementById(id); return el ? (parseFloat((el.value||'').replace(/,/g,'')) || 0) : 0; }
+
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const span = el.parentElement
+    ? el.parentElement.querySelector(`.cents-display[data-for="${el.id}"]`)
+    : null;
+  if (span) span.textContent = '.' + cents;
+}
+
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+
+function editInput(el) {
+  const raw = parseFloat((el.getAttribute('data-raw') || el.value.replace(/,/g,'')).replace(/,/g, '')) || 0;
+  el.value = raw === 0 ? '' : String(raw);
+}
+
+// Split each amount input into dollar portion (80%) + cents span (20%)
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    // Skip text-left description fields
+    if (inp.classList.contains('text-left')) return;
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const span = document.createElement('span');
+    span.className = 'cents-display';
+    span.dataset.for = inp.id;
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+    span.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:none;` +
+      `display:flex;align-items:center;justify-content:flex-start;padding-left:1px;` +
+      `font-family:"Courier New",monospace;font-size:0.60em;box-sizing:border-box;` +
+      `pointer-events:none;color:#222;line-height:1;z-index:1;`;
+    span.textContent = '.' + initCents;
+    inp.parentElement.appendChild(span);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+const S3_ROWS = 10;
+
+function recalcS3() {
+  let total11 = 0;
+  for (let i = 1; i <= S3_ROWS; i++) {
+    const proc = g('f_s3_proc' + i);
+    const cost = g('f_s3_cost' + i);
+    const outl = g('f_s3_outl' + i);
+    const gain = proc - cost - outl;
+    s('f_s3_gain' + i, gain);
+    total11 += gain;
+  }
+  s('f_s3_l11', total11);
+
+  // Part 4
+  const l12 = total11;
+  s('f_s3_l12', l12);
+
+  const l13 = g('f_s3_l13');
+  const l14 = g('f_s3_l14');
+  const l15 = g('f_s3_l15');
+  const l16 = g('f_s3_l16');
+  const l17 = g('f_s3_l17');
+  const l18 = g('f_s3_l18');
+  const l19 = g('f_s3_l19');
+  const l20 = g('f_s3_l20');
+
+  const l21 = l12 + l13 - l14 + l15 - l16 + l17 - l18 + l19 - l20;
+  s('f_s3_l21', l21);
+
+  // Part 5
+  const l22 = Math.max(0, l21);
+  s('f_s3_l22', l22);
+
+  const l23 = g('f_s3_l23');
+  const l24 = g('f_s3_l24');
+  const l25 = Math.max(0, l22 - l23 - l24);
+  s('f_s3_l25', l25);
+
+  const l26 = l25 * 0.5;
+  s('f_s3_l26', l26);
+
+  localStorage.setItem('cra_s3_cap_gains', l26.toString());
+  autoSave();
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcS3();
+  const el = document.getElementById('f_s3_l26');
+  const val = el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0;
+  localStorage.setItem('cra_s3_cap_gains', val.toString());
+  window.location.href = ROOT + '/tax/t1?s3_cap_gains=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+const S3_NUMERIC_IDS = [];
+for (let i = 1; i <= S3_ROWS; i++) {
+  S3_NUMERIC_IDS.push('f_s3_proc' + i, 'f_s3_cost' + i, 'f_s3_outl' + i);
+}
+['f_s3_l13','f_s3_l14','f_s3_l15','f_s3_l16','f_s3_l17','f_s3_l18',
+ 'f_s3_l19','f_s3_l20','f_s3_l23','f_s3_l24'].forEach(id => S3_NUMERIC_IDS.push(id));
+
+const S3_TEXT_IDS = [];
+for (let i = 1; i <= S3_ROWS; i++) S3_TEXT_IDS.push('f_s3_p' + i);
+
+function getFormData() {
+  const data = {};
+  S3_NUMERIC_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  });
+  S3_TEXT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  S3_NUMERIC_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = String(data[id]);
+      fmtInput(el);
+    }
+  });
+  S3_TEXT_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = data[id];
+    }
+  });
+  recalcS3();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem('cra_s3_autosave', JSON.stringify(data));
+  serverSave('schedule3', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'Schedule 3 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 'schedule3'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'schedule3');
+  if (!snap) { toast('No Schedule 3 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  S3_NUMERIC_IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  S3_TEXT_IDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  recalcS3();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/schedule3');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem('cra_s3_autosave', JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem('cra_s3_autosave');
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcS3();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'schedule3');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    if (el.classList.contains('text-left')) {
+      el.addEventListener('blur', autoSave);
+      el.addEventListener('input', autoSave);
+    } else {
+      el.addEventListener('blur',  () => { fmtInput(el); recalcS3(); autoSave(); });
+      el.addEventListener('focus', () => editInput(el));
+      el.addEventListener('input', () => recalcS3());
+    }
+  });
+});
+</script>
+{% endblock %}

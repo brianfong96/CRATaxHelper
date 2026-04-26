@@ -1,0 +1,392 @@
+[
+  {
+    "page": 1,
+    "count": 24,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line1[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 36.364,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line2[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 39.773,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line3[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 43.182,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line4[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 45.076,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line5[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 48.485,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line6[0].AmountA[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 49.02,
+        "top_pct": 51.136,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line6[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 51.136,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].AmountB[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 49.02,
+        "top_pct": 53.03,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].AmountC[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 50.981,
+        "top_pct": 56.44,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line7[0].AmountD[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 50.981,
+        "top_pct": 59.849,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line7[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 59.849,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line8[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 61.742,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line9[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 64.394,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line10[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 67.045,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line11[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 68.94,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line12[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 70.833,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line13[0].Amount_Line13[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 72.727,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line14[0].Amount_Line14[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 74.621,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line15[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 76.515,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line16[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 79.924,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line17[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 82.576,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page1[0].Line18[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 84.47,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": " 253,414.00"
+      },
+      {
+        "name": "form1[0].Page1[0].Line19[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 86.364,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      }
+    ]
+  },
+  {
+    "page": 2,
+    "count": 18,
+    "fields": [
+      {
+        "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+        "type": "Button",
+        "left_pct": 80.392,
+        "top_pct": 0.379,
+        "width_pct": 15.686,
+        "height_pct": 1.894,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].AmountE[0].Amount_Line14[0]",
+        "type": "Text",
+        "left_pct": 49.02,
+        "top_pct": 6.818,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line20[0].AmountF[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 50.981,
+        "top_pct": 8.712,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line20[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 8.712,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line21[0].AmountG[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 50.981,
+        "top_pct": 10.606,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line21[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 10.606,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line22[0].AmountH[0].Amount_Line14[0]",
+        "type": "Text",
+        "left_pct": 49.02,
+        "top_pct": 12.5,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line22[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 12.5,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Line23[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 14.485,
+        "width_pct": 11.275,
+        "height_pct": 2.849,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].TextField_Underlined_Bottom[0]",
+        "type": "Text",
+        "left_pct": 18.301,
+        "top_pct": 30.05,
+        "width_pct": 12.908,
+        "height_pct": 1.389,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].Line_1[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 32.197,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].Line_2[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 34.848,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].Line_3[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 62.255,
+        "top_pct": 37.5,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].Line_4[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 40.151,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart1[0].Line_5[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 42.803,
+        "width_pct": 13.235,
+        "height_pct": 2.94,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart2[0].Line1[0].Amount1[0]",
+        "type": "Text",
+        "left_pct": 79.902,
+        "top_pct": 52.273,
+        "width_pct": 13.235,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart2[0].Line2[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 54.166,
+        "width_pct": 11.275,
+        "height_pct": 1.424,
+        "value": ""
+      },
+      {
+        "name": "form1[0].Page2[0].Chart2[0].Line3[0].Amount[0]",
+        "type": "Text",
+        "left_pct": 81.863,
+        "top_pct": 56.06,
+        "width_pct": 11.275,
+        "height_pct": 2.94,
+        "value": ""
+      }
+    ]
+  }
+]
