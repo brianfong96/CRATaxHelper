@@ -32,29 +32,29 @@ class TestApplyBrackets:
         assert apply_brackets(-5000, FEDERAL_BRACKETS) == 0.0
 
     def test_first_bracket_only(self):
-        # $40,000 × 14.5% = $5,800.00
-        assert apply_brackets(40_000, FEDERAL_BRACKETS) == pytest.approx(5_800.00, abs=0.01)
+        # $40,000 × 15% = $6,000.00
+        assert apply_brackets(40_000, FEDERAL_BRACKETS) == pytest.approx(6_000.00, abs=0.01)
 
     def test_crosses_first_bracket(self):
-        # $57,375 × 14.5% = $8,319.375
+        # $57,375 × 15% = $8,606.25
         # + ($60,000 - $57,375) × 20.5% = $2,625 × 20.5% = $538.125
-        # total = $8,857.50
+        # total = $9,144.375 ≈ $9,144.38
         result = apply_brackets(60_000, FEDERAL_BRACKETS)
-        assert result == pytest.approx(8_857.50, abs=0.02)
+        assert result == pytest.approx(9_144.38, abs=0.02)
 
     def test_exactly_at_bracket_boundary(self):
-        expected = 57_375 * 0.145
+        expected = 57_375 * 0.15
         assert apply_brackets(57_375, FEDERAL_BRACKETS) == pytest.approx(expected, abs=0.01)
 
     def test_all_federal_brackets(self):
         # $250,000 income — crosses four brackets
-        # Bracket 1: $57,375 × 14.5%              =  $8,319.375
-        # Bracket 2: ($114,750-$57,375) × 20.5%   = $11,761.875
-        # Bracket 3: ($177,882-$114,750) × 26%    = $16,414.32
-        # Bracket 4: ($250,000-$177,882) × 29%    = $20,914.22
-        # Total                                    = $57,409.79
+        # Bracket 1: $57,375 × 15%              =  $8,606.25
+        # Bracket 2: ($114,750-$57,375) × 20.5% = $11,761.875
+        # Bracket 3: ($177,882-$114,750) × 26%  = $16,414.32
+        # Bracket 4: ($250,000-$177,882) × 29%  = $20,914.22
+        # Total                                  = $57,696.67
         result = apply_brackets(250_000, FEDERAL_BRACKETS)
-        assert result == pytest.approx(57_409.79, abs=0.10)
+        assert result == pytest.approx(57_696.67, abs=0.10)
 
     def test_bc_first_bracket(self):
         # $30,000 × 5.06% = $1,518.00
@@ -184,7 +184,7 @@ class TestCalculateT1:
         inp.line_30000 = 16_129
         r = calculate_t1(inp)
         assert r.line_35000 == pytest.approx(16_129.00, abs=0.01)
-        assert r.line_35100 == pytest.approx(16_129 * 0.145, abs=0.01)
+        assert r.line_35100 == pytest.approx(16_129 * 0.15, abs=0.01)
 
     def test_federal_tax_single_bracket(self):
         # Taxable income $30,000 → all in 14.5% bracket

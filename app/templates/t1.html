@@ -445,7 +445,7 @@
 {% block scripts %}
 <script>
 // ── 2025 Federal tax brackets ────────────────────────────────────────────────
-const FEDERAL_BRACKETS = [[57375,.145],[114750,.205],[177882,.26],[253414,.29],[Infinity,.33]];
+const FEDERAL_BRACKETS = [[57375,.15],[114750,.205],[177882,.26],[253414,.29],[Infinity,.33]];
 const FEDERAL_BASIC_PERSONAL = 16129;
 const FEDERAL_EMPLOYMENT_MAX = 1471;
 const FEDERAL_PENSION_MAX    = 2000;
@@ -545,11 +545,11 @@ function recalcT1() {
   }
   function fillFedBracketTable(taxableIncome) {
     const BRACKETS = [
-      { max: 57375,    base: 0,       rate: 0.145, baseTax: 0        },
-      { max: 114750,   base: 57375,   rate: 0.205, baseTax: 8319.38  },
-      { max: 177882,   base: 114750,  rate: 0.26,  baseTax: 20081.25 },
-      { max: 253414,   base: 177882,  rate: 0.29,  baseTax: 36495.57 },
-      { max: Infinity, base: 253414,  rate: 0.33,  baseTax: 58399.85 },
+      { max: 57375,    base: 0,       rate: 0.15,  baseTax: 0        },
+      { max: 114750,   base: 57375,   rate: 0.205, baseTax: 8606.25  },
+      { max: 177882,   base: 114750,  rate: 0.26,  baseTax: 20368.13 },
+      { max: 253414,   base: 177882,  rate: 0.29,  baseTax: 36782.45 },
+      { max: Infinity, base: 253414,  rate: 0.33,  baseTax: 58686.73 },
     ];
     let activeCol = 1;
     if      (taxableIncome > 253414) activeCol = 5;

@@ -18,10 +18,9 @@ from typing import NamedTuple
 
 # ── 2025 Tax Constants ────────────────────────────────────────────────────────
 
-# Federal income tax brackets (upper limit, marginal rate)
-# Lowest rate is 14.5% — blended rate for 2025 (15% Jan–Jun, 14% Jul–Dec)
+# Federal income tax brackets (upper limit, marginal rate) — 2025 CRA Schedule 1
 FEDERAL_BRACKETS: list[tuple[float, float]] = [
-    (57_375,       0.1450),
+    (57_375,       0.1500),
     (114_750,      0.2050),
     (177_882,      0.2600),
     (253_414,      0.2900),
@@ -46,7 +45,7 @@ FEDERAL_AGE_INCOME_THRESHOLD = 45_522.00   # reduction begins here
 FEDERAL_AGE_INCOME_CEILING   = 105_709.00  # 45,522 + 9,028 / 0.15
 FEDERAL_EMPLOYMENT_MAX       = 1_471.00
 FEDERAL_PENSION_MAX          = 2_000.00
-FEDERAL_CREDIT_RATE          = 0.145       # 14.5% blended rate
+FEDERAL_CREDIT_RATE          = 0.15        # 15% — federal non-refundable credit rate (Schedule 1)
 
 # 2025 BC amounts  (source: BC government official credits page)
 BC_BASIC_PERSONAL            = 12_932.00
