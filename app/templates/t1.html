@@ -297,6 +297,30 @@
     <input type="number" id="f30425" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:77.145%;width:11.275%;height:2.939%;">
     <input type="number" id="f30450" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:80.365%;width:11.275%;height:1.424%;">
     <input type="number" id="f30500" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" style="left:81.863%;top:82.069%;width:11.275%;height:2.939%;">
+    <!-- Row 36: taxable income (shown in active col only by JS) -->
+    <input type="text" id="bt-f70-c1" class="pdf-input" readonly style="left:23.039%;top:46.653%;width:13.235%;height:1.424%;">
+    <input type="text" id="bt-f70-c2" class="pdf-input" readonly style="left:37.255%;top:46.653%;width:13.235%;height:1.424%;">
+    <input type="text" id="bt-f70-c3" class="pdf-input" readonly style="left:51.471%;top:46.653%;width:13.235%;height:1.424%;">
+    <input type="text" id="bt-f70-c4" class="pdf-input" readonly style="left:65.686%;top:46.653%;width:13.235%;height:1.424%;">
+    <input type="text" id="bt-f70-c5" class="pdf-input" readonly style="left:79.902%;top:46.653%;width:13.235%;height:1.424%;">
+    <!-- Row 38: excess income (line 70 minus threshold) -->
+    <input type="text" id="bt-f72-c1" class="pdf-input" readonly style="left:25.000%;top:50.062%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f72-c2" class="pdf-input" readonly style="left:39.216%;top:50.062%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f72-c3" class="pdf-input" readonly style="left:53.431%;top:50.062%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f72-c4" class="pdf-input" readonly style="left:67.647%;top:50.062%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f72-c5" class="pdf-input" readonly style="left:81.863%;top:50.062%;width:11.275%;height:1.424%;">
+    <!-- Row 40: tax on excess (row 38 × rate) -->
+    <input type="text" id="bt-f74-c1" class="pdf-input" readonly style="left:25.000%;top:53.471%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f74-c2" class="pdf-input" readonly style="left:39.216%;top:53.471%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f74-c3" class="pdf-input" readonly style="left:53.431%;top:53.471%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f74-c4" class="pdf-input" readonly style="left:67.647%;top:53.471%;width:11.275%;height:1.424%;">
+    <input type="text" id="bt-f74-c5" class="pdf-input" readonly style="left:81.863%;top:53.471%;width:11.275%;height:1.424%;">
+    <!-- Row 42: total federal tax -->
+    <input type="text" id="bt-f76-c1" class="pdf-input" readonly style="left:25.000%;top:56.971%;width:11.275%;height:2.848%;">
+    <input type="text" id="bt-f76-c2" class="pdf-input" readonly style="left:39.216%;top:56.971%;width:11.275%;height:2.848%;">
+    <input type="text" id="bt-f76-c3" class="pdf-input" readonly style="left:53.431%;top:56.971%;width:11.275%;height:2.848%;">
+    <input type="text" id="bt-f76-c4" class="pdf-input" readonly style="left:67.647%;top:56.971%;width:11.275%;height:2.848%;">
+    <input type="text" id="bt-f76-c5" class="pdf-input" readonly style="left:81.863%;top:56.971%;width:11.275%;height:2.848%;">
   </div>
 
   <div id="pg-anchor-6"></div>
@@ -329,94 +353,6 @@
     <input type="number" id="f34990" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" tabindex="-1" style="left:81.863%;top:69.727%;width:11.275%;height:1.424%;">
     <input type="text" id="f35000" class="pdf-input" readonly value="0.00" style="left:81.863%;top:71.432%;width:11.275%;height:1.424%;">
   </div>
-
-  <!-- Federal Tax bracket table (after page 6) -->
-  <div class="bracket-section">
-    <div class="bracket-section-title">Part A — Federal Tax on Taxable Income (Schedule 1)</div>
-    <p style="font-size:11px;color:#555;margin:0 0 6px;">Use the amount from line 26000 to complete the appropriate column below.</p>
-    <div class="bracket-table-wrap">
-      <table class="bracket-table" id="fed-bracket-table">
-        <thead>
-          <tr>
-            <th class="bt-label-col"></th>
-            <th class="bt-data-col">Line 26000 is<br>$57,375 or less</th>
-            <th class="bt-data-col">Line 26000 is more than $57,375 but not more than $114,750</th>
-            <th class="bt-data-col">Line 26000 is more than $114,750 but not more than $177,882</th>
-            <th class="bt-data-col">Line 26000 is more than $177,882 but not more than $253,414</th>
-            <th class="bt-data-col">Line 26000 is more than $253,414</th>
-            <th class="bt-rownum-col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="bt-label">Amount from line 26000</td>
-            <td class="bt-input-cell"><input class="bt-input" id="bt-f70-c1" readonly></td>
-            <td class="bt-input-cell"><input class="bt-input" id="bt-f70-c2" readonly></td>
-            <td class="bt-input-cell"><input class="bt-input" id="bt-f70-c3" readonly></td>
-            <td class="bt-input-cell"><input class="bt-input" id="bt-f70-c4" readonly></td>
-            <td class="bt-input-cell"><input class="bt-input" id="bt-f70-c5" readonly></td>
-            <td class="bt-rownum">70</td>
-          </tr>
-          <tr>
-            <td class="bt-label">Line 70 minus line 71<br><span class="bt-note">(cannot be negative)</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">0.00</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">57,375.00</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">114,750.00</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">177,882.00</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&#8722;</span><span class="bt-fixed">253,414.00</span></td>
-            <td class="bt-rownum">71</td>
-          </tr>
-          <tr>
-            <td class="bt-label"></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f72-c1" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f72-c2" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f72-c3" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f72-c4" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f72-c5" readonly></td>
-            <td class="bt-rownum">72</td>
-          </tr>
-          <tr>
-            <td class="bt-label">Line 72 multiplied by the<br>percentage from line 73</td>
-            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">14.5%</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">20.5%</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">26%</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">29%</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">&times;</span><span class="bt-fixed">33%</span></td>
-            <td class="bt-rownum">73</td>
-          </tr>
-          <tr>
-            <td class="bt-label"></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f74-c1" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f74-c2" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f74-c3" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f74-c4" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input" id="bt-f74-c5" readonly></td>
-            <td class="bt-rownum">74</td>
-          </tr>
-          <tr>
-            <td class="bt-label"><strong>Line 74 plus line 75</strong></td>
-            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">0.00</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">8,319.38</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">20,081.25</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">36,495.57</span></td>
-            <td class="bt-sub-cell"><span class="bt-op">+</span><span class="bt-fixed">58,399.85</span></td>
-            <td class="bt-rownum">75</td>
-          </tr>
-          <tr class="bt-result-row">
-            <td class="bt-label"><strong>Federal tax on<br>taxable income</strong></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bt-f76-c1" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bt-f76-c2" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bt-f76-c3" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bt-f76-c4" readonly></td>
-            <td class="bt-input-cell"><span class="bt-op">=</span><input class="bt-input bt-result" id="bt-f76-c5" readonly></td>
-            <td class="bt-rownum">76</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="part-a-note">Enter the amount from line 76 on line 119 and continue at line 77.</p>
-  </div>
-
   <!-- Hidden and supplementary fields required by JS -->
   <input type="hidden" id="f38000" value="0">
   <input type="text" id="f35100" readonly value="0.00" style="display:none">
@@ -453,156 +389,6 @@
     <input type="number" id="f43500" class="pdf-input" min="0" step="0.01" value="0" inputmode="decimal" tabindex="-1" style="left:81.863%;top:69.886%;width:11.275%;height:1.424%;">
   </div>
 
-  <!-- BC provincial tax + summary section (after page 7) -->
-  <div class="bracket-section">
-    <div class="bracket-section-title">Step 5 — Provincial Tax &amp; Summary</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div>
-        <p style="font-size:11px;font-weight:700;margin:0 0 4px;color:#333;">BC Provincial Tax (from BC428)</p>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>British Columbia tax (from BC428 line 42800)</span></div>
-          <div class="line-op">=</div>
-          <div class="line-num">42000</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f42000" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <p style="font-size:11px;margin:4px 0;color:#555;">Other taxes</p>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>CPP contributions payable on self-employment (44800)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">44800</div>
-          <div class="line-amount">
-            <input class="amount-field" type="number" id="f44800" min="0" step="0.01" value="0" inputmode="decimal">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>Social benefits repayment (45200)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">45200</div>
-          <div class="line-amount">
-            <input class="amount-field" type="number" id="f45200" min="0" step="0.01" value="0" inputmode="decimal">
-          </div>
-        </div>
-      </div>
-      <div>
-        <p style="font-size:11px;font-weight:700;margin:0 0 4px;color:#333;">Tax Payable Breakdown</p>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>Net federal tax</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">40424</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f40424_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>BC provincial tax (from BC428)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">42000</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f42000_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>CPP payable on self-employment</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">44800</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f44800_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>Social benefits repayment</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">45200</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f45200_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
-      <div>
-        <p style="font-size:11px;font-weight:700;margin:0 0 4px;color:#333;">Credits and Payments</p>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>Total income tax deducted (all T slips)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">43700</div>
-          <div class="line-amount">
-            <input class="amount-field" type="number" id="f43700" min="0" step="0.01" value="0" inputmode="decimal">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>CPP overpayment (47600)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">47600</div>
-          <div class="line-amount">
-            <input class="amount-field" type="number" id="f47600" min="0" step="0.01" value="0" inputmode="decimal">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;border:1px solid #ccc;">
-          <div class="line-desc"><span>Provincial or territorial credits (47900)</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">47900</div>
-          <div class="line-amount">
-            <input class="amount-field" type="number" id="f47900" min="0" step="0.01" value="0" inputmode="decimal">
-          </div>
-        </div>
-      </div>
-      <div>
-        <p style="font-size:11px;font-weight:700;margin:0 0 4px;color:#333;">Result</p>
-        <div class="form-line total">
-          <div class="line-desc"><span>Total payable</span></div>
-          <div class="line-op">=</div>
-          <div class="line-num">48200</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f48200" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>Total income tax deducted</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">43700</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f43700_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>CPP overpayment</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">47600</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f47600_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line" style="background:#fff;">
-          <div class="line-desc"><span>Provincial or territorial credits</span></div>
-          <div class="line-op">+</div>
-          <div class="line-num">47900</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f47900_r" readonly value="0.00" tabindex="-1">
-          </div>
-        </div>
-        <div class="form-line total" style="border-top:2px solid #278400;">
-          <div class="line-desc" style="color:var(--green);font-weight:700;"><span>Refund</span></div>
-          <div class="line-op">=</div>
-          <div class="line-num">48400</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f48400" readonly value="0.00" tabindex="-1" style="color:var(--green);font-weight:700;">
-          </div>
-        </div>
-        <div class="form-line total" style="border-top:2px solid #d3080c;">
-          <div class="line-desc" style="color:var(--red);font-weight:700;"><span>Balance owing</span></div>
-          <div class="line-op">=</div>
-          <div class="line-num">48500</div>
-          <div class="line-amount">
-            <input class="amount-field" type="text" id="f48500" readonly value="0.00" tabindex="-1" style="color:var(--red);font-weight:700;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="pg-anchor-8"></div>
   <div class="pdf-page">
     <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page8.png" alt="T1 Page 8">
@@ -627,6 +413,13 @@
     <input type="text" id="f48200_2" class="pdf-input" readonly value="0.00" style="left:81.863%;top:38.447%;width:11.275%;height:1.424%;">
     <input type="text" id="f48400" class="pdf-input" readonly value="0.00" style="left:25.980%;top:46.970%;width:13.235%;height:1.424%;">
     <input type="text" id="f48500" class="pdf-input" readonly value="0.00" style="left:76.471%;top:46.970%;width:13.235%;height:1.424%;">
+    <!-- Line 49000: certified tax software Yes/No -->
+    <input type="radio" name="line49000" id="line49000_yes" value="yes" class="pdf-radio" style="left:81.863%;top:68.308%;width:1.634%;height:1.263%;">
+    <input type="radio" name="line49000" id="line49000_no"  value="no"  class="pdf-radio" style="left:89.706%;top:68.308%;width:1.634%;height:1.263%;">
+    <!-- Signature / filing section -->
+    <input type="text" id="id_p8_telephone" class="pdf-input text-left" placeholder="Telephone" style="left:19.608%;top:72.727%;width:28.922%;height:1.424%;">
+    <input type="text" id="id_efiler_name" class="pdf-input text-left" placeholder="e-filer name" style="left:70.098%;top:72.727%;width:24.510%;height:1.424%;">
+    <input type="text" id="id_p8_date" class="pdf-input text-left" placeholder="Date signed" style="left:9.804%;top:74.621%;width:38.725%;height:1.424%;">
   </div>
 
   <!-- Toolbar -->
@@ -681,7 +474,11 @@ function applyBrackets(income, brackets) {
 }
 
 // ── Field helpers ─────────────────────────────────────────────────────────────
-function g(id)  { const el = document.getElementById('f' + id); return el ? Math.max(0, parseFloat(el.value) || 0) : 0; }
+function g(id) {
+  const el = document.getElementById('f' + id);
+  if (!el) return 0;
+  return Math.max(0, parseFloat((el.value || '0').replace(/,/g, '')) || 0);
+}
 function gRaw(id) { const el = document.getElementById('f' + id); return el ? (parseFloat(el.value) || 0) : 0; }
 function s(id, v) {
   const el = document.getElementById('f' + id);
@@ -810,16 +607,8 @@ function recalcT1() {
 
   // Total payable (48200)
   const line48200 = line40424 + bc42000 + g(44800) + g(45200);
-  s(48200, line48200);
-
-  // Mirror values into summary panel read-only copies
-  const mirror = { '40424_r': line40424, '42000_r': bc42000,
-                   '44800_r': g(44800), '45200_r': g(45200),
-                   '43700_r': g(43700), '47600_r': g(47600), '47900_r': g(47900) };
-  Object.entries(mirror).forEach(([k, v]) => {
-    const el = document.getElementById('f' + k);
-    if (el) el.value = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  });
+  s('48200_1', line48200);
+  s('48200_2', line48200);
 
   // Refund / balance owing
   const totalPaid = g(43700) + g(47600) + g(47900);
@@ -853,7 +642,7 @@ function getFormData() {
   const data = { age65: document.getElementById('age65').checked };
   T1_INPUTS.forEach(id => {
     const el = document.getElementById('f' + id);
-    if (el) data[id] = parseFloat(el.value) || 0;
+    if (el) data[id] = parseFloat((el.value || '0').replace(/,/g, '')) || 0;
   });
   // Identification fields (pages 1-2)
   const textIds = ['id_first_name','id_last_name','id_sin','id_address','id_pobox',
@@ -892,7 +681,8 @@ function loadFormData(data) {
   T1_INPUTS.forEach(id => {
     if (data[id] !== undefined) {
       const el = document.getElementById('f' + id);
-      if (el) el.value = data[id];
+      if (el && el.type === 'number') { el.value = data[id]; fmtInput(el); }
+      else if (el) el.value = data[id];
     }
   });
   // Identification text/select fields
@@ -1042,6 +832,18 @@ function updateBC428Link() {
   document.getElementById('bc428-link').href = ROOT + '/tax/bc428?' + params.toString();
 }
 
+// ── Format helpers for number inputs ──────────────────────────────────────────
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '0').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', raw);
+  // Display as comma-formatted (CRA uses whole dollars in input fields)
+  el.value = raw === 0 ? '' : raw.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+function editInput(el) {
+  const raw = el.getAttribute('data-raw') || el.value.replace(/,/g, '');
+  el.value = raw === '0' || raw === '0.00' ? '' : parseFloat(raw) || '';
+}
+
 // ── Wire up all inputs ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   // Restore autosave
@@ -1069,6 +871,12 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('input', recalcT1);
   });
   document.getElementById('age65').addEventListener('change', recalcT1);
+
+  // Format-on-blur / strip-on-focus for all number inputs
+  document.querySelectorAll('.pdf-input[type="number"], .amount-field[type="number"]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el);  recalcT1(); });
+    el.addEventListener('focus', () => editInput(el));
+  });
 
   // Wire up identification fields (pages 1-2) to autoSave only
   const idFields = document.querySelectorAll(
