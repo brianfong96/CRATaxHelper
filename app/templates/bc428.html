@@ -849,6 +849,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     recalcBC428();
   }
 
+  // Always auto-sync taxable income and dividends from T1 localStorage
+  // (these fields are driven by T1 — apply regardless of how BC428 was opened)
+  if (!urlP.has('ti')) {
+    const ti = parseFloat(localStorage.getItem('cra_t1_line26000') || '0') || 0;
+    const d1 = parseFloat(localStorage.getItem('cra_t1_line12000') || '0') || 0;
+    const d2 = parseFloat(localStorage.getItem('cra_t1_line12010') || '0') || 0;
+    if (ti !== 0 || d1 !== 0 || d2 !== 0) {
+      const elTI = document.getElementById('fTaxableIncome');
+      const suppTI = document.getElementById('fTaxableIncome_supp');
+      const elD1  = document.getElementById('fDiv12000');
+      const elD2  = document.getElementById('fDiv12010');
+      if (elTI)   { elTI.value   = String(ti); fmtInput(elTI); }
+      if (suppTI) { suppTI.value = String(ti); fmtInput(suppTI); }
+      if (elD1)   { elD1.value   = String(d1); fmtInput(elD1); }
+      if (elD2)   { elD2.value   = String(d2); fmtInput(elD2); }
+      recalcBC428();
+    }
+  }
+
   // Show last snapshot time
   const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
   const snap = snaps.find(s => s.data?._form === 'bc428');

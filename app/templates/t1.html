@@ -1157,6 +1157,58 @@ document.addEventListener('DOMContentLoaded', async () => {
     history.replaceState({}, '', location.pathname);
   }
 
+  // Check if returning from T777 with employment expenses
+  if (urlP.has('t777_22900')) {
+    const v = parseFloat(urlP.get('t777_22900')) || 0;
+    const el = document.getElementById('f22900');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_t777_22900', v.toString());
+    toast('T777 employment expenses updated: $' + v.toFixed(2));
+    recalcT1();
+    history.replaceState({}, '', location.pathname);
+  }
+
+  // Check if returning from Schedule 5 with spousal/dependant amounts
+  if (urlP.has('s5_30300')) {
+    const v = parseFloat(urlP.get('s5_30300')) || 0;
+    const el = document.getElementById('f30300');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_s5_30300', v.toString());
+    recalcT1();
+  }
+  if (urlP.has('s5_30400')) {
+    const v = parseFloat(urlP.get('s5_30400')) || 0;
+    const el = document.getElementById('f30400');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_s5_30400', v.toString());
+    if (urlP.has('s5_30300'))
+      toast('Schedule 5 spousal/dependant amounts updated');
+    recalcT1();
+    history.replaceState({}, '', location.pathname);
+  }
+
+  // Check if returning from Schedule 8 with CPP/EI deduction
+  if (urlP.has('s8_22200')) {
+    const v = parseFloat(urlP.get('s8_22200')) || 0;
+    const el = document.getElementById('f22200');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_s8_22200', v.toString());
+    toast('Schedule 8 CPP/EI deduction updated: $' + v.toFixed(2));
+    recalcT1();
+    history.replaceState({}, '', location.pathname);
+  }
+
+  // Check if returning from T2209 with federal foreign tax credit
+  if (urlP.has('t2209_40500')) {
+    const v = parseFloat(urlP.get('t2209_40500')) || 0;
+    const el = document.getElementById('f40500');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_t2209_40500', v.toString());
+    toast('T2209 foreign tax credit updated: $' + v.toFixed(2));
+    recalcT1();
+    history.replaceState({}, '', location.pathname);
+  }
+
   // Pre-fill from localStorage values set by sub-forms (when no URL param)
   if (!urlP.has('s9_donations')) {
     const sv = localStorage.getItem('cra_s9_donations');
@@ -1176,6 +1228,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sv = localStorage.getItem('cra_s3_cap_gains');
     if (sv) {
       const el = document.getElementById('f12700');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('t777_22900')) {
+    const sv = localStorage.getItem('cra_t777_22900');
+    if (sv) {
+      const el = document.getElementById('f22900');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('s5_30300')) {
+    const sv = localStorage.getItem('cra_s5_30300');
+    if (sv) {
+      const el = document.getElementById('f30300');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('s5_30400')) {
+    const sv = localStorage.getItem('cra_s5_30400');
+    if (sv) {
+      const el = document.getElementById('f30400');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('s8_22200')) {
+    const sv = localStorage.getItem('cra_s8_22200');
+    if (sv) {
+      const el = document.getElementById('f22200');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('t2209_40500')) {
+    const sv = localStorage.getItem('cra_t2209_40500');
+    if (sv) {
+      const el = document.getElementById('f40500');
       if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
     }
   }

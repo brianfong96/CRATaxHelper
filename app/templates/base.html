@@ -134,14 +134,15 @@
       position: absolute;
       top: calc(100% + 6px);
       left: 0;
-      min-width: 175px;
+      min-width: 185px;
       background: #fff;
       border: 1px solid #d0d5dd;
       border-radius: 4px;
       box-shadow: 0 4px 16px rgba(0,0,0,.18);
-      z-index: 200;
+      z-index: 9999;
       padding: 4px 0;
-      overflow: hidden;
+      max-height: calc(100vh - 70px);
+      overflow-y: auto;
     }
     .year-menu.open .year-dropdown { display: block; }
     .yd-years { display: flex; gap: 6px; padding: 7px 10px; }
