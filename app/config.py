@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     # If empty, data is stored as plaintext (local dev fallback only).
     FIELD_ENCRYPTION_KEY: str = ""
 
+    # Local (offline) mode — used when AUTH_ENABLED=false and no Aether gateway.
+    # These values become the synthetic logged-in user so the userdata API works
+    # without a real session cookie.
+    LOCAL_USER_EMAIL: str = "local@cra-helper.local"
+    LOCAL_USER_NAME: str = "Local User"
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
     @property

@@ -136,6 +136,12 @@ async def taxhelper_auth_middleware(request: Request, call_next):
     if path.endswith("/health"):
         return await call_next(request)
     if not settings.AUTH_ENABLED or not settings.SESSION_SECRET:
+        # Inject a synthetic local user so the userdata API has an email to work with.
+        if settings.LOCAL_USER_EMAIL:
+            request.state.user = {
+                "email": settings.LOCAL_USER_EMAIL,
+                "name": settings.LOCAL_USER_NAME,
+            }
         return await call_next(request)
 
     user = get_current_user(request)

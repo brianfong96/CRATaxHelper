@@ -36,7 +36,14 @@ def _sys_hdrs() -> dict[str, str]:
 
 
 def _cookie_hdrs(cookie: str) -> dict[str, str]:
-    return {"Cookie": f"aether_session={cookie}"}
+    if cookie:
+        return {"Cookie": f"aether_session={cookie}"}
+    # Local mode (AUTH_ENABLED=false): pass the synthetic user as a header.
+    # The local Archive sidecar trusts this without validation.
+    from app.config import settings  # imported here to avoid circular import at module level
+    if not settings.AUTH_ENABLED and settings.LOCAL_USER_EMAIL:
+        return {"X-Local-User": settings.LOCAL_USER_EMAIL}
+    return {}
 
 
 # ── Startup initialisation ────────────────────────────────────────────────────
@@ -154,7 +161,11 @@ async def grant_user_access(email: str) -> None:
 
 async def get_form_data(session_cookie: str, form_name: str) -> dict[str, Any] | None:
     """Return the user's saved form data for *form_name*, or None if not found."""
-    if not settings.ARCHIVE_URL or not session_cookie:
+    from app.config import settings
+    local_mode = not settings.AUTH_ENABLED and bool(settings.LOCAL_USER_EMAIL)
+    if not settings.ARCHIVE_URL:
+        return None
+    if not session_cookie and not local_mode:
         return None
     try:
         async with httpx.AsyncClient(timeout=5) as client:
@@ -186,7 +197,11 @@ async def save_form_data(
     data: dict,
 ) -> bool:
     """Upsert the user's form data in Archive. Returns True on success."""
-    if not settings.ARCHIVE_URL or not session_cookie:
+    from app.config import settings
+    local_mode = not settings.AUTH_ENABLED and bool(settings.LOCAL_USER_EMAIL)
+    if not settings.ARCHIVE_URL:
+        return False
+    if not session_cookie and not local_mode:
         return False
     try:
         async with httpx.AsyncClient(timeout=8) as client:
