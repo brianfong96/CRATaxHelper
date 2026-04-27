@@ -61,8 +61,8 @@ PDF_FIELDS_JSON: dict[str, str] = {
 # Minimum total editable inputs expected per form
 FORM_MIN_INPUTS: dict[str, int] = {
     "t1": 50, "bc428": 50, "schedule3": 20, "schedule5": 15,
-    "schedule7": 15, "schedule8": 10, "schedule9": 15,
-    "t777": 10, "t2209": 5, "worksheet_fed": 10,
+    "schedule7": 15, "schedule8": 20, "schedule9": 15,
+    "t777": 12, "t2209": 5, "worksheet_fed": 10,
 }
 
 

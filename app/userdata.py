@@ -31,17 +31,20 @@ def _base() -> str:
 
 
 def _sys_hdrs() -> dict[str, str]:
-    """Internal-service auth header — grants system-level access to Archive."""
-    return {"X-Aether-Internal": settings.SESSION_SECRET}
+    """Internal-service auth header for Archive admin calls.
+    Production: SESSION_SECRET validated by the real Archive.
+    Local mode: SESSION_SECRET is empty — local Archive accepts any header.
+    """
+    if settings.SESSION_SECRET:
+        return {"X-Aether-Internal": settings.SESSION_SECRET}
+    return {"X-Local-Admin": "local"}
 
 
 def _cookie_hdrs(cookie: str) -> dict[str, str]:
     if cookie:
         return {"Cookie": f"aether_session={cookie}"}
-    # Local mode (AUTH_ENABLED=false): pass the synthetic user as a header.
-    # The local Archive sidecar trusts this without validation.
-    from app.config import settings  # imported here to avoid circular import at module level
-    if not settings.AUTH_ENABLED and settings.LOCAL_USER_EMAIL:
+    # Local mode: no session cookie exists — identify via header instead.
+    if settings.is_local:
         return {"X-Local-User": settings.LOCAL_USER_EMAIL}
     return {}
 
@@ -51,11 +54,16 @@ def _cookie_hdrs(cookie: str) -> dict[str, str]:
 async def ensure_archive_project() -> None:
     """Idempotently create the Archive project, table, and RLS policy on startup.
 
+    Runs in both production (SESSION_SECRET set) and local mode (AUTH_ENABLED=false).
     Safe to call repeatedly — every step checks for prior existence.
     Errors are logged and swallowed so the app starts even if Archive is down.
     """
-    if not settings.ARCHIVE_URL or not settings.SESSION_SECRET:
-        logger.info("Archive not configured — using localStorage only")
+    _local_mode = not settings.AUTH_ENABLED and not settings.SESSION_SECRET
+    if not settings.ARCHIVE_URL:
+        logger.info("ARCHIVE_URL not set — using localStorage only")
+        return
+    if not _local_mode and not settings.SESSION_SECRET:
+        logger.info("Archive not configured (no SESSION_SECRET) — using localStorage only")
         return
 
     try:
@@ -161,11 +169,9 @@ async def grant_user_access(email: str) -> None:
 
 async def get_form_data(session_cookie: str, form_name: str) -> dict[str, Any] | None:
     """Return the user's saved form data for *form_name*, or None if not found."""
-    from app.config import settings
-    local_mode = not settings.AUTH_ENABLED and bool(settings.LOCAL_USER_EMAIL)
     if not settings.ARCHIVE_URL:
         return None
-    if not session_cookie and not local_mode:
+    if not session_cookie and not settings.is_local:
         return None
     try:
         async with httpx.AsyncClient(timeout=5) as client:
@@ -197,11 +203,9 @@ async def save_form_data(
     data: dict,
 ) -> bool:
     """Upsert the user's form data in Archive. Returns True on success."""
-    from app.config import settings
-    local_mode = not settings.AUTH_ENABLED and bool(settings.LOCAL_USER_EMAIL)
     if not settings.ARCHIVE_URL:
         return False
-    if not session_cookie and not local_mode:
+    if not session_cookie and not settings.is_local:
         return False
     try:
         async with httpx.AsyncClient(timeout=8) as client:

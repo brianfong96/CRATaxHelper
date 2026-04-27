@@ -2,34 +2,36 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    ROOT_PATH: str = ""  # Set to /app/cra-taxhelper when deployed via Atlas
+    # ── Shared ────────────────────────────────────────────────────────────────
+    ROOT_PATH: str = ""      # Atlas sets this to /app/cra-taxhelper
     LOG_LEVEL: str = "INFO"
 
-    # Auth — validated against the Aether platform SESSION_SECRET
-    SESSION_SECRET: str = ""   # injected at deploy time from Aether .env
-    AUTH_ENABLED: bool = True  # set False for local dev without Aether stack
-    # URL of the Aether API gateway (used for login redirects)
-    GATEWAY_URL: str = "https://api.aether-data.net"
-
-    # Per-app RBAC: comma-separated list of allowed email addresses.
-    # Empty string (default) = any whitelisted Aether user may access this app.
-    ALLOWED_EMAILS: str = ""
-
-    # Aether Archive service URL for server-side per-user data persistence.
-    ARCHIVE_URL: str = "http://archive:7000"
-
-    # Fernet key for encrypting form data at rest in Archive.
-    # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-    # If empty, data is stored as plaintext (local dev fallback only).
-    FIELD_ENCRYPTION_KEY: str = ""
-
-    # Local (offline) mode — used when AUTH_ENABLED=false and no Aether gateway.
-    # These values become the synthetic logged-in user so the userdata API works
-    # without a real session cookie.
+    # ── LOCAL mode (docker compose up — no .env needed) ──────────────────────
+    # These are the defaults that docker-compose.yml hardcodes.
+    # Override by setting env vars in your shell if desired.
+    AUTH_ENABLED: bool = True     # docker-compose.yml sets False → no login
     LOCAL_USER_EMAIL: str = "local@cra-helper.local"
     LOCAL_USER_NAME: str = "Local User"
 
+    # ── PRODUCTION only (aether-data.net deployment) ─────────────────────────
+    # Injected at deploy time by deploy.ps1 from Aether/.env and repo root .env.
+    # Never stored in atlas-app.json or committed to git.
+    SESSION_SECRET: str = ""      # HMAC key for Aether session cookies
+    GATEWAY_URL: str = "https://api.aether-data.net"   # login redirect base
+    ALLOWED_EMAILS: str = ""      # comma-separated allowlist; empty = any Aether user
+    FIELD_ENCRYPTION_KEY: str = ""  # Fernet key; empty = plaintext (local only)
+
+    # ── Archive (both modes, different backends) ──────────────────────────────
+    # Local:      ARCHIVE_URL=http://archive:7000  → SQLite sidecar in docker-compose
+    # Production: ARCHIVE_URL=http://archive:7000  → real Aether Archive service
+    ARCHIVE_URL: str = "http://archive:7000"
+
     model_config = {"env_file": ".env", "extra": "ignore"}
+
+    @property
+    def is_local(self) -> bool:
+        """True when running in local (offline) mode — no Aether auth."""
+        return not self.AUTH_ENABLED and not self.SESSION_SECRET
 
     @property
     def allowed_emails(self) -> set[str]:
