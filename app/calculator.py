@@ -47,7 +47,21 @@ FEDERAL_EMPLOYMENT_MAX       = 1_471.00
 FEDERAL_PENSION_MAX          = 2_000.00
 FEDERAL_CREDIT_RATE          = 0.15        # 15% — federal non-refundable credit rate (Schedule 1)
 
-# 2025 BC amounts  (source: BC government official credits page)
+# CPP 2025
+CPP_RATE             = 0.0595
+CPP_MAX_EARNINGS     = 73_200.0
+CPP_BASIC_EXEMPT     = 3_500.0
+CPP_MAX_CONTRIBUTION = round((CPP_MAX_EARNINGS - CPP_BASIC_EXEMPT) * CPP_RATE, 2)  # 4166.45
+CPP2_RATE            = 0.04
+CPP2_MAX_EARNINGS    = 81_900.0
+
+# Federal 2025 (aliases for schedule calculations)
+FED_BPA               = FEDERAL_BASIC_PERSONAL  # 16129.00
+FED_CAREGIVER         = 8_375.0
+CHILD_CAREGIVER_AMOUNT = 2_273.0
+MEDICAL_THRESHOLD_MAX = 2_759.0
+
+# 2025 BC amounts(source: BC government official credits page)
 BC_BASIC_PERSONAL            = 12_932.00
 BC_AGE_AMOUNT_MAX            = 5_799.00
 BC_AGE_INCOME_THRESHOLD      = 43_169.00
@@ -693,3 +707,252 @@ def calculate_bc428(
     ), 2)
 
     return r
+
+
+# ── Schedule 5 Data Model ─────────────────────────────────────────────────────
+
+@dataclass
+class Schedule5Input:
+    """User-supplied fields on the 2025 Schedule 5 (5000-S5)."""
+    spouse_net_income: float = 0.0
+    dep_net_income: float = 0.0
+    spouse_infirm: bool = False
+    dep_infirm: bool = False
+    num_children_under18: int = 0
+    has_spouse: bool = False
+    has_eligible_dep: bool = False
+
+
+def calculate_schedule5(inp: Schedule5Input) -> dict:
+    """
+    Schedule 5 -- spouse/dependant amounts.
+    2025: BPA = 16129, caregiver = 8375
+    """
+    BPA = FEDERAL_BASIC_PERSONAL
+    CAREGIVER = 8_375.0
+    CHILD_CAREGIVER = 2_273.0
+
+    line30300 = round(max(0.0, BPA - inp.spouse_net_income), 2) if inp.has_spouse else 0.0
+    line30400 = round(max(0.0, BPA - inp.dep_net_income), 2) if inp.has_eligible_dep else 0.0
+
+    if inp.has_spouse and inp.spouse_infirm:
+        line30425 = round(min(BPA + CAREGIVER, max(0.0, BPA - inp.spouse_net_income + CAREGIVER)), 2)
+    else:
+        line30425 = 0.0
+
+    line30450 = CAREGIVER if inp.dep_infirm and inp.has_eligible_dep else 0.0
+    line30500 = round(CHILD_CAREGIVER * inp.num_children_under18, 2)
+
+    return {
+        "line30300": line30300,
+        "line30400": line30400,
+        "line30425": line30425,
+        "line30450": line30450,
+        "line30500": line30500,
+    }
+
+
+# ── Schedule 7 Data Model ─────────────────────────────────────────────────────
+
+@dataclass
+class Schedule7Input:
+    """User-supplied fields on the 2025 Schedule 7 (5000-S7)."""
+    rrsp_unused_prior: float = 0.0
+    rrsp_contrib_this_year: float = 0.0
+    rrsp_contrib_jan60: float = 0.0
+    prpp_contrib: float = 0.0
+    rrsp_deduction: float = 0.0
+    fhsa_unused_prior: float = 0.0
+    fhsa_contrib_this_year: float = 0.0
+    fhsa_deduction: float = 0.0
+    llp_balance: float = 0.0
+    llp_repayment: float = 0.0
+    hbp_balance: float = 0.0
+    hbp_repayment: float = 0.0
+
+
+def calculate_schedule7(inp: Schedule7Input) -> dict:
+    """Schedule 7 -- RRSP/FHSA/PRPP unused contributions."""
+    rrsp_total = round(inp.rrsp_unused_prior + inp.rrsp_contrib_this_year + inp.rrsp_contrib_jan60, 2)
+    rrsp_after_deduction = round(max(0.0, rrsp_total - inp.rrsp_deduction), 2)
+    fhsa_total = round(inp.fhsa_unused_prior + inp.fhsa_contrib_this_year, 2)
+    fhsa_after_deduction = round(max(0.0, fhsa_total - inp.fhsa_deduction), 2)
+    llp_min_repayment = round(inp.llp_balance / 10, 2) if inp.llp_balance > 0 else 0.0
+    hbp_min_repayment = round(inp.hbp_balance / 15, 2) if inp.hbp_balance > 0 else 0.0
+    return {
+        "rrsp_total": rrsp_total,
+        "rrsp_after_deduction": rrsp_after_deduction,
+        "fhsa_total": fhsa_total,
+        "fhsa_after_deduction": fhsa_after_deduction,
+        "llp_min_repayment": llp_min_repayment,
+        "hbp_min_repayment": hbp_min_repayment,
+        "line20800": inp.rrsp_deduction,
+        "line20805": inp.fhsa_deduction,
+        "line24500": inp.llp_repayment,
+        "line24600": inp.hbp_repayment,
+    }
+
+
+# ── Schedule 8 Data Model ─────────────────────────────────────────────────────
+
+@dataclass
+class Schedule8Input:
+    """User-supplied fields on the 2025 Schedule 8 (5000-S8)."""
+    net_self_emp_income: float = 0.0
+    cpp_thru_employment: float = 0.0
+    cpp2_thru_employment: float = 0.0
+    ei_self_emp: float = 0.0
+
+
+def calculate_schedule8(inp: Schedule8Input) -> dict:
+    """Schedule 8 -- CPP/QPP contributions on self-employment."""
+    _CPP_RATE = 0.0595
+    _CPP_MAX = 73_200.0
+    _CPP_EXEMPT = 3_500.0
+    _CPP_MAX_CONTRIB = round((_CPP_MAX - _CPP_EXEMPT) * _CPP_RATE, 2)  # 4166.45
+    _CPP2_RATE = 0.04
+    _CPP2_MAX = 81_900.0
+
+    base = round(max(0.0, min(inp.net_self_emp_income, _CPP_MAX) - _CPP_EXEMPT), 2)
+    cpp1_on_se = round(base * _CPP_RATE, 2)
+    cpp1_on_se = round(min(cpp1_on_se, max(0.0, _CPP_MAX_CONTRIB - inp.cpp_thru_employment)), 2)
+    line22200 = round(cpp1_on_se * 0.5, 2)
+    line31000 = line22200
+
+    cpp2_base = round(max(0.0, min(inp.net_self_emp_income, _CPP2_MAX) - _CPP_MAX), 2)
+    cpp2_on_se = round(cpp2_base * _CPP2_RATE, 2)
+    line22215 = round(cpp2_on_se * 0.5, 2)
+
+    return {
+        "cpp1_on_se": cpp1_on_se,
+        "cpp2_on_se": cpp2_on_se,
+        "line22200": line22200,
+        "line22215": line22215,
+        "line31000": line31000,
+        "line31205": round(cpp2_on_se * 0.5, 2),
+    }
+
+
+# ── T777 Data Model ───────────────────────────────────────────────────────────
+
+@dataclass
+class T777Input:
+    """User-supplied fields on the 2025 T777."""
+    total_km: float = 0.0
+    work_km: float = 0.0
+    fuel: float = 0.0
+    maintenance: float = 0.0
+    insurance: float = 0.0
+    license: float = 0.0
+    lease: float = 0.0
+    depreciation: float = 0.0
+    interest: float = 0.0
+    home_office_expenses: float = 0.0
+    home_office_work_pct: float = 0.0
+    supplies: float = 0.0
+    legal_fees: float = 0.0
+    other_expenses: float = 0.0
+
+
+def calculate_t777(inp: T777Input) -> dict:
+    """T777 -- Statement of employment expenses."""
+    work_pct = round(inp.work_km / inp.total_km, 6) if inp.total_km > 0 else 0.0
+    vehicle_total = round(inp.fuel + inp.maintenance + inp.insurance + inp.license + inp.lease + inp.depreciation + inp.interest, 2)
+    vehicle_work = round(vehicle_total * work_pct, 2)
+    home_office_work = round(inp.home_office_expenses * inp.home_office_work_pct / 100, 2)
+    line22900 = round(vehicle_work + home_office_work + inp.supplies + inp.legal_fees + inp.other_expenses, 2)
+    return {
+        "work_pct": round(work_pct * 100, 2),
+        "vehicle_total": vehicle_total,
+        "vehicle_work": vehicle_work,
+        "home_office_work": home_office_work,
+        "line22900": line22900,
+    }
+
+
+# ── T2209 Data Model ──────────────────────────────────────────────────────────
+
+@dataclass
+class T2209Input:
+    """User-supplied fields on the 2025 T2209."""
+    foreign_income_non_business: float = 0.0
+    foreign_tax_non_business: float = 0.0
+    net_income: float = 0.0
+    federal_tax_before_credits: float = 0.0
+    foreign_income_business: float = 0.0
+    foreign_tax_business: float = 0.0
+
+
+def calculate_t2209(inp: T2209Input) -> dict:
+    """T2209 -- Federal foreign tax credits."""
+    if inp.net_income > 0 and inp.federal_tax_before_credits > 0:
+        proportion = round(inp.foreign_income_non_business / inp.net_income, 6)
+        limit_non_biz = round(proportion * inp.federal_tax_before_credits, 2)
+    else:
+        limit_non_biz = 0.0
+    credit_non_biz = round(min(inp.foreign_tax_non_business, limit_non_biz), 2)
+    credit_biz = round(min(inp.foreign_tax_business, inp.foreign_income_business * 0.15), 2)
+    line40500 = round(credit_non_biz + credit_biz, 2)
+    return {
+        "limit_non_biz": limit_non_biz,
+        "credit_non_biz": credit_non_biz,
+        "credit_biz": credit_biz,
+        "line40500": line40500,
+    }
+
+
+# ── Worksheet Fed Data Model ──────────────────────────────────────────────────
+
+@dataclass
+class WorksheetFedInput:
+    """User-supplied fields on the 2025 Federal Worksheet (5000-D1)."""
+    net_income: float = 0.0
+    age_65_or_over: bool = False
+    cpp_thru_employment: float = 0.0
+    cpp2_thru_employment: float = 0.0
+    ei_premiums: float = 0.0
+    ei_premiums_se: float = 0.0
+    employment_income: float = 0.0
+    eligible_pension: float = 0.0
+    disability_amount: float = 0.0
+    student_loan_interest: float = 0.0
+    tuition_amount: float = 0.0
+    medical_expenses: float = 0.0
+    income_over_165430: float = 0.0
+
+
+def calculate_worksheet_fed(inp: WorksheetFedInput) -> dict:
+    """Federal Worksheet (5000-D1) -- federal non-refundable tax credits worksheet."""
+    BPA = FEDERAL_BASIC_PERSONAL
+    age_amt = federal_age_amount(inp.net_income, inp.age_65_or_over)
+    employment_amt = round(min(inp.employment_income, FEDERAL_EMPLOYMENT_MAX), 2)
+    pension_amt = round(min(inp.eligible_pension, FEDERAL_PENSION_MAX), 2)
+
+    medical_threshold = round(min(inp.net_income * 0.03, MEDICAL_THRESHOLD_MAX), 2)
+    medical_credit_base = round(max(0.0, inp.medical_expenses - medical_threshold), 2)
+
+    total_credits = round(sum([
+        BPA,
+        age_amt,
+        inp.cpp_thru_employment,
+        inp.cpp2_thru_employment,
+        inp.ei_premiums,
+        inp.ei_premiums_se,
+        employment_amt,
+        pension_amt,
+        inp.disability_amount,
+        inp.student_loan_interest,
+        inp.tuition_amount,
+        medical_credit_base,
+    ]), 2)
+
+    return {
+        "bpa": BPA,
+        "age_amt": age_amt,
+        "employment_amt": employment_amt,
+        "pension_amt": pension_amt,
+        "medical_threshold": medical_threshold,
+        "medical_credit_base": medical_credit_base,
+        "total_credits": total_credits,
+        "credit_value": round(total_credits * FEDERAL_CREDIT_RATE, 2),
+    }

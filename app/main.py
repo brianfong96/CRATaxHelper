@@ -45,6 +45,12 @@ from app.calculator import (
     calculate_schedule9,
     calculate_bc479,
     calculate_schedule3,
+    Schedule5Input, calculate_schedule5,
+    Schedule7Input, calculate_schedule7,
+    Schedule8Input, calculate_schedule8,
+    T777Input, calculate_t777,
+    T2209Input, calculate_t2209,
+    WorksheetFedInput, calculate_worksheet_fed,
 )
 from app.auth import get_current_user, require_auth_response
 from app.config import settings
@@ -166,7 +172,7 @@ def _ctx(request: Request, **extra):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse(
-        "index.html", _ctx(request, forms_by_year=FORMS_BY_YEAR)
+        request, "index.html", _ctx(request, forms_by_year=FORMS_BY_YEAR)
     )
 
 
@@ -175,44 +181,75 @@ async def profile(request: Request):
     user = getattr(request.state, "user", {}) or {}
     archive_enabled = bool(settings.ARCHIVE_URL and settings.SESSION_SECRET)
     return templates.TemplateResponse(
-        "profile.html",
-        _ctx(request, archive_enabled=archive_enabled),
+        request, "profile.html", _ctx(request, archive_enabled=archive_enabled),
     )
 
 
 @app.get("/tax/t1", response_class=HTMLResponse)
 async def t1_form(request: Request):
-    return templates.TemplateResponse("t1.html", _ctx(request))
+    return templates.TemplateResponse(request, "t1.html", _ctx(request))
 
 
 @app.get("/tax/bc428", response_class=HTMLResponse)
 async def bc428_form(request: Request):
-    return templates.TemplateResponse("bc428.html", _ctx(request))
+    return templates.TemplateResponse(request, "bc428.html", _ctx(request))
 
 
 @app.get("/tax/schedule9", response_class=HTMLResponse)
 async def schedule9_form(request: Request):
-    return templates.TemplateResponse("schedule9.html", _ctx(request))
+    return templates.TemplateResponse(request, "schedule9.html", _ctx(request))
 
 
 @app.get("/tax/bc479", response_class=HTMLResponse)
 async def bc479_form(request: Request):
-    return templates.TemplateResponse("bc479.html", _ctx(request))
+    return templates.TemplateResponse(request, "bc479.html", _ctx(request))
 
 
 @app.get("/tax/schedule3", response_class=HTMLResponse)
 async def schedule3_form(request: Request):
-    return templates.TemplateResponse("schedule3.html", _ctx(request))
+    return templates.TemplateResponse(request, "schedule3.html", _ctx(request))
+
+
+@app.get("/tax/schedule5", response_class=HTMLResponse)
+async def schedule5_form(request: Request):
+    return templates.TemplateResponse(request, "schedule5.html", _ctx(request))
+
+
+@app.get("/tax/schedule7", response_class=HTMLResponse)
+async def schedule7_form(request: Request):
+    return templates.TemplateResponse(request, "schedule7.html", _ctx(request))
+
+
+@app.get("/tax/schedule8", response_class=HTMLResponse)
+async def schedule8_form(request: Request):
+    return templates.TemplateResponse(request, "schedule8.html", _ctx(request))
+
+
+@app.get("/tax/t777", response_class=HTMLResponse)
+async def t777_form(request: Request):
+    return templates.TemplateResponse(request, "t777.html", _ctx(request))
+
+
+@app.get("/tax/t2209", response_class=HTMLResponse)
+async def t2209_form(request: Request):
+    return templates.TemplateResponse(request, "t2209.html", _ctx(request))
+
+
+@app.get("/tax/worksheet_fed", response_class=HTMLResponse)
+@app.get("/tax/worksheet-fed", response_class=HTMLResponse)
+async def worksheet_fed_form(request: Request):
+    return templates.TemplateResponse(request, "worksheet_fed.html", _ctx(request))
 
 
 @app.get("/tax/compare", response_class=HTMLResponse)
 async def compare(request: Request):
-    return templates.TemplateResponse("compare.html", _ctx(request))
+    return templates.TemplateResponse(request, "compare.html", _ctx(request))
 
 
 # ── User data API (server-side per-user persistence via Archive) ──────────────
 
-_ALLOWED_FORMS = {"t1", "bc428", "schedule9", "bc479", "schedule3"}
+_ALLOWED_FORMS = {"t1", "bc428", "schedule9", "bc479", "schedule3",
+                  "schedule5", "schedule7", "schedule8", "t777", "t2209", "worksheet_fed"}
 
 
 @app.get("/api/userdata/{form}")
@@ -482,7 +519,7 @@ async def export_excel(request: Request):
 async def admin_setup(request: Request):
     status = forms_status()
     return templates.TemplateResponse(
-        "setup.html", _ctx(request, forms=status)
+        request, "setup.html", _ctx(request, forms=status)
     )
 
 
@@ -842,3 +879,4 @@ async def bc428_pdf(body: BC428PDFBody):
 @app.get("/health")
 async def health():
     return {"service": "taxhelper", "status": "ok"}
+

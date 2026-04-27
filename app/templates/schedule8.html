@@ -1,0 +1,437 @@
+{% extends "base.html" %}
+{% block title %}Schedule 8 &mdash; CPP/QPP Contributions on Self-Employment 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 8 &mdash; CPP/QPP Contributions on Self-Employment and Other Earnings</div>
+      <div class="form-subtitle">Form 5000-S8 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5000-S8-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5000-s8/5000-s8-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 8 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+    <a href="#pg-anchor-6">Page 6</a>
+    <a href="#pg-anchor-7">Page 7</a>
+    <a href="#pg-anchor-8">Page 8</a>
+    <a href="#pg-anchor-9">Page 9</a>
+    <a href="#pg-anchor-10">Page 10</a>
+    <a href="#pg-anchor-11">Page 11</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page1.png" alt="Schedule 8 Page 1">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page2.png" alt="Schedule 8 Page 2">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page3.png" alt="Schedule 8 Page 3">
+
+    <!-- Number of weeks employed (for proration) -->
+    <input type="text" data-numeric="1" id="f_s8_p3_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:80.01%;top:42.87%;width:4.18%;height:1.33%;">
+    <!-- Net self-employment income -->
+    <input type="text" data-numeric="1" id="f_s8_p3_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.90%;top:78.01%;width:13.23%;height:1.42%;">
+    <!-- CPP deduction to add back (line 22200) -->
+    <input type="text" data-numeric="1" id="f_s8_p3_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.90%;top:80.66%;width:13.23%;height:1.42%;">
+    <!-- Total = CPP base A (readonly) -->
+    <input type="text" id="f_s8_p3_4" class="pdf-input" readonly value="0.00" style="left:79.90%;top:83.31%;width:13.23%;height:1.42%;">
+    <!-- Basic exemption 3500 (pre-filled) -->
+    <input type="text" data-numeric="1" id="f_s8_p3_5" class="pdf-input" value="3500" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.90%;top:85.96%;width:13.23%;height:1.42%;">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page4.png" alt="Schedule 8 Page 4">
+
+    <!-- Net earnings minus basic exemption (readonly) -->
+    <input type="text" id="f_s8_p4_1" class="pdf-input" readonly value="0.00" style="left:79.90%;top:7.55%;width:13.23%;height:2.94%;">
+    <!-- Max pensionable earnings 73200 (pre-filled) -->
+    <input type="text" data-numeric="1" id="f_s8_p4_2" class="pdf-input" value="73200" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.25%;top:11.72%;width:13.23%;height:1.42%;">
+    <!-- CPP1 max contribution rate 0.0595 (readonly) -->
+    <input type="text" id="f_s8_p4_3" class="pdf-input" readonly value="0.0595" style="left:79.90%;top:11.72%;width:13.23%;height:1.42%;">
+    <!-- CPP1 contributions col 1 (readonly) -->
+    <input type="text" id="f_s8_p4_4" class="pdf-input" readonly value="0.00" style="left:64.21%;top:13.61%;width:11.28%;height:1.42%;">
+    <!-- CPP1 maximum (readonly) -->
+    <input type="text" id="f_s8_p4_5" class="pdf-input" readonly value="0.00" style="left:64.21%;top:15.51%;width:11.28%;height:2.94%;">
+    <!-- CPP1 total (readonly) -->
+    <input type="text" id="f_s8_p4_6" class="pdf-input" readonly value="0.00" style="left:81.86%;top:15.51%;width:11.28%;height:2.94%;">
+    <!-- CPP1 through employment -->
+    <input type="text" data-numeric="1" id="f_s8_p4_7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.86%;top:18.92%;width:11.28%;height:1.42%;">
+    <!-- CPP1 net = line 31000 (readonly) -->
+    <input type="text" id="f_s8_p4_8" class="pdf-input" readonly value="0.00" style="left:81.86%;top:20.81%;width:11.28%;height:1.42%;">
+    <!-- CPP1 deduction = line 22200 (readonly) -->
+    <input type="text" id="f_s8_p4_9" class="pdf-input" readonly value="0.00" style="left:81.86%;top:22.70%;width:11.28%;height:2.94%;">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page5.png" alt="Schedule 8 Page 5">
+  </div>
+
+  <div id="pg-anchor-6"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page6.png" alt="Schedule 8 Page 6">
+  </div>
+
+  <div id="pg-anchor-7"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page7.png" alt="Schedule 8 Page 7">
+  </div>
+
+  <div id="pg-anchor-8"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page8.png" alt="Schedule 8 Page 8">
+  </div>
+
+  <div id="pg-anchor-9"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page9.png" alt="Schedule 8 Page 9">
+  </div>
+
+  <div id="pg-anchor-10"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page10.png" alt="Schedule 8 Page 10">
+  </div>
+
+  <div id="pg-anchor-11"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page11.png" alt="Schedule 8 Page 11">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule8_autosave';
+const FORM_INPUT_IDS = [
+  'f_s8_p3_1','f_s8_p3_2','f_s8_p3_3','f_s8_p3_5',
+  'f_s8_p4_2','f_s8_p4_7',
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function gRaw(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci && ci !== document.activeElement) ci.value = String(cents).padStart(2,'0').slice(0,2);
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function editInput(el) {
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  const cents = ci ? (parseInt(ci.value,10)||0) : 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const full = dollars + cents/100;
+  el.value = full === 0 ? '' : full.toFixed(2);
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+
+    const ci = document.createElement('input');
+    ci.type = 'text';
+    ci.className = 'cents-input';
+    ci.dataset.for = inp.id;
+    ci.value = initCents;
+    ci.maxLength = 2;
+    ci.setAttribute('inputmode', 'numeric');
+    if (isRO) ci.readOnly = true;
+    ci.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:2px solid ${bdr};` +
+      `text-align:center;font-family:"Courier New",monospace;font-size:0.60em;` +
+      `box-sizing:border-box;color:#222;line-height:1;z-index:1;outline:none;padding:0;`;
+    if (!isRO) {
+      ci.addEventListener('focus', () => ci.select());
+      ci.addEventListener('input', () => { ci.value = ci.value.replace(/\D/g,'').slice(0,2); });
+      ci.addEventListener('blur', () => {
+        ci.value = ci.value.replace(/\D/g,'').padStart(2,'0').slice(0,2);
+        inp.dispatchEvent(new Event('change', {bubbles:true}));
+      });
+      ci.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && ci.selectionStart === 0 && ci.selectionEnd === 0) {
+          inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); e.preventDefault();
+        }
+      });
+    }
+    inp.insertAdjacentElement('afterend', ci);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcS8() {
+  const CPP_RATE = 0.0595;
+  const CPP_MAX = 73200;
+  const CPP_EXEMPT = 3500;
+  const CPP_MAX_CONTRIB = (CPP_MAX - CPP_EXEMPT) * CPP_RATE; // 4166.45
+
+  const net_se = g('f_s8_p3_2');
+  const cpp_addback = g('f_s8_p3_3');
+  const total_base = net_se + cpp_addback;
+  s('f_s8_p3_4', total_base);
+
+  const basic_exempt = g('f_s8_p3_5');
+  const net_earnings = Math.max(0, total_base - basic_exempt);
+  s('f_s8_p4_1', net_earnings);
+
+  const max_pen = g('f_s8_p4_2');
+  const capped = Math.max(0, Math.min(net_earnings, max_pen - CPP_EXEMPT));
+  const cpp1_col1 = capped * CPP_RATE;
+  s('f_s8_p4_4', cpp1_col1);
+  s('f_s8_p4_5', CPP_MAX_CONTRIB);
+
+  const cpp1_total = Math.min(cpp1_col1, CPP_MAX_CONTRIB);
+  s('f_s8_p4_6', cpp1_total);
+
+  const cpp_thru_emp = g('f_s8_p4_7');
+  const cpp1_net = Math.max(0, cpp1_total - cpp_thru_emp);
+  s('f_s8_p4_8', cpp1_net);
+  const line22200 = cpp1_net * 0.5;
+  s('f_s8_p4_9', line22200);
+
+  localStorage.setItem('cra_s8_22200', line22200.toString());
+  localStorage.setItem('cra_s8_31000', line22200.toString());
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcS8();
+  const el = document.getElementById('f_s8_p4_9');
+  const val = el ? (parseFloat(el.value.replace(/,/g,'')) || 0) : 0;
+  window.location.href = ROOT + '/tax/t1?s8_22200=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+function getFormData() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const dollars = parseFloat((el.value || '').replace(/,/g,'')) || 0;
+    const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+    data[id] = dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  FORM_INPUT_IDS.forEach(id => {
+    if (data[id] === undefined) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = String(data[id]);
+    fmtInput(el);
+  });
+  recalcS8();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem(FORM_KEY, JSON.stringify(data));
+  serverSave('schedule8', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'Schedule 8 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 'schedule8'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'schedule8');
+  if (!snap) { toast('No Schedule 8 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  recalcS8();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/schedule8');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem(FORM_KEY, JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem(FORM_KEY);
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcS8();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'schedule8');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcS8(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcS8());
+  });
+});
+</script>
+{% endblock %}

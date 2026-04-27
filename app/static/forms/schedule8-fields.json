@@ -1,327 +1,363 @@
 [
   {
+    "page": 1,
+    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
+    "page": 2,
+    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
     "page": 2,
     "name": "form1[0].Page2[0].Part1[0].Election-Evocation[0].Line50372[0].Month_grp[0].Stop-Month[0]",
     "type": "Text",
-    "left": 81.491,
+    "left": 81.49,
     "top": 72.44,
-    "width": 5.647,
-    "height": 1.334
+    "w": 5.65,
+    "h": 1.33
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Part1[0].Election-Evocation[0].Line50374[0].Month_grp[0].Revoke-Month[0]",
     "type": "Text",
-    "left": 81.491,
-    "top": 77.364,
-    "width": 5.647,
-    "height": 1.334
+    "left": 81.49,
+    "top": 77.36,
+    "w": 5.65,
+    "h": 1.33
+  },
+  {
+    "page": 3,
+    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Part2[0].LineA[0].Number[0]",
     "type": "Text",
-    "left": 80.014,
-    "top": 42.872,
-    "width": 4.176,
-    "height": 1.333
+    "left": 80.01,
+    "top": 42.87,
+    "w": 4.18,
+    "h": 1.33
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Part2[0].LineB[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 78.009,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 78.01,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Part2[0].LineC[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
+    "left": 79.9,
     "top": 80.66,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Part2[0].LineD[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 83.312,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 83.31,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Part2[0].LineE[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 85.963,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 85.96,
+    "w": 13.24,
+    "h": 1.42
+  },
+  {
+    "page": 4,
+    "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line1[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 7.554,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 7.55,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line2[0].Amount1[0]",
     "type": "Text",
-    "left": 62.249,
+    "left": 62.25,
     "top": 11.72,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line2[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
+    "left": 79.9,
     "top": 11.72,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line3[0].Amount[0]",
     "type": "Text",
     "left": 64.21,
-    "top": 13.614,
-    "width": 11.275,
-    "height": 1.424
+    "top": 13.61,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line4[0].Amount1[0]",
     "type": "Text",
     "left": 64.21,
-    "top": 15.508,
-    "width": 11.275,
-    "height": 2.94
+    "top": 15.51,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line4[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 15.508,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 15.51,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line5[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 18.917,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 18.92,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line6[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 20.811,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 20.81,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line7[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 22.705,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 22.71,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line8[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 26.872,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 26.87,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line9[0].Amount1[0]",
     "type": "Text",
-    "left": 44.602,
-    "top": 31.796,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.6,
+    "top": 31.8,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line9[0].Amount2[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 30.281,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 30.28,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line10[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
+    "left": 81.86,
     "top": 33.69,
-    "width": 11.275,
-    "height": 2.94
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line11[0].Amount1[0]",
     "type": "Text",
-    "left": 37.739,
-    "top": 39.372,
-    "width": 13.235,
-    "height": 1.424
+    "left": 37.74,
+    "top": 39.37,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line11[0].Amount2[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 37.857,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 37.86,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line12[0].Amount1[0]",
     "type": "Text",
-    "left": 37.739,
-    "top": 42.781,
-    "width": 13.235,
-    "height": 1.424
+    "left": 37.74,
+    "top": 42.78,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line12[0].Amount2[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 41.266,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 41.27,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line13[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 44.675,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 44.67,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line14[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 48.864,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 48.86,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line15[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 50.757,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 50.76,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line16[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 52.651,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 52.65,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line17[0].Amount[0]",
     "type": "Text",
-    "left": 62.249,
-    "top": 54.545,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.25,
+    "top": 54.55,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line18[0].Amount[0]",
     "type": "Text",
     "left": 64.21,
-    "top": 56.439,
-    "width": 11.275,
-    "height": 1.424
+    "top": 56.44,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line19[0].Amount1[0]",
     "type": "Text",
     "left": 64.21,
-    "top": 58.333,
-    "width": 11.275,
-    "height": 1.424
+    "top": 58.33,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line19[0].Amount2[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 58.333,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 58.33,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line20[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 60.227,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 60.23,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line21[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 62.522,
-    "width": 13.235,
-    "height": 2.94
+    "left": 62.25,
+    "top": 62.52,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line22[0].Amount1[0]",
     "type": "Text",
-    "left": 22.059,
-    "top": 67.446,
-    "width": 13.235,
-    "height": 1.424
+    "left": 22.06,
+    "top": 67.45,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line22[0].Amount2[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 65.931,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 65.93,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
@@ -329,1277 +365,1349 @@
     "type": "Text",
     "left": 64.21,
     "top": 69.34,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line23[0].Amount2[0]",
     "type": "Text",
-    "left": 81.857,
+    "left": 81.86,
     "top": 69.34,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Part3[0].Line24[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 71.234,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 71.23,
+    "w": 11.27,
+    "h": 1.42
+  },
+  {
+    "page": 5,
+    "name": "form1[0].#pageSet[0].Page1[4].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line25[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 25.849,
-    "width": 13.235,
-    "height": 4.364
+    "left": 79.9,
+    "top": 25.85,
+    "w": 13.24,
+    "h": 4.36
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line26[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
+    "left": 79.9,
     "top": 31.44,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line27[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 33.333,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 33.33,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line28[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 35.318,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 35.32,
+    "w": 11.27,
+    "h": 4.36
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line29[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
+    "left": 79.9,
     "top": 41.0,
-    "width": 13.235,
-    "height": 2.849
+    "w": 13.24,
+    "h": 2.85
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line30[0].Amount[0]",
     "type": "Text",
-    "left": 79.896,
-    "top": 47.461,
-    "width": 13.235,
-    "height": 2.849
+    "left": 79.9,
+    "top": 47.46,
+    "w": 13.24,
+    "h": 2.85
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line31[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
+    "left": 62.25,
     "top": 53.03,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line32[0].Amount[0]",
     "type": "Text",
-    "left": 64.222,
-    "top": 54.924,
-    "width": 11.274,
-    "height": 2.94
+    "left": 64.22,
+    "top": 54.92,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line32[0].Amount2[0]",
     "type": "Text",
-    "left": 81.868,
-    "top": 54.924,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.87,
+    "top": 54.92,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line33[0].Amount[0]",
     "type": "Text",
     "left": 64.21,
-    "top": 58.334,
-    "width": 11.274,
-    "height": 1.424
+    "top": 58.33,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line34[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 60.228,
-    "width": 11.274,
-    "height": 1.424
+    "left": 81.86,
+    "top": 60.23,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line35[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 62.212,
-    "width": 11.274,
-    "height": 1.333
+    "left": 81.86,
+    "top": 62.21,
+    "w": 11.27,
+    "h": 1.33
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Part3_Cont[0].Line36[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 64.015,
-    "width": 11.274,
-    "height": 4.455
+    "left": 81.86,
+    "top": 64.02,
+    "w": 11.27,
+    "h": 4.45
+  },
+  {
+    "page": 6,
+    "name": "form1[0].#pageSet[0].Page1[5].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line37[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 7.955,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 7.95,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line38[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 12.879,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.26,
+    "top": 12.88,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line39[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 14.751,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 14.75,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line39[0].Amount2[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 14.751,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 14.75,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line40[0].Amount1[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 18.182,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 18.18,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line41[0].Amount1[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 20.076,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 20.08,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line42[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
+    "left": 81.86,
     "top": 21.97,
-    "width": 11.274,
-    "height": 2.94
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line43[0].Amount1[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 25.379,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 25.38,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line44[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
+    "left": 62.25,
     "top": 28.81,
-    "width": 13.235,
-    "height": 2.94
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line45[0].Amount[0]",
     "type": "Text",
-    "left": 44.608,
-    "top": 35.249,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 35.25,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line46[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 37.143,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 37.14,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line47[0].Amount1[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 40.552,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 40.55,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line47[0].Amount2[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 40.552,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 40.55,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part3[0].Line48[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 42.537,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 42.54,
+    "w": 11.27,
+    "h": 4.36
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Part4[0].Line1[0].Note1[0]",
+    "type": "Button",
+    "left": 33.82,
+    "top": 54.55,
+    "w": 5.88,
+    "h": 1.52
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line1[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 54.545,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 54.55,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line2[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 57.954,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 57.95,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line3[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 61.363,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 61.36,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line4[0].Amount1[0]",
     "type": "Text",
-    "left": 62.255,
+    "left": 62.25,
     "top": 65.53,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line4[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
+    "left": 79.9,
     "top": 65.53,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line5[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 67.424,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 67.42,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line6[0].Amount1[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 69.318,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 69.32,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line6[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 69.318,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 69.32,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line7[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 72.727,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 72.73,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line8[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 74.621,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 74.62,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 6,
     "name": "form1[0].Page6[0].Part4[0].Line9[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 76.515,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 76.51,
+    "w": 11.27,
+    "h": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].#pageSet[0].Page1[6].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line10[0].Amount1[0]",
     "type": "Text",
-    "left": 31.372,
+    "left": 31.37,
     "top": 15.53,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line10[0].Amount2[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 14.015,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 14.02,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line11[0].Amount1[0]",
     "type": "Text",
-    "left": 20.588,
-    "top": 18.939,
-    "width": 13.235,
-    "height": 1.424
+    "left": 20.59,
+    "top": 18.94,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line11[0].Amount2[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 17.424,
-    "width": 13.235,
-    "height": 2.94
+    "left": 62.25,
+    "top": 17.42,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line12[0].Amount1[0]",
     "type": "Text",
-    "left": 20.588,
-    "top": 22.348,
-    "width": 13.235,
-    "height": 1.424
+    "left": 20.59,
+    "top": 22.35,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line12[0].Amount2[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 20.833,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 20.83,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line13[0].Amount1[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 24.242,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 24.24,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line13[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 24.242,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 24.24,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line14[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 26.227,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 26.23,
+    "w": 11.27,
+    "h": 4.36
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line15[0].Amount1[0]",
     "type": "Text",
-    "left": 44.608,
-    "top": 34.849,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 34.85,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line15[0].Amount2[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 31.909,
-    "width": 13.235,
-    "height": 4.364
+    "left": 79.9,
+    "top": 31.91,
+    "w": 13.24,
+    "h": 4.36
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line16[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 36.742,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 36.74,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part4[0].Line17[0].amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 38.728,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 38.73,
+    "w": 11.27,
+    "h": 4.36
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Part5[0].Line1[0].Note2[0]",
+    "type": "Button",
+    "left": 34.32,
+    "top": 51.52,
+    "w": 5.88,
+    "h": 1.52
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line1[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 51.515,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 51.52,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line2[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 54.924,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 54.92,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line3[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 58.333,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 58.33,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line4[0].Amount[0]",
     "type": "Text",
-    "left": 81.857,
-    "top": 61.742,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 61.74,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line5[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 64.394,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 64.39,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line6[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 66.309,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 66.31,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line7[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 68.203,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 68.2,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line8[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 74.621,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.25,
+    "top": 74.62,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line9[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 76.537,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 76.54,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 7,
     "name": "form1[0].Page7[0].Part5[0].Line10[0].Amount1[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 78.431,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 78.43,
+    "w": 11.27,
+    "h": 1.42
+  },
+  {
+    "page": 8,
+    "name": "form1[0].#pageSet[0].Page1[7].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line11[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 10.227,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 10.23,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line12[0].Amount[0]",
     "type": "Text",
-    "left": 81.868,
+    "left": 81.87,
     "top": 12.1,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line13[0].Amount1[0]",
     "type": "Text",
-    "left": 81.868,
-    "top": 13.994,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 13.99,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line14[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 20.455,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.25,
+    "top": 20.45,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line15[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 22.349,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 22.35,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line16[0].Amount1[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 24.243,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 24.24,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line17[0].Amount[0]",
     "type": "Text",
-    "left": 79.908,
-    "top": 26.894,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.91,
+    "top": 26.89,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line18[0].Amount[0]",
     "type": "Text",
-    "left": 81.869,
-    "top": 28.788,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 28.79,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line19[0].Amount[0]",
     "type": "Text",
-    "left": 81.869,
-    "top": 30.682,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 30.68,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line20[0].Amount1[0]",
     "type": "Text",
-    "left": 44.614,
-    "top": 32.576,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 32.58,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line20[0].Amount[0]",
     "type": "Text",
-    "left": 81.869,
-    "top": 32.576,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 32.58,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line21[0].Amount[0]",
     "type": "Text",
-    "left": 81.869,
+    "left": 81.87,
     "top": 34.47,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line22[0].Amount[0]",
     "type": "Text",
-    "left": 79.908,
-    "top": 37.121,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.91,
+    "top": 37.12,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line23[0].Amount[0]",
     "type": "Text",
-    "left": 62.261,
-    "top": 43.182,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.26,
+    "top": 43.18,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line24[0].Amount[0]",
     "type": "Text",
-    "left": 64.221,
-    "top": 45.076,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 45.08,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line25[0].Amount[0]",
     "type": "Text",
-    "left": 64.221,
+    "left": 64.22,
     "top": 46.97,
-    "width": 11.275,
-    "height": 2.94
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line26[0].Amount[0]",
     "type": "Text",
-    "left": 44.614,
-    "top": 50.379,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 50.38,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line27[0].Amount[0]",
     "type": "Text",
-    "left": 46.574,
-    "top": 52.273,
-    "width": 11.275,
-    "height": 1.424
+    "left": 46.57,
+    "top": 52.27,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line28[0].Amount1[0]",
     "type": "Text",
-    "left": 46.574,
-    "top": 54.166,
-    "width": 11.275,
-    "height": 1.424
+    "left": 46.57,
+    "top": 54.17,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line28[0].Amount2[0]",
     "type": "Text",
-    "left": 64.221,
-    "top": 54.166,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 54.17,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line29[0].Amount1[0]",
     "type": "Text",
-    "left": 64.221,
+    "left": 64.22,
     "top": 56.06,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line29[0].Amount2[0]",
     "type": "Text",
-    "left": 81.868,
+    "left": 81.87,
     "top": 56.06,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line30[0].Amount[0]",
     "type": "Text",
-    "left": 81.868,
-    "top": 57.955,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.87,
+    "top": 57.95,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line31[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 62.121,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.25,
+    "top": 62.12,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line32[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 64.015,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 64.02,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line33[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 65.909,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 65.91,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line34[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 72.349,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.26,
+    "top": 72.35,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line35[0].Amount1[0]",
     "type": "Text",
-    "left": 31.372,
-    "top": 74.243,
-    "width": 13.235,
-    "height": 1.424
+    "left": 31.37,
+    "top": 74.24,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line35[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 74.243,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 74.24,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line36[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 76.137,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 76.14,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line37[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 78.788,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.26,
+    "top": 78.79,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line38[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 80.682,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 80.68,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line39[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 82.576,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 82.58,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line40[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
+    "left": 64.22,
     "top": 84.47,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 8,
     "name": "form1[0].Page8[0].Part5[0].Line41[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 86.364,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 86.36,
+    "w": 11.27,
+    "h": 1.42
+  },
+  {
+    "page": 9,
+    "name": "form1[0].#pageSet[0].Page1[8].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line42[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 10.227,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 10.23,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line43[0].Amount1[0]",
     "type": "Text",
-    "left": 31.373,
-    "top": 24.242,
-    "width": 13.235,
-    "height": 1.424
+    "left": 31.37,
+    "top": 24.24,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line43[0].Amount2[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 22.727,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 22.73,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line44[0].Amount1[0]",
     "type": "Text",
-    "left": 21.569,
-    "top": 27.651,
-    "width": 13.235,
-    "height": 1.424
+    "left": 21.57,
+    "top": 27.65,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line44[0].Amount2[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 26.136,
-    "width": 13.235,
-    "height": 2.94
+    "left": 62.26,
+    "top": 26.14,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line45[0].Amount1[0]",
     "type": "Text",
-    "left": 21.569,
+    "left": 21.57,
     "top": 31.06,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line45[0].Amount2[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 29.545,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 29.55,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line46[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 32.955,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 32.95,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line46[0].Amount2[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 32.955,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 32.95,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line47[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 34.849,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 34.85,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line48[0].Amount1[0]",
     "type": "Text",
-    "left": 44.608,
-    "top": 36.742,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 36.74,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line48[0].Amount2[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 36.742,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 36.74,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line49[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 38.727,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 38.73,
+    "w": 11.27,
+    "h": 4.36
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line50[0].Amount1[0]",
     "type": "Text",
-    "left": 44.608,
-    "top": 47.349,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 47.35,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line50[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 44.409,
-    "width": 13.235,
-    "height": 4.364
+    "left": 79.9,
+    "top": 44.41,
+    "w": 13.24,
+    "h": 4.36
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line51[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 50.091,
-    "width": 13.235,
-    "height": 2.849
+    "left": 79.9,
+    "top": 50.09,
+    "w": 13.24,
+    "h": 2.85
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line52[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 55.303,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.25,
+    "top": 55.3,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line53[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 57.197,
-    "width": 11.274,
-    "height": 4.455
+    "left": 64.22,
+    "top": 57.2,
+    "w": 11.27,
+    "h": 4.45
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line53[0].Amount2[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 57.197,
-    "width": 11.275,
-    "height": 4.455
+    "left": 81.86,
+    "top": 57.2,
+    "w": 11.27,
+    "h": 4.45
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line54[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 62.121,
-    "width": 11.274,
-    "height": 1.424
+    "left": 64.22,
+    "top": 62.12,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line55[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 64.015,
-    "width": 11.274,
-    "height": 1.424
+    "left": 81.86,
+    "top": 64.02,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line56[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
+    "left": 81.86,
     "top": 66.0,
-    "width": 11.274,
-    "height": 1.333
+    "w": 11.27,
+    "h": 1.33
   },
   {
     "page": 9,
     "name": "form1[0].Page9[0].Part5_Cont[0].Line57[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 67.894,
-    "width": 11.274,
-    "height": 4.364
+    "left": 81.86,
+    "top": 67.89,
+    "w": 11.27,
+    "h": 4.36
+  },
+  {
+    "page": 10,
+    "name": "form1[0].#pageSet[0].Page1[9].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line58[0].Amount[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 10.227,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.9,
+    "top": 10.23,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line59[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
+    "left": 62.26,
     "top": 15.53,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line60[0].Amount[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 17.403,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 17.4,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line60[0].Amount2[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 17.402,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 17.4,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line61[0].Amount1[0]",
     "type": "Text",
-    "left": 64.216,
-    "top": 20.834,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 20.83,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line62[0].Amount1[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 22.727,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 22.73,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line63[0].Amount[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 24.621,
-    "width": 11.274,
-    "height": 2.94
+    "left": 81.86,
+    "top": 24.62,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line64[0].Amount1[0]",
     "type": "Text",
-    "left": 81.862,
+    "left": 81.86,
     "top": 28.03,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line65[0].Amount[0]",
     "type": "Text",
-    "left": 62.255,
-    "top": 32.197,
-    "width": 13.235,
-    "height": 2.94
+    "left": 62.25,
+    "top": 32.2,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line66[0].Amount[0]",
     "type": "Text",
-    "left": 44.608,
-    "top": 39.015,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.61,
+    "top": 39.02,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line67[0].Amount[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 40.909,
-    "width": 11.275,
-    "height": 2.94
+    "left": 64.22,
+    "top": 40.91,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line68[0].Amount1[0]",
     "type": "Text",
-    "left": 64.215,
-    "top": 44.318,
-    "width": 11.275,
-    "height": 1.424
+    "left": 64.22,
+    "top": 44.32,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line68[0].Amount2[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 44.318,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 44.32,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line69[0].Amount[0]",
     "type": "Text",
-    "left": 81.862,
-    "top": 46.303,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.86,
+    "top": 46.3,
+    "w": 11.27,
+    "h": 4.36
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line70[0].Amount1[0]",
     "type": "Text",
-    "left": 44.615,
-    "top": 54.924,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.62,
+    "top": 54.92,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line70[0].Amount2[0]",
     "type": "Text",
-    "left": 79.909,
-    "top": 51.985,
-    "width": 13.235,
-    "height": 4.364
+    "left": 79.91,
+    "top": 51.98,
+    "w": 13.24,
+    "h": 4.36
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line71[0].Amount1[0]",
     "type": "Text",
-    "left": 44.615,
-    "top": 56.818,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.62,
+    "top": 56.82,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line71[0].Amount2[0]",
     "type": "Text",
     "left": 81.87,
-    "top": 56.819,
-    "width": 11.275,
-    "height": 1.424
+    "top": 56.82,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line72[0].Amount2[0]",
     "type": "Text",
-    "left": 81.869,
-    "top": 58.712,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 58.71,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line73[0].Amount2[0]",
     "type": "Text",
-    "left": 81.869,
-    "top": 60.606,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.87,
+    "top": 60.61,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
@@ -1607,187 +1715,196 @@
     "type": "Text",
     "left": 81.87,
     "top": 62.5,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line75[0].AmountA[0].Amount1[0]",
     "type": "Text",
-    "left": 44.615,
-    "top": 65.152,
-    "width": 13.235,
-    "height": 2.94
+    "left": 44.61,
+    "top": 65.15,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line75[0].Amount2[0]",
     "type": "Text",
-    "left": 79.909,
-    "top": 66.667,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.91,
+    "top": 66.67,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line76[0].Amount2[0]",
     "type": "Text",
-    "left": 46.575,
-    "top": 68.561,
-    "width": 11.275,
-    "height": 1.424
+    "left": 46.58,
+    "top": 68.56,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 10,
     "name": "form1[0].Page10[0].Part5_Cont[0].Line77[0].Amount[0]",
     "type": "Text",
-    "left": 46.575,
-    "top": 70.455,
-    "width": 11.275,
-    "height": 1.424
+    "left": 46.58,
+    "top": 70.45,
+    "w": 11.27,
+    "h": 1.42
+  },
+  {
+    "page": 11,
+    "name": "form1[0].#pageSet[0].Page1[10].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line79[0].Amount2[0]",
     "type": "Text",
-    "left": 62.239,
-    "top": 10.233,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.24,
+    "top": 10.23,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line80[0].Amount2[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 12.127,
-    "width": 11.275,
-    "height": 1.424
+    "top": 12.13,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line81[0].Amount1[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 14.021,
-    "width": 11.275,
-    "height": 1.424
+    "top": 14.02,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line81[0].Amount[0]",
     "type": "Text",
-    "left": 79.892,
-    "top": 14.021,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.89,
+    "top": 14.02,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line82[0].Amount2[0]",
     "type": "Text",
-    "left": 62.239,
-    "top": 15.915,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.24,
+    "top": 15.92,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line82[0].Amount[0]",
     "type": "Text",
-    "left": 81.853,
-    "top": 15.916,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.85,
+    "top": 15.92,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line83[0].Amount2[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 17.809,
-    "width": 11.275,
-    "height": 1.424
+    "top": 17.81,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line84[0].Amount1[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 19.703,
-    "width": 11.275,
-    "height": 1.424
+    "top": 19.7,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line84[0].Amount[0]",
     "type": "Text",
-    "left": 81.847,
-    "top": 19.703,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.85,
+    "top": 19.7,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line85[0].Amount1[0]",
     "type": "Text",
-    "left": 44.592,
-    "top": 21.597,
-    "width": 13.235,
-    "height": 1.424
+    "left": 44.59,
+    "top": 21.6,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line85[0].Amount2[0]",
     "type": "Text",
-    "left": 81.847,
-    "top": 21.597,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.85,
+    "top": 21.6,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line86[0].Amount2[0]",
     "type": "Text",
-    "left": 62.239,
-    "top": 23.491,
-    "width": 13.235,
-    "height": 1.424
+    "left": 62.24,
+    "top": 23.49,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line87[0].Amount2[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 25.384,
-    "width": 11.275,
-    "height": 4.455
+    "top": 25.38,
+    "w": 11.27,
+    "h": 4.45
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line88[0].Amount1[0]",
     "type": "Text",
     "left": 64.2,
-    "top": 30.309,
-    "width": 11.275,
-    "height": 1.424
+    "top": 30.31,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line88[0].Amount[0]",
     "type": "Text",
-    "left": 81.847,
-    "top": 30.309,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.85,
+    "top": 30.31,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 11,
     "name": "form1[0].Page11[0].Part5-Cont[0].Line89[0].Amount[0]",
     "type": "Text",
-    "left": 81.847,
-    "top": 32.294,
-    "width": 11.275,
-    "height": 4.364
+    "left": 81.85,
+    "top": 32.29,
+    "w": 11.27,
+    "h": 4.36
   }
 ]

@@ -1,281 +1,326 @@
 [
   {
+    "page": 1,
+    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
+    "page": 2,
+    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line1[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 48.485,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.41,
+    "top": 48.48,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line2[0].Amount[0]",
     "type": "Text",
-    "left": 61.765,
-    "top": 53.409,
-    "width": 13.235,
-    "height": 2.94
+    "left": 61.77,
+    "top": 53.41,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line3[0].Amount[0]",
     "type": "Text",
-    "left": 63.726,
-    "top": 56.818,
-    "width": 11.275,
-    "height": 4.455
+    "left": 63.73,
+    "top": 56.82,
+    "w": 11.27,
+    "h": 4.45
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line4[0].Amount1[0]",
     "type": "Text",
-    "left": 63.726,
-    "top": 61.743,
-    "width": 11.275,
-    "height": 1.424
+    "left": 63.73,
+    "top": 61.74,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line4[0].Amount2[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 61.743,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.37,
+    "top": 61.74,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].PartA[0].Line5[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 63.636,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.37,
+    "top": 63.64,
+    "w": 11.27,
+    "h": 2.94
+  },
+  {
+    "page": 3,
+    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line6[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
+    "left": 79.41,
     "top": 34.47,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line7[0].Amount[0]",
     "type": "Text",
-    "left": 61.765,
-    "top": 37.879,
-    "width": 13.235,
-    "height": 1.424
+    "left": 61.77,
+    "top": 37.88,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line8[0].Amount[0]",
     "type": "Text",
-    "left": 63.726,
-    "top": 39.773,
-    "width": 11.275,
-    "height": 2.94
+    "left": 63.73,
+    "top": 39.77,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line9[0].Amount1[0]",
     "type": "Text",
-    "left": 63.726,
-    "top": 43.182,
-    "width": 11.275,
-    "height": 1.424
+    "left": 63.73,
+    "top": 43.18,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line9[0].Amount2[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 43.182,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.37,
+    "top": 43.18,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartB[0].Line10[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 45.076,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.37,
+    "top": 45.08,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line11[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 60.227,
-    "width": 13.235,
-    "height": 2.94
+    "left": 79.41,
+    "top": 60.23,
+    "w": 13.24,
+    "h": 2.94
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line12[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 63.636,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.37,
+    "top": 63.64,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line13[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
+    "left": 81.37,
     "top": 65.53,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line14[0].Amount[0]",
     "type": "Text",
-    "left": 61.765,
-    "top": 68.182,
-    "width": 13.235,
-    "height": 1.424
+    "left": 61.77,
+    "top": 68.18,
+    "w": 13.24,
+    "h": 1.42
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].PartC[0].Line15[0].Note1[0]",
+    "type": "Button",
+    "left": 10.78,
+    "top": 70.08,
+    "w": 5.88,
+    "h": 1.52
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line15[0].Amount1[0]",
     "type": "Text",
-    "left": 63.726,
-    "top": 70.076,
-    "width": 11.275,
-    "height": 1.424
+    "left": 63.73,
+    "top": 70.08,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line15[0].Amount2[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 70.076,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.41,
+    "top": 70.08,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line16[0].Amount[0]",
     "type": "Text",
-    "left": 63.726,
+    "left": 63.73,
     "top": 71.97,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line17[0].Amount[0]",
     "type": "Text",
-    "left": 61.765,
-    "top": 73.864,
-    "width": 13.235,
-    "height": 1.424
+    "left": 61.77,
+    "top": 73.86,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line18[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 75.757,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.37,
+    "top": 75.76,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line19[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 79.166,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.37,
+    "top": 79.17,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].PartC[0].Line20[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 81.909,
-    "width": 13.235,
-    "height": 2.849
+    "left": 79.41,
+    "top": 81.91,
+    "w": 13.24,
+    "h": 2.85
+  },
+  {
+    "page": 4,
+    "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartD[0].Line22[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 7.576,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.41,
+    "top": 7.58,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartD[0].Line23[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
+    "left": 81.37,
     "top": 9.47,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartD[0].Line24[0].Amount[0]",
     "type": "Text",
-    "left": 81.373,
-    "top": 11.364,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.37,
+    "top": 11.36,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartE[0].Line25[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 30.303,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.41,
+    "top": 30.3,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartE[0].Line26[0].Box_Line25[0]",
     "type": "CheckBox",
-    "left": 79.412,
-    "top": 34.091,
-    "width": 1.961,
-    "height": 1.515
+    "left": 79.41,
+    "top": 34.09,
+    "w": 1.96,
+    "h": 1.52
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartE[0].Line27[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
-    "top": 36.364,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.41,
+    "top": 36.36,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartE[0].Line28[0].Box_Line27[0]",
     "type": "CheckBox",
-    "left": 79.412,
-    "top": 42.803,
-    "width": 1.961,
-    "height": 1.515
+    "left": 79.41,
+    "top": 42.8,
+    "w": 1.96,
+    "h": 1.52
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].PartF[0].Line29[0].Amount[0]",
     "type": "Text",
-    "left": 79.412,
+    "left": 79.41,
     "top": 56.44,
-    "width": 13.235,
-    "height": 1.424
+    "w": 13.24,
+    "h": 1.42
   }
 ]

@@ -1,0 +1,437 @@
+{% extends "base.html" %}
+{% block title %}Schedule 7 &mdash; RRSP, FHSA, and PRPP Unused Contributions 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 7 &mdash; RRSP, FHSA, and PRPP Unused Contributions, Transfers, and Activities</div>
+      <div class="form-subtitle">Form 5000-S7 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5000-S7-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/5000-s7/5000-s7-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 7 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule7_page1.png" alt="Schedule 7 Page 1">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule7_page2.png" alt="Schedule 7 Page 2">
+
+    <!-- RRSP unused from prior years -->
+    <input type="text" data-numeric="1" id="f_s7_p2_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:48.48%;width:13.23%;height:2.94%;">
+    <!-- RRSP contributions this year -->
+    <input type="text" data-numeric="1" id="f_s7_p2_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:61.77%;top:53.41%;width:13.23%;height:2.94%;">
+    <!-- RRSP contributions Jan-60 days -->
+    <input type="text" data-numeric="1" id="f_s7_p2_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:63.73%;top:56.82%;width:11.28%;height:4.46%;">
+    <!-- RRSP total A (readonly) -->
+    <input type="text" id="f_s7_p2_4" class="pdf-input" readonly value="0.00" style="left:63.73%;top:61.74%;width:11.28%;height:1.42%;">
+    <!-- PRPP/VRSP -->
+    <input type="text" data-numeric="1" id="f_s7_p2_5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:61.74%;width:11.28%;height:1.42%;">
+    <!-- RRSP deduction line 20800 -->
+    <input type="text" data-numeric="1" id="f_s7_p2_6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:63.64%;width:11.28%;height:2.94%;">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule7_page3.png" alt="Schedule 7 Page 3">
+
+    <!-- FHSA unused contributions -->
+    <input type="text" data-numeric="1" id="f_s7_p3_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:34.47%;width:13.23%;height:1.42%;">
+    <!-- FHSA contributions this year -->
+    <input type="text" data-numeric="1" id="f_s7_p3_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:61.77%;top:37.88%;width:13.23%;height:1.42%;">
+    <!-- FHSA cont continued -->
+    <input type="text" data-numeric="1" id="f_s7_p3_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:63.73%;top:39.77%;width:11.28%;height:2.94%;">
+    <!-- FHSA total B (readonly) -->
+    <input type="text" id="f_s7_p3_4" class="pdf-input" readonly value="0.00" style="left:63.73%;top:43.18%;width:11.28%;height:1.42%;">
+    <!-- FHSA deduction -->
+    <input type="text" data-numeric="1" id="f_s7_p3_5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:43.18%;width:11.28%;height:1.42%;">
+    <!-- line 20805 FHSA deduction -->
+    <input type="text" data-numeric="1" id="f_s7_p3_6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:45.08%;width:11.28%;height:1.42%;">
+    <!-- LLP repayment this year -->
+    <input type="text" data-numeric="1" id="f_s7_p3_7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:60.23%;width:13.23%;height:2.94%;">
+    <!-- LLP balance owing -->
+    <input type="text" data-numeric="1" id="f_s7_p3_8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:63.64%;width:11.28%;height:1.42%;">
+    <!-- LLP min repayment (readonly) -->
+    <input type="text" id="f_s7_p3_9" class="pdf-input" readonly value="0.00" style="left:81.37%;top:65.53%;width:11.28%;height:1.42%;">
+    <!-- HBP contributions this year -->
+    <input type="text" data-numeric="1" id="f_s7_p3_10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:61.77%;top:68.18%;width:13.23%;height:1.42%;">
+    <!-- HBP balance -->
+    <input type="text" data-numeric="1" id="f_s7_p3_11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:63.73%;top:70.08%;width:11.28%;height:1.42%;">
+    <!-- HBP repay this year -->
+    <input type="text" data-numeric="1" id="f_s7_p3_12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:70.08%;width:13.23%;height:1.42%;">
+    <!-- HBP 1/15 of withdrawal (readonly) -->
+    <input type="text" id="f_s7_p3_13" class="pdf-input" readonly value="0.00" style="left:63.73%;top:71.97%;width:11.28%;height:1.42%;">
+    <!-- HBP total -->
+    <input type="text" data-numeric="1" id="f_s7_p3_14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:61.77%;top:73.86%;width:13.23%;height:1.42%;">
+    <!-- HBP line 24600 -->
+    <input type="text" data-numeric="1" id="f_s7_p3_15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:75.76%;width:11.28%;height:2.94%;">
+    <!-- LLP line 24500 -->
+    <input type="text" data-numeric="1" id="f_s7_p3_16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:79.17%;width:11.28%;height:1.42%;">
+    <!-- PRPP line 20805 -->
+    <input type="text" data-numeric="1" id="f_s7_p3_17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:81.91%;width:13.23%;height:2.85%;">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule7_page4.png" alt="Schedule 7 Page 4">
+
+    <!-- total deductions 20800 -->
+    <input type="text" data-numeric="1" id="f_s7_p4_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:7.58%;width:13.23%;height:1.42%;">
+    <!-- FHSA deduction 20805 -->
+    <input type="text" data-numeric="1" id="f_s7_p4_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:9.47%;width:11.28%;height:1.42%;">
+    <!-- PRPP deduction -->
+    <input type="text" data-numeric="1" id="f_s7_p4_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:81.37%;top:11.36%;width:11.28%;height:2.94%;">
+    <!-- designated withdrawal LLP -->
+    <input type="text" data-numeric="1" id="f_s7_p4_4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:30.30%;width:13.23%;height:1.42%;">
+    <!-- Checkbox LLP repay -->
+    <input type="checkbox" id="f_s7_p4_5" class="pdf-input" style="left:79.41%;top:34.09%;width:1.96%;height:1.51%;" onchange="recalcS7(); autoSave();">
+    <!-- line 24500 LLP repay -->
+    <input type="text" data-numeric="1" id="f_s7_p4_6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:36.36%;width:13.23%;height:1.42%;">
+    <!-- Checkbox HBP repay -->
+    <input type="checkbox" id="f_s7_p4_7" class="pdf-input" style="left:79.41%;top:42.80%;width:1.96%;height:1.51%;" onchange="recalcS7(); autoSave();">
+    <!-- line 24600 HBP repay -->
+    <input type="text" data-numeric="1" id="f_s7_p4_8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS7(); autoSave();" style="left:79.41%;top:56.44%;width:13.23%;height:1.42%;">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule7_autosave';
+const FORM_INPUT_IDS = [
+  'f_s7_p2_1','f_s7_p2_2','f_s7_p2_3','f_s7_p2_5','f_s7_p2_6',
+  'f_s7_p3_1','f_s7_p3_2','f_s7_p3_3','f_s7_p3_5','f_s7_p3_6',
+  'f_s7_p3_7','f_s7_p3_8','f_s7_p3_10','f_s7_p3_11','f_s7_p3_12',
+  'f_s7_p3_14','f_s7_p3_15','f_s7_p3_16','f_s7_p3_17',
+  'f_s7_p4_1','f_s7_p4_2','f_s7_p4_3','f_s7_p4_4','f_s7_p4_6','f_s7_p4_8',
+];
+const CHECKBOX_IDS = ['f_s7_p4_5','f_s7_p4_7'];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function gRaw(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci && ci !== document.activeElement) ci.value = String(cents).padStart(2,'0').slice(0,2);
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function editInput(el) {
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  const cents = ci ? (parseInt(ci.value,10)||0) : 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const full = dollars + cents/100;
+  el.value = full === 0 ? '' : full.toFixed(2);
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+
+    const ci = document.createElement('input');
+    ci.type = 'text';
+    ci.className = 'cents-input';
+    ci.dataset.for = inp.id;
+    ci.value = initCents;
+    ci.maxLength = 2;
+    ci.setAttribute('inputmode', 'numeric');
+    if (isRO) ci.readOnly = true;
+    ci.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:2px solid ${bdr};` +
+      `text-align:center;font-family:"Courier New",monospace;font-size:0.60em;` +
+      `box-sizing:border-box;color:#222;line-height:1;z-index:1;outline:none;padding:0;`;
+    if (!isRO) {
+      ci.addEventListener('focus', () => ci.select());
+      ci.addEventListener('input', () => { ci.value = ci.value.replace(/\D/g,'').slice(0,2); });
+      ci.addEventListener('blur', () => {
+        ci.value = ci.value.replace(/\D/g,'').padStart(2,'0').slice(0,2);
+        inp.dispatchEvent(new Event('change', {bubbles:true}));
+      });
+      ci.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && ci.selectionStart === 0 && ci.selectionEnd === 0) {
+          inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); e.preventDefault();
+        }
+      });
+    }
+    inp.insertAdjacentElement('afterend', ci);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcS7() {
+  // RRSP total
+  const rrsp_prior = g('f_s7_p2_1');
+  const rrsp_this = g('f_s7_p2_2');
+  const rrsp_jan = g('f_s7_p2_3');
+  const rrsp_total = rrsp_prior + rrsp_this + rrsp_jan;
+  s('f_s7_p2_4', rrsp_total);
+
+  // FHSA total
+  const fhsa_prior = g('f_s7_p3_1');
+  const fhsa_this = g('f_s7_p3_2') + g('f_s7_p3_3');
+  const fhsa_total = fhsa_prior + fhsa_this;
+  s('f_s7_p3_4', fhsa_total);
+
+  // LLP min repayment (balance / 10)
+  const llp_bal = g('f_s7_p3_8');
+  s('f_s7_p3_9', llp_bal > 0 ? llp_bal / 10 : 0);
+
+  // HBP min repayment (balance / 15)
+  const hbp_bal = g('f_s7_p3_11');
+  s('f_s7_p3_13', hbp_bal > 0 ? hbp_bal / 15 : 0);
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcS7();
+  const p = new URLSearchParams();
+  p.set('s7_20800', g('f_s7_p2_6').toFixed(2));
+  window.location.href = ROOT + '/tax/t1?' + p.toString();
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+function getFormData() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const dollars = parseFloat((el.value || '').replace(/,/g,'')) || 0;
+    const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+    data[id] = dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+  });
+  CHECKBOX_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.checked;
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  FORM_INPUT_IDS.forEach(id => {
+    if (data[id] === undefined) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = String(data[id]);
+    fmtInput(el);
+  });
+  CHECKBOX_IDS.forEach(id => {
+    if (data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.checked = !!data[id];
+    }
+  });
+  recalcS7();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem(FORM_KEY, JSON.stringify(data));
+  serverSave('schedule7', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'Schedule 7 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 'schedule7'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 'schedule7');
+  if (!snap) { toast('No Schedule 7 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  CHECKBOX_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = false;
+  });
+  recalcS7();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/schedule7');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem(FORM_KEY, JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem(FORM_KEY);
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcS7();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 'schedule7');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcS7(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcS7());
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+{% block title %}T2209 &mdash; Federal Foreign Tax Credits 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">T2209 &mdash; Federal Foreign Tax Credits</div>
+      <div class="form-subtitle">Form T2209 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>T2209-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/t2209/t2209-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA T2209 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page1.png" alt="T2209 Page 1">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page2.png" alt="T2209 Page 2">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page3.png" alt="T2209 Page 3">
+
+    <!-- Country name -->
+    <input type="text" id="f_t2209_p3_country" class="pdf-input text-left" style="left:49.02%;top:25.38%;width:44.12%;height:1.42%;">
+    <!-- Total foreign income -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_foreign_inc" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:79.90%;top:30.68%;width:13.23%;height:1.42%;">
+    <!-- Non-business col A -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_nb_a" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:26.96%;top:34.09%;width:13.23%;height:1.42%;">
+    <!-- Non-business col B -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_nb_b" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:26.96%;top:35.61%;width:13.23%;height:1.42%;">
+    <!-- Line 5 col C -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_nb_c" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:59.31%;top:34.85%;width:13.23%;height:1.42%;">
+    <!-- Col D = line 4 (net income from T1) -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_nb_d" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:79.90%;top:34.85%;width:13.23%;height:1.42%;">
+    <!-- Line 6 = min(4,3) credit non-biz (readonly) -->
+    <input type="text" id="f_t2209_p3_nb_credit" class="pdf-input" readonly value="0.00" style="left:79.90%;top:37.50%;width:13.23%;height:2.94%;">
+    <!-- Total business income -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_biz_inc" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:79.90%;top:51.89%;width:13.23%;height:1.42%;">
+    <!-- Business col A -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_biz_a" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:26.96%;top:55.30%;width:13.23%;height:1.42%;">
+    <!-- Business col B -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_biz_b" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:26.96%;top:56.82%;width:13.23%;height:1.42%;">
+    <!-- Business col C -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_biz_c" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:59.31%;top:56.06%;width:13.23%;height:1.42%;">
+    <!-- Business col D -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_biz_d" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:79.90%;top:56.06%;width:13.23%;height:1.42%;">
+    <!-- Total line 7 (readonly) -->
+    <input type="text" id="f_t2209_p3_l7" class="pdf-input" readonly value="0.00" style="left:81.86%;top:62.88%;width:11.28%;height:1.42%;">
+    <!-- Line 8 federal tax (from T1) -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_l8" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:81.86%;top:64.77%;width:11.28%;height:1.42%;">
+    <!-- Line 9 foreign income -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_l9_inc" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:62.26%;top:66.67%;width:13.23%;height:1.42%;">
+    <!-- Line 9 factor -->
+    <input type="text" id="f_t2209_p3_l9_factor" class="pdf-input" readonly value="0.00" style="left:64.22%;top:68.56%;width:11.28%;height:1.42%;">
+    <!-- Line 10 -->
+    <input type="text" id="f_t2209_p3_l10" class="pdf-input" readonly value="0.00" style="left:64.22%;top:70.45%;width:11.28%;height:1.42%;">
+    <!-- Line 11 = min(10,8) -->
+    <input type="text" id="f_t2209_p3_l11" class="pdf-input" readonly value="0.00" style="left:79.90%;top:70.45%;width:13.23%;height:1.42%;">
+    <!-- Line 12 = credits total (readonly) -->
+    <input type="text" id="f_t2209_p3_l12" class="pdf-input" readonly value="0.00" style="left:79.90%;top:72.35%;width:13.23%;height:2.94%;">
+    <!-- Line 13 business tax paid -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_l13" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:62.26%;top:79.17%;width:13.23%;height:1.42%;">
+    <!-- Line 14 limit (readonly) -->
+    <input type="text" id="f_t2209_p3_l14" class="pdf-input" readonly value="0.00" style="left:81.86%;top:79.17%;width:11.28%;height:1.42%;">
+    <!-- Line 15 = 40500 (readonly) -->
+    <input type="text" id="f_t2209_p3_l15" class="pdf-input" readonly value="0.00" style="left:81.86%;top:81.06%;width:11.28%;height:1.42%;">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page4.png" alt="T2209 Page 4">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page5.png" alt="T2209 Page 5">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_t2209_autosave';
+const FORM_INPUT_IDS = [
+  'f_t2209_p3_country','f_t2209_p3_foreign_inc',
+  'f_t2209_p3_nb_a','f_t2209_p3_nb_b','f_t2209_p3_nb_c','f_t2209_p3_nb_d',
+  'f_t2209_p3_biz_inc','f_t2209_p3_biz_a','f_t2209_p3_biz_b','f_t2209_p3_biz_c','f_t2209_p3_biz_d',
+  'f_t2209_p3_l8','f_t2209_p3_l9_inc','f_t2209_p3_l13',
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function gRaw(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci && ci !== document.activeElement) ci.value = String(cents).padStart(2,'0').slice(0,2);
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function editInput(el) {
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  const cents = ci ? (parseInt(ci.value,10)||0) : 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const full = dollars + cents/100;
+  el.value = full === 0 ? '' : full.toFixed(2);
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+
+    const ci = document.createElement('input');
+    ci.type = 'text';
+    ci.className = 'cents-input';
+    ci.dataset.for = inp.id;
+    ci.value = initCents;
+    ci.maxLength = 2;
+    ci.setAttribute('inputmode', 'numeric');
+    if (isRO) ci.readOnly = true;
+    ci.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:2px solid ${bdr};` +
+      `text-align:center;font-family:"Courier New",monospace;font-size:0.60em;` +
+      `box-sizing:border-box;color:#222;line-height:1;z-index:1;outline:none;padding:0;`;
+    if (!isRO) {
+      ci.addEventListener('focus', () => ci.select());
+      ci.addEventListener('input', () => { ci.value = ci.value.replace(/\D/g,'').slice(0,2); });
+      ci.addEventListener('blur', () => {
+        ci.value = ci.value.replace(/\D/g,'').padStart(2,'0').slice(0,2);
+        inp.dispatchEvent(new Event('change', {bubbles:true}));
+      });
+      ci.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && ci.selectionStart === 0 && ci.selectionEnd === 0) {
+          inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); e.preventDefault();
+        }
+      });
+    }
+    inp.insertAdjacentElement('afterend', ci);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcT2209() {
+  const foreign_inc = g('f_t2209_p3_foreign_inc');
+  const nb_a = g('f_t2209_p3_nb_a');
+  const nb_b = g('f_t2209_p3_nb_b'); // foreign tax paid non-biz
+  const nb_d = g('f_t2209_p3_nb_d'); // net income (T1 line 23600)
+  const fed_tax = g('f_t2209_p3_l8');
+
+  // Non-business credit
+  const proportion = nb_d > 0 ? nb_a / nb_d : 0;
+  const limit_nb = proportion * fed_tax;
+  const credit_nb = Math.min(nb_b, limit_nb);
+  s('f_t2209_p3_nb_credit', credit_nb);
+
+  // Business credit
+  const biz_a = g('f_t2209_p3_biz_a');
+  const biz_b = g('f_t2209_p3_biz_b'); // foreign tax paid biz
+  const biz_inc = g('f_t2209_p3_biz_inc');
+  const l13 = g('f_t2209_p3_l13');
+  const l14 = biz_inc * 0.15;
+  s('f_t2209_p3_l14', l14);
+  const credit_biz = Math.min(l13, l14);
+
+  const l15 = credit_nb + credit_biz;
+  s('f_t2209_p3_l15', l15);
+  s('f_t2209_p3_l7', credit_nb);
+  s('f_t2209_p3_l12', credit_nb);
+
+  localStorage.setItem('cra_t2209_40500', l15.toString());
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcT2209();
+  const val = g('f_t2209_p3_l15');
+  window.location.href = ROOT + '/tax/t1?t2209_40500=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+function getFormData() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.getAttribute('data-numeric')) {
+      const dollars = parseFloat((el.value || '').replace(/,/g,'')) || 0;
+      const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+      data[id] = dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+    } else {
+      data[id] = el.value;
+    }
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  FORM_INPUT_IDS.forEach(id => {
+    if (data[id] === undefined) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = String(data[id]);
+    if (el.getAttribute('data-numeric')) fmtInput(el);
+  });
+  recalcT2209();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem(FORM_KEY, JSON.stringify(data));
+  serverSave('t2209', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'T2209 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 't2209'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 't2209');
+  if (!snap) { toast('No T2209 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  recalcT2209();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/t2209');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem(FORM_KEY, JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem(FORM_KEY);
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcT2209();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 't2209');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcT2209(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcT2209());
+  });
+});
+</script>
+{% endblock %}

@@ -1,84 +1,156 @@
 [
   {
+    "page": 1,
+    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Eligibility_sf[0].Table1[0].Row2[0].Cell1_sf[0].Note[0]",
+    "type": "Button",
+    "left": 43.63,
+    "top": 52.27,
+    "w": 5.88,
+    "h": 1.52
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Eligibility_sf[0].Table1[0].Row3[0].Cell1_sf[0].Note[0]",
+    "type": "Button",
+    "left": 16.18,
+    "top": 57.58,
+    "w": 5.88,
+    "h": 1.52
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Eligibility_sf[0].Table1[0].Row4[0].Cell1_sf[0].Note[0]",
+    "type": "Button",
+    "left": 38.73,
+    "top": 60.98,
+    "w": 5.88,
+    "h": 1.52
+  },
+  {
+    "page": 2,
+    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line55220[0].Line30300_CheckBox[0]",
     "type": "CheckBox",
-    "left": 79.902,
-    "top": 29.167,
-    "width": 1.961,
-    "height": 1.515
+    "left": 79.9,
+    "top": 29.17,
+    "w": 1.96,
+    "h": 1.52
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line55220[0].MonthDay[0].Line30300_DateMMDD_Comb[0]",
     "type": "Text",
-    "left": 83.333,
-    "top": 29.167,
-    "width": 9.804,
-    "height": 1.515
+    "left": 83.33,
+    "top": 29.17,
+    "w": 9.8,
+    "h": 1.52
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line1[0].Line30300_L1_inpt[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 31.061,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 31.06,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line2[0].Line30300_L2_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 32.955,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 32.95,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line3[0].Line30300_L3_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 36.364,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 36.36,
+    "w": 11.27,
+    "h": 1.42
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line4[0].Note1[0]",
+    "type": "Button",
+    "left": 62.26,
+    "top": 38.26,
+    "w": 5.88,
+    "h": 1.52
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line4[0].Line30300_L4_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 38.258,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 38.26,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 2,
     "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line5[0].Line30300_L5_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 40.243,
-    "width": 11.275,
-    "height": 2.849
+    "left": 81.86,
+    "top": 40.24,
+    "w": 11.27,
+    "h": 2.85
+  },
+  {
+    "page": 3,
+    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
+  },
+  {
+    "page": 4,
+    "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55290[0].Line30400_CheckBox[0]",
     "type": "CheckBox",
-    "left": 79.902,
+    "left": 79.9,
     "top": 9.47,
-    "width": 1.961,
-    "height": 1.515
+    "w": 1.96,
+    "h": 1.52
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55290[0].MonthDay[0].Line30400_DateMMDD_Comb[0]",
     "type": "Text",
-    "left": 83.333,
+    "left": 83.33,
     "top": 9.47,
-    "width": 9.804,
-    "height": 1.515
+    "w": 9.8,
+    "h": 1.52
   },
   {
     "page": 4,
@@ -86,205 +158,250 @@
     "type": "Text",
     "left": 5.02,
     "top": 15.53,
-    "width": 59.569,
-    "height": 1.425
+    "w": 59.57,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55295[0].SIN_Comb_Top[0].SIN_Comb[0]",
     "type": "Text",
-    "left": 69.235,
+    "left": 69.24,
     "top": 15.53,
-    "width": 23.784,
-    "height": 1.425
+    "w": 23.78,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line30400_Address_inpt[0]",
     "type": "Text",
     "left": 5.02,
-    "top": 18.561,
-    "width": 54.176,
-    "height": 1.424
+    "top": 18.56,
+    "w": 54.18,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Yearofbirth_sf[0].Line30400_Yr_Birth_Comb[0]",
     "type": "Text",
-    "left": 59.432,
-    "top": 18.561,
-    "width": 9.569,
-    "height": 1.424
+    "left": 59.43,
+    "top": 18.56,
+    "w": 9.57,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line30400_Relationship_inpt[0]",
     "type": "Text",
-    "left": 69.235,
-    "top": 18.561,
-    "width": 23.784,
-    "height": 1.424
+    "left": 69.24,
+    "top": 18.56,
+    "w": 23.78,
+    "h": 1.42
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Infirmity_YesNo_sf[0].Rd_sf[0].RadioButtonGroup[0]",
+    "type": "RadioButton",
+    "left": 80.88,
+    "top": 21.65,
+    "w": 1.96,
+    "h": 1.52
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Infirmity_YesNo_sf[0].Rd_sf[0].RadioButtonGroup[0]",
+    "type": "RadioButton",
+    "left": 88.24,
+    "top": 21.65,
+    "w": 1.96,
+    "h": 1.52
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line1[0].Line30400_L1_inpt[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 23.864,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 23.86,
+    "w": 13.24,
+    "h": 1.42
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line2[0].Note2[0]",
+    "type": "Button",
+    "left": 33.82,
+    "top": 26.89,
+    "w": 5.39,
+    "h": 1.89
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line2[0].Line30400_L2_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 25.758,
-    "width": 11.275,
-    "height": 2.94
+    "left": 81.86,
+    "top": 25.76,
+    "w": 11.27,
+    "h": 2.94
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line3[0].Line30400_L3_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 29.167,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 29.17,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line4[0].Line30400_L4_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 31.061,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 31.06,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line5[0].Line30400_L5_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 33.046,
-    "width": 11.275,
-    "height": 2.849
+    "left": 81.86,
+    "top": 33.05,
+    "w": 11.27,
+    "h": 2.85
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line1[0].Line30425_L1_inpt[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 58.712,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 58.71,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line2[0].Line30425_L2_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 60.606,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 60.61,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line3[0].Line30425_L3_inpt[0]",
     "type": "Text",
-    "left": 81.863,
+    "left": 81.86,
     "top": 62.5,
-    "width": 11.275,
-    "height": 1.424
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line4[0].Line30425_L4_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 64.394,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 64.39,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 4,
     "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line5[0].Line30425_L5_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 66.379,
-    "width": 11.275,
-    "height": 2.849
+    "left": 81.86,
+    "top": 66.38,
+    "w": 11.27,
+    "h": 2.85
+  },
+  {
+    "page": 5,
+    "name": "form1[0].#pageSet[0].Page1[4].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Name_inpt[0]",
     "type": "Text",
     "left": 5.02,
-    "top": 51.515,
-    "width": 54.176,
-    "height": 1.424
+    "top": 51.52,
+    "w": 54.18,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Address_inpt[0]",
     "type": "Text",
     "left": 5.02,
-    "top": 54.545,
-    "width": 54.176,
-    "height": 1.424
+    "top": 54.55,
+    "w": 54.18,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].YearOfbirth_sf[0].Line30400_Yr_Birth_Comb[0]",
     "type": "Text",
-    "left": 59.432,
-    "top": 54.545,
-    "width": 9.569,
-    "height": 1.424
+    "left": 59.43,
+    "top": 54.55,
+    "w": 9.57,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Relationship_inpt[0]",
     "type": "Text",
-    "left": 69.235,
-    "top": 54.545,
-    "width": 23.784,
-    "height": 1.424
+    "left": 69.24,
+    "top": 54.55,
+    "w": 23.78,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line1[0].Line30450_L1_inpt[0]",
     "type": "Text",
-    "left": 79.902,
-    "top": 57.197,
-    "width": 13.235,
-    "height": 1.424
+    "left": 79.9,
+    "top": 57.2,
+    "w": 13.24,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line2[0].Line30450_L2_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 59.091,
-    "width": 11.275,
-    "height": 1.424
+    "left": 81.86,
+    "top": 59.09,
+    "w": 11.27,
+    "h": 1.42
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line3[0].Line30450_L2_inpt[0]",
     "type": "Text",
-    "left": 81.863,
-    "top": 61.076,
-    "width": 11.275,
-    "height": 2.849
+    "left": 81.86,
+    "top": 61.08,
+    "w": 11.27,
+    "h": 2.85
   },
   {
     "page": 5,
     "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line51120[0].Unique_Name[0]",
     "type": "Text",
     "left": 80.02,
-    "top": 66.379,
-    "width": 3.196,
-    "height": 1.333
+    "top": 66.38,
+    "w": 3.2,
+    "h": 1.33
+  },
+  {
+    "page": 6,
+    "name": "form1[0].#pageSet[0].Page1[5].ClearData_EN[0]",
+    "type": "Button",
+    "left": 80.39,
+    "top": 0.38,
+    "w": 15.69,
+    "h": 1.89
   }
 ]

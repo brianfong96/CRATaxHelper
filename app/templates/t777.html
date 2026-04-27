@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+{% block title %}T777 &mdash; Statement of Employment Expenses 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">T777 &mdash; Statement of Employment Expenses</div>
+      <div class="form-subtitle">Form T777 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>T777-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/t777/t777-fill-25e.pdf"
+         target="_blank" rel="noopener" title="Open official CRA T777 2025 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page1.png" alt="T777 Page 1">
+
+    <!-- Employer name -->
+    <input type="text" id="f_t777_p1_employer" class="pdf-input text-left" style="left:5.02%;top:20%;width:60%;height:1.42%;">
+    <!-- Total km driven -->
+    <input type="text" data-numeric="1" id="f_t777_p1_total_km" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.22%;top:50%;width:11.28%;height:1.42%;">
+    <!-- Work km driven -->
+    <input type="text" data-numeric="1" id="f_t777_p1_work_km" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.22%;top:52%;width:11.28%;height:1.42%;">
+    <!-- Work % (readonly) -->
+    <input type="text" id="f_t777_p1_work_pct" class="pdf-input" readonly value="0.00" style="left:64.22%;top:54%;width:11.28%;height:1.42%;">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page2.png" alt="T777 Page 2">
+
+    <!-- Fuel -->
+    <input type="text" data-numeric="1" id="f_t777_p2_fuel" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:20%;width:13.23%;height:1.42%;">
+    <!-- Maintenance -->
+    <input type="text" data-numeric="1" id="f_t777_p2_maint" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:22%;width:13.23%;height:1.42%;">
+    <!-- Insurance -->
+    <input type="text" data-numeric="1" id="f_t777_p2_insur" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:24%;width:13.23%;height:1.42%;">
+    <!-- Lease -->
+    <input type="text" data-numeric="1" id="f_t777_p2_lease" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:26%;width:13.23%;height:1.42%;">
+    <!-- Vehicle total (readonly) -->
+    <input type="text" id="f_t777_p2_veh_total" class="pdf-input" readonly value="0.00" style="left:79.90%;top:28%;width:13.23%;height:1.42%;">
+    <!-- Vehicle work (readonly) -->
+    <input type="text" id="f_t777_p2_veh_work" class="pdf-input" readonly value="0.00" style="left:79.90%;top:30%;width:13.23%;height:1.42%;">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page3.png" alt="T777 Page 3">
+
+    <!-- Home office expenses -->
+    <input type="text" data-numeric="1" id="f_t777_p3_home_exp" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:20%;width:13.23%;height:1.42%;">
+    <!-- Home office work % -->
+    <input type="text" data-numeric="1" id="f_t777_p3_home_pct" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:22%;width:13.23%;height:1.42%;">
+    <!-- Home office work amount (readonly) -->
+    <input type="text" id="f_t777_p3_home_work" class="pdf-input" readonly value="0.00" style="left:79.90%;top:24%;width:13.23%;height:1.42%;">
+    <!-- Supplies -->
+    <input type="text" data-numeric="1" id="f_t777_p3_supplies" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:30%;width:13.23%;height:1.42%;">
+    <!-- Other expenses -->
+    <input type="text" data-numeric="1" id="f_t777_p3_other" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.90%;top:32%;width:13.23%;height:1.42%;">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page4.png" alt="T777 Page 4">
+
+    <!-- Line 22900 total (readonly) -->
+    <input type="text" id="f_t777_p4_22900" class="pdf-input" readonly value="0.00" style="left:81.86%;top:20%;width:11.28%;height:1.42%;">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_t777_autosave';
+const FORM_INPUT_IDS = [
+  'f_t777_p1_employer','f_t777_p1_total_km','f_t777_p1_work_km',
+  'f_t777_p2_fuel','f_t777_p2_maint','f_t777_p2_insur','f_t777_p2_lease',
+  'f_t777_p3_home_exp','f_t777_p3_home_pct','f_t777_p3_supplies','f_t777_p3_other',
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function gRaw(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function updateCents(el, cents) {
+  if (!el || !el.id) return;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci && ci !== document.activeElement) ci.value = String(cents).padStart(2,'0').slice(0,2);
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value || '').replace(/,/g, '')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; updateCents(el, '00'); return; }
+  const formatted = raw.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  updateCents(el, dot >= 0 ? formatted.slice(dot + 1) : '00');
+}
+function editInput(el) {
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  const cents = ci ? (parseInt(ci.value,10)||0) : 0;
+  const dollars = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  const full = dollars + cents/100;
+  el.value = full === 0 ? '' : full.toFixed(2);
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const top  = parseFloat(inp.style.top);
+    const w    = parseFloat(inp.style.width);
+    const h    = parseFloat(inp.style.height);
+    if (isNaN(left) || isNaN(top) || isNaN(w) || isNaN(h)) return;
+
+    let initCents = '00';
+    if (inp.value && inp.value.includes('.')) {
+      const dot = inp.value.indexOf('.');
+      initCents = inp.value.slice(dot + 1) || '00';
+      inp.value = inp.value.slice(0, dot);
+    }
+
+    inp.style.width = (w * 0.80).toFixed(3) + '%';
+    inp.style.borderRight = 'none';
+
+    const isRO = inp.readOnly;
+    const bg  = isRO ? 'rgba(200,230,255,0.65)' : 'rgba(255,255,200,0.75)';
+    const bdr = isRO ? '#888' : '#0066cc';
+
+    const ci = document.createElement('input');
+    ci.type = 'text';
+    ci.className = 'cents-input';
+    ci.dataset.for = inp.id;
+    ci.value = initCents;
+    ci.maxLength = 2;
+    ci.setAttribute('inputmode', 'numeric');
+    if (isRO) ci.readOnly = true;
+    ci.style.cssText =
+      `position:absolute;left:${(left + w*0.80).toFixed(3)}%;top:${top.toFixed(3)}%;` +
+      `width:${(w*0.20).toFixed(3)}%;height:${h.toFixed(3)}%;` +
+      `background:${bg};border:1px solid ${bdr};border-left:2px solid ${bdr};` +
+      `text-align:center;font-family:"Courier New",monospace;font-size:0.60em;` +
+      `box-sizing:border-box;color:#222;line-height:1;z-index:1;outline:none;padding:0;`;
+    if (!isRO) {
+      ci.addEventListener('focus', () => ci.select());
+      ci.addEventListener('input', () => { ci.value = ci.value.replace(/\D/g,'').slice(0,2); });
+      ci.addEventListener('blur', () => {
+        ci.value = ci.value.replace(/\D/g,'').padStart(2,'0').slice(0,2);
+        inp.dispatchEvent(new Event('change', {bubbles:true}));
+      });
+      ci.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && ci.selectionStart === 0 && ci.selectionEnd === 0) {
+          inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); e.preventDefault();
+        }
+      });
+    }
+    inp.insertAdjacentElement('afterend', ci);
+  });
+}
+
+// ── Calculator ─────────────────────────────────────────────────────────────────
+function recalcT777() {
+  const total_km = g('f_t777_p1_total_km');
+  const work_km = g('f_t777_p1_work_km');
+  const work_pct = total_km > 0 ? work_km / total_km : 0;
+  s('f_t777_p1_work_pct', work_pct * 100);
+
+  const fuel = g('f_t777_p2_fuel');
+  const maint = g('f_t777_p2_maint');
+  const insur = g('f_t777_p2_insur');
+  const lease = g('f_t777_p2_lease');
+  const veh_total = fuel + maint + insur + lease;
+  s('f_t777_p2_veh_total', veh_total);
+  const veh_work = veh_total * work_pct;
+  s('f_t777_p2_veh_work', veh_work);
+
+  const home_exp = g('f_t777_p3_home_exp');
+  const home_pct = g('f_t777_p3_home_pct');
+  const home_work = home_exp * home_pct / 100;
+  s('f_t777_p3_home_work', home_work);
+
+  const supplies = g('f_t777_p3_supplies');
+  const other = g('f_t777_p3_other');
+  const line22900 = veh_work + home_work + supplies + other;
+  s('f_t777_p4_22900', line22900);
+
+  localStorage.setItem('cra_t777_22900', line22900.toString());
+}
+
+// ── Save and return to T1 ──────────────────────────────────────────────────────
+function saveAndReturnToT1() {
+  recalcT777();
+  const val = g('f_t777_p4_22900');
+  window.location.href = ROOT + '/tax/t1?t777_22900=' + val.toFixed(2);
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────────
+function getFormData() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.getAttribute('data-numeric')) {
+      const dollars = parseFloat((el.value || '').replace(/,/g,'')) || 0;
+      const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+      data[id] = dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+    } else {
+      data[id] = el.value;
+    }
+  });
+  return data;
+}
+
+function loadFormData(data) {
+  if (!data) return;
+  FORM_INPUT_IDS.forEach(id => {
+    if (data[id] === undefined) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = String(data[id]);
+    if (el.getAttribute('data-numeric')) fmtInput(el);
+  });
+  recalcT777();
+}
+
+function autoSave() {
+  const data = getFormData();
+  localStorage.setItem(FORM_KEY, JSON.stringify(data));
+  serverSave('t777', data);
+}
+
+async function serverSave(form, data) {
+  try {
+    await fetch(ROOT + '/api/userdata/' + form, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+  } catch(_) {}
+}
+
+function saveSnapshot() {
+  const name = 'T777 Snapshot ' + new Date().toLocaleString();
+  const data = getFormData();
+  data._form = 't777'; data._name = name; data._ts = Date.now();
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  snaps.unshift({ name, data });
+  if (snaps.length > 10) snaps.length = 10;
+  localStorage.setItem('cra_snapshots', JSON.stringify(snaps));
+  document.getElementById('last-saved').textContent = 'Saved: ' + new Date().toLocaleTimeString();
+  toast('Snapshot saved: ' + name);
+}
+
+function loadLastSnapshot() {
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data._form === 't777');
+  if (!snap) { toast('No T777 snapshot found', false); return; }
+  loadFormData(snap.data);
+  toast('Loaded: ' + snap.name);
+}
+
+function clearForm() {
+  FORM_INPUT_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  recalcT777();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  initAmountBoxes();
+
+  let loaded = false;
+  try {
+    const r = await fetch(ROOT + '/api/userdata/t777');
+    if (r.ok) {
+      const sd = await r.json();
+      if (sd && Object.keys(sd).length > 0) {
+        loadFormData(sd);
+        localStorage.setItem(FORM_KEY, JSON.stringify(sd));
+        loaded = true;
+      }
+    }
+  } catch(_) {}
+
+  if (!loaded) {
+    const saved = localStorage.getItem(FORM_KEY);
+    if (saved) {
+      try { loadFormData(JSON.parse(saved)); loaded = true; } catch(e) {}
+    }
+  }
+
+  if (!loaded) recalcT777();
+
+  const snaps = JSON.parse(localStorage.getItem('cra_snapshots') || '[]');
+  const snap = snaps.find(s => s.data?._form === 't777');
+  if (snap) {
+    document.getElementById('last-saved').textContent =
+      'Last snapshot: ' + new Date(snap.data._ts).toLocaleDateString();
+  }
+
+  document.querySelectorAll('.cra-form input[data-numeric]').forEach(el => {
+    el.addEventListener('blur',  () => { fmtInput(el); recalcT777(); autoSave(); });
+    el.addEventListener('focus', () => editInput(el));
+    el.addEventListener('input', () => recalcT777());
+  });
+});
+</script>
+{% endblock %}
