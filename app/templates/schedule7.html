@@ -397,6 +397,7 @@ function clearForm() {
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   initAmountBoxes();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => { if (el.value) fmtInput(el); });
 
   let loaded = false;
   try {
