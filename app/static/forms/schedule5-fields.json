@@ -1,0 +1,290 @@
+[
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line55220[0].Line30300_CheckBox[0]",
+    "type": "CheckBox",
+    "left": 79.902,
+    "top": 29.167,
+    "width": 1.961,
+    "height": 1.515
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line55220[0].MonthDay[0].Line30300_DateMMDD_Comb[0]",
+    "type": "Text",
+    "left": 83.333,
+    "top": 29.167,
+    "width": 9.804,
+    "height": 1.515
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line1[0].Line30300_L1_inpt[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 31.061,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line2[0].Line30300_L2_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 32.955,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line3[0].Line30300_L3_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 36.364,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line4[0].Line30300_L4_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 38.258,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line30300_sf[0].Line30300_Chart_sf[0].Line5[0].Line30300_L5_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 40.243,
+    "width": 11.275,
+    "height": 2.849
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55290[0].Line30400_CheckBox[0]",
+    "type": "CheckBox",
+    "left": 79.902,
+    "top": 9.47,
+    "width": 1.961,
+    "height": 1.515
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55290[0].MonthDay[0].Line30400_DateMMDD_Comb[0]",
+    "type": "Text",
+    "left": 83.333,
+    "top": 9.47,
+    "width": 9.804,
+    "height": 1.515
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line30400_Name_inpt[0]",
+    "type": "Text",
+    "left": 5.02,
+    "top": 15.53,
+    "width": 59.569,
+    "height": 1.425
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line55295[0].SIN_Comb_Top[0].SIN_Comb[0]",
+    "type": "Text",
+    "left": 69.235,
+    "top": 15.53,
+    "width": 23.784,
+    "height": 1.425
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line30400_Address_inpt[0]",
+    "type": "Text",
+    "left": 5.02,
+    "top": 18.561,
+    "width": 54.176,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Yearofbirth_sf[0].Line30400_Yr_Birth_Comb[0]",
+    "type": "Text",
+    "left": 59.432,
+    "top": 18.561,
+    "width": 9.569,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line30400_Relationship_inpt[0]",
+    "type": "Text",
+    "left": 69.235,
+    "top": 18.561,
+    "width": 23.784,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line1[0].Line30400_L1_inpt[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 23.864,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line2[0].Line30400_L2_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 25.758,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line3[0].Line30400_L3_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 29.167,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line4[0].Line30400_L4_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 31.061,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30400_sf[0].Line30400_chart[0].Line5[0].Line30400_L5_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 33.046,
+    "width": 11.275,
+    "height": 2.849
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line1[0].Line30425_L1_inpt[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 58.712,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line2[0].Line30425_L2_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 60.606,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line3[0].Line30425_L3_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 62.5,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line4[0].Line30425_L4_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 64.394,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30425[0].Line30425_Chart[0].Line5[0].Line30425_L5_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 66.379,
+    "width": 11.275,
+    "height": 2.849
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Name_inpt[0]",
+    "type": "Text",
+    "left": 5.02,
+    "top": 51.515,
+    "width": 54.176,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Address_inpt[0]",
+    "type": "Text",
+    "left": 5.02,
+    "top": 54.545,
+    "width": 54.176,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].YearOfbirth_sf[0].Line30400_Yr_Birth_Comb[0]",
+    "type": "Text",
+    "left": 59.432,
+    "top": 54.545,
+    "width": 9.569,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line30450_Relationship_inpt[0]",
+    "type": "Text",
+    "left": 69.235,
+    "top": 54.545,
+    "width": 23.784,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line1[0].Line30450_L1_inpt[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 57.197,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line2[0].Line30450_L2_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 59.091,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line3[0].Line30450_L2_inpt[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 61.076,
+    "width": 11.275,
+    "height": 2.849
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line30450[0].Line30450_Chart[0].Line51120[0].Unique_Name[0]",
+    "type": "Text",
+    "left": 80.02,
+    "top": 66.379,
+    "width": 3.196,
+    "height": 1.333
+  }
+]

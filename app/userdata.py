@@ -18,6 +18,7 @@ from typing import Any
 import httpx
 
 from app.config import settings
+from app.crypto import decrypt_blob, encrypt_blob
 
 logger = logging.getLogger("taxhelper.userdata")
 
@@ -169,7 +170,8 @@ async def get_form_data(session_cookie: str, form_name: str) -> dict[str, Any] |
                 if row.get("form_name") == form_name:
                     raw = row.get("form_data", "")
                     try:
-                        return json.loads(raw) if isinstance(raw, str) else (raw or {})
+                        decrypted = decrypt_blob(raw) if isinstance(raw, str) else ""
+                        return json.loads(decrypted) if decrypted else (raw or {})
                     except Exception:
                         return {}
     except Exception as exc:
@@ -204,7 +206,7 @@ async def save_form_data(
             payload = {
                 "owner_email": email,
                 "form_name":   form_name,
-                "form_data":   json.dumps(data),
+                "form_data":   encrypt_blob(json.dumps(data)),
                 "saved_at":    time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             }
 

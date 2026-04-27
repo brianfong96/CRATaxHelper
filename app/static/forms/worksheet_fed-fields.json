@@ -1,0 +1,2036 @@
+[
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group1[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 23.864,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group1[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 25.758,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group1[0].Line3[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 27.652,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group1[0].Line4[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 29.545,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group1[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 31.44,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group2[0].Line6[0].Line4_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 35.606,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group2[0].Line7[0].Line5_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 37.5,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group2[0].Line8[0].Line6_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 39.394,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group2[0].Line9[0].Line6_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 41.288,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group2[0].Line10[0].Line7_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 43.182,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line11[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 47.348,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line12[0].Percentage[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 49.242,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line13[0].Line2_Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 51.136,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line13[0].Line2_Amount2[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 51.136,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line14[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 53.03,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line15[0].Percentage[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 54.924,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line16[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 56.818,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line16[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 56.818,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12000_12010[0].Group3[0].Line17[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 60.227,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 68.939,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 70.833,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 72.727,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 74.621,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 76.515,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 78.409,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 80.303,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 83.712,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 85.606,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line10[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 87.5,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 1,
+    "name": "form1[0].Page1[0].Line12100[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 89.394,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line22100[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 8.712,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line22100[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 10.606,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line22100[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 12.5,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line22100[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 14.394,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line1[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 26.515,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line2[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 28.409,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line3[0].Line3_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 30.303,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line4[0].Line4_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 32.197,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line5[0].Line5_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 34.091,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line6[0].Line6_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 36.743,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line7[0].Line7_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 38.637,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line8[0].Line8_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 40.53,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line9[0].Line9_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 42.424,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].LIne10[0].Line10_Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 44.319,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].LIne10[0].Line10_Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 44.319,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line11[0].Line11_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 46.212,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line12[0].Line12_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 48.106,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line13[0].Line13_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 50.0,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line14[0].Line14_Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 51.894,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line14[0].Line14_Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 51.894,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line15[0].Line15_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 53.788,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line16[0].Line16_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 55.682,
+    "width": 10.34,
+    "height": 1.515
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line17[0].Line17_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 57.576,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line18[0].Amount1[0]",
+    "type": "Text",
+    "left": 50.0,
+    "top": 60.227,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line18[0].Amount2[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 60.227,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line19[0].Line19_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 62.879,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line20[0].Line20_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 64.773,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 2,
+    "name": "form1[0].Page2[0].Line23500[0].Line21[0].Line21_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 66.667,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 8.333,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 10.227,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 12.121,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line4[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 14.015,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line4[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 14.015,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 15.909,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 17.803,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 19.697,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line8[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 21.591,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line8[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 21.591,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line25000[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 23.485,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line1[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 41.666,
+    "width": 12.301,
+    "height": 1.515
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line2[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 43.56,
+    "width": 12.301,
+    "height": 1.515
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line3[0].Line3_Amount[0]",
+    "type": "Text",
+    "left": 47.549,
+    "top": 45.455,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line4[0].Line4_Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 47.348,
+    "width": 10.34,
+    "height": 1.515
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line5[0].Line5_Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 49.242,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 51.136,
+    "width": 10.34,
+    "height": 1.515
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 53.03,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line8[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 54.924,
+    "width": 10.34,
+    "height": 1.515
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line9[0].Amount1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 56.818,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line9[0].Amount2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 56.818,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line10[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 58.712,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line10[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 58.712,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 3,
+    "name": "form1[0].Page3[0].Line30000[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 60.606,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 14.015,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 15.909,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 17.803,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 19.697,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 21.591,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line6[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 23.485,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line6[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 23.485,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line30100[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 25.379,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row1[0].Cell1_R1[0]",
+    "type": "Text",
+    "left": 4.039,
+    "top": 41.379,
+    "width": 11.529,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row1[0].Cell2_R1[0]",
+    "type": "Text",
+    "left": 15.804,
+    "top": 41.379,
+    "width": 20.353,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row1[0].Cell3_R1[0]",
+    "type": "Text",
+    "left": 36.392,
+    "top": 41.379,
+    "width": 12.51,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row1[0].Cell4_R1[0]",
+    "type": "Text",
+    "left": 49.137,
+    "top": 41.379,
+    "width": 30.647,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row1[0].Cell5_R1[0]",
+    "type": "Text",
+    "left": 80.02,
+    "top": 41.379,
+    "width": 13.0,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row2[0].Cell1_R2[0]",
+    "type": "Text",
+    "left": 4.039,
+    "top": 43.273,
+    "width": 11.529,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row2[0].Cell2_R2[0]",
+    "type": "Text",
+    "left": 15.804,
+    "top": 43.273,
+    "width": 20.353,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row2[0].Cell3_R2[0]",
+    "type": "Text",
+    "left": 36.392,
+    "top": 43.273,
+    "width": 12.51,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row2[0].Cell4_R2[0]",
+    "type": "Text",
+    "left": 49.137,
+    "top": 43.273,
+    "width": 30.647,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row2[0].Cell5_R2[0].Cell5_R2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 43.273,
+    "width": 11.157,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row3[0].Cell1_R3[0]",
+    "type": "Text",
+    "left": 4.039,
+    "top": 45.167,
+    "width": 11.529,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row3[0].Cell2_R3[0]",
+    "type": "Text",
+    "left": 15.804,
+    "top": 45.167,
+    "width": 20.353,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row3[0].Cell3_R3[0]",
+    "type": "Text",
+    "left": 36.392,
+    "top": 45.167,
+    "width": 12.51,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row3[0].Cell4_R3[0]",
+    "type": "Text",
+    "left": 49.137,
+    "top": 45.167,
+    "width": 30.647,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row3[0].Cell5_R3[0].Cell5_R3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 45.167,
+    "width": 11.157,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row4[0].Cell1_R4[0]",
+    "type": "Text",
+    "left": 4.039,
+    "top": 47.061,
+    "width": 11.529,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row4[0].Cell2_R4[0]",
+    "type": "Text",
+    "left": 15.804,
+    "top": 47.061,
+    "width": 20.353,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row4[0].Cell3_R4[0]",
+    "type": "Text",
+    "left": 36.392,
+    "top": 47.061,
+    "width": 12.51,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row4[0].Cell4_R4[0]",
+    "type": "Text",
+    "left": 49.137,
+    "top": 47.061,
+    "width": 30.647,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row4[0].Cell5_R4[0].Cell3_R4[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 47.061,
+    "width": 11.157,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row5[0].Cell1_R5[0]",
+    "type": "Text",
+    "left": 4.039,
+    "top": 48.955,
+    "width": 11.529,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row5[0].Cell2_R5[0]",
+    "type": "Text",
+    "left": 15.804,
+    "top": 48.955,
+    "width": 20.353,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row5[0].Cell3_R5[0]",
+    "type": "Text",
+    "left": 36.392,
+    "top": 48.955,
+    "width": 12.51,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row5[0].Cell4_R5[0]",
+    "type": "Text",
+    "left": 49.137,
+    "top": 48.955,
+    "width": 30.647,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Table1[0].Row5[0].Cell5_R5[0].Cell5_R5[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 48.955,
+    "width": 11.157,
+    "height": 1.712
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 50.758,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 53.409,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 55.303,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 4,
+    "name": "form1[0].Page4[0].Line31285[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 58.712,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 10.227,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 12.121,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 15.53,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 18.939,
+    "width": 11.275,
+    "height": 5.591
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line5[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 25.0,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line5[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 25.0,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 26.894,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 30.303,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31400[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 33.712,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line1[0].FixedAmount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 64.015,
+    "width": 13.235,
+    "height": 1.515
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 65.909,
+    "width": 13.235,
+    "height": 1.515
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 47.549,
+    "top": 67.803,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 71.212,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line5[0].Amount1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 73.106,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line5[0].Amount2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 73.106,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line6[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 75.0,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line6[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 75.0,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 5,
+    "name": "form1[0].Page5[0].Line31600[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 76.894,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line1[0].Line1_FixedAmount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 54.167,
+    "width": 13.235,
+    "height": 1.515
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line2[0].Line2_FixedAmount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 60.228,
+    "width": 13.235,
+    "height": 1.515
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line3[0].Line3_Amount[0]",
+    "type": "Text",
+    "left": 47.549,
+    "top": 62.121,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line4[0].Line4_FixedAmount[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 65.53,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line5[0].Line5_Amount1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 67.424,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line5[0].Line5_Amount2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 67.424,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line6[0].Line6_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 69.319,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line7[0].Line7_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 71.212,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line8[0].Line8_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 74.621,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line9[0].Line9_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 76.515,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line10[0].Line10_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 79.924,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line11[0].Line11_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 81.819,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line12[0].Line12_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 83.712,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 6,
+    "name": "form1[0].Page6[0].Line31800[0].Line13[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 86.364,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column1[0].Line1[0].Line33199_Line1[0]",
+    "type": "Text",
+    "left": 47.549,
+    "top": 27.273,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column1[0].Line2[0].Line33199_Line2[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 30.681,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column1[0].Line3[0].Line33199_Line3[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 34.091,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column2[0].Line1[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 27.273,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column2[0].Line2[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 30.682,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column2[0].Line3[0].Line3_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 34.091,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column3[0].Line1[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 27.273,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column3[0].Line2[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 30.682,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Column3[0].Line3[0].Line3_Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 34.091,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line33199[0].Chart[0].Line4[0].Line4_Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 36.742,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line1[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 47.003,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 48.897,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line3[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 50.791,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line4[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 52.685,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 54.579,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line6[0].Rate[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 56.473,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 7,
+    "name": "form1[0].Page7[0].Line34990[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.862,
+    "top": 58.367,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line1[0].Line1_Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 12.5,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line2[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 14.394,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line3[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 16.288,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line4[0].Line2_Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 18.181,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line5[0].Amount1[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 20.166,
+    "width": 11.275,
+    "height": 1.333
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group1[0].Line5[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 20.076,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].LineA[0].AmountA[0]",
+    "type": "Text",
+    "left": 31.373,
+    "top": 27.651,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line6[0].LineB[0].AmountB[0]",
+    "type": "Text",
+    "left": 33.333,
+    "top": 31.06,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line6[0].Amount1[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 31.06,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line7[0].LineC[0].AmountC[0]",
+    "type": "Text",
+    "left": 33.333,
+    "top": 34.47,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line7[0].Amount2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 34.47,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line8[0].Amount3[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 36.364,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 36.364,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].Line40425[0].Group2[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 38.258,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line1_grp1[0].Line41000_Line1_1[0]",
+    "type": "Text",
+    "left": 47.549,
+    "top": 65.341,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line2_grp1[0].Line41000__Line2_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 68.75,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line3_grp1[0].Line41000_Line3_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 70.644,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line4_grp1[0].Line41000_Line4_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 72.538,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line5_grp1[0].Line41000_Line5_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 74.432,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line6_grp1[0].Line41000_Line6_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 76.326,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column1[0].Line41000_Line7_grp1[0].Line41000_Line7_1[0]",
+    "type": "Text",
+    "left": 49.51,
+    "top": 78.22,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line1_grp2[0].Line41000_Line1_2[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 65.341,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line2_grp2[0].Line41000__Line2_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 68.75,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line3_grp2[0].Line4100_Line3_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 70.644,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line4_grp2[0].Line41000_Line4_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 72.538,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line5_grp2[0].Line41000_Line5_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 74.432,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line6_grp2[0].Line41000_Line6_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 76.326,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column2[0].Line41000_Line7_grp2[0].Line41000_Line7_2[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 78.22,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line1_grp3[0].Line410_Line1_3[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 65.341,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line2_grp3[0].Line41000__Line2_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 68.75,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line3_grp3[0].Line41000_Line3_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 70.644,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line4_grp3[0].Line41000_Line4_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 72.538,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line5_grp3[0].Line41000_Line5_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 74.432,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line6_grp3[0].Line41000_Line6_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 76.326,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 8,
+    "name": "form1[0].Page8[0].line41000[0].Chart[0].Column3[0].Line41000_Line7_grp3[0].Line41000_Line7_3[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 78.22,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line1[0].Amount1[0].Amount[0]",
+    "type": "Text",
+    "left": 63.703,
+    "top": 47.349,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line1[0].Amount2[0].Amount[0]",
+    "type": "Text",
+    "left": 79.88,
+    "top": 47.349,
+    "width": 13.235,
+    "height": 2.94
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line2[0].Amount1[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 50.757,
+    "width": 11.275,
+    "height": 4.455
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line2[0].Amount2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 50.757,
+    "width": 11.275,
+    "height": 4.455
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line3[0].Amount1[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 55.681,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line3[0].Amount2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 55.681,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line4[0].Amount1[0].Amount[0]",
+    "type": "Text",
+    "left": 65.664,
+    "top": 57.575,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line4[0].Amount2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.841,
+    "top": 57.575,
+    "width": 11.275,
+    "height": 2.94
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line5[0].Amount1[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 60.984,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line5[0].Amount2[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 60.984,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line6[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 63.636,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line7[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 65.529,
+    "width": 11.275,
+    "height": 1.515
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line8[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 67.423,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line9[0].Amount[0]",
+    "type": "Text",
+    "left": 63.726,
+    "top": 69.317,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line10[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 71.211,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line11[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 73.105,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line12[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 74.999,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line13[0].Amount[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 76.893,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line14[0].Amount[0]",
+    "type": "Text",
+    "left": 79.902,
+    "top": 79.544,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line15[0].Amount1[0]",
+    "type": "Text",
+    "left": 50.0,
+    "top": 81.438,
+    "width": 13.235,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line15[0].Percentage[0]",
+    "type": "Text",
+    "left": 65.686,
+    "top": 81.438,
+    "width": 9.314,
+    "height": 1.515
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line15[0].Amount2[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 81.438,
+    "width": 11.275,
+    "height": 1.424
+  },
+  {
+    "page": 9,
+    "name": "form1[0].Page9[0].Line45200[0].Line16[0].Amount[0]",
+    "type": "Text",
+    "left": 81.863,
+    "top": 83.332,
+    "width": 11.275,
+    "height": 2.94
+  }
+]

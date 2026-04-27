@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     # Aether Archive service URL for server-side per-user data persistence.
     ARCHIVE_URL: str = "http://archive:7000"
 
+    # Fernet key for encrypting form data at rest in Archive.
+    # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+    # If empty, data is stored as plaintext (local dev fallback only).
+    FIELD_ENCRYPTION_KEY: str = ""
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
     @property
