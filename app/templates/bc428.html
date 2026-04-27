@@ -45,6 +45,7 @@
   border-radius: 2px;
   margin: 4px 0 8px;
   padding: 8px;
+  overflow: hidden;
 }
 .bracket-section-title {
   font-size: 12px; font-weight: 700;
@@ -90,8 +91,8 @@
   <!-- Supplementary inputs not directly on the PDF pages -->
   <div class="bracket-section" style="margin-bottom:4px;">
     <div class="bracket-section-title">Taxable Income &amp; Dividend Inputs (from T1)</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;padding:4px 0;">
-      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px;padding:4px 0;">
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;min-width:0;">
         <div class="line-desc"><span>Taxable income (T1 line 26000)</span></div>
         <div class="line-op">+</div>
         <div class="line-num">26000</div>
@@ -100,7 +101,7 @@
                  oninput="document.getElementById('fTaxableIncome') && (document.getElementById('fTaxableIncome').value=this.value); recalcBC428();">
         </div>
       </div>
-      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;min-width:0;">
         <div class="line-desc"><span>Eligible dividends grossed-up (T1 line 12000)</span></div>
         <div class="line-op">+</div>
         <div class="line-num">12000</div>
@@ -108,7 +109,7 @@
           <input class="amount-field" type="text" data-numeric="1" id="fDiv12000" value="" inputmode="decimal">
         </div>
       </div>
-      <div class="form-line" style="background:#fff;border:1px solid #ccc;flex:1;min-width:220px;">
+      <div class="form-line" style="background:#fff;border:1px solid #ccc;min-width:0;">
         <div class="line-desc"><span>Other dividends grossed-up (T1 line 12010)</span></div>
         <div class="line-op">+</div>
         <div class="line-num">12010</div>
@@ -215,7 +216,7 @@
   <div class="bracket-section">
     <div class="bracket-section-title">Part 3 &mdash; BC Tax Calculation Summary</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div>
+      <div style="min-width:0;">
         <div class="form-line" style="background:#fff;">
           <div class="line-desc"><span>BC dividend tax credit (auto-computed)</span></div>
           <div class="line-op">=</div>
@@ -233,7 +234,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div style="min-width:0;">
         <div class="form-line" style="background:#fff;">
           <div class="line-desc"><span>BC political contribution credit (61520)</span></div>
           <div class="line-op">+</div>
