@@ -6,3 +6,16 @@ __pycache__/
 # Official CRA fillable PDFs — downloaded by user; not committed to source
 # Keep the directory (tracked via .gitkeep)
 app/static/forms/*.pdf
+
+# Private keys, certificates, secrets — never commit these
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cert
+*.jks
+
+# Local data volumes
+data/
+archive_data/

@@ -17,16 +17,40 @@
 
 param(
     [string]$AtlasUrl       = ($env:ATLAS_URL            ?? "http://localhost:8600"),
-    [string]$InternalSecret = ($env:AETHER_SESSION_SECRET ?? "")
+    [string]$InternalSecret = ($env:AETHER_SESSION_SECRET ?? ""),
+    [string]$EncryptionKey  = ($env:FIELD_ENCRYPTION_KEY  ?? "")
 )
 
-# Try reading from Aether .env if secret not supplied
+# Helper: read a key from a .env file
+function Read-EnvValue([string]$FilePath, [string]$Key) {
+    if (-not (Test-Path $FilePath)) { return "" }
+    $line = Get-Content $FilePath | Where-Object { $_ -match "^${Key}=" } | Select-Object -First 1
+    if ($line) { return ($line -split "=", 2)[1].Trim() }
+    return ""
+}
+
+# Try reading SESSION_SECRET from Aether .env if not supplied
 if (-not $InternalSecret) {
     $aetherEnv = Join-Path $PSScriptRoot "..\..\Aether\.env"
-    if (Test-Path $aetherEnv) {
-        $line = Get-Content $aetherEnv | Where-Object { $_ -match "^SESSION_SECRET=" } | Select-Object -First 1
-        if ($line) { $InternalSecret = ($line -split "=", 2)[1].Trim() }
-    }
+    $InternalSecret = Read-EnvValue $aetherEnv "SESSION_SECRET"
+}
+
+# Try reading FIELD_ENCRYPTION_KEY from local .env if not supplied
+if (-not $EncryptionKey) {
+    $localEnv = Join-Path $PSScriptRoot "..\..env"  # repo root .env
+    # Resolve properly
+    $localEnv = Join-Path (Split-Path $PSScriptRoot -Parent) ".env"
+    $EncryptionKey = Read-EnvValue $localEnv "FIELD_ENCRYPTION_KEY"
+}
+
+if (-not $InternalSecret) {
+    Write-Error "SESSION_SECRET not found. Set AETHER_SESSION_SECRET env var or add SESSION_SECRET to Aether/.env"
+    exit 1
+}
+
+if (-not $EncryptionKey) {
+    Write-Warning "FIELD_ENCRYPTION_KEY not set — form data will be stored as plaintext."
+    Write-Warning "Set FIELD_ENCRYPTION_KEY in the repo root .env file to enable encryption."
 }
 
 $headers = @{ "Content-Type" = "application/json" }
@@ -43,9 +67,12 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 $AppConfig = Get-Content "$RepoRoot\atlas-app.json" | ConvertFrom-Json
 
-# Inject the SESSION_SECRET so the app can validate Aether session cookies
+# Inject runtime secrets — never stored in atlas-app.json
 if ($InternalSecret) {
     $AppConfig.env | Add-Member -NotePropertyName "SESSION_SECRET" -NotePropertyValue $InternalSecret -Force
+}
+if ($EncryptionKey) {
+    $AppConfig.env | Add-Member -NotePropertyName "FIELD_ENCRYPTION_KEY" -NotePropertyValue $EncryptionKey -Force
 }
 
 $Body = $AppConfig | ConvertTo-Json -Depth 5

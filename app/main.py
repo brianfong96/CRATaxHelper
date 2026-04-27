@@ -88,7 +88,14 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def _lifespan(app):
-    """Initialise Archive project/table/RLS on startup (idempotent, non-fatal)."""
+    """Startup validation + Archive project/table/RLS init (idempotent, non-fatal)."""
+    # Fail fast: if auth is enabled but no secret is set, every request will
+    # be unauthenticated — this is a dangerous misconfiguration.
+    if settings.AUTH_ENABLED and not settings.SESSION_SECRET:
+        raise RuntimeError(
+            "FATAL: AUTH_ENABLED=true but SESSION_SECRET is not set. "
+            "Set SESSION_SECRET in your environment or disable auth with AUTH_ENABLED=false."
+        )
     asyncio.create_task(ensure_archive_project())
     yield
 
@@ -554,8 +561,35 @@ async def export_excel(request: Request):
 
 # ── Admin / setup routes ──────────────────────────────────────────────────────
 
+def _require_local_or_admin(request: Request):
+    """Block admin routes from non-localhost when AUTH_ENABLED=false.
+
+    When running locally (AUTH_ENABLED=false), admin routes are only accessible
+    from localhost (127.0.0.1 / ::1). This prevents accidental exposure if the
+    Docker port is inadvertently bound to a public interface.
+    When AUTH_ENABLED=true, the normal Aether auth middleware already protects
+    every route — no additional check needed here.
+    """
+    if settings.AUTH_ENABLED:
+        return  # Protected by the global auth middleware already
+    client_host = request.client.host if request.client else ""
+    forwarded = request.headers.get("X-Forwarded-For", "")
+    if forwarded:
+        # Behind a proxy — if forwarded header is present, request came from outside
+        raise HTTPException(
+            status_code=403,
+            detail="Admin routes are only accessible from localhost in local mode.",
+        )
+    if client_host not in ("127.0.0.1", "::1", "localhost"):
+        raise HTTPException(
+            status_code=403,
+            detail="Admin routes are only accessible from localhost in local mode.",
+        )
+
+
 @app.get("/admin/setup", response_class=HTMLResponse)
 async def admin_setup(request: Request):
+    _require_local_or_admin(request)
     status = forms_status()
     return templates.TemplateResponse(
         request, "setup.html", _ctx(request, forms=status)
@@ -563,19 +597,22 @@ async def admin_setup(request: Request):
 
 
 @app.get("/admin/forms-status")
-async def admin_forms_status():
+async def admin_forms_status(request: Request):
+    _require_local_or_admin(request)
     return forms_status()
 
 
 @app.get("/admin/list-fields/{form_name}")
-async def admin_list_fields(form_name: str):
+async def admin_list_fields(form_name: str, request: Request):
+    _require_local_or_admin(request)
     if form_name not in ("t1-2025.pdf", "bc428-2025.pdf"):
         raise HTTPException(status_code=400, detail="Unknown form name")
     return {"form": form_name, "fields": list_fields(form_name)}
 
 
 @app.post("/admin/upload-form/{form_name}")
-async def admin_upload_form(form_name: str, file: UploadFile = File(...)):
+async def admin_upload_form(form_name: str, request: Request, file: UploadFile = File(...)):
+    _require_local_or_admin(request)
     if form_name not in ("t1-2025.pdf", "bc428-2025.pdf"):
         raise HTTPException(status_code=400, detail="Unknown form name")
     content = await file.read()
