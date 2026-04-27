@@ -636,3 +636,607 @@ class TestCalculateSchedule3:
         r = calculate_schedule3(inp)
         assert r["line25"] == 0.0
         assert r["line26"] == 0.0
+
+
+# ── Schedule 5 calculate_schedule5 ────────────────────────────────────────────
+
+from app.calculator import Schedule5Input, calculate_schedule5
+
+
+class TestCalculateSchedule5:
+    def _calc(self, **kwargs):
+        return calculate_schedule5(Schedule5Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["line30300"] == 0.0
+        assert r["line30400"] == 0.0
+        assert r["line30425"] == 0.0
+        assert r["line30450"] == 0.0
+        assert r["line30500"] == 0.0
+
+    def test_spouse_amount_no_income(self):
+        # Full basic personal amount when spouse has zero net income
+        r = self._calc(has_spouse=True, spouse_net_income=0)
+        assert r["line30300"] == pytest.approx(16_129.0, abs=0.01)
+
+    def test_spouse_amount_partial(self):
+        # BPA - spouse income = 16,129 - 5,000 = 11,129
+        r = self._calc(has_spouse=True, spouse_net_income=5_000)
+        assert r["line30300"] == pytest.approx(11_129.0, abs=0.01)
+
+    def test_spouse_amount_zero_when_income_exceeds_bpa(self):
+        # Spouse income >= BPA → line30300 = 0
+        r = self._calc(has_spouse=True, spouse_net_income=20_000)
+        assert r["line30300"] == 0.0
+
+    def test_no_spouse_gives_zero_line30300(self):
+        r = self._calc(has_spouse=False, spouse_net_income=0)
+        assert r["line30300"] == 0.0
+
+    def test_eligible_dependant_amount(self):
+        # Eligible dependant with zero income → full BPA
+        r = self._calc(has_eligible_dep=True, dep_net_income=0)
+        assert r["line30400"] == pytest.approx(16_129.0, abs=0.01)
+
+    def test_eligible_dependant_partial_income(self):
+        r = self._calc(has_eligible_dep=True, dep_net_income=3_000)
+        assert r["line30400"] == pytest.approx(13_129.0, abs=0.01)
+
+    def test_child_caregiver_amount(self):
+        # 2 children × $2,273 = $4,546
+        r = self._calc(num_children_under18=2)
+        assert r["line30500"] == pytest.approx(4_546.0, abs=0.01)
+
+    def test_caregiver_spouse_infirm(self):
+        # Spouse infirm + no income: line30425 = BPA + CAREGIVER (capped)
+        r = self._calc(has_spouse=True, spouse_net_income=0, spouse_infirm=True)
+        assert r["line30425"] > 0
+
+    def test_caregiver_dep_infirm(self):
+        r = self._calc(has_eligible_dep=True, dep_net_income=0, dep_infirm=True)
+        assert r["line30450"] == pytest.approx(8_375.0, abs=0.01)
+
+
+# ── Schedule 7 calculate_schedule7 ────────────────────────────────────────────
+
+from app.calculator import Schedule7Input, calculate_schedule7
+
+
+class TestCalculateSchedule7:
+    def _calc(self, **kwargs):
+        return calculate_schedule7(Schedule7Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["rrsp_total"] == 0.0
+        assert r["rrsp_after_deduction"] == 0.0
+
+    def test_rrsp_total_sums_contributions(self):
+        r = self._calc(rrsp_unused_prior=5_000, rrsp_contrib_this_year=10_000, rrsp_contrib_jan60=3_000)
+        assert r["rrsp_total"] == pytest.approx(18_000.0, abs=0.01)
+
+    def test_rrsp_after_deduction(self):
+        r = self._calc(rrsp_unused_prior=10_000, rrsp_deduction=8_000)
+        assert r["rrsp_after_deduction"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_rrsp_after_deduction_floored_at_zero(self):
+        r = self._calc(rrsp_unused_prior=5_000, rrsp_deduction=10_000)
+        assert r["rrsp_after_deduction"] == 0.0
+
+    def test_fhsa_total_and_remaining(self):
+        r = self._calc(fhsa_unused_prior=3_000, fhsa_contrib_this_year=8_000, fhsa_deduction=5_000)
+        assert r["fhsa_total"] == pytest.approx(11_000.0, abs=0.01)
+        assert r["fhsa_after_deduction"] == pytest.approx(6_000.0, abs=0.01)
+
+    def test_llp_minimum_repayment_is_one_tenth(self):
+        r = self._calc(llp_balance=20_000)
+        assert r["llp_min_repayment"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_hbp_minimum_repayment_is_one_fifteenth(self):
+        r = self._calc(hbp_balance=15_000)
+        assert r["hbp_min_repayment"] == pytest.approx(1_000.0, abs=0.01)
+
+    def test_line20800_equals_rrsp_deduction(self):
+        r = self._calc(rrsp_deduction=12_000)
+        assert r["line20800"] == pytest.approx(12_000.0, abs=0.01)
+
+    def test_line20805_equals_fhsa_deduction(self):
+        r = self._calc(fhsa_deduction=4_000)
+        assert r["line20805"] == pytest.approx(4_000.0, abs=0.01)
+
+
+# ── Schedule 8 calculate_schedule8 ────────────────────────────────────────────
+
+from app.calculator import Schedule8Input, calculate_schedule8
+
+
+class TestCalculateSchedule8:
+    def _calc(self, **kwargs):
+        return calculate_schedule8(Schedule8Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["cpp1_on_se"] == 0.0
+        assert r["line22200"] == 0.0
+        assert r["line31000"] == 0.0
+
+    def test_cpp1_below_exemption(self):
+        # Net SE income below $3,500 exemption → no CPP
+        r = self._calc(net_self_emp_income=3_000)
+        assert r["cpp1_on_se"] == 0.0
+
+    def test_cpp1_basic_calculation(self):
+        # (10,000 - 3,500) × 5.95% = 6,500 × 5.95% = 386.75
+        r = self._calc(net_self_emp_income=10_000)
+        assert r["cpp1_on_se"] == pytest.approx(386.75, abs=0.02)
+
+    def test_line22200_is_half_of_cpp1(self):
+        # Deduction = employee half
+        r = self._calc(net_self_emp_income=10_000)
+        assert r["line22200"] == pytest.approx(r["cpp1_on_se"] / 2, abs=0.01)
+
+    def test_line31000_equals_line22200(self):
+        r = self._calc(net_self_emp_income=10_000)
+        assert r["line31000"] == r["line22200"]
+
+    def test_cpp1_capped_at_max_earnings(self):
+        # Earnings above $73,200 don't increase CPP1
+        r_high = self._calc(net_self_emp_income=100_000)
+        r_max  = self._calc(net_self_emp_income=73_200)
+        assert r_high["cpp1_on_se"] == r_max["cpp1_on_se"]
+
+    def test_cpp2_applies_above_max_pensionable(self):
+        # Earnings above $73,200 up to $81,900 → CPP2 at 4%
+        r = self._calc(net_self_emp_income=75_000)
+        assert r["cpp2_on_se"] > 0
+
+    def test_cpp2_zero_below_cpp1_ceiling(self):
+        r = self._calc(net_self_emp_income=50_000)
+        assert r["cpp2_on_se"] == 0.0
+
+    def test_line22215_is_half_of_cpp2(self):
+        r = self._calc(net_self_emp_income=80_000)
+        assert r["line22215"] == pytest.approx(r["cpp2_on_se"] / 2, abs=0.01)
+
+
+# ── T777 calculate_t777 ───────────────────────────────────────────────────────
+
+from app.calculator import T777Input, calculate_t777
+
+
+class TestCalculateT777:
+    def _calc(self, **kwargs):
+        return calculate_t777(T777Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["line22900"] == 0.0
+
+    def test_vehicle_work_percentage(self):
+        # 20,000 total km, 10,000 work km → 50%
+        r = self._calc(total_km=20_000, work_km=10_000, fuel=4_000)
+        assert r["work_pct"] == pytest.approx(50.0, abs=0.01)
+        assert r["vehicle_work"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_vehicle_total_sums_all_costs(self):
+        r = self._calc(total_km=10_000, work_km=10_000,
+                       fuel=1_000, maintenance=500, insurance=1_200,
+                       license=100, lease=300, depreciation=2_000, interest=400)
+        assert r["vehicle_total"] == pytest.approx(5_500.0, abs=0.01)
+
+    def test_full_work_ratio(self):
+        # 100% work km → vehicle_work = vehicle_total
+        r = self._calc(total_km=10_000, work_km=10_000, fuel=2_000)
+        assert r["vehicle_work"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_home_office_percentage(self):
+        # $10,000 home office, 20% work → $2,000
+        r = self._calc(home_office_expenses=10_000, home_office_work_pct=20.0)
+        assert r["home_office_work"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_supplies_and_legal_direct(self):
+        r = self._calc(supplies=500, legal_fees=1_000)
+        assert r["line22900"] == pytest.approx(1_500.0, abs=0.01)
+
+    def test_other_expenses_included(self):
+        r = self._calc(other_expenses=750)
+        assert r["line22900"] == pytest.approx(750.0, abs=0.01)
+
+    def test_line22900_full_combination(self):
+        r = self._calc(
+            total_km=10_000, work_km=5_000,
+            fuel=2_000, supplies=300, legal_fees=200,
+            home_office_expenses=5_000, home_office_work_pct=40.0,
+        )
+        # vehicle_work = 1,000; home_office = 2,000; supplies+legal = 500
+        assert r["line22900"] == pytest.approx(3_500.0, abs=0.01)
+
+
+# ── T2209 calculate_t2209 ────────────────────────────────────────────────────
+
+from app.calculator import T2209Input, calculate_t2209
+
+
+class TestCalculateT2209:
+    def _calc(self, **kwargs):
+        return calculate_t2209(T2209Input(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        assert r["line40500"] == 0.0
+
+    def test_credit_limit_proportional(self):
+        # foreign_income=10,000, net_income=100,000, fed_tax=20,000
+        # limit = (10,000/100,000) × 20,000 = 2,000
+        r = self._calc(
+            foreign_income_non_business=10_000,
+            net_income=100_000,
+            federal_tax_before_credits=20_000,
+            foreign_tax_non_business=3_000,
+        )
+        assert r["limit_non_biz"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_credit_is_lesser_of_tax_and_limit(self):
+        # Foreign tax paid (1,500) < limit (2,000) → credit = 1,500
+        r = self._calc(
+            foreign_income_non_business=10_000,
+            net_income=100_000,
+            federal_tax_before_credits=20_000,
+            foreign_tax_non_business=1_500,
+        )
+        assert r["credit_non_biz"] == pytest.approx(1_500.0, abs=0.01)
+
+    def test_credit_capped_at_limit(self):
+        # Foreign tax paid (5,000) > limit (2,000) → credit = 2,000
+        r = self._calc(
+            foreign_income_non_business=10_000,
+            net_income=100_000,
+            federal_tax_before_credits=20_000,
+            foreign_tax_non_business=5_000,
+        )
+        assert r["credit_non_biz"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_zero_net_income_gives_zero_credit(self):
+        r = self._calc(
+            foreign_income_non_business=5_000,
+            net_income=0,
+            federal_tax_before_credits=10_000,
+            foreign_tax_non_business=1_000,
+        )
+        assert r["credit_non_biz"] == 0.0
+        assert r["line40500"] == 0.0
+
+    def test_business_credit_included(self):
+        r = self._calc(
+            foreign_income_business=10_000,
+            foreign_tax_business=1_000,
+        )
+        assert r["credit_biz"] > 0
+        assert r["line40500"] == r["credit_biz"]
+
+    def test_line40500_is_sum_of_biz_and_nonbiz(self):
+        r = self._calc(
+            foreign_income_non_business=5_000,
+            net_income=50_000,
+            federal_tax_before_credits=10_000,
+            foreign_tax_non_business=500,
+            foreign_income_business=2_000,
+            foreign_tax_business=200,
+        )
+        assert r["line40500"] == pytest.approx(r["credit_non_biz"] + r["credit_biz"], abs=0.01)
+
+
+# ── WorksheetFed calculate_worksheet_fed ────────────────────────────────────
+
+from app.calculator import WorksheetFedInput, calculate_worksheet_fed
+
+
+class TestCalculateWorksheetFed:
+    def _calc(self, **kwargs):
+        return calculate_worksheet_fed(WorksheetFedInput(**kwargs))
+
+    def test_zero_input(self):
+        r = self._calc()
+        # BPA is always 16,129 even with no input
+        assert r["bpa"] == pytest.approx(16_129.0, abs=0.01)
+        assert r["total_credits"] > 0
+
+    def test_employment_amount_capped(self):
+        r = self._calc(employment_income=100_000)
+        assert r["employment_amt"] == pytest.approx(1_471.0, abs=0.01)
+
+    def test_employment_amount_partial(self):
+        r = self._calc(employment_income=800)
+        assert r["employment_amt"] == pytest.approx(800.0, abs=0.01)
+
+    def test_pension_amount_capped(self):
+        r = self._calc(eligible_pension=5_000)
+        assert r["pension_amt"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_pension_amount_partial(self):
+        r = self._calc(eligible_pension=1_200)
+        assert r["pension_amt"] == pytest.approx(1_200.0, abs=0.01)
+
+    def test_age_amount_under_65(self):
+        r = self._calc(net_income=40_000, age_65_or_over=False)
+        assert r["age_amt"] == 0.0
+
+    def test_age_amount_over_65_low_income(self):
+        r = self._calc(net_income=30_000, age_65_or_over=True)
+        assert r["age_amt"] == pytest.approx(9_028.0, abs=0.01)
+
+    def test_medical_threshold_is_3pct_capped_at_2759(self):
+        # 3% of $80,000 = $2,400 < $2,759 → threshold = $2,400
+        r = self._calc(net_income=80_000, medical_expenses=5_000)
+        assert r["medical_threshold"] == pytest.approx(2_400.0, abs=0.01)
+        assert r["medical_credit_base"] == pytest.approx(2_600.0, abs=0.01)
+
+    def test_medical_threshold_capped(self):
+        # 3% of $200,000 = $6,000 > $2,759 → threshold capped at $2,759
+        r = self._calc(net_income=200_000, medical_expenses=5_000)
+        assert r["medical_threshold"] == pytest.approx(2_759.0, abs=0.01)
+
+    def test_total_credits_includes_bpa(self):
+        r = self._calc()
+        assert r["total_credits"] >= 16_129.0
+
+    def test_credit_value_is_15pct_of_total(self):
+        r = self._calc(employment_income=50_000)
+        assert r["credit_value"] == pytest.approx(r["total_credits"] * 0.15, abs=0.01)
+
+
+from app.calculator import (
+    Schedule5Input, calculate_schedule5,
+    Schedule7Input, calculate_schedule7,
+    Schedule8Input, calculate_schedule8,
+    T777Input, calculate_t777,
+    T2209Input, calculate_t2209,
+    WorksheetFedInput, calculate_worksheet_fed,
+    FEDERAL_BASIC_PERSONAL, FEDERAL_EMPLOYMENT_MAX, FEDERAL_PENSION_MAX,
+    FEDERAL_CREDIT_RATE,
+)
+
+
+class TestCalculateSchedule5:
+    def test_zero_input(self):
+        r = calculate_schedule5(Schedule5Input())
+        assert r["line30300"] == 0.0
+        assert r["line30400"] == 0.0
+        assert r["line30500"] == 0.0
+
+    def test_spouse_amount_full(self):
+        # Spouse has no income -> 30300 = BPA = 16129
+        r = calculate_schedule5(Schedule5Input(has_spouse=True, spouse_net_income=0.0))
+        assert r["line30300"] == pytest.approx(16_129.0, abs=0.01)
+
+    def test_spouse_amount_reduced(self):
+        # Spouse earns 5000 -> 30300 = 16129 - 5000 = 11129
+        r = calculate_schedule5(Schedule5Input(has_spouse=True, spouse_net_income=5_000.0))
+        assert r["line30300"] == pytest.approx(11_129.0, abs=0.01)
+
+    def test_spouse_amount_nil(self):
+        # Spouse earns more than BPA -> 30300 = 0
+        r = calculate_schedule5(Schedule5Input(has_spouse=True, spouse_net_income=20_000.0))
+        assert r["line30300"] == 0.0
+
+    def test_dep_amount(self):
+        # Eligible dep with no income -> 30400 = 16129
+        r = calculate_schedule5(Schedule5Input(has_eligible_dep=True, dep_net_income=0.0))
+        assert r["line30400"] == pytest.approx(16_129.0, abs=0.01)
+
+    def test_num_children(self):
+        # 2 children -> 30500 = 2 * 2273 = 4546
+        r = calculate_schedule5(Schedule5Input(num_children_under18=2))
+        assert r["line30500"] == pytest.approx(4_546.0, abs=0.01)
+
+    def test_no_spouse_flag_gives_zero(self):
+        # has_spouse=False even with zero income -> 30300 = 0
+        r = calculate_schedule5(Schedule5Input(has_spouse=False, spouse_net_income=0.0))
+        assert r["line30300"] == 0.0
+
+
+class TestCalculateSchedule7:
+    def test_zero_input(self):
+        r = calculate_schedule7(Schedule7Input())
+        assert r["rrsp_total"] == 0.0
+        assert r["fhsa_total"] == 0.0
+
+    def test_rrsp_total(self):
+        # prior 1000 + this year 2000 + jan60 500 = 3500
+        r = calculate_schedule7(Schedule7Input(
+            rrsp_unused_prior=1_000.0,
+            rrsp_contrib_this_year=2_000.0,
+            rrsp_contrib_jan60=500.0,
+        ))
+        assert r["rrsp_total"] == pytest.approx(3_500.0, abs=0.01)
+
+    def test_rrsp_after_deduction(self):
+        # total 5000 - deduction 3000 = 2000 remaining
+        r = calculate_schedule7(Schedule7Input(
+            rrsp_contrib_this_year=5_000.0,
+            rrsp_deduction=3_000.0,
+        ))
+        assert r["rrsp_after_deduction"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_fhsa_total(self):
+        r = calculate_schedule7(Schedule7Input(
+            fhsa_unused_prior=2_000.0,
+            fhsa_contrib_this_year=3_000.0,
+        ))
+        assert r["fhsa_total"] == pytest.approx(5_000.0, abs=0.01)
+
+    def test_hbp_min_repayment(self):
+        # balance 30000, min repayment = 30000/15 = 2000
+        r = calculate_schedule7(Schedule7Input(hbp_balance=30_000.0))
+        assert r["hbp_min_repayment"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_llp_min_repayment(self):
+        # balance 20000, min repayment = 20000/10 = 2000
+        r = calculate_schedule7(Schedule7Input(llp_balance=20_000.0))
+        assert r["llp_min_repayment"] == pytest.approx(2_000.0, abs=0.01)
+
+    def test_zero_balance_no_repayment(self):
+        r = calculate_schedule7(Schedule7Input(hbp_balance=0.0, llp_balance=0.0))
+        assert r["hbp_min_repayment"] == 0.0
+        assert r["llp_min_repayment"] == 0.0
+
+
+class TestCalculateSchedule8:
+    def test_zero_input(self):
+        r = calculate_schedule8(Schedule8Input())
+        assert r["cpp1_on_se"] == 0.0
+        assert r["line22200"] == 0.0
+
+    def test_cpp1_basic(self):
+        # income = 50000: base = min(50000, 73200) - 3500 = 46500; cpp1 = 46500 * 0.0595 = 2766.75
+        r = calculate_schedule8(Schedule8Input(net_self_emp_income=50_000.0))
+        assert r["cpp1_on_se"] == pytest.approx(2_766.75, abs=0.02)
+
+    def test_cpp1_max(self):
+        # income way above max -> capped at (73200 - 3500) * 0.0595 = 4147.15
+        r = calculate_schedule8(Schedule8Input(net_self_emp_income=200_000.0))
+        assert r["cpp1_on_se"] == pytest.approx(4_147.15, abs=0.02)
+
+    def test_line22200_is_half_cpp1(self):
+        r = calculate_schedule8(Schedule8Input(net_self_emp_income=50_000.0))
+        assert r["line22200"] == pytest.approx(r["cpp1_on_se"] * 0.5, abs=0.01)
+
+    def test_cpp2_only_above_73200(self):
+        # income = 60000 < 73200 -> cpp2 = 0
+        r = calculate_schedule8(Schedule8Input(net_self_emp_income=60_000.0))
+        assert r["cpp2_on_se"] == 0.0
+
+    def test_employment_cpp_reduces_se_cpp(self):
+        # if already paid max through employment, SE cpp = 0
+        r = calculate_schedule8(Schedule8Input(
+            net_self_emp_income=100_000.0,
+            cpp_thru_employment=4_147.15,
+        ))
+        assert r["cpp1_on_se"] == 0.0
+
+
+class TestCalculateT777:
+    def test_zero_input(self):
+        r = calculate_t777(T777Input())
+        assert r["line22900"] == 0.0
+
+    def test_vehicle_proportion(self):
+        # 5000 work km / 10000 total = 50%
+        r = calculate_t777(T777Input(total_km=10_000.0, work_km=5_000.0, fuel=1_000.0))
+        assert r["work_pct"] == pytest.approx(50.0, abs=0.01)
+        assert r["vehicle_work"] == pytest.approx(500.0, abs=0.01)
+
+    def test_home_office(self):
+        # 10000 expenses * 40% = 4000
+        r = calculate_t777(T777Input(home_office_expenses=10_000.0, home_office_work_pct=40.0))
+        assert r["home_office_work"] == pytest.approx(4_000.0, abs=0.01)
+
+    def test_line22900_total(self):
+        r = calculate_t777(T777Input(
+            total_km=10_000.0, work_km=5_000.0,
+            fuel=2_000.0, supplies=500.0,
+        ))
+        # vehicle_total = 2000, work_pct = 0.5, vehicle_work = 1000
+        # line22900 = 1000 + 0 + 500 + 0 + 0 = 1500
+        assert r["line22900"] == pytest.approx(1_500.0, abs=0.01)
+
+    def test_no_total_km_gives_zero_vehicle(self):
+        r = calculate_t777(T777Input(total_km=0.0, work_km=100.0, fuel=500.0))
+        assert r["vehicle_work"] == 0.0
+
+    def test_supplies_added(self):
+        r = calculate_t777(T777Input(supplies=1_234.56))
+        assert r["line22900"] == pytest.approx(1_234.56, abs=0.01)
+
+
+class TestCalculateT2209:
+    def test_zero_input(self):
+        r = calculate_t2209(T2209Input())
+        assert r["line40500"] == 0.0
+
+    def test_credit_non_business(self):
+        # foreign_income = 10000, net_income = 100000 -> proportion = 0.1
+        # fed_tax = 20000, limit = 0.1 * 20000 = 2000
+        # foreign_tax = 1500 < 2000 -> credit = 1500
+        r = calculate_t2209(T2209Input(
+            foreign_income_non_business=10_000.0,
+            foreign_tax_non_business=1_500.0,
+            net_income=100_000.0,
+            federal_tax_before_credits=20_000.0,
+        ))
+        assert r["credit_non_biz"] == pytest.approx(1_500.0, abs=0.01)
+
+    def test_credit_at_limit(self):
+        # foreign_tax paid > limit -> capped at limit
+        r = calculate_t2209(T2209Input(
+            foreign_income_non_business=10_000.0,
+            foreign_tax_non_business=5_000.0,  # more than limit
+            net_income=100_000.0,
+            federal_tax_before_credits=20_000.0,
+        ))
+        assert r["credit_non_biz"] == pytest.approx(2_000.0, abs=0.01)  # limit = 0.1 * 20000
+
+    def test_credit_is_min_of_tax_and_limit(self):
+        r = calculate_t2209(T2209Input(
+            foreign_income_non_business=5_000.0,
+            foreign_tax_non_business=1_000.0,
+            net_income=50_000.0,
+            federal_tax_before_credits=10_000.0,
+        ))
+        limit = (5_000.0 / 50_000.0) * 10_000.0  # 1000
+        assert r["credit_non_biz"] == pytest.approx(min(1_000.0, limit), abs=0.01)
+
+    def test_line40500_sum(self):
+        # credit_non_biz + credit_biz
+        r = calculate_t2209(T2209Input(
+            foreign_income_non_business=10_000.0,
+            foreign_tax_non_business=500.0,
+            net_income=100_000.0,
+            federal_tax_before_credits=20_000.0,
+        ))
+        assert r["line40500"] == pytest.approx(r["credit_non_biz"] + r["credit_biz"], abs=0.01)
+
+    def test_zero_net_income_gives_zero(self):
+        r = calculate_t2209(T2209Input(
+            foreign_income_non_business=5_000.0,
+            foreign_tax_non_business=1_000.0,
+            net_income=0.0,
+            federal_tax_before_credits=5_000.0,
+        ))
+        assert r["credit_non_biz"] == 0.0
+
+
+class TestCalculateWorksheetFed:
+    def test_zero_input(self):
+        # Even with zero input, BPA is included in total_credits
+        r = calculate_worksheet_fed(WorksheetFedInput())
+        assert r["bpa"] == pytest.approx(FEDERAL_BASIC_PERSONAL, abs=0.01)
+        assert r["total_credits"] >= FEDERAL_BASIC_PERSONAL
+
+    def test_bpa_always_included(self):
+        r = calculate_worksheet_fed(WorksheetFedInput(net_income=50_000.0))
+        assert r["total_credits"] >= FEDERAL_BASIC_PERSONAL
+
+    def test_age_amount_computed(self):
+        # age 65+, low income -> full age amount
+        r = calculate_worksheet_fed(WorksheetFedInput(
+            net_income=30_000.0, age_65_or_over=True
+        ))
+        assert r["age_amt"] == pytest.approx(9_028.0, abs=0.01)
+
+    def test_employment_amount_capped(self):
+        # employment_income > 1471 -> capped at 1471
+        r = calculate_worksheet_fed(WorksheetFedInput(employment_income=100_000.0))
+        assert r["employment_amt"] == pytest.approx(FEDERAL_EMPLOYMENT_MAX, abs=0.01)
+
+    def test_pension_amount_capped(self):
+        # pension > 2000 -> capped at 2000
+        r = calculate_worksheet_fed(WorksheetFedInput(eligible_pension=5_000.0))
+        assert r["pension_amt"] == pytest.approx(FEDERAL_PENSION_MAX, abs=0.01)
+
+    def test_medical_threshold(self):
+        # net income 50000, 3% = 1500 < 2759 -> threshold = 1500
+        r = calculate_worksheet_fed(WorksheetFedInput(net_income=50_000.0, medical_expenses=3_000.0))
+        assert r["medical_threshold"] == pytest.approx(1_500.0, abs=0.01)
+        assert r["medical_credit_base"] == pytest.approx(1_500.0, abs=0.01)
