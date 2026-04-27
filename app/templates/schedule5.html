@@ -430,8 +430,9 @@ function clearForm() {
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   initAmountBoxes();
-  // Format any hardcoded pre-filled values (e.g. BPA constants)
+  // Format pre-filled constants and run initial recalc so computed fields also show decimals
   document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => { if (el.value) fmtInput(el); });
+  recalcS5();
 
   let loaded = false;
   try {

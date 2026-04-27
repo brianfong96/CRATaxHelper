@@ -423,6 +423,7 @@ function clearForm() {
 document.addEventListener('DOMContentLoaded', async () => {
   initAmountBoxes();
   document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => { if (el.value) fmtInput(el); });
+  recalcWF();
 
   let loaded = false;
   try {
