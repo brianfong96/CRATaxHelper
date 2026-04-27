@@ -12,6 +12,7 @@
     "AUTH_ENABLED": "true",
     "GATEWAY_URL": "https://api.aether-data.net",
     "ALLOWED_EMAILS": "",
-    "ARCHIVE_URL": "http://archive:7000"
+    "ARCHIVE_URL": "http://archive:7000",
+    "FIELD_ENCRYPTION_KEY": "6qW4_7zRgfP2CUo0S6KKGNNNv88BE-htn8YTvxE_DBY="
   }
 }
