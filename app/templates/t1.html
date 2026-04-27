@@ -49,7 +49,7 @@
   text-align: center;
   box-sizing: border-box;
   font-family: "Courier New", monospace;
-  font-size: 0.62em;
+  font-size: 0.78em;
   padding: 0;
   line-height: 1;
   color: #222;
@@ -444,11 +444,11 @@
     <input type="text" id="id_p8_date" class="pdf-input text-left" placeholder="Date signed" style="left:9.804%;top:74.621%;width:38.725%;height:1.424%;">
   </div>
 
-  <!-- Toolbar -->
   <div class="form-toolbar">
     <a class="btn btn-primary" href="{{ root_path }}/tax/bc428" id="bc428-link">Open BC428 &rarr;</a>
     <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
     <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA T1 form with your values"><svg class="icon"><use href="#ic-download"/></svg> Export PDF</button>
+    <button class="btn btn-outline" onclick="exportExcel()"><svg class="icon"><use href="#ic-download"/></svg> Export Excel</button>
     <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
     <a class="btn btn-outline" href="{{ root_path }}/tax/compare"><svg class="icon"><use href="#ic-compare"/></svg> Compare</a>
     <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
@@ -548,6 +548,10 @@ function recalcT1() {
   const step4ded = sum([24400,24900,25000,25100,25200,25300,25400,25500,25600]);
   const line26000 = Math.max(0, line23600 - step4ded);
   s(26000, line26000);
+  // Keep latest taxable income available for BC428 sync
+  localStorage.setItem('cra_t1_line26000', String(line26000));
+  localStorage.setItem('cra_t1_line12000', String(g(12000)));
+  localStorage.setItem('cra_t1_line12010', String(g(12010)));
 
   // ── Schedule 1 credits ──────────────────────────────────────────────────
   // Age amount (30100)
@@ -884,6 +888,27 @@ async function exportPDF() {
     }
   } catch(_) {}
 })();
+
+// ── Excel export ──────────────────────────────────────────────────────────────
+async function exportExcel() {
+  try {
+    const t1Data = getFormData();
+    // also collect BC428 data from localStorage if available
+    let bc428Data = {};
+    try { bc428Data = JSON.parse(localStorage.getItem('cra_bc428_autosave') || '{}'); } catch(_) {}
+    const resp = await fetch(ROOT + '/tax/export/excel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t1: t1Data, bc428: bc428Data }),
+    });
+    if (!resp.ok) throw new Error('Server error');
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'cra-tax-2025.xlsx'; a.click();
+    URL.revokeObjectURL(url);
+  } catch(e) { toast('Excel export failed: ' + e.message, false); }
+}
 
 // ── Update BC428 link with current line 26000 ──────────────────────────────
 function updateBC428Link() {

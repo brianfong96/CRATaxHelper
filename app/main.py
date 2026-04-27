@@ -247,6 +247,235 @@ async def userdata_post(form: str, request: Request):
     return {"saved": True}
 
 
+# ── Excel export ──────────────────────────────────────────────────────────────
+
+# Human-readable labels for key T1 and BC428 line numbers
+_T1_LABELS: dict[str, str] = {
+    "10100": "Employment income",
+    "10400": "Other employment income",
+    "11300": "OAS pension",
+    "11400": "CPP/QPP benefits",
+    "11500": "Other pensions",
+    "11700": "UCCB",
+    "11900": "Employment insurance",
+    "12000": "Taxable dividends (eligible)",
+    "12010": "Taxable dividends (other)",
+    "12100": "Interest and investment income",
+    "12200": "Net partnership income",
+    "12500": "RDSP income",
+    "12700": "Taxable capital gains",
+    "13000": "Other income",
+    "13010": "Taxable scholarships",
+    "14300": "Self-employment net income",
+    "14400": "Workers compensation",
+    "15000": "Total income",
+    "20600": "Pension adjustment",
+    "20700": "Registered pension plan deduction",
+    "20800": "RRSP/PRPP deduction",
+    "21000": "RRSP/PRPP employer contribution",
+    "21200": "Union/professional dues",
+    "21300": "UCCB repayment",
+    "21400": "Child care expenses",
+    "21500": "Disability supports deduction",
+    "21600": "Business investment loss",
+    "21700": "Moving expenses",
+    "21900": "Support payments made",
+    "22000": "Carrying charges",
+    "22100": "Deductible interest",
+    "22200": "CPP/QPP contributions (self-employed)",
+    "22215": "Deduction for CPP/QPP enhanced contributions",
+    "22400": "Exploration and development expenses",
+    "22900": "Other employment expenses",
+    "23100": "Clergy residence deduction",
+    "23200": "Other deductions",
+    "23300": "Total deductions",
+    "23400": "Net income before adjustments",
+    "23500": "Social benefits repayment",
+    "23600": "Net income",
+    "24400": "Employee home relocation loan",
+    "24900": "Security options deductions",
+    "25000": "Other payments deduction",
+    "25100": "Limited partnership losses",
+    "25200": "Non-capital losses",
+    "25300": "Net capital losses",
+    "25400": "Capital gains deduction",
+    "25500": "Northern residents deductions",
+    "25600": "Additional deductions",
+    "26000": "Taxable income",
+    "30100": "Age amount",
+    "30300": "Spouse/common-law partner amount",
+    "30400": "Eligible dependant amount",
+    "30425": "Canada caregiver – spouse/partner",
+    "30450": "Canada caregiver – dependant",
+    "30499": "Number of children under 18",
+    "30500": "Canada caregiver for children",
+    "31220": "Disability amount",
+    "31270": "Home buyers' amount",
+    "31285": "Home accessibility expenses",
+    "31300": "Adoption expenses",
+    "31350": "Digital news subscription expenses",
+    "31400": "Pension income amount",
+    "31600": "Disability transferred from dependant",
+    "31800": "Amounts transferred from spouse",
+    "32300": "Tuition, education and textbook amounts",
+    "32400": "Tuition transferred from child",
+    "32600": "Interest paid on student loans",
+    "33099": "Medical expenses for self/spouse",
+    "33199": "Medical expenses for other dependants",
+    "34900": "Donations and gifts",
+    "35000": "Federal non-refundable tax credits",
+    "35100": "Federal dividend tax credit",
+    "38000": "Federal tax on taxable income",
+    "40424": "Federal tax on split income",
+    "40425": "Federal dividend tax credit",
+    "42000": "Federal tax",
+    "44000": "Federal income tax withheld",
+    "45200": "CPP overpayment",
+    "45300": "Employment insurance overpayment",
+    "46800": "Working income tax benefit advance",
+    "47900": "Provincial or territorial tax",
+    "48200": "Total payable",
+    "48400": "Total income tax deducted",
+    "48500": "Refund or balance owing",
+}
+
+_BC428_LABELS: dict[str, str] = {
+    "fTaxableIncome": "Taxable income (from T1 line 26000)",
+    "fDiv12000": "Eligible dividends (T1 line 12000)",
+    "fDiv12010": "Other dividends (T1 line 12010)",
+    "f58040": "Basic personal amount (BC)",
+    "f58120": "Age amount (BC)",
+    "f58160": "Spouse/partner amount (BC)",
+    "f58200": "Eligible dependant (BC)",
+    "f58240": "Child amount (BC)",
+    "f58280": "CPP/QPP contributions (BC)",
+    "f58300": "Volunteer firefighters (BC)",
+    "f58360": "Employment amount (BC)",
+    "f58400": "Pension income amount (BC)",
+    "f58440": "Disability amount (BC)",
+    "f58480": "Disability transferred (BC)",
+    "f58560": "Tuition transferred (BC)",
+    "f58640": "Medical expenses (BC)",
+    "f58689": "Donations and gifts (BC)",
+    "f58729": "Dividend tax credit (BC)",
+    "f58800": "Other BC non-refundable credits",
+    "f59090": "Total BC non-refundable credits base",
+    "fbcCredits": "Total BC non-refundable credits",
+    "fbcTax": "BC tax before credits",
+    "fbcDTC": "BC dividend tax credit",
+    "f42800": "BC net tax (line 42800)",
+}
+
+
+@app.post("/tax/export/excel")
+async def export_excel(request: Request):
+    """Generate an Excel workbook with T1 and BC428 data and return it for download."""
+    try:
+        import openpyxl
+        from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    except ImportError:
+        raise HTTPException(500, "openpyxl not installed")
+
+    body = await request.json()
+    t1_data: dict = body.get("t1", {})
+    bc428_data: dict = body.get("bc428", {})
+
+    wb = openpyxl.Workbook()
+
+    # ── Helper styles ──────────────────────────────────────────────────────────
+    hdr_font  = Font(bold=True, color="FFFFFF", size=11)
+    hdr_fill  = PatternFill("solid", fgColor="26374A")
+    hdr_align = Alignment(horizontal="center")
+    sub_fill  = PatternFill("solid", fgColor="E8F0F8")
+    sub_font  = Font(bold=True, size=10)
+    thin      = Side(style="thin", color="CCCCCC")
+    border    = Border(bottom=thin)
+    num_fmt   = '#,##0.00'
+
+    def _build_sheet(ws, sheet_title: str, labels: dict[str, str], data: dict):
+        ws.title = sheet_title
+        ws.column_dimensions["A"].width = 14
+        ws.column_dimensions["B"].width = 46
+        ws.column_dimensions["C"].width = 16
+
+        # Header row
+        for col, hdr in enumerate(["Field / Line", "Description", "Value"], start=1):
+            cell = ws.cell(row=1, column=col, value=hdr)
+            cell.font = hdr_font
+            cell.fill = hdr_fill
+            cell.alignment = hdr_align
+
+        row = 2
+        for field_id, label in labels.items():
+            raw = data.get(field_id, data.get(field_id.lstrip("f"), ""))
+            try:
+                val = float(raw) if raw != "" else ""
+            except (TypeError, ValueError):
+                val = raw
+
+            # Line number display (strip leading 'f')
+            display_id = field_id.lstrip("f")
+
+            a = ws.cell(row=row, column=1, value=display_id)
+            a.alignment = Alignment(horizontal="right")
+            a.border = border
+
+            b = ws.cell(row=row, column=2, value=label)
+            b.border = border
+            if row % 2 == 0:
+                b.fill = sub_fill
+
+            c = ws.cell(row=row, column=3, value=val)
+            c.border = border
+            c.alignment = Alignment(horizontal="right")
+            if isinstance(val, float):
+                c.number_format = num_fmt
+            if row % 2 == 0:
+                c.fill = sub_fill
+
+            row += 1
+
+        # Freeze header
+        ws.freeze_panes = "A2"
+
+    # Build T1 sheet — also include any unlabelled numeric fields from data
+    t1_labels = dict(_T1_LABELS)
+    for k, v in t1_data.items():
+        if k not in t1_labels and not k.startswith("_") and not k.startswith("id_") and not k.startswith("radio_"):
+            try:
+                float(v)
+                t1_labels[k] = f"Line {k}"
+            except (TypeError, ValueError):
+                pass
+
+    ws1 = wb.active
+    _build_sheet(ws1, "T1 General", t1_labels, t1_data)
+
+    # Build BC428 sheet
+    bc428_labels = dict(_BC428_LABELS)
+    for k, v in bc428_data.items():
+        if k not in bc428_labels and not k.startswith("_"):
+            try:
+                float(v)
+                bc428_labels[k] = f"Field {k}"
+            except (TypeError, ValueError):
+                pass
+
+    ws2 = wb.create_sheet("BC428")
+    _build_sheet(ws2, "BC428", bc428_labels, bc428_data)
+
+    # ── Write to buffer ────────────────────────────────────────────────────────
+    buf = io.BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+
+    return Response(
+        content=buf.read(),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": 'attachment; filename="cra-tax-2025.xlsx"'},
+    )
+
+
 # ── Admin / setup routes ──────────────────────────────────────────────────────
 
 @app.get("/admin/setup", response_class=HTMLResponse)

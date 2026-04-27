@@ -305,6 +305,8 @@
     <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
     <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
     <button class="btn btn-secondary" id="btn-export-pdf" onclick="exportPDF()" title="Fills the official CRA BC428 form with your values"><svg class="icon"><use href="#ic-download"/></svg> Export PDF</button>
+    <button class="btn btn-outline" onclick="exportExcel()"><svg class="icon"><use href="#ic-download"/></svg> Export Excel</button>
+    <button class="btn btn-outline" onclick="syncFromT1()" title="Load taxable income and dividends from T1 (uses last saved T1 values)">Sync from T1</button>
     <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
     <a class="btn btn-outline" href="{{ root_path }}/tax/compare"><svg class="icon"><use href="#ic-compare"/></svg> Compare</a>
     <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
@@ -600,6 +602,46 @@ function saveAndReturnToT1() {
   localStorage.setItem('cra_bc428_net_tax', net.toString());
   // Navigate back to T1 with the BC net tax as a query param
   window.location.href = ROOT + '/tax/t1?bc_net_tax=' + net.toFixed(2);
+}
+
+// ── Sync taxable income and dividends from T1 localStorage ─────────────────
+function syncFromT1() {
+  const ti = parseFloat(localStorage.getItem('cra_t1_line26000') || '0') || 0;
+  const d1 = parseFloat(localStorage.getItem('cra_t1_line12000') || '0') || 0;
+  const d2 = parseFloat(localStorage.getItem('cra_t1_line12010') || '0') || 0;
+  if (ti === 0 && d1 === 0 && d2 === 0) {
+    toast('No T1 data found — open T1 first and enter your income', false);
+    return;
+  }
+  const elTI = document.getElementById('fTaxableIncome');
+  const elD1 = document.getElementById('fDiv12000');
+  const elD2 = document.getElementById('fDiv12010');
+  if (elTI) { elTI.value = String(ti); fmtInput(elTI); }
+  if (elD1) { elD1.value = String(d1); fmtInput(elD1); }
+  if (elD2) { elD2.value = String(d2); fmtInput(elD2); }
+  recalcBC428();
+  autoSave();
+  toast('Synced from T1 — taxable income: $' + ti.toLocaleString('en-CA', {minimumFractionDigits:2}));
+}
+
+// ── Excel export ────────────────────────────────────────────────────────────
+async function exportExcel() {
+  try {
+    const bc428Data = getFormData();
+    let t1Data = {};
+    try { t1Data = JSON.parse(localStorage.getItem('cra_t1_autosave') || '{}'); } catch(_) {}
+    const resp = await fetch(ROOT + '/tax/export/excel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t1: t1Data, bc428: bc428Data }),
+    });
+    if (!resp.ok) throw new Error('Server error');
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'cra-tax-2025.xlsx'; a.click();
+    URL.revokeObjectURL(url);
+  } catch(e) { toast('Excel export failed: ' + e.message, false); }
 }
 
 // ── Persistence ────────────────────────────────────────────────────────────
