@@ -1,0 +1,550 @@
+{% extends "base.html" %}
+{% block title %}Schedule 3 &mdash; Capital Gains (or Losses) 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 3 &mdash; Capital Gains (or Losses)</div>
+      <div class="form-subtitle">Form Schedule 3 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>Schedule 3-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 3 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page1.png" alt="Schedule 3 Page 1">
+    <!-- 17905 (including a rental property) that was not considered  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p1_L17905" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:71.402%;width:1.634%;height:1.263%;" title="17905 (including a rental property) that was not considered inventory and was ow">
+    <!-- 17905 (including a rental property) that was not considered  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p1_L17905" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:89.216%;top:71.402%;width:1.634%;height:1.263%;" title="17905 (including a rental property) that was not considered inventory and was ow">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page2.png" alt="Schedule 3 Page 2">
+    <!-- Was the disposition due to, or in anticipation of, any of th -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:9.47%;width:1.634%;height:1.263%;">
+    <!-- 17906 1 the death of the taxpayer or a related person 2 a re -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:11.364%;width:1.634%;height:1.263%;">
+    <!-- (for example, birth of a child, adoption, or care of an elde -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:14.773%;width:1.634%;height:1.263%;">
+    <!-- apart from their spouse or common-law partner for at least 9 -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:17.929%;width:1.634%;height:1.263%;">
+    <!-- 4 a threat to the personal safety of the taxpayer or a relat -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:19.823%;width:1.634%;height:1.263%;">
+    <!-- 5 a serious disability or illness of the taxpayer or a relat -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:21.591%;width:1.634%;height:1.263%;">
+    <!-- the taxpayer to carry on business, be employed, or attend fu -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:26.263%;width:1.634%;height:1.263%;">
+    <!-- 7 the involuntary termination of employment of the taxpayer  -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:28.157%;width:1.634%;height:1.263%;">
+    <!-- 8 the insolvency of the taxpayer (for example, due to an acc -->
+    <input type="checkbox" id="f_schedule3_p2_L17906" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:29.924%;width:1.634%;height:1.263%;">
+    <!-- pp y g p p y ( ) 17900 1 I designate the property as my prin -->
+    <input type="checkbox" id="f_schedule3_p2_L17900" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:66.667%;width:1.634%;height:1.263%;">
+    <!-- I owned it except one year. 2 I designate the property as my -->
+    <input type="checkbox" id="f_schedule3_p2_L17900" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:70.202%;width:1.634%;height:1.263%;">
+    <!-- 2 I designate the property as my principal residence for som -->
+    <input type="checkbox" id="f_schedule3_p2_L17900" class="pdf-input" onchange="recalcS3(); autoSave();" style="left:12.255%;top:72.096%;width:1.634%;height:1.263%;">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page3.png" alt="Schedule 3 Page 3">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:4.039%;top:17.515%;width:6.137%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" id="f_schedule3_p3_L1" class="pdf-input text-left" oninput="autoSave();" style="left:10.412%;top:17.515%;width:24.275%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:17.515%;width:6.628%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:17.515%;width:12.51%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:17.515%;width:12.51%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:17.515%;width:12.51%;height:1.333%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- Number Name of corp. and class of shares  (1) (2) (3) (4) (5 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:17.515%;width:13.0%;height:1.334%;" title="Number Name of corp. and class of shares  (1) (2) (3) (4) (5) 10699 Total procee">
+    <!-- 10699 Total proceeds of disposition 10700 1 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10699" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:19.318%;width:12.745%;height:1.424%;" title="10699 Total proceeds of disposition 10700 1 Total gain or loss Q lifi d f fi hi ">
+    <!-- 10699 Total proceeds of disposition 10700 1 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10700" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:79.902%;top:19.318%;width:13.235%;height:1.424%;" title="10699 Total proceeds of disposition 10700 1 Total gain or loss Q lifi d f fi hi ">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" id="f_schedule3_p3_L2" class="pdf-input text-left" oninput="autoSave();" style="left:4.039%;top:25.091%;width:23.784%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:28.059%;top:25.091%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:25.091%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:25.091%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:25.091%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:25.091%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:25.091%;width:13.0%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 10999 Total proceed">
+    <!-- 10999 Total proceeds of disposition 11000 2 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10999" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:26.894%;width:12.745%;height:1.424%;" title="10999 Total proceeds of disposition 11000 2 Total gain or loss +">
+    <!-- 10999 Total proceeds of disposition 11000 2 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L11000" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:26.894%;width:11.275%;height:1.424%;" title="10999 Total proceeds of disposition 11000 2 Total gain or loss +">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" id="f_schedule3_p3_L3" class="pdf-input text-left" oninput="autoSave();" style="left:4.039%;top:32.666%;width:23.784%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:28.059%;top:32.666%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:32.666%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:32.666%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:32.666%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:32.666%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:32.666%;width:13.0%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 12399 Total proceed">
+    <!-- 12399 Total proceeds of disposition 12400 3 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L12399" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:34.47%;width:12.745%;height:1.424%;" title="12399 Total proceeds of disposition 12400 3 Total gain or loss + P bli l d d h l">
+    <!-- 12399 Total proceeds of disposition 12400 3 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L12400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:34.47%;width:11.275%;height:1.424%;" title="12399 Total proceeds of disposition 12400 3 Total gain or loss + P bli l d d h l">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:4.039%;top:40.242%;width:6.137%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" id="f_schedule3_p3_L4" class="pdf-input text-left" oninput="autoSave();" style="left:10.412%;top:40.242%;width:24.275%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:40.242%;width:6.628%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:40.242%;width:12.51%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:40.242%;width:12.51%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:40.242%;width:12.51%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- Number Name of fund/corp. and class of shares  (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:40.242%;width:13.0%;height:1.334%;" title="Number Name of fund/corp. and class of shares  (1) (2) (3) (4) (5) 13199 Total p">
+    <!-- 13199 Total proceeds of disposition 13200 4 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L13199" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:42.045%;width:12.745%;height:1.424%;" title="13199 Total proceeds of disposition 13200 4 Total gain or loss + R l d i bl d h ">
+    <!-- 13199 Total proceeds of disposition 13200 4 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L13200" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:42.045%;width:11.275%;height:1.424%;" title="13199 Total proceeds of disposition 13200 4 Total gain or loss + R l d i bl d h ">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" id="f_schedule3_p3_L5" class="pdf-input text-left" oninput="autoSave();" style="left:4.039%;top:47.818%;width:23.784%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:28.059%;top:47.818%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:47.818%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:47.818%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:47.818%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:47.818%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:47.818%;width:13.0%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 13599 Total proceed">
+    <!-- 13599 Total proceeds of disposition 13800 5 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L13599" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:49.621%;width:12.745%;height:1.424%;" title="13599 Total proceeds of disposition 13800 5 Total gain or loss +">
+    <!-- 13599 Total proceeds of disposition 13800 5 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L13800" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:49.621%;width:11.275%;height:1.424%;" title="13599 Total proceeds of disposition 13800 5 Total gain or loss +">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:4.039%;top:55.394%;width:8.588%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" id="f_schedule3_p3_L6" class="pdf-input text-left" oninput="autoSave();" style="left:12.863%;top:55.394%;width:10.549%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" id="f_schedule3_p3_L6" class="pdf-input text-left" oninput="autoSave();" style="left:23.647%;top:55.394%;width:11.039%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:55.394%;width:6.628%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:55.394%;width:12.51%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:55.394%;width:12.51%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:55.394%;width:12.51%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- Face value Maturity date Name of issuer (1) (2) (3) (4) (5)  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:55.394%;width:13.0%;height:1.334%;" title="Face value Maturity date Name of issuer (1) (2) (3) (4) (5) 15199 Total proceeds">
+    <!-- 15199 Total proceeds of disposition 15300 6 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15199" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:57.197%;width:12.745%;height:1.424%;" title="15199 Total proceeds of disposition 15300 6 Total gain or loss +">
+    <!-- 15199 Total proceeds of disposition 15300 6 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:57.197%;width:11.275%;height:1.424%;" title="15199 Total proceeds of disposition 15300 6 Total gain or loss +">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" id="f_schedule3_p3_L7" class="pdf-input text-left" oninput="autoSave();" style="left:4.039%;top:62.97%;width:19.372%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:23.647%;top:62.97%;width:11.039%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:62.97%;width:6.628%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:62.97%;width:12.51%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:62.97%;width:12.51%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:62.97%;width:12.51%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- Description of crypto-assets No. of units sold (1) (2) (3) ( -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:62.97%;width:13.0%;height:1.334%;" title="Description of crypto-assets No. of units sold (1) (2) (3) (4) (5) 15200 Total p">
+    <!-- 15200 Total proceeds of disposition 15301 7 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15199" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:64.773%;width:12.745%;height:1.424%;" title="15200 Total proceeds of disposition 15301 7 Total gain or loss +">
+    <!-- 15200 Total proceeds of disposition 15301 7 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;" title="15200 Total proceeds of disposition 15301 7 Total gain or loss +">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" id="f_schedule3_p3_L8" class="pdf-input text-left" oninput="autoSave();" style="left:4.039%;top:70.545%;width:23.784%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:28.059%;top:70.545%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:70.545%;width:6.628%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:70.545%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:70.545%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:70.545%;width:12.51%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- Address or legal description Prov./Terr. (1) (2) (3) (4) (5) -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:70.545%;width:13.0%;height:1.334%;" title="Address or legal description Prov./Terr. (1) (2) (3) (4) (5) 15499 Total proceed">
+    <!-- 15499 Total proceeds of disposition 15500 8 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15499" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.667%;top:72.348%;width:12.745%;height:1.424%;" title="15499 Total proceeds of disposition 15500 8 Total gain or loss + P l ( 1 d 2)">
+    <!-- 15499 Total proceeds of disposition 15500 8 Total gain or lo -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15500" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:72.348%;width:11.275%;height:1.424%;" title="15499 Total proceeds of disposition 15500 8 Total gain or loss + P l ( 1 d 2)">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:4.039%;top:78.121%;width:30.647%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:78.121%;width:6.628%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:78.121%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:78.121%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:78.121%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- (provide full description) (1) (2) (3) (4) (5) 15800 9 Total -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:78.121%;width:13.0%;height:1.333%;" title="(provide full description) (1) (2) (3) (4) (5) 15800 9 Total gain only +">
+    <!-- 15800 9 Total gain only  + Li d l (LPP) (LPP l l b li d i LP -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15800" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;" title="15800 9 Total gain only  + Li d l (LPP) (LPP l l b li d i LPP i )">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:4.039%;top:85.697%;width:30.647%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:34.922%;top:85.697%;width:6.628%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:41.785%;top:85.697%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:54.529%;top:85.697%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:67.275%;top:85.697%;width:12.51%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- (provide full description) (1) (2) (3) (4) (5) Subtract unap -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:80.02%;top:85.697%;width:13.0%;height:1.334%;" title="(provide full description) (1) (2) (3) (4) (5) Subtract unapplied LPP losses fro">
+    <!-- Subtract unapplied LPP losses from other years. – 15900 10 N -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:87.5%;width:11.275%;height:1.424%;" title="Subtract unapplied LPP losses from other years. – 15900 10 Net gain only +">
+    <!-- Subtract unapplied LPP losses from other years. – 15900 10 N -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L15900" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:89.394%;width:11.275%;height:1.424%;" title="Subtract unapplied LPP losses from other years. – 15900 10 Net gain only  + Tota">
+    <!-- 15900 10 Net gain only  + 11  Total gains or losses of quali -->
+    <input type="text" data-numeric="1" id="f_schedule3_p3_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:91.288%;width:11.275%;height:2.94%;" title="15900 10 Net gain only  + 11  Total gains or losses of qualified properties  and">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule3_page4.png" alt="Schedule 3 Page 4">
+    <!-- 12 Amount from line 11 of the previous page Capital gains de -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:79.902%;top:9.47%;width:13.235%;height:1.424%;" title="12 Amount from line 11 of the previous page Capital gains deferral from qualifyi">
+    <!-- 12 Amount from line 11 of the previous page 16100 13 Capital -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:11.364%;width:11.275%;height:2.94%;" title="12 Amount from line 11 of the previous page 16100 13 Capital gains deferral from">
+    <!-- 16100 13 included on line 4 – 14 Line 12 minus line 13 = 174 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:14.773%;width:11.275%;height:1.424%;" title="16100 13 included on line 4 – 14 Line 12 minus line 13 = 17400 15 Capital gains ">
+    <!-- 14 Line 12 minus line 13 = 17400 15 Capital gains or losses  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:16.667%;width:11.275%;height:1.424%;" title="14 Line 12 minus line 13 = 17400 15 Capital gains or losses from your T5, T5013,">
+    <!-- 17400 15 Capital gains or losses from your T5, T5013, and T4 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:18.561%;width:11.275%;height:1.424%;" title="17400 15 Capital gains or losses from your T5, T5013, and T4PS slips + 17600 16 ">
+    <!-- 17600 16 Capital gains or losses from your T3 slips + 17 Add -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:20.455%;width:11.275%;height:1.424%;" title="17600 16 Capital gains or losses from your T3 slips + 17 Add lines 14 to 16. = 1">
+    <!-- 17 Add lines 14 to 16. = 17800 18 Capital loss from a reduct -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L18" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:22.349%;width:11.275%;height:1.424%;" title="17 Add lines 14 to 16. = 17800 18 Capital loss from a reduction in your business">
+    <!-- 17800 18 Capital loss from a reduction in your business inve -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:24.243%;width:11.275%;height:2.94%;" title="17800 18 Capital loss from a reduction in your business investment loss – 19100 ">
+    <!-- 19100 19 line 17 minus line 18 = 19200 20 Reserves to be inc -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:27.652%;width:11.275%;height:1.424%;" title="19100 19 line 17 minus line 18 = 19200 20 Reserves to be included in (or deducte">
+    <!-- 19200 20 Reserves to be included in (or deducted from) incom -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:29.545%;width:11.275%;height:2.94%;" title="19200 20 Reserves to be included in (or deducted from) income from Form T2017 + ">
+    <!-- p g p 22 Amount from line 21 above 23 Inclusion rate × 50% -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:79.902%;top:37.5%;width:13.235%;height:1.424%;" title="p g p 22 Amount from line 21 above 23 Inclusion rate × 50%">
+    <!-- 22 Amount from line 21 above 23 Inclusion rate × 24 Line 22  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;" title="22 Amount from line 21 above 23 Inclusion rate × 24 Line 22 multiplied by the pe">
+    <!-- 23 Inclusion rate × 24 Line 22 multiplied by the percentage  -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L24" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;" title="23 Inclusion rate × 24 Line 22 multiplied by the percentage from line 23 = Capit">
+    <!-- 24 Line 22 multiplied by the percentage from line 23 = 19890 -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L25" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:43.182%;width:11.275%;height:2.94%;" title="24 Line 22 multiplied by the percentage from line 23 = 19890 25 Capital gains fr">
+    <!-- 19890 25 (if negative, enter 0 ) + 19900 26 Total taxable ca -->
+    <input type="text" data-numeric="1" id="f_schedule3_p4_L26" class="pdf-input" value="" inputmode="decimal" oninput="recalcS3(); autoSave();" style="left:81.863%;top:46.682%;width:11.275%;height:4.364%;" title="19890 25 (if negative, enter 0 ) + 19900 26 Total taxable capital gains or  net ">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule3_autosave';
+const FORM_INPUT_IDS = [
+  'f_schedule3_p1_L17905',
+  'f_schedule3_p1_L17905',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L1',
+  'f_schedule3_p3_L10699',
+  'f_schedule3_p3_L10700',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L2',
+  'f_schedule3_p3_L10999',
+  'f_schedule3_p3_L11000',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L3',
+  'f_schedule3_p3_L12399',
+  'f_schedule3_p3_L12400',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L4',
+  'f_schedule3_p3_L13199',
+  'f_schedule3_p3_L13200',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L5',
+  'f_schedule3_p3_L13599',
+  'f_schedule3_p3_L13800',
+  'f_schedule3_p3_L6',
+  'f_schedule3_p3_L6',
+  'f_schedule3_p3_L6'
+];
+const CHECKBOX_IDS = [
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17906',
+  'f_schedule3_p2_L17900',
+  'f_schedule3_p2_L17900',
+  'f_schedule3_p2_L17900'
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcS3() using field IDs listed in FORM_INPUT_IDS
+function recalcS3() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_schedule3_p1_Ltotal', g('f_schedule3_p1_L1') + g('f_schedule3_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcS3();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcS3();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcS3();
+});
+</script>
+{% endblock %}

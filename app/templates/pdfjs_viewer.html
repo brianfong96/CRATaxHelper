@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+{% block title %}{{ form_number }} &mdash; {{ form_title }} 2025 (Live PDF){% endblock %}
+
+{% block content %}
+<style>
+/* ── PDF.js hybrid viewer ─────────────────────────────────── */
+.pdfjs-container {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.pdfjs-toolbar {
+  position: sticky; top: 0; z-index: 200;
+  background: #26374a; color: #fff;
+  padding: 8px 14px;
+  display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.pdfjs-toolbar a, .pdfjs-toolbar button {
+  color: #fff; font-size: 12px; text-decoration: none;
+  padding: 3px 10px; border-radius: 3px;
+  border: 1px solid rgba(255,255,255,.35);
+  background: transparent; cursor: pointer;
+}
+.pdfjs-toolbar a:hover, .pdfjs-toolbar button:hover {
+  background: rgba(255,255,255,.18);
+}
+.pdfjs-toolbar .sep { border-left: 1px solid rgba(255,255,255,.3); height: 20px; }
+.pdfjs-toolbar .saved-tag { font-size: 11px; opacity: .7; margin-left: auto; }
+#viewerContainer {
+  overflow: auto;
+  background: #525659;
+  padding: 12px 0;
+  min-height: 400px;
+}
+/* PDF.js page styles */
+#viewer { position: relative; }
+#viewer .page {
+  margin: 8px auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,.4);
+  position: relative;
+  background: white;
+}
+/* Style the AcroForm annotation inputs to match our app */
+#viewer .annotationLayer section.widget input[type="text"],
+#viewer .annotationLayer section.widget textarea {
+  background: rgba(255,255,200,0.88) !important;
+  border: 1px solid #0066cc !important;
+  font-family: "Courier New", monospace !important;
+  font-size: 9px !important;
+  color: #000 !important;
+  padding: 0 2px !important;
+  box-sizing: border-box !important;
+}
+#viewer .annotationLayer section.widget input:focus,
+#viewer .annotationLayer section.widget textarea:focus {
+  background: rgba(255,255,200,1) !important;
+  border-color: #003399 !important;
+  outline: 2px solid rgba(0,51,153,.35) !important;
+  z-index: 10 !important;
+}
+#viewer .annotationLayer section.widget input[readonly],
+#viewer .annotationLayer section.widget textarea[readonly] {
+  background: rgba(200,230,255,0.75) !important;
+  border-color: #888 !important;
+  cursor: default !important;
+}
+.calc-panel {
+  background: #f5f7fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 14px 20px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+.calc-panel h3 { margin: 0 0 8px; font-size: 14px; color: #26374a; }
+.calc-row { display: flex; gap: 12px; margin-bottom: 4px; align-items: baseline; }
+.calc-row label { flex: 1; color: #555; font-size: 12px; }
+.calc-row .val { font-family: monospace; font-weight: bold; color: #003399; }
+.info-banner {
+  background: #e8f0fe; border: 1px solid #4285f4; border-radius: 5px;
+  padding: 10px 16px; margin-bottom: 10px; font-size: 13px; color: #1a3c7e;
+}
+.info-banner a { color: #1a3c7e; }
+</style>
+
+<!-- PDF.js CSS from unpkg (reliable CDN) -->
+<link rel="stylesheet" href="https://unpkg.com/pdfjs-dist@4.4.168/web/pdf_viewer.css">
+
+<div class="cra-form pdfjs-container">
+  <div class="form-header">
+    <div>
+      <div class="form-title">{{ form_number }} &mdash; {{ form_title }}</div>
+      <div class="form-subtitle">Live PDF Viewer &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>{{ form_number }}-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge" href="{{ root_path }}/static/forms/{{ pdf_filename }}" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#ic-external"/></svg> Download PDF
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>Rendered live from the official CRA PDF</span>
+  </div>
+
+  <div class="info-banner">
+    ✨ <strong>Live PDF Mode:</strong> This renders the actual CRA PDF in the browser. All input fields are from the PDF's own AcroForm layer — positions are always 100% accurate.
+    <a href="{{ root_path }}/tax/{{ form_key }}">Switch to overlay mode</a>
+  </div>
+
+  <div class="pdfjs-toolbar">
+    <button onclick="saveFormData()"><svg class="icon"><use href="#ic-save"/></svg> Save</button>
+    <button onclick="clearFormData()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <div class="sep"></div>
+    <span id="page-info" style="font-size:12px;color:#ccc;">Loading PDF…</span>
+    <span class="saved-tag" id="last-saved"></span>
+  </div>
+
+  <!-- PDF.js renders the PDF here -->
+  <div id="viewerContainer">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+
+  <!-- Live calculation summary -->
+  <div class="calc-panel" id="calc-panel" style="display:none;">
+    <h3>📊 Live Field Values</h3>
+    <div id="calc-rows"><em style="color:#888">Fill in form fields above to see values here.</em></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module">
+// PDF.js 4.4.168 — ES module build (works in modern browsers)
+import * as pdfjsLib from 'https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.mjs';
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.mjs';
+
+const PDF_URL  = '{{ root_path }}/static/forms/{{ pdf_filename }}';
+const FORM_KEY = 'cra_{{ form_key }}_pdfjs_v1';
+
+// ── Render all pages ──────────────────────────────────────────────────────────
+async function renderAll() {
+  const loadingTask = pdfjsLib.getDocument({ url: PDF_URL });
+  const pdf = await loadingTask.promise;
+  const container = document.getElementById('viewer');
+  document.getElementById('page-info').textContent =
+    `${pdf.numPages} page${pdf.numPages !== 1 ? 's' : ''}`;
+
+  for (let pg = 1; pg <= pdf.numPages; pg++) {
+    const page = await pdf.getPage(pg);
+    const viewport = page.getViewport({ scale: 1.5 });
+
+    // Page wrapper
+    const pageDiv = document.createElement('div');
+    pageDiv.className = 'page';
+    pageDiv.setAttribute('data-page-number', String(pg));
+    pageDiv.style.width  = viewport.width  + 'px';
+    pageDiv.style.height = viewport.height + 'px';
+    container.appendChild(pageDiv);
+
+    // Canvas (background rendering)
+    const canvasDiv = document.createElement('div');
+    canvasDiv.className = 'canvasWrapper';
+    canvasDiv.style.width  = viewport.width  + 'px';
+    canvasDiv.style.height = viewport.height + 'px';
+    pageDiv.appendChild(canvasDiv);
+
+    const canvas = document.createElement('canvas');
+    canvas.width  = viewport.width;
+    canvas.height = viewport.height;
+    canvasDiv.appendChild(canvas);
+
+    const renderCtx = { canvasContext: canvas.getContext('2d'), viewport };
+    await page.render(renderCtx).promise;
+
+    // Annotation layer (AcroForm fields)
+    const annotations = await page.getAnnotations({ intent: 'display' });
+    if (annotations.length) {
+      const annDiv = document.createElement('div');
+      annDiv.className = 'annotationLayer';
+      pageDiv.appendChild(annDiv);
+
+      await pdfjsLib.AnnotationLayer.render({
+        viewport: viewport.clone({ dontFlip: false }),
+        div: annDiv,
+        annotations,
+        page,
+        renderForms: true,
+        linkService: { getDestinationHash: () => '', getAnchorUrl: () => '' },
+        downloadManager: null,
+        imageResourcesPath: 'https://unpkg.com/pdfjs-dist@4.4.168/web/images/',
+        enableScripting: false,
+        hasJSActions: false,
+      }).catch(() => {});
+
+      // Attach listeners to all rendered inputs
+      annDiv.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input',  () => { runCalculations(); scheduleSave(); });
+        el.addEventListener('change', () => { runCalculations(); scheduleSave(); });
+      });
+
+      // Restore saved values for this page
+      restorePageValues(pg);
+    }
+  }
+}
+
+// ── Field access helpers ──────────────────────────────────────────────────────
+function getAllInputs() {
+  return document.querySelectorAll('#viewer .annotationLayer input, #viewer .annotationLayer textarea, #viewer .annotationLayer select');
+}
+
+function getField(name) {
+  return document.querySelector(`#viewer .annotationLayer [data-element-id="${name}"] input,
+    #viewer .annotationLayer [data-element-id="${name}"] textarea`);
+}
+
+function getVal(name) {
+  const el = getField(name);
+  if (!el) return 0;
+  if (el.type === 'checkbox') return el.checked ? 1 : 0;
+  return parseFloat((el.value || '').replace(/,/g, '')) || 0;
+}
+
+function setVal(name, value) {
+  const el = getField(name);
+  if (!el) return;
+  el.value = typeof value === 'number'
+    ? value.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    : String(value);
+}
+
+// ── Calculations (customise per form) ─────────────────────────────────────────
+// PDF AcroForm field names are in the format: form1[0].Page1[0].Line26000[0].Amount[0]
+// Use getVal() / setVal() to read/write.
+function runCalculations() {
+  // TODO: wire up form-specific calculations here.
+  // The field IDs come directly from the PDF's AcroForm — they are 100% accurate.
+  updatePanel();
+}
+
+function updatePanel() {
+  const panel = document.getElementById('calc-panel');
+  const rows  = document.getElementById('calc-rows');
+  const inputs = getAllInputs();
+  if (!inputs.length) return;
+  panel.style.display = 'block';
+  let html = '';
+  let shown = 0;
+  inputs.forEach(el => {
+    if (!el.value || el.value === '0' || el.value === '0.00' || shown > 15) return;
+    const section = el.closest('[data-element-id]');
+    const id = section ? section.getAttribute('data-element-id') : el.name || '?';
+    const parts = id.split('.').filter(p => p && !/^\d+$/.test(p.replace(/[\[\]]/g,'')));
+    const label = parts.slice(-2).join(' › ');
+    html += `<div class="calc-row"><label>${label}</label><span class="val">${el.value}</span></div>`;
+    shown++;
+  });
+  rows.innerHTML = html || '<em style="color:#888">No values entered yet.</em>';
+}
+
+// ── Save / Restore ────────────────────────────────────────────────────────────
+let _saveTimer;
+function scheduleSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(saveFormData, 600);
+}
+
+function saveFormData() {
+  const data = {};
+  getAllInputs().forEach(el => {
+    const section = el.closest('[data-element-id]');
+    if (!section) return;
+    const id = section.getAttribute('data-element-id');
+    data[id] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  try {
+    const payload = typeof CRAEncrypt === 'function'
+      ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+    localStorage.setItem(FORM_KEY, payload);
+    document.getElementById('last-saved').textContent =
+      'Saved ' + new Date().toLocaleTimeString();
+  } catch(e) {}
+}
+
+function restorePageValues(pageNum) {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str  = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    const pageDiv = document.querySelector(`#viewer [data-page-number="${pageNum}"]`);
+    if (!pageDiv) return;
+    pageDiv.querySelectorAll('.annotationLayer [data-element-id]').forEach(section => {
+      const id = section.getAttribute('data-element-id');
+      if (data[id] === undefined) return;
+      const el = section.querySelector('input, textarea, select');
+      if (!el) return;
+      if (el.type === 'checkbox') el.checked = !!data[id];
+      else el.value = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearFormData() {
+  if (!confirm('Clear all saved data for this form?')) return;
+  localStorage.removeItem(FORM_KEY);
+  getAllInputs().forEach(el => {
+    if (el.type === 'checkbox') el.checked = false;
+    else el.value = '';
+  });
+  updatePanel();
+}
+
+window.saveFormData  = saveFormData;
+window.clearFormData = clearFormData;
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+renderAll().catch(err => {
+  document.getElementById('page-info').textContent = 'Error loading PDF: ' + err.message;
+  console.error('PDF.js render error:', err);
+});
+</script>
+{% endblock %}

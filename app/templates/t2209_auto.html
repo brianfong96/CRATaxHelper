@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+{% block title %}T2209 &mdash; Federal Foreign Tax Credits 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">T2209 &mdash; Federal Foreign Tax Credits</div>
+      <div class="form-subtitle">Form T2209 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>T2209-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA T2209 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page1.png" alt="T2209 Page 1">
+    
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page2.png" alt="T2209 Page 2">
+    
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page3.png" alt="T2209 Page 3">
+    <!-- Country or countries for which you are making this claim: -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_country_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:49.02%;top:25.379%;width:44.118%;height:1.424%;" title="Country or countries for which you are making this claim:">
+    <!-- Federal non business foreign tax credit 43100 1 Non-business -->
+    <input type="text" id="f_t2209_p3_L1" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:30.682%;width:13.235%;height:1.424%;" title="Federal non business foreign tax credit 43100 1 Non-business income tax paid to ">
+    <!-- 2 43300 Net foreign  non-business income (2)  Net income (3) -->
+    <input type="text" id="f_t2209_p3_L43300" class="pdf-input text-left" oninput="autoSave();" style="left:26.961%;top:34.091%;width:13.235%;height:1.424%;" title="2 43300 Net foreign  non-business income (2)  Net income (3) × Basic federal tax">
+    <!-- 2 43300 non-business income (2)  Net income (3)  × Basic fed -->
+    <input type="text" id="f_t2209_p3_L2" class="pdf-input text-left" oninput="autoSave();" style="left:26.961%;top:35.606%;width:13.235%;height:1.424%;" title="2 43300 non-business income (2)  Net income (3)  × Basic federal tax (4) = Enter">
+    <!-- 2 43300 Net foreign  non-business income (2)  Net income (3) -->
+    <input type="text" id="f_t2209_p3_L2" class="pdf-input text-left" oninput="autoSave();" style="left:59.314%;top:34.849%;width:13.235%;height:1.424%;" title="2 43300 Net foreign  non-business income (2)  Net income (3)  × Basic federal ta">
+    <!-- 2 43300 Net foreign  non-business income (2)  Net income (3) -->
+    <input type="text" id="f_t2209_p3_L2" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:34.849%;width:13.235%;height:1.424%;" title="2 43300 Net foreign  non-business income (2)  Net income (3)  × Basic federal ta">
+    <!-- Net income (3)  3 Federal non-business foreign tax credit En -->
+    <input type="text" id="f_t2209_p3_L3" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:37.5%;width:13.235%;height:2.94%;" title="Net income (3)  3 Federal non-business foreign tax credit Enter whichever is les">
+    <!-- 43400 4 Business income tax paid to a foreign country (5)  f -->
+    <input type="text" id="f_t2209_p3_L4" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:51.894%;width:13.235%;height:1.424%;" title="43400 4 Business income tax paid to a foreign country (5)  for the year, plus an">
+    <!-- 5 43900 Net foreign  business income (7)  Net income (3) × B -->
+    <input type="text" id="f_t2209_p3_L43900" class="pdf-input text-left" oninput="autoSave();" style="left:26.961%;top:55.303%;width:13.235%;height:1.424%;" title="5 43900 Net foreign  business income (7)  Net income (3) × Basic federal tax (8)">
+    <!-- 5 43900 business income (7)  Net income (3) × Basic federal  -->
+    <input type="text" id="f_t2209_p3_L5" class="pdf-input text-left" oninput="autoSave();" style="left:26.961%;top:56.818%;width:13.235%;height:1.424%;" title="5 43900 business income (7)  Net income (3) × Basic federal tax (8) = Federal su">
+    <!-- 5 43900 Net foreign  business income (7)  Net income (3) × B -->
+    <input type="text" id="f_t2209_p3_L5" class="pdf-input text-left" oninput="autoSave();" style="left:59.314%;top:56.06%;width:13.235%;height:1.424%;" title="5 43900 Net foreign  business income (7)  Net income (3) × Basic federal tax (8)">
+    <!-- 5 43900 Net foreign  business income (7)  Net income (3) × B -->
+    <input type="text" id="f_t2209_p3_L5" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:56.06%;width:13.235%;height:1.424%;" title="5 43900 Net foreign  business income (7)  Net income (3) × Basic federal tax (8)">
+    <!-- 6 Jurisdictions, or 48% of the amount from line 42900 of you -->
+    <input type="text" id="f_t2209_p3_L6" class="pdf-input text-left" oninput="autoSave();" style="left:81.863%;top:62.879%;width:11.275%;height:1.424%;" title="6 Jurisdictions, or 48% of the amount from line 42900 of your return. Enter the ">
+    <!-- 6 to the country or countries you identified at the top of t -->
+    <input type="text" id="f_t2209_p3_L7" class="pdf-input text-left" oninput="autoSave();" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;" title="6 to the country or countries you identified at the top of this page. + 7 Add li">
+    <!-- 7 Add lines 5 and 6. = 8 Add basic federal tax (8) and the a -->
+    <input type="text" id="f_t2209_p3_L8" class="pdf-input text-left" oninput="autoSave();" style="left:62.255%;top:66.666%;width:13.235%;height:1.424%;" title="7 Add lines 5 and 6. = 8 Add basic federal tax (8) and the amount from line 6. 9">
+    <!-- 8 Add basic federal tax (8) and the amount from line 6. 9 En -->
+    <input type="text" id="f_t2209_p3_L9" class="pdf-input text-left" oninput="autoSave();" style="left:64.216%;top:68.56%;width:11.275%;height:1.424%;" title="8 Add basic federal tax (8) and the amount from line 6. 9 Enter the amount from ">
+    <!-- 9 Enter the amount from line 3, if any. – 10 Line 8 minus li -->
+    <input type="text" id="f_t2209_p3_L10" class="pdf-input text-left" oninput="autoSave();" style="left:64.216%;top:70.455%;width:11.275%;height:1.424%;" title="9 Enter the amount from line 3, if any. – 10 Line 8 minus line 9 = ◄ Enter which">
+    <!-- 9 Enter the amount from line 3, if any. – 10 Line 8 minus li -->
+    <input type="text" id="f_t2209_p3_L10" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:70.455%;width:13.235%;height:1.424%;" title="9 Enter the amount from line 3, if any. – 10 Line 8 minus line 9 = ◄ Enter which">
+    <!-- 10 Line 8 minus line 9 = ◄ 11 Federal business foreign tax c -->
+    <input type="text" id="f_t2209_p3_L11" class="pdf-input text-left" oninput="autoSave();" style="left:79.902%;top:72.348%;width:13.235%;height:2.94%;" title="10 Line 8 minus line 9 = ◄ 11 Federal business foreign tax credit Enter whicheve">
+    <!-- Federal foreign tax credit 12 Enter the amount from line 3,  -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:62.255%;top:79.167%;width:13.235%;height:1.424%;" title="Federal foreign tax credit 12 Enter the amount from line 3, if any. ◄ + 13 Feder">
+    <!-- Federal foreign tax credit 12 Enter the amount from line 3,  -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:81.863%;top:79.167%;width:11.275%;height:1.424%;" title="Federal foreign tax credit 12 Enter the amount from line 3, if any. ◄ + 13 Feder">
+    <!-- 12 Enter the amount from line 3, if any. ◄ + 13 Federal fore -->
+    <input type="text" data-numeric="1" id="f_t2209_p3_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcT2209(); autoSave();" style="left:81.863%;top:81.061%;width:11.275%;height:1.424%;" title="12 Enter the amount from line 3, if any. ◄ + 13 Federal foreign tax credit Add l">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page4.png" alt="T2209 Page 4">
+    
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t2209_page5.png" alt="T2209 Page 5">
+    
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_t2209_autosave';
+const FORM_INPUT_IDS = [
+  'f_t2209_p3_country_1',
+  'f_t2209_p3_L1',
+  'f_t2209_p3_L43300',
+  'f_t2209_p3_L2',
+  'f_t2209_p3_L2',
+  'f_t2209_p3_L2',
+  'f_t2209_p3_L3',
+  'f_t2209_p3_L4',
+  'f_t2209_p3_L43900',
+  'f_t2209_p3_L5',
+  'f_t2209_p3_L5',
+  'f_t2209_p3_L5',
+  'f_t2209_p3_L6',
+  'f_t2209_p3_L7',
+  'f_t2209_p3_L8',
+  'f_t2209_p3_L9',
+  'f_t2209_p3_L10',
+  'f_t2209_p3_L10',
+  'f_t2209_p3_L11',
+  'f_t2209_p3_L12',
+  'f_t2209_p3_L12',
+  'f_t2209_p3_L13'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcT2209() using field IDs listed in FORM_INPUT_IDS
+function recalcT2209() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_t2209_p1_Ltotal', g('f_t2209_p1_L1') + g('f_t2209_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcT2209();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcT2209();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcT2209();
+});
+</script>
+{% endblock %}

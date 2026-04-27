@@ -1,0 +1,604 @@
+{% extends "base.html" %}
+{% block title %}T777 &mdash; Statement of Employment Expenses 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">T777 &mdash; Statement of Employment Expenses</div>
+      <div class="form-subtitle">Form T777 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>T777-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA T777 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page1.png" alt="T777 Page 1">
+    <!-- Expenses 8862 1 Accounting and legal fees 8520 2 Advertising -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8862" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:21.212%;width:13.235%;height:1.424%;" title="Expenses 8862 1 Accounting and legal fees 8520 2 Advertising and promotion +">
+    <!-- 8862 1 Accounting and legal fees 8520 2 Advertising and prom -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8520" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:23.106%;width:11.275%;height:1.424%;" title="8862 1 Accounting and legal fees 8520 2 Advertising and promotion + 9281 3 Allow">
+    <!-- 8520 2 Advertising and promotion + 9281 3 Allowable motor ve -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9281" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:25.0%;width:11.275%;height:1.424%;" title="8520 2 Advertising and promotion + 9281 3 Allowable motor vehicle expenses (see ">
+    <!-- 9281 3 Allowable motor vehicle expenses (see chart for line  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8523" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:52.942%;top:26.894%;width:13.235%;height:1.424%;" title="9281 3 Allowable motor vehicle expenses (see chart for line 3 below) + 8523 4 Fo">
+    <!-- 9281 3 Allowable motor vehicle expenses (see chart for line  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8523" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:26.894%;width:11.275%;height:1.424%;" title="9281 3 Allowable motor vehicle expenses (see chart for line 3 below) + 8523 4 Fo">
+    <!-- 8523 4 Food, beverages, and entertainment expenses  × 50% =  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:28.788%;width:11.275%;height:1.424%;" title="8523 4 Food, beverages, and entertainment expenses  × 50% = + 9200 5 Lodging + 8">
+    <!-- 9200 5 Lodging + 8910 6 Parking + 8810 7 Office supplies (po -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8910" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:30.682%;width:11.275%;height:1.424%;" title="9200 5 Lodging + 8910 6 Parking + 8810 7 Office supplies (postage stationery ink">
+    <!-- 8910 6 Parking + 8810 7 Office supplies (postage, stationery -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L8810" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:32.576%;width:11.275%;height:1.424%;" title="8910 6 Parking + 8810 7 Office supplies (postage, stationery, ink cartridge, etc">
+    <!-- 9270 8 Other expenses (employment use of a cell phone, long  -->
+    <input type="text" id="f_t777_p1_L9270" class="pdf-input text-left" oninput="autoSave();" style="left:11.765%;top:35.985%;width:63.725%;height:1.424%;" title="9270 8 Other expenses (employment use of a cell phone, long distance calls for e">
+    <!-- 8810 7 Office supplies (postage, stationery, ink cartridge,  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9270" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:34.47%;width:11.275%;height:2.94%;" title="8810 7 Office supplies (postage, stationery, ink cartridge, etc.) + 9270 8 Other">
+    <!-- 9270 8 (specify): + 1770 9 Tradesperson's tools expenses  (m -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L1770" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:37.879%;width:11.275%;height:1.424%;" title="9270 8 (specify): + 1770 9 Tradesperson's tools expenses  (maximum $1,000) + 913">
+    <!-- 1770 9 Tradesperson s tools expenses  (maximum $1,000) + 913 -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9131" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:39.773%;width:11.275%;height:1.424%;" title="1770 9 Tradesperson s tools expenses  (maximum $1,000) + 9131 10 Apprentice mech">
+    <!-- 9131 10 Apprentice mechanic tools expenses + 1771 11 Labour  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L1771" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:41.667%;width:11.275%;height:1.424%;" title="9131 10 Apprentice mechanic tools expenses + 1771 11 Labour mobility deduction (">
+    <!-- 1771 11 Labour mobility deduction (see chart for line 11 on  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L1776" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:43.56%;width:11.275%;height:1.424%;" title="1771 11 Labour mobility deduction (see chart for line 11 on page 2) (maximum $4,">
+    <!-- 1776 12 Musical instrument expenses  + 1777 13 Capital cost  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L1777" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:45.455%;width:11.275%;height:1.424%;" title="1776 12 Musical instrument expenses  + 1777 13 Capital cost allowance for musica">
+    <!-- 1777 13 Capital cost allowance for musical instruments (see  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9973" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:47.349%;width:11.275%;height:1.424%;" title="1777 13 Capital cost allowance for musical instruments (see Part A on page 4) + ">
+    <!-- 9973 14 Artists  employment expenses  + 15 Add lines 1 to 14 -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:49.242%;width:11.275%;height:1.424%;" title="9973 14 Artists  employment expenses  + 15 Add lines 1 to 14. = 9945 16 Work-spa">
+    <!-- 15 Add lines 1 to 14. = 9945 16 Work-space-in-the-home expen -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9945" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:51.136%;width:11.275%;height:1.424%;" title="15 Add lines 1 to 14. = 9945 16 Work-space-in-the-home expenses (see chart for l">
+    <!-- 9945 16 Work-space-in-the-home expenses (see chart for line  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L9368" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:53.03%;width:11.275%;height:2.94%;" title="9945 16 Work-space-in-the-home expenses (see chart for line 16 on page 3) + 9368">
+    <!-- Line 3  Calculation of allowable motor vehicle expenses  Ent -->
+    <input type="text" id="f_t777_p1_L3" class="pdf-input text-left" oninput="autoSave();" style="left:62.255%;top:62.121%;width:30.882%;height:2.94%;" title="Line 3  Calculation of allowable motor vehicle expenses  Enter the year, make, a">
+    <!-- 18 Enter the number of kilometres you drove in the tax year  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:66.288%;width:13.235%;height:1.424%;" title="18 Enter the number of kilometres you drove in the tax year to earn employment i">
+    <!-- 18 Enter the number of kilometres you drove in the tax year  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:68.182%;width:11.275%;height:1.424%;" title="18 Enter the number of kilometres you drove in the tax year to earn employment i">
+    <!-- 19 Enter the total number of kilometres you drove in the tax -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:70.076%;width:11.275%;height:1.424%;" title="19 Enter the total number of kilometres you drove in the tax year. ÷ 20 Line 18 ">
+    <!-- Enter the motor vehicle expenses you paid for: 21 Fuel (such -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:73.485%;width:13.235%;height:1.424%;" title="Enter the motor vehicle expenses you paid for: 21 Fuel (such as gasoline, propan">
+    <!-- 21 Fuel (such as gasoline, propane, and oil) and electricity -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:75.379%;width:11.275%;height:1.424%;" title="21 Fuel (such as gasoline, propane, and oil) and electricity 22 Maintenance and ">
+    <!-- 22 Maintenance and repairs + 23 Insurance + 24 Licence and r -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:77.273%;width:11.275%;height:1.424%;" title="22 Maintenance and repairs + 23 Insurance + 24 Licence and registration +">
+    <!-- 23 Insurance + 24 Licence and registration + 25 Capital cost -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:79.167%;width:11.275%;height:1.424%;" title="23 Insurance + 24 Licence and registration + 25 Capital cost allowance (see Part">
+    <!-- 24 Licence and registration + 25 Capital cost allowance (see -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:81.06%;width:11.275%;height:1.424%;" title="24 Licence and registration + 25 Capital cost allowance (see Part A and Part B o">
+    <!-- 25 Capital cost allowance (see Part A and Part B on pages 4  -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:82.955%;width:11.275%;height:1.424%;" title="25 Capital cost allowance (see Part A and Part B on pages 4 and 5) + 26 Interest">
+    <!-- 26 Interest expense + 27 Leasing costs + 28 Other expenses ( -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:84.849%;width:11.275%;height:1.424%;" title="26 Interest expense + 27 Leasing costs + 28 Other expenses (specify): +">
+    <!-- 27 Leasing costs + 28 Other expenses (specify): + 29 Add lin -->
+    <input type="text" id="f_t777_p1_L3" class="pdf-input text-left" oninput="autoSave();" style="left:25.491%;top:86.742%;width:32.353%;height:1.424%;" title="27 Leasing costs + 28 Other expenses (specify): + 29 Add lines 21 to 28 = ◄">
+    <!-- 27 Leasing costs + 28 Other expenses (specify): + 29 Add lin -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:86.742%;width:11.275%;height:1.424%;" title="27 Leasing costs + 28 Other expenses (specify): + 29 Add lines 21 to 28 = ◄">
+    <!-- 28 Other expenses (specify): + 29 Add lines 21 to 28. = ◄ 30 -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:88.636%;width:11.275%;height:1.424%;" title="28 Other expenses (specify): + 29 Add lines 21 to 28. = ◄ 30 Employment-use port">
+    <!-- 28 Other expenses (specify): + 29 Add lines 21 to 28. = ◄ 30 -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:88.636%;width:13.235%;height:1.424%;" title="28 Other expenses (specify): + 29 Add lines 21 to 28. = ◄ 30 Employment-use port">
+    <!-- 29 Add lines 21 to 28. = ◄ 30 Employment-use portion Line 20 -->
+    <input type="text" data-numeric="1" id="f_t777_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:90.53%;width:11.275%;height:1.424%;" title="29 Add lines 21 to 28. = ◄ 30 Employment-use portion Line 20 multiplied by line ">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page2.png" alt="T777 Page 2">
+    <!-- 31 Enter the total of all rebates, motor vehicle allowances, -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L31" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:8.712%;width:11.275%;height:2.94%;" title="31 Enter the total of all rebates, motor vehicle allowances, and reimbursements ">
+    <!-- 31 used to calculate your leasing costs on line 27 of the pr -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L32" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:12.121%;width:11.275%;height:2.94%;" title="31 used to calculate your leasing costs on line 27 of the previous page).  – 32 ">
+    <!-- Eligible temporary relocation expenses ( ) 33 Eligible tempo -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L33" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:32.197%;width:13.235%;height:2.94%;" title="Eligible temporary relocation expenses ( ) 33 Eligible temporary relocation expe">
+    <!-- 33 the previous year from the same eligible temporary reloca -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L34" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:35.606%;width:11.275%;height:2.94%;" title="33 the previous year from the same eligible temporary relocation 34 Transportati">
+    <!-- 34 the taxpayer between the ordinary residence and the tempo -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L35" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:39.015%;width:11.275%;height:2.94%;" title="34 the taxpayer between the ordinary residence and the temporary lodging) + 35 M">
+    <!-- 35 round trip between the ordinary residence and the tempora -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:42.424%;width:11.275%;height:1.424%;" title="35 round trip between the ordinary residence and the temporary lodging  + 36 Tem">
+    <!-- 36 Temporary lodging expenses (2) + 37 Total eligible tempor -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:44.318%;width:11.275%;height:2.94%;" title="36 Temporary lodging expenses (2) + 37 Total eligible temporary   relocation exp">
+    <!-- 36 Temporary lodging expenses (2) + 37 Total eligible tempor -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:44.318%;width:13.235%;height:2.94%;" title="36 Temporary lodging expenses (2) + 37 Total eligible temporary   relocation exp">
+    <!-- 38 Employment income earned as an  eligible tradesperson in  -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:35.785%;top:48.864%;width:13.235%;height:2.94%;" title="38 Employment income earned as an  eligible tradesperson in the year at   the te">
+    <!-- 38 Employment income earned as an  eligible tradesperson in  -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:48.864%;width:13.235%;height:2.94%;" title="38 Employment income earned as an  eligible tradesperson in the year at   the te">
+    <!-- 39 Enter whichever is less:  Amount from line 37, line 38 or -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:55.303%;width:13.235%;height:2.94%;" title="39 Enter whichever is less:  Amount from line 37, line 38 or the amount you are ">
+    <!-- 39 Enter whichever is less:  Amount from line 37, line 38 or -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:55.303%;width:11.275%;height:2.94%;" title="39 Enter whichever is less:  Amount from line 37, line 38 or the amount you are ">
+    <!-- 39 claiming for this eligible temporary relocation. (maximum -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:58.712%;width:11.275%;height:2.94%;" title="39 claiming for this eligible temporary relocation. (maximum $4,000) ◄ – 40 Unus">
+    <!-- 41 Total labour mobility  deduction for the year Enter the a -->
+    <input type="text" data-numeric="1" id="f_t777_p2_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:64.394%;width:13.235%;height:2.94%;" title="41 Total labour mobility  deduction for the year Enter the amount from line 39. ">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page3.png" alt="T777 Page 3">
+    <!-- Line 16  Calculation of work space in the home expenses  42  -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:7.197%;width:13.235%;height:1.424%;" title="Line 16  Calculation of work space in the home expenses  42 Electricity, heat, w">
+    <!-- 42 Electricity, heat, water, home Internet access fees 43 Ma -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:9.091%;width:11.275%;height:1.424%;" title="42 Electricity, heat, water, home Internet access fees 43 Maintenance (cleaning ">
+    <!-- 43 Maintenance (cleaning supplies, light bulbs, etc.) + 44 H -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:10.985%;width:11.275%;height:1.424%;" title="43 Maintenance (cleaning supplies, light bulbs, etc.) + 44 Home insurance (commi">
+    <!-- 44 Home insurance (commission employees only) + 45 Property  -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:12.879%;width:11.275%;height:1.424%;" title="44 Home insurance (commission employees only) + 45 Property taxes (commission em">
+    <!-- 45 Property taxes (commission employees only) + 46 Other exp -->
+    <input type="text" id="f_t777_p3_L16" class="pdf-input text-left" oninput="autoSave();" style="left:32.353%;top:14.773%;width:25.49%;height:1.424%;" title="45 Property taxes (commission employees only) + 46 Other expenses (rent, etc.) (">
+    <!-- 45 Property taxes (commission employees only) + 46 Other exp -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:14.773%;width:11.275%;height:1.424%;" title="45 Property taxes (commission employees only) + 46 Other expenses (rent, etc.) (">
+    <!-- 46 Other expenses (rent, etc.) (specify): + 47 Add lines 42  -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:16.667%;width:11.275%;height:1.424%;" title="46 Other expenses (rent, etc.) (specify): + 47 Add lines 42 to 46. =">
+    <!-- 48 Total employment-use amount (see example below) (4) 49 Am -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:19.318%;width:13.235%;height:1.424%;" title="48 Total employment-use amount (see example below) (4) 49 Amount carried forward">
+    <!-- 48 Total employment-use amount (see example below) (4) 49 Am -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:21.212%;width:11.275%;height:1.424%;" title="48 Total employment-use amount (see example below) (4) 49 Amount carried forward">
+    <!-- 49 Amount carried forward from the previous year + 50 Line 4 -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:23.106%;width:11.275%;height:1.424%;" title="49 Amount carried forward from the previous year + 50 Line 48 plus line 49 = ◄ 5">
+    <!-- 49 Amount carried forward from the previous year + 50 Line 4 -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:79.902%;top:23.106%;width:13.235%;height:1.424%;" title="49 Amount carried forward from the previous year + 50 Line 48 plus line 49 = ◄ 5">
+    <!-- 50 Line 48 plus line 49 = ◄ 51 Enter your employment income. -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:25.0%;width:13.235%;height:1.424%;" title="50 Line 48 plus line 49 = ◄ 51 Enter your employment income. Enter any amounts f">
+    <!-- 51 Enter your employment income. 52 Enter any amounts from l -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:26.894%;width:11.275%;height:2.94%;" title="51 Enter your employment income. 52 Enter any amounts from line 15 of page 1 and">
+    <!-- 52 of your return that relate to your employment income. – 5 -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:64.216%;top:30.303%;width:11.275%;height:1.424%;" title="52 of your return that relate to your employment income. – 53 Line 51 minus line">
+    <!-- 52 of your return that relate to your employment income. – 5 -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;" title="52 of your return that relate to your employment income. – 53 Line 51 minus line">
+    <!-- 54 Work-space-in-the-home  expenses Enter whichever is less: -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:62.255%;top:33.712%;width:13.235%;height:2.94%;" title="54 Work-space-in-the-home  expenses Enter whichever is less:  Amount from line 5">
+    <!-- 54 expenses Enter this amount on line 16 of page 1. 55 Work- -->
+    <input type="text" data-numeric="1" id="f_t777_p3_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:81.863%;top:37.121%;width:11.275%;height:2.94%;" title="54 expenses Enter this amount on line 16 of page 1. 55 Work-space-in-the-home ex">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page4.png" alt="T777 Page 4">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:9.432%;top:28.879%;width:11.039%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell3_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:20.706%;top:28.879%;width:11.039%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:31.981%;top:28.879%;width:13.0%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_4" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:45.216%;top:28.879%;width:13.0%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_5" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:58.451%;top:28.879%;width:11.039%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_6" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:69.726%;top:28.879%;width:13.0%;height:1.712%;" title="enter '0') 8 10">
+    <!-- enter "0") 8 10 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell8_7" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:82.961%;top:28.879%;width:13.0%;height:1.712%;" title="enter '0') 8 10">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_8" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:9.432%;top:30.773%;width:11.039%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell3_9" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:20.706%;top:30.773%;width:11.039%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_10" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:31.981%;top:30.773%;width:13.0%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_11" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:45.216%;top:30.773%;width:13.0%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_12" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:58.451%;top:30.773%;width:11.039%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_13" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:69.726%;top:30.773%;width:13.0%;height:1.712%;" title="8 10 54">
+    <!-- 8 10 54 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell8_14" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:82.961%;top:30.773%;width:13.0%;height:1.712%;" title="8 10 54">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_15" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:9.432%;top:32.667%;width:11.039%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell3_16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:20.706%;top:32.667%;width:11.039%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_17" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:31.981%;top:32.667%;width:13.0%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_18" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:45.216%;top:32.667%;width:13.0%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_19" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:58.451%;top:32.667%;width:11.039%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_20" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:69.726%;top:32.667%;width:13.0%;height:1.712%;" title="10 54 55">
+    <!-- 10 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell8_21" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:82.961%;top:32.667%;width:13.0%;height:1.712%;" title="10 54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_22" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:9.432%;top:34.561%;width:11.039%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell3_23" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:20.706%;top:34.561%;width:11.039%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_24" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:31.981%;top:34.561%;width:13.0%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_25" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:45.216%;top:34.561%;width:13.0%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_26" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:58.451%;top:34.561%;width:11.039%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_27" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:69.726%;top:34.561%;width:13.0%;height:1.712%;" title="54 55">
+    <!-- 54 55 -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell8_28" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:82.961%;top:34.561%;width:13.0%;height:1.712%;" title="54 55">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_29" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:56.152%;width:13.0%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_30" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:17.275%;top:56.152%;width:13.0%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell11_31" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:30.51%;top:56.152%;width:13.0%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell12_32" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:43.745%;top:56.152%;width:13.0%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell13_33" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:56.981%;top:56.152%;width:11.039%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell15_34" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:72.667%;top:56.152%;width:12.02%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- (8) (9) 20% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell16_35" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:84.922%;top:56.152%;width:11.039%;height:1.712%;" title="(8) (9) 20% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:58.046%;width:13.0%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:17.275%;top:58.046%;width:13.0%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell11_38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:30.51%;top:58.046%;width:13.0%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell12_39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:43.745%;top:58.046%;width:13.0%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell13_40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:56.981%;top:58.046%;width:11.039%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell15_41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:72.667%;top:58.046%;width:12.02%;height:1.712%;" title="20% 30% 30%">
+    <!-- 20% 30% 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell16_42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:84.922%;top:58.046%;width:11.039%;height:1.712%;" title="20% 30% 30%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_43" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:59.94%;width:13.0%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_44" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:17.275%;top:59.94%;width:13.0%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell11_45" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:30.51%;top:59.94%;width:13.0%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell12_46" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:43.745%;top:59.94%;width:13.0%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell13_47" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:56.981%;top:59.94%;width:11.039%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell15_48" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:72.667%;top:59.94%;width:12.02%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell16_49" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:84.922%;top:59.94%;width:11.039%;height:1.712%;" title="30% 30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_50" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:61.834%;width:13.0%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_51" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:17.275%;top:61.834%;width:13.0%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell11_52" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:30.51%;top:61.834%;width:13.0%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell12_53" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:43.745%;top:61.834%;width:13.0%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell13_54" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:56.981%;top:61.834%;width:11.039%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell15_55" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:72.667%;top:61.834%;width:12.02%;height:1.712%;" title="30% 40%">
+    <!-- 30% 40% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell16_56" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:84.922%;top:61.834%;width:11.039%;height:1.712%;" title="30% 40%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell1_57" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:81.909%;width:9.569%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_58" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:13.843%;top:81.909%;width:9.569%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_59" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:29.53%;top:81.909%;width:10.059%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_60" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:39.824%;top:81.909%;width:9.569%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_61" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:49.628%;top:81.909%;width:10.059%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_62" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:59.922%;top:81.909%;width:10.059%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_63" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:75.608%;top:81.909%;width:10.059%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- (12) 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_64" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:85.902%;top:81.909%;width:10.059%;height:1.712%;" title="(12) 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell1_65" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:83.803%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_66" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:13.843%;top:83.803%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_67" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:29.53%;top:83.803%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_68" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:39.824%;top:83.803%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_69" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:49.628%;top:83.803%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_70" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:59.922%;top:83.803%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_71" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:75.608%;top:83.803%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% 10 1 30% -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_72" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:85.902%;top:83.803%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% 10 1 30%">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell1_73" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:4.039%;top:85.697%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell2_74" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:13.843%;top:85.697%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell4_75" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:29.53%;top:85.697%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell5_76" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:39.824%;top:85.697%;width:9.569%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell6_77" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:49.628%;top:85.697%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell7_78" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:59.922%;top:85.697%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell9_79" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:75.608%;top:85.697%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_cell10_80" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:85.902%;top:85.697%;width:10.059%;height:1.712%;" title="10.1 30% 10.1 30% Total">
+    <!-- 10.1 30% Total -->
+    <input type="text" data-numeric="1" id="f_t777_p4_total_fld_81" class="pdf-input" value="" inputmode="decimal" oninput="recalcT777(); autoSave();" style="left:75.608%;top:87.591%;width:10.059%;height:1.712%;" title="10.1 30% Total">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t777_page5.png" alt="T777 Page 5">
+    
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_t777_autosave';
+const FORM_INPUT_IDS = [
+  'f_t777_p1_L8862',
+  'f_t777_p1_L8520',
+  'f_t777_p1_L9281',
+  'f_t777_p1_L8523',
+  'f_t777_p1_L8523',
+  'f_t777_p1_L9200',
+  'f_t777_p1_L8910',
+  'f_t777_p1_L8810',
+  'f_t777_p1_L9270',
+  'f_t777_p1_L9270',
+  'f_t777_p1_L1770',
+  'f_t777_p1_L9131',
+  'f_t777_p1_L1771',
+  'f_t777_p1_L1776',
+  'f_t777_p1_L1777',
+  'f_t777_p1_L9973',
+  'f_t777_p1_L15',
+  'f_t777_p1_L9945',
+  'f_t777_p1_L9368',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p1_L3',
+  'f_t777_p2_L31',
+  'f_t777_p2_L32',
+  'f_t777_p2_L33',
+  'f_t777_p2_L34',
+  'f_t777_p2_L35',
+  'f_t777_p2_L36',
+  'f_t777_p2_L37',
+  'f_t777_p2_L37',
+  'f_t777_p2_L38',
+  'f_t777_p2_L38',
+  'f_t777_p2_L39',
+  'f_t777_p2_L39',
+  'f_t777_p2_L40',
+  'f_t777_p2_L41',
+  'f_t777_p3_L16'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcT777() using field IDs listed in FORM_INPUT_IDS
+function recalcT777() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_t777_p1_Ltotal', g('f_t777_p1_L1') + g('f_t777_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcT777();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcT777();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcT777();
+});
+</script>
+{% endblock %}

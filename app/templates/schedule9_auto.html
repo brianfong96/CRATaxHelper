@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+{% block title %}Schedule 9 &mdash; Donations and Gifts 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 9 &mdash; Donations and Gifts</div>
+      <div class="form-subtitle">Form Schedule 9 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>Schedule 9-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 9 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule9_page1.png" alt="Schedule 9 Page 1">
+    <!-- 1 Donations made to registered charities, registered Canadia -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:36.364%;width:13.235%;height:2.94%;" title="1 Donations made to registered charities, registered Canadian amateur athletic a">
+    <!-- 1 set up only to provide low cost housing for the aged 32900 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:39.773%;width:11.275%;height:2.94%;" title="1 set up only to provide low cost housing for the aged 32900 2 Donations made to">
+    <!-- 32900 2 in Canada, or registered municipal or public bodies  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;" title="32900 2 in Canada, or registered municipal or public bodies performing functions">
+    <!-- 33300 3 Donations made to registered universities outside Ca -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:45.076%;width:11.275%;height:2.94%;" title="33300 3 Donations made to registered universities outside Canada  + 33400 4 Dona">
+    <!-- 33400 4 received a gift from the Government of Canada + 5 To -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:48.485%;width:11.275%;height:1.424%;" title="33400 4 received a gift from the Government of Canada + 5 Total eligible amount ">
+    <!-- 6 A Enter your net income from line 23600 of your return. ×  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:49.02%;top:51.136%;width:13.235%;height:1.424%;" title="6 A Enter your net income from line 23600 of your return. ×  75%  = Gifts of cap">
+    <!-- 6 A Enter your net income from line 23600 of your return. ×  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:51.136%;width:13.235%;height:1.424%;" title="6 A Enter your net income from line 23600 of your return. ×  75%  = Gifts of cap">
+    <!-- 6 A Enter your net income from line 23600 of your return. ×  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_amount_8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:49.02%;top:53.03%;width:13.235%;height:2.94%;" title="6 A Enter your net income from line 23600 of your return. ×  75%  = 33700 B Gift">
+    <!-- 33700 B (complete the chart on page 2)  33900 C Gifts of cap -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_amount_9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:50.981%;top:56.44%;width:11.275%;height:2.94%;" title="33700 B (complete the chart on page 2)  33900 C Gifts of capital property  (comp">
+    <!-- 33900 C (complete the chart on page 2)  + 7 D Amount B plus  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:50.981%;top:59.849%;width:11.275%;height:1.424%;" title="33900 C (complete the chart on page 2)  + 7 D Amount B plus amount C = ×  25% = ">
+    <!-- 33900 C (complete the chart on page 2)  + 7 D Amount B plus  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:59.849%;width:11.275%;height:1.424%;" title="33900 C (complete the chart on page 2)  + 7 D Amount B plus amount C = ×  25% = ">
+    <!-- 7 D Amount B plus amount C = ×  25% = + 8 Line 6 plus line 7 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:61.742%;width:11.275%;height:1.424%;" title="7 D Amount B plus amount C = ×  25% = + 8 Line 6 plus line 7 =">
+    <!-- 9 Total charitable donations limit  Enter whichever is less: -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:64.394%;width:13.235%;height:1.424%;" title="9 Total charitable donations limit  Enter whichever is less: amount A or line 8.">
+    <!-- 34000 10 Enter whichever is less: amount from line 5 or line -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:67.045%;width:13.235%;height:1.424%;" title="34000 10 Enter whichever is less: amount from line 5 or line 9. 34200 11 Eligibl">
+    <!-- 34000 10 Enter whichever is less: amount from line 5 or line -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:68.94%;width:11.275%;height:1.424%;" title="34000 10 Enter whichever is less: amount from line 5 or line 9. 34200 11 Eligibl">
+    <!-- 34200 11 Eligible amount of ecological gifts and cultural gi -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;" title="34200 11 Eligible amount of ecological gifts and cultural gifts (see Guide P113)">
+    <!-- 12 Line 10 plus line 11 = 13 Enter whichever is less: amount -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;" title="12 Line 10 plus line 11 = 13 Enter whichever is less: amount from line 12 or $20">
+    <!-- 13 Enter whichever is less: amount from line 12 or $200. – 1 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;" title="13 Enter whichever is less: amount from line 12 or $200. – 14 Line 12 minus line">
+    <!-- 14 Line 12 minus line 13  = 34210 15 Total ecological gifts  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:76.515%;width:11.275%;height:2.94%;" title="14 Line 12 minus line 13  = 34210 15 Total ecological gifts made after February ">
+    <!-- 34210 15 in the amount on line 11  – 16 Line 14 minus line 1 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;" title="34210 15 in the amount on line 11  – 16 Line 14 minus line 15 (if negative, ente">
+    <!-- 17 Enter your taxable income from line 26000 of your return. -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:82.576%;width:13.235%;height:1.424%;" title="17 Enter your taxable income from line 26000 of your return. 18 Income threshold">
+    <!-- 17 Enter your taxable income from line 26000 of your return. -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L18" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:84.47%;width:11.275%;height:1.424%;" title="17 Enter your taxable income from line 26000 of your return. 18 Income threshold">
+    <!-- 18 Income threshold – 19 Line 17 minus line 18 (if negative, -->
+    <input type="text" data-numeric="1" id="f_schedule9_p1_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:86.364%;width:11.275%;height:1.424%;" title="18 Income threshold – 19 Line 17 minus line 18 (if negative, enter '0') =  253,4">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule9_page2.png" alt="Schedule 9 Page 2">
+    <!-- E Amount from line 14 of the previous page 20 F Enter whiche -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:49.02%;top:6.818%;width:13.235%;height:1.424%;" title="E Amount from line 14 of the previous page 20 F Enter whichever is less: amount ">
+    <!-- E Amount from line 14 of the previous page 20 F Enter whiche -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:50.981%;top:8.712%;width:11.275%;height:1.424%;" title="E Amount from line 14 of the previous page 20 F Enter whichever is less: amount ">
+    <!-- E Amount from line 14 of the previous page 20 F Enter whiche -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:8.712%;width:13.235%;height:1.424%;" title="E Amount from line 14 of the previous page 20 F Enter whichever is less: amount ">
+    <!-- 20 F Enter whichever is less: amount from line 16 or line 19 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:50.981%;top:10.606%;width:11.275%;height:1.424%;" title="20 F Enter whichever is less: amount from line 16 or line 19. – ×  33% = 21 G Am">
+    <!-- 20 F Enter whichever is less: amount from line 16 or line 19 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:10.606%;width:11.275%;height:1.424%;" title="20 F Enter whichever is less: amount from line 16 or line 19. – ×  33% = 21 G Am">
+    <!-- 21 G Amount E minus amount F = ×  29% = + 22 H Amount from l -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:49.02%;top:12.5%;width:13.235%;height:1.424%;" title="21 G Amount E minus amount F = ×  29% = + 22 H Amount from line 13 of the previo">
+    <!-- 21 G Amount E minus amount F = ×  29% = + 22 H Amount from l -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:12.5%;width:11.275%;height:1.424%;" title="21 G Amount E minus amount F = ×  29% = + 22 H Amount from line 13 of the previo">
+    <!-- 22 H Amount from line 13 of the previous page × 14.5%  = + 2 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:14.485%;width:11.275%;height:2.849%;" title="22 H Amount from line 13 of the previous page × 14.5%  = + 23 Allowable donation">
+    <!-- Class of property: 1 Amount of recaptured depreciation inclu -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_textfield_underlined_9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:18.301%;top:30.05%;width:12.908%;height:1.389%;" title="Class of property: 1 Amount of recaptured depreciation included on your 2025 ret">
+    <!-- p p y 1 Amount of recaptured depreciation included on your 2 -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:32.197%;width:13.235%;height:1.424%;" title="p p y 1 Amount of recaptured depreciation included on your 2025 return">
+    <!-- 2 Net proceeds of disposition of property donated in 2025 fo -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:62.255%;top:34.848%;width:13.235%;height:1.424%;" title="2 Net proceeds of disposition of property donated in 2025 for this class">
+    <!-- 3 Capital cost of property donated in 2025 for this class -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:62.255%;top:37.5%;width:13.235%;height:1.424%;" title="3 Capital cost of property donated in 2025 for this class">
+    <!-- 4 Enter whichever is less: amount from line 2 or line 3. -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:40.151%;width:13.235%;height:1.424%;" title="4 Enter whichever is less: amount from line 2 or line 3.">
+    <!-- 5 Enter whichever is less: amount from line 1 or line 4.  En -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:42.803%;width:13.235%;height:2.94%;" title="5 Enter whichever is less: amount from line 1 or line 4.  Enter this amount on l">
+    <!-- Chart for line 33900  Gifts of capital property 1 Amount of  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:79.902%;top:52.273%;width:13.235%;height:1.424%;" title="Chart for line 33900  Gifts of capital property 1 Amount of current-year taxable">
+    <!-- 1 Amount of current-year taxable capital gains from capital  -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:54.166%;width:11.275%;height:1.424%;" title="1 Amount of current-year taxable capital gains from capital property donated in ">
+    <!-- 2 Amount of current-year capital gains deduction from capita -->
+    <input type="text" data-numeric="1" id="f_schedule9_p2_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS9(); autoSave();" style="left:81.863%;top:56.06%;width:11.275%;height:2.94%;" title="2 Amount of current-year capital gains deduction from capital property donated i">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule9_autosave';
+const FORM_INPUT_IDS = [
+  'f_schedule9_p1_L1',
+  'f_schedule9_p1_L2',
+  'f_schedule9_p1_L3',
+  'f_schedule9_p1_L4',
+  'f_schedule9_p1_L5',
+  'f_schedule9_p1_L6',
+  'f_schedule9_p1_L6',
+  'f_schedule9_p1_amount_8',
+  'f_schedule9_p1_amount_9',
+  'f_schedule9_p1_L7',
+  'f_schedule9_p1_L7',
+  'f_schedule9_p1_L8',
+  'f_schedule9_p1_L9',
+  'f_schedule9_p1_L10',
+  'f_schedule9_p1_L11',
+  'f_schedule9_p1_L12',
+  'f_schedule9_p1_L13',
+  'f_schedule9_p1_L14',
+  'f_schedule9_p1_L15',
+  'f_schedule9_p1_L16',
+  'f_schedule9_p1_L17',
+  'f_schedule9_p1_L18',
+  'f_schedule9_p1_L19',
+  'f_schedule9_p2_L14',
+  'f_schedule9_p2_L20',
+  'f_schedule9_p2_L20',
+  'f_schedule9_p2_L21',
+  'f_schedule9_p2_L21',
+  'f_schedule9_p2_L22',
+  'f_schedule9_p2_L22',
+  'f_schedule9_p2_L23',
+  'f_schedule9_p2_textfield_underlined_9',
+  'f_schedule9_p2_L1',
+  'f_schedule9_p2_L2',
+  'f_schedule9_p2_L3',
+  'f_schedule9_p2_L4',
+  'f_schedule9_p2_L5',
+  'f_schedule9_p2_L1',
+  'f_schedule9_p2_L2',
+  'f_schedule9_p2_L3'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcS9() using field IDs listed in FORM_INPUT_IDS
+function recalcS9() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_schedule9_p1_Ltotal', g('f_schedule9_p1_L1') + g('f_schedule9_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcS9();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcS9();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcS9();
+});
+</script>
+{% endblock %}

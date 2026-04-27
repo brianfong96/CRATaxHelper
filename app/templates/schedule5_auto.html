@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+{% block title %}Schedule 5 &mdash; Amounts for Spouse / Dependants 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 5 &mdash; Amounts for Spouse / Dependants</div>
+      <div class="form-subtitle">Form Schedule 5 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>Schedule 5-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 5 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+    <a href="#pg-anchor-6">Page 6</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page1.png" alt="Schedule 5 Page 1">
+    
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page2.png" alt="Schedule 5 Page 2">
+    <!-- 55220 Did your marital status change to a status other than  -->
+    <input type="checkbox" id="f_schedule5_p2_L30300" class="pdf-input" onchange="recalcS5(); autoSave();" style="left:79.902%;top:29.167%;width:1.961%;height:1.515%;">
+    <!-- 55220 Did your marital status change to a status other than  -->
+    <input type="text" id="f_schedule5_p2_L30300" class="pdf-input text-left" oninput="autoSave();" style="left:83.333%;top:29.167%;width:9.804%;height:1.515%;" title="55220 Did your marital status change to a status other than married or living co">
+    <!-- 55220 If yes, tick this box and enter the date of the change -->
+    <input type="text" data-numeric="1" id="f_schedule5_p2_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:79.902%;top:31.061%;width:13.235%;height:1.424%;" title="55220 If yes, tick this box and enter the date of the change.  1 Basic personal ">
+    <!-- 1 Basic personal amount from line 30000 of your return 51090 -->
+    <input type="text" data-numeric="1" id="f_schedule5_p2_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:32.955%;width:11.275%;height:2.94%;" title="1 Basic personal amount from line 30000 of your return 51090 2 If you are eligib">
+    <!-- 51090 2 enter $2,687 (see line 30425 on page 4). + 3 Line 1  -->
+    <input type="text" data-numeric="1" id="f_schedule5_p2_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:36.364%;width:11.275%;height:1.424%;" title="51090 2 enter $2,687 (see line 30425 on page 4). + 3 Line 1 plus line 2 = 4 Your">
+    <!-- 3 Line 1 plus line 2 = 4 Your spouse's or common-law partner -->
+    <input type="text" data-numeric="1" id="f_schedule5_p2_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:38.258%;width:11.275%;height:1.424%;" title="3 Line 1 plus line 2 = 4 Your spouse's or common-law partner's net income from l">
+    <!-- 4 Your spouse s or common-law partner s net income from line -->
+    <input type="text" data-numeric="1" id="f_schedule5_p2_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:40.243%;width:11.275%;height:2.849%;" title="4 Your spouse s or common-law partner s net income from line 23600 of their retu">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page3.png" alt="Schedule 5 Page 3">
+    
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page4.png" alt="Schedule 5 Page 4">
+    <!-- 55290 Did your marital status change to married or common-la -->
+    <input type="checkbox" id="f_schedule5_p4_L30400" class="pdf-input" onchange="recalcS5(); autoSave();" style="left:79.902%;top:9.47%;width:1.961%;height:1.515%;">
+    <!-- 55290 Did your marital status change to married or common-la -->
+    <input type="text" id="f_schedule5_p4_L30400" class="pdf-input text-left" oninput="autoSave();" style="left:83.333%;top:9.47%;width:9.804%;height:1.515%;" title="55290 Did your marital status change to married or common-law in 2025?   If yes,">
+    <!-- First and last name 55295 Social insurance number (SIN) Addr -->
+    <input type="text" id="f_schedule5_p4_L30400" class="pdf-input text-left" oninput="autoSave();" style="left:5.02%;top:15.53%;width:59.569%;height:1.425%;" title="First and last name 55295 Social insurance number (SIN) Address Year of birth Re">
+    <!-- First and last name 55295 Social insurance number (SIN) Addr -->
+    <input type="text" id="f_schedule5_p4_L30400" class="pdf-input text-left" oninput="autoSave();" style="left:69.235%;top:15.53%;width:23.784%;height:1.425%;" title="First and last name 55295 Social insurance number (SIN) Address Year of birth Re">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" id="f_schedule5_p4_L30400" class="pdf-input text-left" oninput="autoSave();" style="left:5.02%;top:18.561%;width:54.176%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:59.432%;top:18.561%;width:9.569%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:69.235%;top:18.561%;width:23.784%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- Does this dependant have a mental or physical infirmity? Yes -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:80.883%;top:21.654%;width:1.961%;height:1.515%;" title="Does this dependant have a mental or physical infirmity? Yes No 1 Basic personal">
+    <!-- Does this dependant have a mental or physical infirmity? Yes -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:88.236%;top:21.654%;width:1.961%;height:1.515%;" title="Does this dependant have a mental or physical infirmity? Yes No 1 Basic personal">
+    <!-- Does this dependant have a mental or physical infirmity? Yes -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:79.902%;top:23.864%;width:13.235%;height:1.424%;" title="Does this dependant have a mental or physical infirmity? Yes No 1 Basic personal">
+    <!-- 1 Basic personal amount from line 30000 of your return 51100 -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:25.758%;width:11.275%;height:2.94%;" title="1 Basic personal amount from line 30000 of your return 51100 2 If you are eligib">
+    <!-- 51100 2 child under 18 years of age), enter $2,687 (2) (see  -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:29.167%;width:11.275%;height:1.424%;" title="51100 2 child under 18 years of age), enter $2,687 (2) (see line 30425 below). +">
+    <!-- 3 Line 1 plus line 2 = 51106 4 Dependant's net income from l -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:31.061%;width:11.275%;height:1.424%;" title="3 Line 1 plus line 2 = 51106 4 Dependant's net income from line 23600 of their r">
+    <!-- 51106 4 Dependant s net income from line 23600 of their retu -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:33.046%;width:11.275%;height:2.849%;" title="51106 4 Dependant s net income from line 23600 of their return – 5 Line 3 minus ">
+    <!-- 1 Base amount  2 Net income for this person from line 23600  -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:79.902%;top:58.712%;width:13.235%;height:1.424%;" title="1 Base amount  2 Net income for this person from line 23600 of their return –  2">
+    <!-- 1 Base amount  2 Net income for this person from line 23600  -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:60.606%;width:11.275%;height:1.424%;" title="1 Base amount  2 Net income for this person from line 23600 of their return – 3 ">
+    <!-- 2 Net income for this person from line 23600 of their return -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:62.5%;width:11.275%;height:1.424%;" title="2 Net income for this person from line 23600 of their return – 3 Line 1 minus li">
+    <!-- 3 Line 1 minus line 2 (if negative, enter 0 )                -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:64.394%;width:11.275%;height:1.424%;" title="3 Line 1 minus line 2 (if negative, enter 0 )                                   ">
+    <!-- 4 Amount claimed on line 30300 or line 30400 of your return, -->
+    <input type="text" data-numeric="1" id="f_schedule5_p4_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:66.379%;width:11.275%;height:2.849%;" title="4 Amount claimed on line 30300 or line 30400 of your return, if applicable – 5 A">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page5.png" alt="Schedule 5 Page 5">
+    <!-- First and last name Address Year of birth Relationship to yo -->
+    <input type="text" id="f_schedule5_p5_L30450" class="pdf-input text-left" oninput="autoSave();" style="left:5.02%;top:51.515%;width:54.176%;height:1.424%;" title="First and last name Address Year of birth Relationship to you">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" id="f_schedule5_p5_L30450" class="pdf-input text-left" oninput="autoSave();" style="left:5.02%;top:54.545%;width:54.176%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" data-numeric="1" id="f_schedule5_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:59.432%;top:54.545%;width:9.569%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- Address Year of birth Relationship to you -->
+    <input type="text" data-numeric="1" id="f_schedule5_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:69.235%;top:54.545%;width:23.784%;height:1.424%;" title="Address Year of birth Relationship to you">
+    <!-- 1 Base amount  2 Infirm dependant's net income from line 236 -->
+    <input type="text" data-numeric="1" id="f_schedule5_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:79.902%;top:57.197%;width:13.235%;height:1.424%;" title="1 Base amount  2 Infirm dependant's net income from line 23600 of their return –">
+    <!-- 1 Base amount  2 Infirm dependant's net income from line 236 -->
+    <input type="text" data-numeric="1" id="f_schedule5_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:59.091%;width:11.275%;height:1.424%;" title="1 Base amount  2 Infirm dependant's net income from line 23600 of their return –">
+    <!-- 2 Infirm dependant s net income from line 23600 of their ret -->
+    <input type="text" data-numeric="1" id="f_schedule5_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcS5(); autoSave();" style="left:81.863%;top:61.076%;width:11.275%;height:2.849%;" title="2 Infirm dependant s net income from line 23600 of their return – 3 Allowable am">
+    <!-- Enter on line 30450 of your return the total of allowable am -->
+    <input type="text" id="f_schedule5_p5_L30450" class="pdf-input text-left" oninput="autoSave();" style="left:80.02%;top:66.379%;width:3.196%;height:1.333%;" title="Enter on line 30450 of your return the total of allowable amounts claimed for al">
+  </div>
+
+  <div id="pg-anchor-6"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule5_page6.png" alt="Schedule 5 Page 6">
+    
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule5_autosave';
+const FORM_INPUT_IDS = [
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30400',
+  'f_schedule5_p4_L30425',
+  'f_schedule5_p4_L30425',
+  'f_schedule5_p4_L30425',
+  'f_schedule5_p4_L30425',
+  'f_schedule5_p4_L30425',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450',
+  'f_schedule5_p5_L30450'
+];
+const CHECKBOX_IDS = [
+  'f_schedule5_p2_L30300',
+  'f_schedule5_p4_L30400'
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcS5() using field IDs listed in FORM_INPUT_IDS
+function recalcS5() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_schedule5_p1_Ltotal', g('f_schedule5_p1_L1') + g('f_schedule5_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcS5();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcS5();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcS5();
+});
+</script>
+{% endblock %}

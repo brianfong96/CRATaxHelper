@@ -1,0 +1,902 @@
+{% extends "base.html" %}
+{% block title %}T1 &mdash; General Income and Benefit Return 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">T1 &mdash; General Income and Benefit Return</div>
+      <div class="form-subtitle">Form T1 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>T1-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA T1 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+    <a href="#pg-anchor-6">Page 6</a>
+    <a href="#pg-anchor-7">Page 7</a>
+    <a href="#pg-anchor-8">Page 8</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page1.png" alt="T1 Page 1">
+    <!-- First name Last name M ili dd ( t t b t t) temporary tax num -->
+    <input type="text" id="f_t1_p1_id_firstnameinitial_1" class="pdf-input text-left" oninput="autoSave();" style="left:4.896%;top:24.243%;width:21.569%;height:1.424%;" title="First name Last name M ili dd ( t t b t t) temporary tax number (TTN),  or indiv">
+    <!-- First name Last name M ili dd ( t t b t t) temporary tax num -->
+    <input type="text" id="f_t1_p1_id_lastname_2" class="pdf-input text-left" oninput="autoSave();" style="left:27.445%;top:24.243%;width:22.549%;height:1.424%;" title="First name Last name M ili dd ( t t b t t) temporary tax number (TTN),  or indiv">
+    <!-- Mailing address (apartment - number, street) PO B RR   Date  -->
+    <input type="text" id="f_t1_p1_id_mailingaddress_3" class="pdf-input text-left" oninput="autoSave();" style="left:4.896%;top:28.031%;width:45.098%;height:1.424%;" title="Mailing address (apartment - number, street) PO B RR   Date of birth  (Year Mont">
+    <!-- PO Box RR Ci P /T P t l d (Year  Month  Day) 5 Separated 6 S -->
+    <input type="text" data-numeric="1" id="f_t1_p1_id_pobox_4" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:4.896%;top:32.008%;width:21.451%;height:1.424%;" title="PO Box RR Ci P /T P t l d (Year  Month  Day) 5 Separated 6 Single">
+    <!-- PO Box RR Ci P /T P t l d (Year  Month  Day) 5 Separated 6 S -->
+    <input type="text" data-numeric="1" id="f_t1_p1_id_ruralroute_5" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:27.608%;top:32.008%;width:22.385%;height:1.424%;" title="PO Box RR Ci P /T P t l d (Year  Month  Day) 5 Separated 6 Single">
+    <!-- City Prov./Terr. Postal code E il dd If this return is for   -->
+    <input type="text" data-numeric="1" id="f_t1_p1_id_city_6" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:4.896%;top:35.985%;width:21.569%;height:1.424%;" title="City Prov./Terr. Postal code E il dd If this return is for   a deceased person, ">
+    <!-- City Prov./Terr. Postal code E il dd If this return is for   -->
+    <input type="text" data-numeric="1" id="f_t1_p1_postalcode_7" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:38.347%;top:35.985%;width:11.529%;height:1.424%;" title="City Prov./Terr. Postal code E il dd If this return is for   a deceased person, ">
+    <!-- Email address B idi il dd ill i i enter the date of death  ( -->
+    <input type="text" id="f_t1_p1_emailaddress_8" class="pdf-input text-left" oninput="autoSave();" style="left:4.896%;top:39.963%;width:45.098%;height:1.424%;" title="Email address B idi il dd ill i i enter the date of death  (Year  Month  Day) th">
+    <!-- Mailing address (apartment - number, street) or individual t -->
+    <input type="text" data-numeric="1" id="f_t1_p1_numericfield_comb9_c_9" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:51.541%;top:25.406%;width:22.059%;height:1.342%;" title="Mailing address (apartment - number, street) or individual tax number (ITN): 1 M">
+    <!-- PO Box RR (Year  Month  Day) 5 Separated 6 Single -->
+    <input type="text" id="f_t1_p1_datebirth_comb_10" class="pdf-input text-left" oninput="autoSave();" style="left:54.523%;top:31.612%;width:15.451%;height:1.54%;" title="PO Box RR (Year  Month  Day) 5 Separated 6 Single">
+    <!-- By providing your email address, you will stop receiving     -->
+    <input type="text" id="f_t1_p1_datedeath_comb_11" class="pdf-input text-left" oninput="autoSave();" style="left:54.523%;top:41.269%;width:15.451%;height:1.424%;" title="By providing your email address, you will stop receiving    (Year  Month  Day) (">
+    <!-- First name Last name temporary tax number (TTN),  or individ -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_1" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:23.499%;width:1.634%;height:1.263%;">
+    <!-- Mailing address (apartment - number, street) or individual t -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_2" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:25.413%;width:1.634%;height:1.263%;">
+    <!-- Mailing address (apartment - number, street)   Date of birth -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_3" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:27.329%;width:1.634%;height:1.263%;">
+    <!-- PO Box RR   Date of birth  (Year  Month  Day) 3 Widowed 4 Di -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_4" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:29.243%;width:1.634%;height:1.263%;">
+    <!-- PO Box RR (Year  Month  Day) 4 Divorced 5 Separated 6 Single -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_5" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:31.16%;width:1.634%;height:1.263%;">
+    <!-- City Prov./Terr. Postal code If this return is for 5 Separat -->
+    <input type="checkbox" id="f_t1_p1_maritalstatus_6" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:77.445%;top:33.074%;width:1.634%;height:1.263%;">
+    <!-- By providing your email address, you will stop receiving   p -->
+    <input type="text" id="f_t1_p1_datemmdd_comb_12" class="pdf-input text-left" oninput="autoSave();" style="left:80.575%;top:41.755%;width:9.078%;height:1.424%;" title="By providing your email address, you will stop receiving   paper mail from the C">
+    <!-- paper mail from the CRA and will instead receive an email  n -->
+    <input type="text" data-numeric="1" id="f_t1_p1_radiobuttonlanguaget_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:83.735%;top:45.648%;width:1.634%;height:1.263%;" title="paper mail from the CRA and will instead receive an email  notification when mai">
+    <!-- notification when mail is available in My Account. To access -->
+    <input type="text" data-numeric="1" id="f_t1_p1_radiobuttonlanguaget_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:83.735%;top:47.542%;width:1.634%;height:1.263%;" title="notification when mail is available in My Account. To access  My Account, go to ">
+    <!-- Your current province or territory of residence if it is dif -->
+    <input type="text" id="f_t1_p1_datemmdd_comb_13" class="pdf-input text-left" oninput="autoSave();" style="left:83.92%;top:57.088%;width:9.078%;height:1.424%;" title="Your current province or territory of residence if it is different  than your ma">
+    <!-- y p establishments if you were self-employed in 2025: tax pu -->
+    <input type="text" id="f_t1_p1_datemmdd_comb_14" class="pdf-input text-left" oninput="autoSave();" style="left:83.92%;top:65.316%;width:9.078%;height:1.425%;" title="y p establishments if you were self-employed in 2025: tax purposes, enter your  ">
+    <!-- Their first name Their SIN, TTN, or ITN Ti k hi b if h lf l  -->
+    <input type="text" id="f_t1_p1_spouse_first_name_15" class="pdf-input text-left" oninput="autoSave();" style="left:4.902%;top:73.597%;width:21.569%;height:1.424%;" title="Their first name Their SIN, TTN, or ITN Ti k hi b if h lf l d i 202">
+    <!-- Their first name Their SIN, TTN, or ITN Ti k hi b if h lf l  -->
+    <input type="text" data-numeric="1" id="f_t1_p1_numericfield_comb9_c_16" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:27.92%;top:73.597%;width:22.059%;height:1.421%;" title="Their first name Their SIN, TTN, or ITN Ti k hi b if h lf l d i">
+    <!-- Tick this box if they were self-employed in 2025. 1 Net inco -->
+    <input type="checkbox" id="f_t1_p1_checkbox_7" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:82.19%;top:76.275%;width:1.634%;height:1.263%;">
+    <!-- Tick this box if they were self-employed in 2025. 1 Net inco -->
+    <input type="text" data-numeric="1" id="f_t1_p1_L23600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:77.854%;width:13.235%;height:2.94%;" title="Tick this box if they were self-employed in 2025. 1 Net income from line 23600 o">
+    <!-- (or the amount that it would be if they filed a return, even -->
+    <input type="text" data-numeric="1" id="f_t1_p1_L11700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:81.074%;width:13.235%;height:1.424%;" title="(or the amount that it would be if they filed a return, even if the amount is '0">
+    <!-- Amount of universal child care benefit (UCCB) from line 1170 -->
+    <input type="text" data-numeric="1" id="f_t1_p1_L21300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:82.778%;width:13.235%;height:1.424%;" title="Amount of universal child care benefit (UCCB) from line 11700 of their return Am">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page2.png" alt="T1 Page 2">
+    <!-- A) Do you have Canadian citizenship?  If yes, go to question -->
+    <input type="checkbox" id="f_t1_p2_a_checkbox_1" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:81.863%;top:14.899%;width:1.634%;height:1.263%;">
+    <!-- A) Do you have Canadian citizenship?  If yes, go to question -->
+    <input type="checkbox" id="f_t1_p2_a_checkbox_2" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:89.706%;top:14.899%;width:1.634%;height:1.263%;">
+    <!-- and citizenship to Elections Canada to update the National R -->
+    <input type="checkbox" id="f_t1_p2_b_authorize_checkbox_3" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:81.863%;top:19.823%;width:1.634%;height:1.263%;">
+    <!-- and citizenship to Elections Canada to update the National R -->
+    <input type="checkbox" id="f_t1_p2_b_authorize_checkbox_4" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:89.706%;top:19.823%;width:1.634%;height:1.263%;">
+    <!-- Tick this box if you have income that is exempt under the In -->
+    <input type="checkbox" id="f_t1_p2_spouse_selfemployed_5" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:82.19%;top:41.603%;width:1.634%;height:1.263%;">
+    <!-- 26600 Did you own or hold specified foreign property where t -->
+    <input type="checkbox" id="f_t1_p2_L26600" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:81.863%;top:55.997%;width:1.634%;height:1.263%;">
+    <!-- 26600 Did you own or hold specified foreign property where t -->
+    <input type="checkbox" id="f_t1_p2_L26600" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:89.706%;top:55.997%;width:1.634%;height:1.263%;">
+    <!-- Ontario Health (Trillium Gift of Life) may contact or send i -->
+    <input type="checkbox" id="f_t1_p2_organdonor_checkbox_8" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:81.863%;top:69.634%;width:1.634%;height:1.263%;">
+    <!-- Ontario Health (Trillium Gift of Life) may contact or send i -->
+    <input type="checkbox" id="f_t1_p2_organdonor_checkbox_9" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:89.706%;top:69.634%;width:1.634%;height:1.263%;">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page3.png" alt="T1 Page 3">
+    <!-- , y p y 10100 1 Employment income (box 14 of all T4 slips) 1 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:14.394%;width:13.235%;height:1.424%;" title=", y p y 10100 1 Employment income (box 14 of all T4 slips) 10105 Tax-exempt inco">
+    <!-- 10100 1 Employment income (box 14 of all T4 slips) 10105 Tax -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L10105" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:16.098%;width:13.235%;height:1.424%;" title="10100 1 Employment income (box 14 of all T4 slips) 10105 Tax-exempt income for e">
+    <!-- 10105 Tax-exempt income for emergency services volunteers 10 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L10120" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:17.803%;width:13.235%;height:1.424%;" title="10105 Tax-exempt income for emergency services volunteers 10120 Commissions incl">
+    <!-- 10120 Commissions included on line 10100 (box 42 of all T4 s -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L10130" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:19.508%;width:13.235%;height:1.424%;" title="10120 Commissions included on line 10100 (box 42 of all T4 slips) 10130 Wage-los">
+    <!-- 10130 Wage-loss replacement contributions 10400 2 Other empl -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L10400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:21.212%;width:11.275%;height:1.424%;" title="10130 Wage-loss replacement contributions 10400 2 Other employment income + 1130">
+    <!-- 10400 2 Other employment income + 11300 3 Old age security ( -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:22.917%;width:11.275%;height:1.424%;" title="10400 2 Other employment income + 11300 3 Old age security (OAS) pension (box 18">
+    <!-- 11300 3 Old age security (OAS) pension (box 18 of the T4A(OA -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:24.621%;width:11.275%;height:1.424%;" title="11300 3 Old age security (OAS) pension (box 18 of the T4A(OAS) slip) + 11400 4 C">
+    <!-- 11400 4 CPP or QPP benefits (box 20 of the T4A(P) slip) + 11 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11410" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:26.326%;width:13.235%;height:1.424%;" title="11400 4 CPP or QPP benefits (box 20 of the T4A(P) slip) + 11410 Disability benef">
+    <!-- 11410 Disability benefits included on line 11400 (box 16 of  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:28.03%;width:11.275%;height:1.424%;" title="11410 Disability benefits included on line 11400 (box 16 of the T4A(P) slip) 115">
+    <!-- 11500 5 Other pensions and superannuation + 11600 6 Elected  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:29.735%;width:11.275%;height:1.424%;" title="11500 5 Other pensions and superannuation + 11600 6 Elected split-pension amount">
+    <!-- 11600 6 Elected split-pension amount (complete Form T1032) + -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:31.44%;width:11.275%;height:1.424%;" title="11600 6 Elected split-pension amount (complete Form T1032) + 11700 7 Universal c">
+    <!-- 11700 7 Universal child care benefit (UCCB) (see the RC62 sl -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11701" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:33.144%;width:13.235%;height:1.424%;" title="11700 7 Universal child care benefit (UCCB) (see the RC62 slip) + 11701 UCCB amo">
+    <!-- 11701 UCCB amount designated to a dependant 11900 8 Employme -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:34.849%;width:11.275%;height:1.424%;" title="11701 UCCB amount designated to a dependant 11900 8 Employment insurance (EI) an">
+    <!-- 11900 8 Employment insurance (EI) and other benefits (box 14 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L11905" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:36.553%;width:13.235%;height:2.94%;" title="11900 8 Employment insurance (EI) and other benefits (box 14 of the T4E slip) + ">
+    <!-- Taxable amount of dividends from taxable Canadian corporatio -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;" title="Taxable amount of dividends from taxable Canadian corporations (use Federal Work">
+    <!-- 12000 9 Amount of dividends (eligible and other than eligibl -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12010" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:42.992%;width:13.235%;height:1.424%;" title="12000 9 Amount of dividends (eligible and other than eligible) + 12010 Amount of">
+    <!-- 12010 Amount of dividends (other than eligible) 12100 10 Int -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:44.697%;width:11.275%;height:1.424%;" title="12010 Amount of dividends (other than eligible) 12100 10 Interest and other inve">
+    <!-- 12100 10 Interest and other investment income (use Federal W -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:46.402%;width:11.275%;height:1.424%;" title="12100 10 Interest and other investment income (use Federal Worksheet)  + 12200 1">
+    <!-- 12200 11 Net partnership income (limited or non-active partn -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:48.106%;width:11.275%;height:1.424%;" title="12200 11 Net partnership income (limited or non-active partners only) + 12500 12">
+    <!-- 12500 12 Registered disability savings plan (RDSP) income (b -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:44.608%;top:49.811%;width:13.235%;height:1.424%;" title="12500 12 Registered disability savings plan (RDSP) income (box 131 of the T4A sl">
+    <!-- 12500 12 Registered disability savings plan (RDSP) income (b -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:49.811%;width:11.275%;height:1.424%;" title="12500 12 Registered disability savings plan (RDSP) income (box 131 of the T4A sl">
+    <!-- 12600 13 Rental income (complete Form T776) 12599 Gross Net  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.928%;top:51.515%;width:11.275%;height:1.424%;" title="12600 13 Rental income (complete Form T776) 12599 Gross Net + 12700 14 Taxable c">
+    <!-- 12800 15 Support payments received  (go to canada.ca/taxes-s -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:44.608%;top:54.768%;width:13.235%;height:1.424%;" title="12800 15 Support payments received  (go to canada.ca/taxes-support-payments) 127">
+    <!-- 12700 14 Taxable capital gains (complete Schedule 3) + 12800 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:53.279%;width:11.275%;height:2.94%;" title="12700 14 Taxable capital gains (complete Schedule 3) + 12800 15 Support payments">
+    <!-- 12800 15 (go to canada.ca/taxes-support-payments) 12799 Tota -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:56.565%;width:11.275%;height:1.424%;" title="12800 15 (go to canada.ca/taxes-support-payments) 12799 Total Taxable amount + 1">
+    <!-- 12900 16 Registered retirement savings plan (RRSP) income (f -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12905" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:58.27%;width:11.275%;height:1.424%;" title="12900 16 Registered retirement savings plan (RRSP) income (from all T4RSP slips)">
+    <!-- 12905 17 Taxable first home savings account (FHSA) income (s -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L12906" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:59.974%;width:11.275%;height:1.424%;" title="12905 17 Taxable first home savings account (FHSA) income (see the T4FHSA slip) ">
+    <!-- 12906 18 Taxable FHSA income – other (see the T4FHSA slip) + -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:21.569%;top:61.679%;width:53.431%;height:1.49%;" title="12906 18 Taxable FHSA income – other (see the T4FHSA slip) + 13000 19 Other inco">
+    <!-- 12906 18 Taxable FHSA income – other (see the T4FHSA slip) + -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:61.679%;width:11.275%;height:1.424%;" title="12906 18 Taxable FHSA income – other (see the T4FHSA slip) + 13000 19 Other inco">
+    <!-- 13000 19 Other income (specify): + 13010 20 Taxable scholars -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13010" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:63.383%;width:11.275%;height:1.424%;" title="13000 19 Other income (specify): + 13010 20 Taxable scholarships, fellowships, b">
+    <!-- 13010 20 Taxable scholarships, fellowships, bursaries and ar -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:65.088%;width:11.275%;height:1.424%;" title="13010 20 Taxable scholarships, fellowships, bursaries and artists' project grant">
+    <!-- Self-employment income (see Guide T4002): 13500 22 Business  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:35.295%;top:68.497%;width:13.235%;height:1.424%;" title="Self-employment income (see Guide T4002): 13500 22 Business income 13499 Gross N">
+    <!-- Self-employment income (see Guide T4002): 13500 22 Business  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:68.497%;width:13.235%;height:1.424%;" title="Self-employment income (see Guide T4002): 13500 22 Business income 13499 Gross N">
+    <!-- 13500 22 Business income 13499 Gross Net 13700 23 Profession -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:35.295%;top:70.202%;width:13.235%;height:1.424%;" title="13500 22 Business income 13499 Gross Net 13700 23 Professional income 13699 Gros">
+    <!-- 13500 22 Business income 13499 Gross Net 13700 23 Profession -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:70.202%;width:11.275%;height:1.424%;" title="13500 22 Business income 13499 Gross Net 13700 23 Professional income 13699 Gros">
+    <!-- 13700 23 Professional income 13699 Gross Net + 13900 24 Comm -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:35.295%;top:71.906%;width:13.235%;height:1.424%;" title="13700 23 Professional income 13699 Gross Net + 13900 24 Commission income 13899 ">
+    <!-- 13700 23 Professional income 13699 Gross Net + 13900 24 Comm -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L13900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:71.906%;width:11.275%;height:1.424%;" title="13700 23 Professional income 13699 Gross Net + 13900 24 Commission income 13899 ">
+    <!-- 13900 24 Commission income 13899 Gross Net + 14100 25 Farmin -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:35.295%;top:73.611%;width:13.235%;height:1.424%;" title="13900 24 Commission income 13899 Gross Net + 14100 25 Farming income 14099 Gross">
+    <!-- 13900 24 Commission income 13899 Gross Net + 14100 25 Farmin -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:73.611%;width:11.275%;height:1.424%;" title="13900 24 Commission income 13899 Gross Net + 14100 25 Farming income 14099 Gross">
+    <!-- 14100 25 Farming income 14099 Gross Net + 14300 26 Fishing i -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:35.295%;top:75.315%;width:13.235%;height:1.424%;" title="14100 25 Farming income 14099 Gross Net + 14300 26 Fishing income 14299 Gross Ne">
+    <!-- 14100 25 Farming income 14099 Gross Net + 14300 26 Fishing i -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:75.315%;width:11.275%;height:1.424%;" title="14100 25 Farming income 14099 Gross Net + 14300 26 Fishing income 14299 Gross Ne">
+    <!-- 14300 26 Fishing income 14299 Gross Net + 27 Net self-employ -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:77.02%;width:11.275%;height:1.424%;" title="14300 26 Fishing income 14299 Gross Net + 27 Net self-employment income Add line">
+    <!-- 14300 26 Fishing income 14299 Gross Net + 27 Net self-employ -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:77.02%;width:11.275%;height:1.424%;" title="14300 26 Fishing income 14299 Gross Net + 27 Net self-employment income Add line">
+    <!-- 27 Net self-employment income Add lines 22 to 26. = ◄ + 28 L -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L30" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:78.724%;width:11.275%;height:1.424%;" title="27 Net self-employment income Add lines 22 to 26. = ◄ + 28 Line 21 plus line 27 ">
+    <!-- 28 Line 21 plus line 27 = 14400 29 Workers' compensation ben -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:80.429%;width:13.235%;height:1.424%;" title="28 Line 21 plus line 27 = 14400 29 Workers' compensation benefits (box 10 of the">
+    <!-- 14400 29 Workers' compensation benefits (box 10 of the T5007 -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:82.133%;width:11.275%;height:1.424%;" title="14400 29 Workers' compensation benefits (box 10 of the T5007 slip) 14500 30 Soci">
+    <!-- 14500 30 Social assistance payments + 14600 31 Net federal s -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:83.838%;width:11.275%;height:1.424%;" title="14500 30 Social assistance payments + 14600 31 Net federal supplements paid (box">
+    <!-- 14600 31 Net federal supplements paid (box 21 of the T4A(OAS -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:85.543%;width:11.275%;height:1.424%;" title="14600 31 Net federal supplements paid (box 21 of the T4A(OAS) slip) + 14700 32 A">
+    <!-- 14600 31 Net federal supplements paid (box 21 of the T4A(OAS -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L14700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:85.543%;width:11.275%;height:1.424%;" title="14600 31 Net federal supplements paid (box 21 of the T4A(OAS) slip) + 14700 32 A">
+    <!-- 14700 32 Add lines 29 to 31 (see line 25000 in Step 4). = ◄  -->
+    <input type="text" data-numeric="1" id="f_t1_p3_L15000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:87.247%;width:11.275%;height:1.424%;" title="14700 32 Add lines 29 to 31 (see line 25000 in Step 4). = ◄ + 15000 33 Total inc">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page4.png" alt="T1 Page 4">
+    <!-- Step 3  Net income 34 Enter the amount from line 33 of the p -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:6.44%;width:13.235%;height:1.424%;" title="Step 3  Net income 34 Enter the amount from line 33 of the previous page. Pensio">
+    <!-- 20600 Pension adjustment  (box 52 of all T4 slips and box 03 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L20600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:44.608%;top:9.659%;width:13.235%;height:1.424%;" title="20600 Pension adjustment  (box 52 of all T4 slips and box 034 of all T4A slips) ">
+    <!-- 20600 (box 52 of all T4 slips and box 034 of all T4A slips)  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L20700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:11.364%;width:13.235%;height:2.94%;" title="20600 (box 52 of all T4 slips and box 034 of all T4A slips) 20700 35 Registered ">
+    <!-- 20700 35 (box 20 of all T4 slips and box 032 of all T4A slip -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L20800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:14.583%;width:11.275%;height:1.424%;" title="20700 35 (box 20 of all T4 slips and box 032 of all T4A slips) 20800 36 RRSP ded">
+    <!-- 20800 36 RRSP deduction (complete Schedule 7 and attach rece -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L20805" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:16.288%;width:11.275%;height:1.424%;" title="20800 36 RRSP deduction (complete Schedule 7 and attach receipts) + 20805 37 FHS">
+    <!-- 20810 Pooled registered pension plan (PRPP) employer contrib -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L20810" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:44.608%;top:19.507%;width:13.235%;height:1.424%;" title="20810 Pooled registered pension plan (PRPP) employer contributions  (amount from">
+    <!-- 20810 (amount from your PRPP contribution receipts) 21000 38 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:21.212%;width:11.275%;height:1.424%;" title="20810 (amount from your PRPP contribution receipts) 21000 38 Deduction for elect">
+    <!-- 21000 38 Deduction for elected split-pension amount (complet -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:22.917%;width:11.275%;height:1.424%;" title="21000 38 Deduction for elected split-pension amount (complete Form T1032)  + 212">
+    <!-- 21200 39 Annual union, professional, or like dues (receipts  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:24.621%;width:11.275%;height:1.424%;" title="21200 39 Annual union, professional, or like dues (receipts and box 44 of all T4">
+    <!-- 21300 40 Universal child care benefit (UCCB) repayment (box  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:26.326%;width:11.275%;height:1.424%;" title="21300 40 Universal child care benefit (UCCB) repayment (box 12 of all RC62 slips">
+    <!-- 21400 41 Child care expenses (complete Form T778) + 21500 42 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:28.03%;width:11.275%;height:1.424%;" title="21400 41 Child care expenses (complete Form T778) + 21500 42 Disability supports">
+    <!-- 21700 43 Business investment loss (see Guide T4037) 21699 Gr -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21699" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:27.025%;top:31.346%;width:13.235%;height:1.424%;" title="21700 43 Business investment loss (see Guide T4037) 21699 Gross Allowable deduct">
+    <!-- 21700 43 Business investment loss (see Guide T4037) 21699 Gr -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L45" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:31.275%;width:11.275%;height:1.424%;" title="21700 43 Business investment loss (see Guide T4037) 21699 Gross Allowable deduct">
+    <!-- 21700 43 21699 Gross Allowable deduction + 21900 44 Moving e -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L21900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:33.081%;width:11.275%;height:1.424%;" title="21700 43 21699 Gross Allowable deduction + 21900 44 Moving expenses (complete Fo">
+    <!-- 22000 45 Support payments made (go to canada.ca/taxes-suppor -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:26.961%;top:36.3%;width:13.235%;height:1.424%;" title="22000 45 Support payments made (go to canada.ca/taxes-support-payments) 21999 To">
+    <!-- 21900 44 Moving expenses (complete Form T1-M) + 22000 45 Sup -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:34.785%;width:11.275%;height:2.94%;" title="21900 44 Moving expenses (complete Form T1-M) + 22000 45 Support payments made (">
+    <!-- 22000 45 21999 Total Allowable deduction + 22100 46 Carrying -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:38.005%;width:11.275%;height:2.94%;" title="22000 45 21999 Total Allowable deduction + 22100 46 Carrying charges, interest e">
+    <!-- 22100 46 (use Federal Worksheet) + 22200 47 Deduction for CP -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:41.224%;width:11.275%;height:2.94%;" title="22100 46 (use Federal Worksheet) + 22200 47 Deduction for CPP or QPP contributio">
+    <!-- 22200 47 other earnings (complete Schedule 8 or Form RC381,  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22215" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:44.444%;width:11.275%;height:4.455%;" title="22200 47 other earnings (complete Schedule 8 or Form RC381, whichever applies) +">
+    <!-- 22215 48 or Form RC381, whichever applies) (maximum $1,074.0 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:49.179%;width:11.275%;height:1.424%;" title="22215 48 or Form RC381, whichever applies) (maximum $1,074.00) + • 22400 49 Expl">
+    <!-- 22400 49 Exploration and development expenses (complete Form -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L22900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:50.883%;width:11.275%;height:1.424%;" title="22400 49 Exploration and development expenses (complete Form T1229) + 22900 50 O">
+    <!-- 22900 50 Other employment expenses (see Guide T4044) + 23100 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:52.588%;width:11.275%;height:1.424%;" title="22900 50 Other employment expenses (see Guide T4044) + 23100 51 Clergy residence">
+    <!-- 23100 51 Clergy residence deduction (complete Form T1223) +  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:24.02%;top:54.292%;width:33.333%;height:1.49%;" title="23100 51 Clergy residence deduction (complete Form T1223) + 23200 52 Other deduc">
+    <!-- 23100 51 Clergy residence deduction (complete Form T1223) +  -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:54.292%;width:11.275%;height:1.424%;" title="23100 51 Clergy residence deduction (complete Form T1223) + 23200 52 Other deduc">
+    <!-- 23200 52 Other deductions (specify): + 23300 53 Add lines 35 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:55.997%;width:11.275%;height:1.424%;" title="23200 52 Other deductions (specify): + 23300 53 Add lines 35 to 52. = ◄ – 23400 ">
+    <!-- 23200 52 Other deductions (specify): + 23300 53 Add lines 35 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:55.997%;width:11.275%;height:1.424%;" title="23200 52 Other deductions (specify): + 23300 53 Add lines 35 to 52. = ◄ – 23400 ">
+    <!-- 23300 53 Add lines 35 to 52. = ◄ – 23400 54 Net income befor -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:57.702%;width:11.275%;height:1.424%;" title="23300 53 Add lines 35 to 52. = ◄ – 23400 54 Net income before adjustments Line 3">
+    <!-- 23500 55 • You entered an amount for OAS pension on line 113 -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:69.254%;width:11.275%;height:2.94%;" title="23500 55 • You entered an amount for OAS pension on line 11300 or net federal su">
+    <!-- 23500 55 If not, enter "0" on line 23500. – • 23600 56 Net i -->
+    <input type="text" data-numeric="1" id="f_t1_p4_L23600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:72.474%;width:11.275%;height:4.455%;" title="23500 55 If not, enter '0' on line 23500. – • 23600 56 Net income Line 54 minus ">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page5.png" alt="T1 Page 5">
+    <!-- Step 4  Taxable income 57 Enter the amount from line 56 of t -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L59" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:6.44%;width:13.235%;height:1.424%;" title="Step 4  Taxable income 57 Enter the amount from line 56 of the previous page. 24">
+    <!-- 57 Enter the amount from line 56 of the previous page. 24400 -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L24400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:8.144%;width:13.235%;height:1.424%;" title="57 Enter the amount from line 56 of the previous page. 24400 58 Canadian Armed F">
+    <!-- 24400 58 Canadian Armed Forces personnel and police deductio -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L24900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:9.849%;width:11.275%;height:2.94%;" title="24400 58 Canadian Armed Forces personnel and police deduction (box 43 of all T4 ">
+    <!-- 24900 59 (boxes 39, 41, 91 and 92 of all T4 slips or see For -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:13.071%;width:11.275%;height:2.94%;" title="24900 59 (boxes 39, 41, 91 and 92 of all T4 slips or see Form T1212) + 25000 60 ">
+    <!-- 25000 60 not enter an amount on line 14600; otherwise, use F -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:16.291%;width:11.275%;height:1.424%;" title="25000 60 not enter an amount on line 14600; otherwise, use Federal Worksheet) + ">
+    <!-- 25100 61 Limited partnership losses of other years + 25200 6 -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:17.995%;width:11.275%;height:1.424%;" title="25100 61 Limited partnership losses of other years + 25200 62 Non-capital losses">
+    <!-- 25200 62 Non-capital losses of other years + 25300 63 Net ca -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:19.7%;width:11.275%;height:1.424%;" title="25200 62 Non-capital losses of other years + 25300 63 Net capital losses of othe">
+    <!-- 25300 63 Net capital losses of other years + 25395 64 Capita -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25395" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:21.404%;width:11.275%;height:2.94%;" title="25300 63 Net capital losses of other years + 25395 64 Capital gains deduction fo">
+    <!-- 25395 64 qualifying cooperative conversions (complete Form T -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:24.624%;width:11.275%;height:1.424%;" title="25395 64 qualifying cooperative conversions (complete Form T2048) + 25400 65 Cap">
+    <!-- 25400 65 Capital gains deduction (complete Form T657) + 2550 -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:26.329%;width:11.275%;height:1.424%;" title="25400 65 Capital gains deduction (complete Form T657) + 25500 66 Northern reside">
+    <!-- 25500 66 Northern residents deductions (complete Form T2222) -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:27.451%;top:28.033%;width:29.902%;height:1.49%;" title="25500 66 Northern residents deductions (complete Form T2222) + 25600 67 Addition">
+    <!-- 25500 66 Northern residents deductions (complete Form T2222) -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:28.033%;width:11.275%;height:1.424%;" title="25500 66 Northern residents deductions (complete Form T2222) + 25600 67 Addition">
+    <!-- 25600 67 Additional deductions (specify): + 25700 68 Add lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:29.738%;width:11.275%;height:1.424%;" title="25600 67 Additional deductions (specify): + 25700 68 Add lines 58 to 67. = ◄ – 2">
+    <!-- 25600 67 Additional deductions (specify): + 25700 68 Add lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L25700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:29.738%;width:11.275%;height:1.424%;" title="25600 67 Additional deductions (specify): + 25700 68 Add lines 58 to 67. = ◄ – 2">
+    <!-- 25700 68 Add lines 58 to 67. = ◄ – 26000 69  Taxable income  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L26000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:31.501%;width:11.275%;height:1.424%;" title="25700 68 Add lines 58 to 67. = ◄ – 26000 69  Taxable income Line 57 minus line 6">
+    <!-- $57,375 or less Amount from line 26000   – Line 70 minus lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:23.039%;top:46.653%;width:13.235%;height:1.424%;" title="$57,375 or less Amount from line 26000   – Line 70 minus line 71 more than $114,">
+    <!-- Amount from line 26000   – Line 70 minus line 71  (cannot be -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.0%;top:48.357%;width:11.275%;height:1.424%;" title="Amount from line 26000   – Line 70 minus line 71  (cannot be negative) = – = – =">
+    <!-- – Line 70 minus line 71  (cannot be negative) = × Line 72 mu -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.0%;top:50.062%;width:11.275%;height:1.424%;" title="– Line 70 minus line 71  (cannot be negative) = × Line 72 multiplied by the – = ">
+    <!-- (cannot be negative) = × Line 72 multiplied by the  percenta -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:24.937%;top:51.786%;width:11.275%;height:1.424%;" title="(cannot be negative) = × Line 72 multiplied by the  percentage from line 73 = = ">
+    <!-- × Line 72 multiplied by the  percentage from line 73 = + Lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.0%;top:53.471%;width:11.275%;height:1.424%;" title="× Line 72 multiplied by the  percentage from line 73 = + Line 74 plus line 75 × ">
+    <!-- percentage from line 73 = + Federal tax on Line 74 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.0%;top:55.175%;width:11.275%;height:1.424%;" title="percentage from line 73 = + Federal tax on Line 74 plus line 75 = + = + = + = + ">
+    <!-- + Federal tax on  taxable income Line 74 plus line 75 = + =  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.0%;top:56.971%;width:11.275%;height:2.849%;" title="+ Federal tax on  taxable income Line 74 plus line 75 = + = + = + = + = 75 76 En">
+    <!-- $57,375 or less Amount from line 26000   – Line 70 minus lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:37.255%;top:46.653%;width:13.235%;height:1.424%;" title="$57,375 or less Amount from line 26000   – Line 70 minus line 71 more than $114,">
+    <!-- Amount from line 26000   – Line 70 minus line 71  (cannot be -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:48.357%;width:11.275%;height:1.424%;" title="Amount from line 26000   – Line 70 minus line 71  (cannot be negative) = – = – =">
+    <!-- – Line 70 minus line 71  (cannot be negative) = × Line 72 mu -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:50.062%;width:11.275%;height:1.424%;" title="– Line 70 minus line 71  (cannot be negative) = × Line 72 multiplied by the – = ">
+    <!-- (cannot be negative) = × Line 72 multiplied by the  percenta -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:51.766%;width:11.275%;height:1.424%;" title="(cannot be negative) = × Line 72 multiplied by the  percentage from line 73 = = ">
+    <!-- × Line 72 multiplied by the  percentage from line 73 = + Lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:53.471%;width:11.275%;height:1.424%;" title="× Line 72 multiplied by the  percentage from line 73 = + Line 74 plus line 75 × ">
+    <!-- percentage from line 73 = + Federal tax on Line 74 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:55.175%;width:11.275%;height:1.424%;" title="percentage from line 73 = + Federal tax on Line 74 plus line 75 = + = + = + = + ">
+    <!-- + Federal tax on  taxable income Line 74 plus line 75 = + =  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:39.216%;top:56.971%;width:11.275%;height:2.849%;" title="+ Federal tax on  taxable income Line 74 plus line 75 = + = + = + = + = 75 76 En">
+    <!-- $57,375 or less Amount from line 26000   – Line 70 minus lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:51.471%;top:46.653%;width:13.235%;height:1.424%;" title="$57,375 or less Amount from line 26000   – Line 70 minus line 71 more than $114,">
+    <!-- Amount from line 26000   – Line 70 minus line 71  (cannot be -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:48.357%;width:11.275%;height:1.424%;" title="Amount from line 26000   – Line 70 minus line 71  (cannot be negative) = – = – =">
+    <!-- – Line 70 minus line 71  (cannot be negative) = × Line 72 mu -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:50.062%;width:11.275%;height:1.424%;" title="– Line 70 minus line 71  (cannot be negative) = × Line 72 multiplied by the – = ">
+    <!-- (cannot be negative) = × Line 72 multiplied by the  percenta -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:51.766%;width:11.275%;height:1.424%;" title="(cannot be negative) = × Line 72 multiplied by the  percentage from line 73 = = ">
+    <!-- × Line 72 multiplied by the  percentage from line 73 = + Lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:53.471%;width:11.275%;height:1.424%;" title="× Line 72 multiplied by the  percentage from line 73 = + Line 74 plus line 75 × ">
+    <!-- percentage from line 73 = + Federal tax on Line 74 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:55.175%;width:11.275%;height:1.424%;" title="percentage from line 73 = + Federal tax on Line 74 plus line 75 = + = + = + = + ">
+    <!-- + Federal tax on  taxable income Line 74 plus line 75 = + =  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:53.431%;top:56.971%;width:11.275%;height:2.849%;" title="+ Federal tax on  taxable income Line 74 plus line 75 = + = + = + = + = 75 76 En">
+    <!-- $57,375 or less Amount from line 26000   – Line 70 minus lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:65.686%;top:46.653%;width:13.235%;height:1.424%;" title="$57,375 or less Amount from line 26000   – Line 70 minus line 71 more than $114,">
+    <!-- Amount from line 26000   – Line 70 minus line 71  (cannot be -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:48.357%;width:11.275%;height:1.424%;" title="Amount from line 26000   – Line 70 minus line 71  (cannot be negative) = – = – =">
+    <!-- – Line 70 minus line 71  (cannot be negative) = × Line 72 mu -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:50.062%;width:11.275%;height:1.424%;" title="– Line 70 minus line 71  (cannot be negative) = × Line 72 multiplied by the – = ">
+    <!-- (cannot be negative) = × Line 72 multiplied by the  percenta -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:51.766%;width:11.275%;height:1.424%;" title="(cannot be negative) = × Line 72 multiplied by the  percentage from line 73 = = ">
+    <!-- × Line 72 multiplied by the  percentage from line 73 = + Lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:53.471%;width:11.275%;height:1.424%;" title="× Line 72 multiplied by the  percentage from line 73 = + Line 74 plus line 75 × ">
+    <!-- percentage from line 73 = + Federal tax on Line 74 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:55.175%;width:11.275%;height:1.424%;" title="percentage from line 73 = + Federal tax on Line 74 plus line 75 = + = + = + = + ">
+    <!-- + Federal tax on  taxable income Line 74 plus line 75 = + =  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:67.647%;top:56.971%;width:11.275%;height:2.849%;" title="+ Federal tax on  taxable income Line 74 plus line 75 = + = + = + = + = 75 76 En">
+    <!-- $57,375 or less Amount from line 26000   – Line 70 minus lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:46.653%;width:13.235%;height:1.424%;" title="$57,375 or less Amount from line 26000   – Line 70 minus line 71 more than $114,">
+    <!-- Amount from line 26000   – Line 70 minus line 71  (cannot be -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:48.357%;width:11.275%;height:1.424%;" title="Amount from line 26000   – Line 70 minus line 71  (cannot be negative) = – = – =">
+    <!-- – Line 70 minus line 71  (cannot be negative) = × Line 72 mu -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:50.062%;width:11.275%;height:1.424%;" title="– Line 70 minus line 71  (cannot be negative) = × Line 72 multiplied by the – = ">
+    <!-- (cannot be negative) = × Line 72 multiplied by the  percenta -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:51.766%;width:11.275%;height:1.424%;" title="(cannot be negative) = × Line 72 multiplied by the  percentage from line 73 = = ">
+    <!-- × Line 72 multiplied by the  percentage from line 73 = + Lin -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:53.471%;width:11.275%;height:1.424%;" title="× Line 72 multiplied by the  percentage from line 73 = + Line 74 plus line 75 × ">
+    <!-- percentage from line 73 = + Federal tax on Line 74 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:55.176%;width:11.275%;height:1.424%;" title="percentage from line 73 = + Federal tax on Line 74 plus line 75 = + = + = + = + ">
+    <!-- + Federal tax on  taxable income Line 74 plus line 75 = + =  -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:56.971%;width:11.275%;height:2.849%;" title="+ Federal tax on  taxable income Line 74 plus line 75 = + = + = + = + = 75 76 En">
+    <!-- 30000 77 If the amount on line 23600 is $177,882 or less, en -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:68.812%;width:13.235%;height:2.94%;" title="30000 77 If the amount on line 23600 is $177,882 or less, enter $16,129.  If the">
+    <!-- 30000 77 Otherwise, use the Federal Worksheet to calculate t -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:72.032%;width:11.275%;height:1.424%;" title="30000 77 Otherwise, use the Federal Worksheet to calculate the amount to enter. ">
+    <!-- 30100 78 Age amount (if you were born in 1960 or earlier) (u -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:73.736%;width:11.275%;height:1.424%;" title="30100 78 Age amount (if you were born in 1960 or earlier) (use Federal Worksheet">
+    <!-- 30300 79 Spouse or common-law partner amount (complete Sched -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:75.441%;width:11.275%;height:1.424%;" title="30300 79 Spouse or common-law partner amount (complete Schedule 5) + 30400 80 Am">
+    <!-- 30400 80 Amount for an eligible dependant (complete Schedule -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30425" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:77.145%;width:11.275%;height:2.94%;" title="30400 80 Amount for an eligible dependant (complete Schedule 5) + 30425 81 Canad">
+    <!-- 30425 81 (complete Schedule 5) + 30450 82 Canada caregiver a -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30450" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:80.365%;width:11.275%;height:1.424%;" title="30425 81 (complete Schedule 5) + 30450 82 Canada caregiver amount for other infi">
+    <!-- 30500 83 Canada caregiver amount for infirm children under 1 -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:57.843%;top:83.585%;width:4.412%;height:1.424%;" title="30500 83 Canada caregiver amount for infirm children under 18 years of age (see ">
+    <!-- 30450 82 Canada caregiver amount for other infirm dependants -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L30500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:82.069%;width:11.275%;height:2.94%;" title="30450 82 Canada caregiver amount for other infirm dependants age 18 or older (co">
+    <!-- 30500 83 30499 Number of children you are claiming this amou -->
+    <input type="text" data-numeric="1" id="f_t1_p5_L89" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:85.289%;width:11.275%;height:1.424%;" title="30500 83 30499 Number of children you are claiming this amount for × $2,687 = + ">
+  </div>
+
+  <div id="pg-anchor-6"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page6.png" alt="T1 Page 6">
+    <!-- Part B – Federal non-refundable tax credits (continued) 85 E -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L90" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:6.061%;width:13.235%;height:1.424%;" title="Part B – Federal non-refundable tax credits (continued) 85 Enter the amount from">
+    <!-- Base CPP or QPP contributions (complete Schedule 8 or Form R -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L30800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:9.28%;width:13.235%;height:1.424%;" title="Base CPP or QPP contributions (complete Schedule 8 or Form RC381, whichever appl">
+    <!-- 30800 86 through employment income • 31000 87 on self-employ -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:10.985%;width:11.275%;height:1.424%;" title="30800 86 through employment income • 31000 87 on self-employment income and othe">
+    <!-- 31000 87 on self-employment income and other earnings + • Em -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:12.689%;width:11.275%;height:2.94%;" title="31000 87 on self-employment income and other earnings + • Employment insurance p">
+    <!-- 31200 88 through employment (boxes 18 and 55 of all T4 slips -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31217" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:15.909%;width:11.275%;height:1.424%;" title="31200 88 through employment (boxes 18 and 55 of all T4 slips)  (maximum $1,077.4">
+    <!-- 31217 89 on self-employment and other eligible earnings (com -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31220" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:17.614%;width:11.275%;height:1.424%;" title="31217 89 on self-employment and other eligible earnings (complete Schedule 13) +">
+    <!-- 31220 90 Volunteer firefighters' amount (VFA) + 31240 91 Sea -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31240" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:19.318%;width:11.275%;height:1.424%;" title="31220 90 Volunteer firefighters' amount (VFA) + 31240 91 Search and rescue volun">
+    <!-- 31240 91 Search and rescue volunteers' amount (SRVA) + 31260 -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31260" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:21.023%;width:11.275%;height:2.94%;" title="31240 91 Search and rescue volunteers' amount (SRVA) + 31260 92 Canada employmen">
+    <!-- 31260 92 Enter whichever is less: $1,471 or line 1 plus line -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31270" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:24.243%;width:11.275%;height:1.424%;" title="31260 92 Enter whichever is less: $1,471 or line 1 plus line 2. + 31270 93 Home ">
+    <!-- 31270 93 Home buyers' amount (maximum $10,000) + 31285 94 Ho -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:25.947%;width:11.275%;height:1.424%;" title="31270 93 Home buyers' amount (maximum $10,000) + 31285 94 Home accessibility exp">
+    <!-- 31285 94 Home accessibility expenses (use Federal Worksheet) -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:27.652%;width:11.275%;height:1.424%;" title="31285 94 Home accessibility expenses (use Federal Worksheet) (maximum $20,000) +">
+    <!-- 31300 95 Adoption expenses + 96 Add lines 86 to 95. = ◄ + 31 -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L102" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:29.386%;width:11.275%;height:1.424%;" title="31300 95 Adoption expenses + 96 Add lines 86 to 95. = ◄ + 31400 97 Pension incom">
+    <!-- 31300 95 Adoption expenses + 96 Add lines 86 to 95. = ◄ + 31 -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L102" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:29.386%;width:11.275%;height:1.424%;" title="31300 95 Adoption expenses + 96 Add lines 86 to 95. = ◄ + 31400 97 Pension incom">
+    <!-- 96 Add lines 86 to 95. = ◄ + 31400 97 Pension income amount  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:31.09%;width:11.275%;height:1.424%;" title="96 Add lines 86 to 95. = ◄ + 31400 97 Pension income amount (use Federal Workshe">
+    <!-- 31400 97 Pension income amount (use Federal Worksheet)       -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L104" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:32.795%;width:11.275%;height:1.424%;" title="31400 97 Pension income amount (use Federal Worksheet)                          ">
+    <!-- 98 Add lines 85, 96, and 97. = 31600 99 Disability amount fo -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:34.499%;width:11.275%;height:2.94%;" title="98 Add lines 85, 96, and 97. = 31600 99 Disability amount for self  (if you were">
+    <!-- 31600 99 (if you were under 18 years of age, use Federal Wor -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:37.719%;width:11.275%;height:1.424%;" title="31600 99 (if you were under 18 years of age, use Federal Worksheet; if not, clai">
+    <!-- 31800 100 Disability amount transferred from a dependant (us -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L107" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:39.423%;width:11.275%;height:1.424%;" title="31800 100 Disability amount transferred from a dependant (use Federal Worksheet)">
+    <!-- 101 Add lines 98 to 100. = 31900 102 Interest paid on your s -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L31900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:41.128%;width:11.275%;height:1.424%;" title="101 Add lines 98 to 100. = 31900 102 Interest paid on your student loans (go to ">
+    <!-- 31900 102 Interest paid on your student loans (go to canada. -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L32300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:42.832%;width:11.275%;height:1.424%;" title="31900 102 Interest paid on your student loans (go to canada.ca/taxes-students) +">
+    <!-- 32300 103 Your federal tuition amount (complete Schedule 11) -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L32400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:44.537%;width:11.275%;height:1.424%;" title="32300 103 Your federal tuition amount (complete Schedule 11) + 32400 104 Tuition">
+    <!-- 32400 104 Tuition amount transferred from a child or grandch -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L32600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:46.242%;width:11.275%;height:1.424%;" title="32400 104 Tuition amount transferred from a child or grandchild + 32600 105 Amou">
+    <!-- 32600 105 Amounts transferred from your spouse or common-law -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L112" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:47.946%;width:11.275%;height:1.424%;" title="32600 105 Amounts transferred from your spouse or common-law partner (complete S">
+    <!-- 106 Add lines 101 to 105. = 33099 107 Medical expenses for s -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33099" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:49.651%;width:13.235%;height:2.94%;" title="106 Add lines 101 to 105. = 33099 107 Medical expenses for self, spouse or commo">
+    <!-- 33099 107 and your dependent children under 18 years of age  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L114" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:23.039%;top:52.87%;width:13.235%;height:1.424%;" title="33099 107 and your dependent children under 18 years of age 108 Amount from line">
+    <!-- 33099 107 and your dependent children under 18 years of age  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L114" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:44.608%;top:52.87%;width:13.235%;height:1.424%;" title="33099 107 and your dependent children under 18 years of age 108 Amount from line">
+    <!-- 108 Amount from line 23600 × 3% = 109 Enter whichever is les -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L115" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:54.575%;width:11.275%;height:1.424%;" title="108 Amount from line 23600 × 3% = 109 Enter whichever is less: $2,834 or the amo">
+    <!-- 109 Enter whichever is less: $2,834 or the amount from line  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L116" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:56.28%;width:11.275%;height:1.424%;" title="109 Enter whichever is less: $2,834 or the amount from line 108. – 110 Line 107 ">
+    <!-- 110 Line 107 minus line 109 (if negative, enter "0") = 33199 -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:57.984%;width:11.275%;height:2.94%;" title="110 Line 107 minus line 109 (if negative, enter '0') = 33199 111 Allowable amoun">
+    <!-- 33199 111 (use Federal Worksheet) + 33200 112 Line 110 plus  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:61.204%;width:11.275%;height:1.424%;" title="33199 111 (use Federal Worksheet) + 33200 112 Line 110 plus line 111 = ◄ + 33500">
+    <!-- 33199 111 (use Federal Worksheet) + 33200 112 Line 110 plus  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:61.204%;width:11.275%;height:1.424%;" title="33199 111 (use Federal Worksheet) + 33200 112 Line 110 plus line 111 = ◄ + 33500">
+    <!-- 33200 112 Line 110 plus line 111 = ◄ + 33500 113 Line 106 pl -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:62.908%;width:11.275%;height:1.424%;" title="33200 112 Line 110 plus line 111 = ◄ + 33500 113 Line 106 plus line 112 = 114 Fe">
+    <!-- 33500 113 Line 106 plus line 112 = 114 Federal non-refundabl -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L120" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.905%;top:64.613%;width:11.275%;height:1.424%;" title="33500 113 Line 106 plus line 112 = 114 Federal non-refundable tax credit rate × ">
+    <!-- 114 Federal non-refundable tax credit rate × 33800 115 Line  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L33800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:66.317%;width:11.275%;height:1.424%;" title="114 Federal non-refundable tax credit rate × 33800 115 Line 113 multiplied by th">
+    <!-- 33800 115 Line 113 multiplied by the percentage from line 11 -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L34900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:68.022%;width:11.275%;height:1.424%;" title="33800 115 Line 113 multiplied by the percentage from line 114 = 34900 116 Donati">
+    <!-- 34900 116 Donations and gifts (complete Schedule 9) + 34990  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:69.727%;width:11.275%;height:1.424%;" title="34900 116 Donations and gifts (complete Schedule 9) + 34990 117 Top-up tax credi">
+    <!-- 34990 117 Top-up tax credit (use Federal Worksheet) + 35000  -->
+    <input type="text" data-numeric="1" id="f_t1_p6_L35000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:71.432%;width:11.275%;height:1.424%;" title="34990 117 Top-up tax credit (use Federal Worksheet) + 35000 118 Total federal no">
+  </div>
+
+  <div id="pg-anchor-7"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page7.png" alt="T1 Page 7">
+    <!-- Part C – Net federal tax 119 Enter the amount from line 76.  -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L124" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:6.061%;width:13.235%;height:1.424%;" title="Part C – Net federal tax 119 Enter the amount from line 76. 40424 120 Federal ta">
+    <!-- 119 Enter the amount from line 76. 40424 120 Federal tax on  -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40424" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:7.765%;width:11.275%;height:1.424%;" title="119 Enter the amount from line 76. 40424 120 Federal tax on split income (TOSI) ">
+    <!-- 40424 120 Federal tax on split income (TOSI) (complete Form  -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:9.47%;width:11.275%;height:1.424%;" title="40424 120 Federal tax on split income (TOSI) (complete Form T1206) + • 40400 121">
+    <!-- 40400 121 Line 119 plus line 120 = 122 Amount from line 3500 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L127" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:11.174%;width:13.235%;height:1.424%;" title="40400 121 Line 119 plus line 120 = 122 Amount from line 35000 40425 123 Federal ">
+    <!-- 122 Amount from line 35000 40425 123 Federal dividend tax cr -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:12.879%;width:11.275%;height:1.424%;" title="122 Amount from line 35000 40425 123 Federal dividend tax credit (use Federal Wo">
+    <!-- 40425 123 Federal dividend tax credit (use Federal Worksheet -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40427" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:14.583%;width:11.275%;height:1.424%;" title="40425 123 Federal dividend tax credit (use Federal Worksheet) + • 40427 124 Mini">
+    <!-- 40427 124 Minimum tax carryover (complete Form T691)  + • 12 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L130" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:16.288%;width:11.275%;height:1.424%;" title="40427 124 Minimum tax carryover (complete Form T691)  + • 125 Add lines 122 to 1">
+    <!-- 40427 124 Minimum tax carryover (complete Form T691)  + • 12 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L130" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:16.288%;width:11.275%;height:1.424%;" title="40427 124 Minimum tax carryover (complete Form T691)  + • 125 Add lines 122 to 1">
+    <!-- 125 Add lines 122 to 124. = ◄ – 42900 126 Basic federal tax  -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:17.993%;width:11.275%;height:1.424%;" title="125 Add lines 122 to 124. = ◄ – 42900 126 Basic federal tax  Line 121 minus line">
+    <!-- 42900 126 Basic federal tax  Line 121 minus line 125 (if neg -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L132" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:19.697%;width:11.275%;height:1.424%;" title="42900 126 Basic federal tax  Line 121 minus line 125 (if negative, enter '0') = ">
+    <!-- 127 Federal surtax on income earned outside Canada (complete -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L133" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:21.402%;width:11.275%;height:1.424%;" title="127 Federal surtax on income earned outside Canada (complete Form T2203) + 128 L">
+    <!-- 128 Line 126 plus line 127 = 40500 129 Federal foreign tax c -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:23.106%;width:11.275%;height:1.424%;" title="128 Line 126 plus line 127 = 40500 129 Federal foreign tax credit (complete Form">
+    <!-- 40500 129 Federal foreign tax credit (complete Form T2209)   -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L135" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:24.811%;width:11.275%;height:1.424%;" title="40500 129 Federal foreign tax credit (complete Form T2209)  – 130 Line 128 minus">
+    <!-- 130 Line 128 minus line 129 = 131 Recapture of investment ta -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L136" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:26.515%;width:11.275%;height:1.424%;" title="130 Line 128 minus line 129 = 131 Recapture of investment tax credit (complete F">
+    <!-- 131 Recapture of investment tax credit (complete Form T2038( -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L137" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:28.22%;width:11.275%;height:1.424%;" title="131 Recapture of investment tax credit (complete Form T2038(IND)) + 132 Line 130">
+    <!-- 132 Line 130 plus line 131 = 133 Federal logging tax credit  -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L138" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:29.924%;width:11.275%;height:1.424%;" title="132 Line 130 plus line 131 = 133 Federal logging tax credit – 40600 134 Federal ">
+    <!-- 133 Federal logging tax credit – 40600 134 Federal tax  Line -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L40600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:31.629%;width:11.275%;height:1.424%;" title="133 Federal logging tax credit – 40600 134 Federal tax  Line 132 minus line 133 ">
+    <!-- 41000 135 40900 Total federal political contributions  (atta -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:26.961%;top:36.364%;width:13.235%;height:1.424%;" title="41000 135 40900 Total federal political contributions  (attach receipts) (maximu">
+    <!-- 41000 135 Federal political contribution tax credit (use Fed -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:34.849%;width:13.235%;height:2.94%;" title="41000 135 Federal political contribution tax credit (use Federal Worksheet) 4090">
+    <!-- 41000 135 40900 (attach receipts) (maximum $650) • 41200 136 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:38.068%;width:11.275%;height:1.424%;" title="41000 135 40900 (attach receipts) (maximum $650) • 41200 136 Investment tax cred">
+    <!-- 41400 137 41300 Net cost of shares of a provincially  regist -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:26.961%;top:42.803%;width:13.235%;height:1.424%;" title="41400 137 41300 Net cost of shares of a provincially  registered fund Allowable ">
+    <!-- 41200 136 Investment tax credit (complete Form T2038(IND))   -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:39.773%;width:11.275%;height:4.455%;" title="41200 136 Investment tax credit (complete Form T2038(IND))  + • 41400 137 Labour">
+    <!-- 41400 137 41300 registered fund Allowable credit + • 41600 1 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:44.508%;width:11.275%;height:1.424%;" title="41400 137 41300 registered fund Allowable credit + • 41600 138 Add lines 135 to ">
+    <!-- 41400 137 41300 registered fund Allowable credit + • 41600 1 -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:44.508%;width:11.275%;height:1.424%;" title="41400 137 41300 registered fund Allowable credit + • 41600 138 Add lines 135 to ">
+    <!-- 41600 138 Add lines 135 to 137. = ◄ – 41700 139 Line 134 min -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:46.212%;width:11.275%;height:1.424%;" title="41600 138 Add lines 135 to 137. = ◄ – 41700 139 Line 134 minus line 138 (if nega">
+    <!-- 41700 139 Line 134 minus line 138 (if negative, enter "0") = -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:47.917%;width:11.275%;height:1.424%;" title="41700 139 Line 134 minus line 138 (if negative, enter '0') = 41500 140 Advanced ">
+    <!-- 41500 140 Advanced Canada workers benefit (ACWB) (complete S -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L41800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:49.621%;width:11.275%;height:1.424%;" title="41500 140 Advanced Canada workers benefit (ACWB) (complete Schedule 6) + • 41800">
+    <!-- 41800 141 Special taxes + • 42000 142 Net federal tax Add li -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:51.326%;width:11.275%;height:1.424%;" title="41800 141 Special taxes + • 42000 142 Net federal tax Add lines 139 to 141. =">
+    <!-- Step 6  Refund or balance owing 143 Amount from line 42000 C -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L148" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:56.818%;width:13.235%;height:1.424%;" title="Step 6  Refund or balance owing 143 Amount from line 42000 CPP contributions pay">
+    <!-- 143 Amount from line 42000 42100 144 CPP contributions payab -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42100" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:58.523%;width:11.275%;height:2.94%;" title="143 Amount from line 42000 42100 144 CPP contributions payable on self-employmen">
+    <!-- 42100 144 (complete Schedule 8 or Form RC381, whichever appl -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42120" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:61.742%;width:11.275%;height:2.94%;" title="42100 144 (complete Schedule 8 or Form RC381, whichever applies) + • 42120 145 E">
+    <!-- 42120 145 (complete Schedule 13) + 42200 146 Social benefits -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:64.962%;width:11.275%;height:1.424%;" title="42120 145 (complete Schedule 13) + 42200 146 Social benefits repayment (amount f">
+    <!-- 42200 146 Social benefits repayment (amount from line 23500) -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L42800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:66.667%;width:11.275%;height:2.94%;" title="42200 146 Social benefits repayment (amount from line 23500) + 42800 147 Provinc">
+    <!-- 42800 147 (complete and attach your provincial or territoria -->
+    <input type="text" data-numeric="1" id="f_t1_p7_L43500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:69.886%;width:11.275%;height:1.424%;" title="42800 147 (complete and attach your provincial or territorial Form 428, even if ">
+  </div>
+
+  <div id="pg-anchor-8"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/t1_page8.png" alt="T1 Page 8">
+    <!-- Step 6  Refund or balance owing (continued) 149 Enter the am -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L154" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:6.44%;width:13.235%;height:1.424%;" title="Step 6  Refund or balance owing (continued) 149 Enter the amount from line 148 o">
+    <!-- 149 Enter the amount from line 148 of the previous page. 437 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L43700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:62.255%;top:8.144%;width:13.235%;height:1.424%;" title="149 Enter the amount from line 148 of the previous page. 43700 150 Total income ">
+    <!-- 43700 150 Total income tax deducted (amounts from all Canadi -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L44000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:9.849%;width:11.275%;height:1.424%;" title="43700 150 Total income tax deducted (amounts from all Canadian slips) • 44000 15">
+    <!-- 44000 151 Refundable Quebec abatement + • 44800 152 CPP or Q -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L44800" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:11.553%;width:11.275%;height:1.424%;" title="44000 151 Refundable Quebec abatement + • 44800 152 CPP or QPP overpayment + • 4">
+    <!-- 44800 152 CPP or QPP overpayment + • 45000 153 Employment in -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:13.258%;width:11.275%;height:1.424%;" title="44800 152 CPP or QPP overpayment + • 45000 153 Employment insurance (EI) overpay">
+    <!-- 45000 153 Employment insurance (EI) overpayment + • 45200 15 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:14.962%;width:11.275%;height:1.424%;" title="45000 153 Employment insurance (EI) overpayment + • 45200 154 Refundable medical">
+    <!-- 45200 154 Refundable medical expense supplement (use Federal -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45300" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:16.667%;width:11.275%;height:1.424%;" title="45200 154 Refundable medical expense supplement (use Federal Worksheet)  + • 453">
+    <!-- 45300 155 Canada workers benefit (CWB) (complete Schedule 6) -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45350" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:18.371%;width:11.275%;height:1.424%;" title="45300 155 Canada workers benefit (CWB) (complete Schedule 6) + • 45350 156 Canad">
+    <!-- 45350 156 Canada training credit (CTC) (complete Schedule 11 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45355" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:20.076%;width:11.275%;height:2.94%;" title="45350 156 Canada training credit (CTC) (complete Schedule 11) + • 45355 157 Mult">
+    <!-- 45355 157 (complete Schedule 12) + • 45400 158 Refund of inv -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:23.296%;width:11.275%;height:1.424%;" title="45355 157 (complete Schedule 12) + • 45400 158 Refund of investment tax credit (">
+    <!-- 45400 158 Refund of investment tax credit (complete Form T20 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:25.0%;width:11.275%;height:1.424%;" title="45400 158 Refund of investment tax credit (complete Form T2038(IND)) + • 45600 1">
+    <!-- 45600 159 Part XII.2 tax credit (box 38 of all T3 slips and  -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L45700" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:26.705%;width:11.275%;height:1.424%;" title="45600 159 Part XII.2 tax credit (box 38 of all T3 slips and box 209 of all T5013">
+    <!-- 46900 161 Eligible educator school supply tax credit         -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L46900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:38.726%;top:29.924%;width:11.275%;height:1.424%;" title="46900 161 Eligible educator school supply tax credit                            ">
+    <!-- 45700 160 Employee and partner GST/HST rebate (complete Form -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L46900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:28.409%;width:11.275%;height:2.94%;" title="45700 160 Employee and partner GST/HST rebate (complete Form GST370) + • 46900 1">
+    <!-- 46900 161 46800 Supplies expenses    (maximum $1,000) × 25%  -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L47555" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:31.629%;width:11.275%;height:1.424%;" title="46900 161 46800 Supplies expenses    (maximum $1,000) × 25% = + • 47555 162 Cana">
+    <!-- 47555 162 Canadian journalism labour tax credit (box 236 of  -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L47556" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:33.334%;width:11.275%;height:1.424%;" title="47555 162 Canadian journalism labour tax credit (box 236 of all T5013 slips) + •">
+    <!-- 47556 163 Return of fuel charge proceeds to farmers tax cred -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L47600" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:35.038%;width:11.275%;height:1.424%;" title="47556 163 Return of fuel charge proceeds to farmers tax credit (complete Form T2">
+    <!-- 47600 164 Tax paid by instalments + • 47900 165 Provincial o -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L47900" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:36.743%;width:11.275%;height:1.424%;" title="47600 164 Tax paid by instalments + • 47900 165 Provincial or territorial credit">
+    <!-- 47900 165 Provincial or territorial credits (complete Form 4 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L48200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:64.216%;top:38.447%;width:11.275%;height:1.424%;" title="47900 165 Provincial or territorial credits (complete Form 479, if it applies) +">
+    <!-- 47900 165 Provincial or territorial credits (complete Form 4 -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L48200" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:38.447%;width:11.275%;height:1.424%;" title="47900 165 Provincial or territorial credits (complete Form 479, if it applies) +">
+    <!-- 48200 166 Total credits Add lines 150 to 165. = ◄ – 167 Refu -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L172" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:40.432%;width:11.275%;height:4.364%;" title="48200 166 Total credits Add lines 150 to 165. = ◄ – 167 Refund or balance owing ">
+    <!-- 48400 Refund • For more information and ways to enrol for di -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L48400" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:25.981%;top:46.97%;width:13.235%;height:1.424%;" title="48400 Refund • For more information and ways to enrol for direct deposit 48500 B">
+    <!-- 48400 Refund • For more information and ways to enrol for di -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L48500" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:76.471%;top:46.97%;width:13.235%;height:1.424%;" title="48400 Refund • For more information and ways to enrol for direct deposit 48500 B">
+    <!-- Ontario opportunities fund Y h l d O i ' d b b l i hi 1 Amou -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:79.902%;top:56.06%;width:13.235%;height:1.424%;" title="Ontario opportunities fund Y h l d O i ' d b b l i hi 1 Amount from line 48400 a">
+    <!-- Ontario opportunities fund You can help reduce Ontario's deb -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:57.955%;width:11.275%;height:2.94%;" title="Ontario opportunities fund You can help reduce Ontario's debt by completing this">
+    <!-- donate some or all of your 2025 tax refund to the Ontario  o -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:81.863%;top:61.364%;width:11.275%;height:1.424%;" title="donate some or all of your 2025 tax refund to the Ontario  opportunities fund. P">
+    <!-- It is a serious offence to make a false return. Telephone nu -->
+    <input type="text" data-numeric="1" id="f_t1_p8_telephone_27" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:19.608%;top:72.727%;width:28.922%;height:1.424%;" title="It is a serious offence to make a false return. Telephone number:  Date: Name of">
+    <!-- Telephone number:  Date: Name of tax professional: Telephone -->
+    <input type="text" id="f_t1_p8_date_28" class="pdf-input text-left" oninput="autoSave();" style="left:9.804%;top:74.621%;width:38.726%;height:1.424%;" title="Telephone number:  Date: Name of tax professional: Telephone number:">
+    <!-- all of my income. Sign here 49000 Was a fee charged? 1 Yes 2 -->
+    <input type="checkbox" id="f_t1_p8_L49000" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:81.862%;top:68.308%;width:1.634%;height:1.263%;">
+    <!-- all of my income. Sign here 49000 Was a fee charged? 1 Yes 2 -->
+    <input type="checkbox" id="f_t1_p8_L49000" class="pdf-input" onchange="recalcT1(); autoSave();" style="left:89.706%;top:68.308%;width:1.634%;height:1.263%;">
+    <!-- Sign here It is a serious offence to make a false return. T  -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L49000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:80.019%;top:70.076%;width:12.019%;height:1.424%;" title="Sign here It is a serious offence to make a false return. T l h b 49000 Was a fe">
+    <!-- It is a serious offence to make a false return. Telephone nu -->
+    <input type="text" id="f_t1_p8_L49000" class="pdf-input text-left" oninput="autoSave();" style="left:70.098%;top:72.727%;width:24.51%;height:1.424%;" title="It is a serious offence to make a false return. Telephone number:  Date: Name of">
+    <!-- Telephone number:  Date: Name of tax professional: Telephone -->
+    <input type="text" data-numeric="1" id="f_t1_p8_L49000" class="pdf-input" value="" inputmode="decimal" oninput="recalcT1(); autoSave();" style="left:65.686%;top:74.621%;width:28.922%;height:1.424%;" title="Telephone number:  Date: Name of tax professional: Telephone number:">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_t1_autosave';
+const FORM_INPUT_IDS = [
+  'f_t1_p1_id_firstnameinitial_1',
+  'f_t1_p1_id_lastname_2',
+  'f_t1_p1_id_mailingaddress_3',
+  'f_t1_p1_id_pobox_4',
+  'f_t1_p1_id_ruralroute_5',
+  'f_t1_p1_id_city_6',
+  'f_t1_p1_postalcode_7',
+  'f_t1_p1_emailaddress_8',
+  'f_t1_p1_numericfield_comb9_c_9',
+  'f_t1_p1_datebirth_comb_10',
+  'f_t1_p1_datedeath_comb_11',
+  'f_t1_p1_datemmdd_comb_12',
+  'f_t1_p1_radiobuttonlanguaget_1',
+  'f_t1_p1_radiobuttonlanguaget_2',
+  'f_t1_p1_datemmdd_comb_13',
+  'f_t1_p1_datemmdd_comb_14',
+  'f_t1_p1_spouse_first_name_15',
+  'f_t1_p1_numericfield_comb9_c_16',
+  'f_t1_p1_L23600',
+  'f_t1_p1_L11700',
+  'f_t1_p1_L21300',
+  'f_t1_p3_L1',
+  'f_t1_p3_L10105',
+  'f_t1_p3_L10120',
+  'f_t1_p3_L10130',
+  'f_t1_p3_L10400',
+  'f_t1_p3_L11300',
+  'f_t1_p3_L11400',
+  'f_t1_p3_L11410',
+  'f_t1_p3_L11500',
+  'f_t1_p3_L11600',
+  'f_t1_p3_L11700',
+  'f_t1_p3_L11701',
+  'f_t1_p3_L11900',
+  'f_t1_p3_L11905',
+  'f_t1_p3_L12000',
+  'f_t1_p3_L12010',
+  'f_t1_p3_L12100',
+  'f_t1_p3_L12200',
+  'f_t1_p3_L12500',
+  'f_t1_p3_L12600',
+  'f_t1_p3_L12600',
+  'f_t1_p3_L12700',
+  'f_t1_p3_L12800',
+  'f_t1_p3_L12800',
+  'f_t1_p3_L12900',
+  'f_t1_p3_L12905',
+  'f_t1_p3_L12906',
+  'f_t1_p3_L13000',
+  'f_t1_p3_L13000'
+];
+const CHECKBOX_IDS = [
+  'f_t1_p1_maritalstatus_1',
+  'f_t1_p1_maritalstatus_2',
+  'f_t1_p1_maritalstatus_3',
+  'f_t1_p1_maritalstatus_4',
+  'f_t1_p1_maritalstatus_5',
+  'f_t1_p1_maritalstatus_6',
+  'f_t1_p1_checkbox_7',
+  'f_t1_p2_a_checkbox_1',
+  'f_t1_p2_a_checkbox_2',
+  'f_t1_p2_b_authorize_checkbox_3',
+  'f_t1_p2_b_authorize_checkbox_4',
+  'f_t1_p2_spouse_selfemployed_5',
+  'f_t1_p2_L26600',
+  'f_t1_p2_L26600',
+  'f_t1_p2_organdonor_checkbox_8',
+  'f_t1_p2_organdonor_checkbox_9',
+  'f_t1_p8_L49000',
+  'f_t1_p8_L49000'
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcT1() using field IDs listed in FORM_INPUT_IDS
+function recalcT1() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_t1_p1_Ltotal', g('f_t1_p1_L1') + g('f_t1_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcT1();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcT1();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcT1();
+});
+</script>
+{% endblock %}

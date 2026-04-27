@@ -1,335 +1,200 @@
 [
   {
-    "page": 1,
-    "name": "form1[0].#pageSet[0].Page1[0].ClearData_EN[0]",
-    "type": "Button",
-    "left": 80.39,
-    "top": 0.38,
-    "w": 15.69,
-    "h": 1.89
-  },
-  {
-    "page": 2,
-    "name": "form1[0].#pageSet[0].Page1[1].ClearData_EN[0]",
-    "type": "Button",
-    "left": 80.39,
-    "top": 0.38,
-    "w": 15.69,
-    "h": 1.89
-  },
-  {
-    "page": 3,
-    "name": "form1[0].#pageSet[0].Page1[2].ClearData_EN[0]",
-    "type": "Button",
-    "left": 80.39,
-    "top": 0.38,
-    "w": 15.69,
-    "h": 1.89
-  },
-  {
     "page": 3,
     "name": "form1[0].Page3[0].Country[0].Country[0]",
     "type": "Text",
     "left": 49.02,
-    "top": 25.38,
-    "w": 44.12,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Non-business[0].Line1[0].Note1[0]",
-    "type": "Button",
-    "left": 39.22,
-    "top": 30.68,
-    "w": 5.88,
-    "h": 1.52
+    "top": 25.379,
+    "width": 44.118,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line1[0].Amount[0]",
     "type": "Text",
-    "left": 79.9,
-    "top": 30.68,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Non-business[0].Line2[0].Line43300[0].Note2[0]",
-    "type": "Button",
-    "left": 16.67,
-    "top": 34.09,
-    "w": 5.88,
-    "h": 1.52
+    "left": 79.902,
+    "top": 30.682,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line2[0].Line43300[0].Amount[0]",
     "type": "Text",
-    "left": 26.96,
-    "top": 34.09,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Non-business[0].Line2[0].NetIncome[0].Note3[0]",
-    "type": "Button",
-    "left": 15.69,
-    "top": 35.61,
-    "w": 5.88,
-    "h": 1.52
+    "left": 26.961,
+    "top": 34.091,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line2[0].NetIncome[0].Amount2[0]",
     "type": "Text",
-    "left": 26.96,
-    "top": 35.61,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Non-business[0].Line2[0].FederalTax[0].Note4[0]",
-    "type": "Button",
-    "left": 52.94,
-    "top": 34.85,
-    "w": 5.88,
-    "h": 1.52
+    "left": 26.961,
+    "top": 35.606,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line2[0].FederalTax[0].Amount3[0]",
     "type": "Text",
-    "left": 59.31,
-    "top": 34.85,
-    "w": 13.24,
-    "h": 1.42
+    "left": 59.314,
+    "top": 34.849,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line2[0].Amount4[0]",
     "type": "Text",
-    "left": 79.9,
-    "top": 34.85,
-    "w": 13.24,
-    "h": 1.42
+    "left": 79.902,
+    "top": 34.849,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Non-business[0].Line3[0].Amount[0]",
     "type": "Text",
-    "left": 79.9,
+    "left": 79.902,
     "top": 37.5,
-    "w": 13.24,
-    "h": 2.94
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line4[0].Note5[0]",
-    "type": "Button",
-    "left": 35.29,
-    "top": 50.38,
-    "w": 5.88,
-    "h": 1.52
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line4[0].Note6[0]",
-    "type": "Button",
-    "left": 25.0,
-    "top": 51.89,
-    "w": 5.88,
-    "h": 1.52
+    "width": 13.235,
+    "height": 2.94
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line4[0].Amount[0]",
     "type": "Text",
-    "left": 79.9,
-    "top": 51.89,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line5[0].Line43900[0].Note7[0]",
-    "type": "Button",
-    "left": 16.67,
-    "top": 55.3,
-    "w": 5.88,
-    "h": 1.52
+    "left": 79.902,
+    "top": 51.894,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line5[0].Line43900[0].Amount1[0]",
     "type": "Text",
-    "left": 26.96,
-    "top": 55.3,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line5[0].Net_income[0].Note3[0]",
-    "type": "Button",
-    "left": 15.2,
-    "top": 56.82,
-    "w": 5.88,
-    "h": 1.52
+    "left": 26.961,
+    "top": 55.303,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line5[0].Net_income[0].Amount2[0]",
     "type": "Text",
-    "left": 26.96,
-    "top": 56.82,
-    "w": 13.24,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line5[0].Federal_tax[0].Note8[0]",
-    "type": "Button",
-    "left": 52.94,
-    "top": 56.06,
-    "w": 5.88,
-    "h": 1.52
+    "left": 26.961,
+    "top": 56.818,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line5[0].Federal_tax[0].Amount3[0]",
     "type": "Text",
-    "left": 59.31,
+    "left": 59.314,
     "top": 56.06,
-    "w": 13.24,
-    "h": 1.42
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line5[0].Amount5[0]",
     "type": "Text",
-    "left": 79.9,
+    "left": 79.902,
     "top": 56.06,
-    "w": 13.24,
-    "h": 1.42
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line6[0].Amount[0]",
     "type": "Text",
-    "left": 81.86,
-    "top": 62.88,
-    "w": 11.27,
-    "h": 1.42
+    "left": 81.863,
+    "top": 62.879,
+    "width": 11.275,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line7[0].Amount[0]",
     "type": "Text",
-    "left": 81.86,
-    "top": 64.77,
-    "w": 11.27,
-    "h": 1.42
-  },
-  {
-    "page": 3,
-    "name": "form1[0].Page3[0].Business[0].Line8[0].Note8[0]",
-    "type": "Button",
-    "left": 17.16,
-    "top": 66.67,
-    "w": 5.88,
-    "h": 1.52
+    "left": 81.863,
+    "top": 64.773,
+    "width": 11.275,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line8[0].Amount[0]",
     "type": "Text",
-    "left": 62.26,
-    "top": 66.67,
-    "w": 13.24,
-    "h": 1.42
+    "left": 62.255,
+    "top": 66.666,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line9[0].Amount[0]",
     "type": "Text",
-    "left": 64.22,
+    "left": 64.216,
     "top": 68.56,
-    "w": 11.27,
-    "h": 1.42
+    "width": 11.275,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line10[0].Line_10_Amount[0]",
     "type": "Text",
-    "left": 64.22,
-    "top": 70.45,
-    "w": 11.27,
-    "h": 1.42
+    "left": 64.216,
+    "top": 70.455,
+    "width": 11.275,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line10[0].Line_10[0]",
     "type": "Text",
-    "left": 79.9,
-    "top": 70.45,
-    "w": 13.24,
-    "h": 1.42
+    "left": 79.902,
+    "top": 70.455,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Business[0].Line11[0].Amount[0]",
     "type": "Text",
-    "left": 79.9,
-    "top": 72.35,
-    "w": 13.24,
-    "h": 2.94
+    "left": 79.902,
+    "top": 72.348,
+    "width": 13.235,
+    "height": 2.94
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Tax_credit[0].Line12[0].Amount[0]",
     "type": "Text",
-    "left": 62.26,
-    "top": 79.17,
-    "w": 13.24,
-    "h": 1.42
+    "left": 62.255,
+    "top": 79.167,
+    "width": 13.235,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Tax_credit[0].Line12[0].Amount[1]",
     "type": "Text",
-    "left": 81.86,
-    "top": 79.17,
-    "w": 11.27,
-    "h": 1.42
+    "left": 81.863,
+    "top": 79.167,
+    "width": 11.275,
+    "height": 1.424
   },
   {
     "page": 3,
     "name": "form1[0].Page3[0].Tax_credit[0].Line13[0].Amount[0]",
     "type": "Text",
-    "left": 81.86,
-    "top": 81.06,
-    "w": 11.27,
-    "h": 1.42
-  },
-  {
-    "page": 4,
-    "name": "form1[0].#pageSet[0].Page1[3].ClearData_EN[0]",
-    "type": "Button",
-    "left": 80.39,
-    "top": 0.38,
-    "w": 15.69,
-    "h": 1.89
-  },
-  {
-    "page": 5,
-    "name": "form1[0].#pageSet[0].Page1[4].ClearData_EN[0]",
-    "type": "Button",
-    "left": 80.39,
-    "top": 0.38,
-    "w": 15.69,
-    "h": 1.89
+    "left": 81.863,
+    "top": 81.061,
+    "width": 11.275,
+    "height": 1.424
   }
 ]

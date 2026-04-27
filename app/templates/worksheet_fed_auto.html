@@ -1,0 +1,785 @@
+{% extends "base.html" %}
+{% block title %}5000-D1 &mdash; Federal Worksheet 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">5000-D1 &mdash; Federal Worksheet</div>
+      <div class="form-subtitle">Form 5000-D1 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>5000-D1-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA 5000-D1 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+    <a href="#pg-anchor-6">Page 6</a>
+    <a href="#pg-anchor-7">Page 7</a>
+    <a href="#pg-anchor-8">Page 8</a>
+    <a href="#pg-anchor-9">Page 9</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page1.png" alt="5000-D1 Page 1">
+    <!-- Taxable amount of dividends (other than eligible) 1 Box 32 o -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:23.864%;width:13.235%;height:1.424%;" title="Taxable amount of dividends (other than eligible) 1 Box 32 of all T3 slips 2 Box">
+    <!-- 1 Box 32 of all T3 slips 2 Box 25 of all T4PS slips + 3 Box  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:25.758%;width:11.275%;height:1.424%;" title="1 Box 32 of all T3 slips 2 Box 25 of all T4PS slips + 3 Box 11 of all T5 slips +">
+    <!-- 2 Box 25 of all T4PS slips + 3 Box 11 of all T5 slips + 4 Bo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:27.652%;width:11.275%;height:1.424%;" title="2 Box 25 of all T4PS slips + 3 Box 11 of all T5 slips + 4 Box 130 of all T5013 s">
+    <!-- 3 Box 11 of all T5 slips + 4 Box 130 of all T5013 slips + 5  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:29.545%;width:11.275%;height:1.424%;" title="3 Box 11 of all T5 slips + 4 Box 130 of all T5013 slips + 5 Add lines 1 to 4 Ent">
+    <!-- 4 Box 130 of all T5013 slips + 5 Add lines 1 to 4. Enter thi -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:31.44%;width:11.275%;height:1.424%;" title="4 Box 130 of all T5013 slips + 5 Add lines 1 to 4. Enter this amount on line 120">
+    <!-- Taxable amount of dividends (eligible and other than eligibl -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:35.606%;width:13.235%;height:1.424%;" title="Taxable amount of dividends (eligible and other than eligible) 6 Boxes 32 and 50">
+    <!-- 6 Boxes 32 and 50 of all T3 slips 7 Boxes 25 and 31 of all T -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:37.5%;width:11.275%;height:1.424%;" title="6 Boxes 32 and 50 of all T3 slips 7 Boxes 25 and 31 of all T4PS slips + 8 Boxes ">
+    <!-- 7 Boxes 25 and 31 of all T4PS slips + 8 Boxes 11 and 25 of a -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;" title="7 Boxes 25 and 31 of all T4PS slips + 8 Boxes 11 and 25 of all T5 slips + 9 Boxe">
+    <!-- 8 Boxes 11 and 25 of all T5 slips + 9 Boxes 130 and 133 of a -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;" title="8 Boxes 11 and 25 of all T5 slips + 9 Boxes 130 and 133 of all T5013 slips + 10 ">
+    <!-- 9 Boxes 130 and 133 of all T5013 slips + 10 Add lines 6 to 9 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;" title="9 Boxes 130 and 133 of all T5013 slips + 10 Add lines 6 to 9. Enter this amount ">
+    <!-- Taxable amount of dividends if you did not receive an inform -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:47.348%;width:13.235%;height:1.424%;" title="Taxable amount of dividends if you did not receive an information slip 11 Actual">
+    <!-- 11 Actual amount of eligible dividends received 12 Applicabl -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:49.242%;width:11.275%;height:1.515%;" title="11 Actual amount of eligible dividends received 12 Applicable rate × 13 Line 11 ">
+    <!-- 12 Applicable rate × 13 Line 11 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:51.136%;width:11.275%;height:1.424%;" title="12 Applicable rate × 13 Line 11 multiplied by the percentage from line 12 = ◄ 14">
+    <!-- 12 Applicable rate × 13 Line 11 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:51.136%;width:13.235%;height:1.424%;" title="12 Applicable rate × 13 Line 11 multiplied by the percentage from line 12 = ◄ 14">
+    <!-- 13 Line 11 multiplied by the percentage from line 12 = ◄ 14  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:53.03%;width:13.235%;height:1.424%;" title="13 Line 11 multiplied by the percentage from line 12 = ◄ 14 Actual amount of div">
+    <!-- 14 Actual amount of dividends other than eligible dividends  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:54.924%;width:11.275%;height:1.515%;" title="14 Actual amount of dividends other than eligible dividends received 15 Applicab">
+    <!-- 15 Applicable rate × 16 Line 14 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:56.818%;width:11.275%;height:2.94%;" title="15 Applicable rate × 16 Line 14 multiplied by the percentage from line 15  Inclu">
+    <!-- 15 Applicable rate × 16 Line 14 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:56.818%;width:11.275%;height:2.94%;" title="15 Applicable rate × 16 Line 14 multiplied by the percentage from line 15  Inclu">
+    <!-- 16 Include this amount on line 12010 of your return. = ◄ + 1 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:60.227%;width:11.275%;height:1.424%;" title="16 Include this amount on line 12010 of your return. = ◄ + 17 Line 13 plus line ">
+    <!-- , g 1 Box 25 of all T3 slips 2 Boxes 13 14 15 and 30 of all  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:68.939%;width:13.235%;height:1.424%;" title=", g 1 Box 25 of all T3 slips 2 Boxes 13 14 15 and 30 of all T5 slips +">
+    <!-- 1 Box 25 of all T3 slips 2 Boxes 13, 14, 15, and 30 of all T -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;" title="1 Box 25 of all T3 slips 2 Boxes 13, 14, 15, and 30 of all T5 slips + 3 Boxes 12">
+    <!-- 2 Boxes 13, 14, 15, and 30 of all T5 slips + 3 Boxes 128, 13 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;" title="2 Boxes 13, 14, 15, and 30 of all T5 slips + 3 Boxes 128, 135, and 146 of all T5">
+    <!-- 3 Boxes 128, 135, and 146 of all T5013 slips + 4 Amounts cre -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;" title="3 Boxes 128, 135, and 146 of all T5013 slips + 4 Amounts credited to you that yo">
+    <!-- 4 Amounts credited to you that you did not receive (such as  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:76.515%;width:11.275%;height:1.424%;" title="4 Amounts credited to you that you did not receive (such as reinvestments)  + 5 ">
+    <!-- 5 Interest on any tax refund you received in 2025 as shown o -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:78.409%;width:11.275%;height:1.424%;" title="5 Interest on any tax refund you received in 2025 as shown on your notice of ass">
+    <!-- 6 Income from foreign sources, including foreign dividends,  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:80.303%;width:11.275%;height:2.94%;" title="6 Income from foreign sources, including foreign dividends, in Canadian dollars ">
+    <!-- 7 and other similar investments, treasury bills or life insu -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;" title="7 and other similar investments, treasury bills or life insurance policies not r">
+    <!-- 8 Royalties not included on line 10400 or line 13500 of your -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:85.606%;width:11.275%;height:1.424%;" title="8 Royalties not included on line 10400 or line 13500 of your return + 9 Add line">
+    <!-- 9 Add lines 1 to 8. = 10 Interest and other investment incom -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:87.5%;width:11.275%;height:1.424%;" title="9 Add lines 1 to 8. = 10 Interest and other investment income, included on line ">
+    <!-- 10 Interest and other investment income, included on line 9, -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p1_L12100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:89.394%;width:11.275%;height:1.424%;" title="10 Interest and other investment income, included on line 9, received and report">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page2.png" alt="5000-D1 Page 2">
+    <!-- , g 1 Total carrying charges 2 Total interest expenses + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L22100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:8.712%;width:13.235%;height:1.424%;" title=", g 1 Total carrying charges 2 Total interest expenses +">
+    <!-- 1 Total carrying charges 2 Total interest expenses + 3 Total -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L22100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:10.606%;width:11.275%;height:1.424%;" title="1 Total carrying charges 2 Total interest expenses + 3 Total other expenses +">
+    <!-- 2 Total interest expenses + 3 Total other expenses + 4 Add l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L22100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:12.5%;width:11.275%;height:1.424%;" title="2 Total interest expenses + 3 Total other expenses + 4 Add lines 1 to 3 Enter th">
+    <!-- 3 Total other expenses + 4 Add lines 1 to 3. Enter this amou -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L22100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:14.394%;width:11.275%;height:1.515%;" title="3 Total other expenses + 4 Add lines 1 to 3. Enter this amount on line 22100 of ">
+    <!-- • You entered an amount on line 11300 or line 14600 of your  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:26.515%;width:13.235%;height:1.424%;" title="• You entered an amount on line 11300 or line 14600 of your return and the amoun">
+    <!-- 1 Old age security (OAS) pension from line 11300 of your ret -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:28.409%;width:11.275%;height:1.424%;" title="1 Old age security (OAS) pension from line 11300 of your return 2 Net federal su">
+    <!-- 2 Net federal supplements paid from line 14600 of your retur -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;" title="2 Net federal supplements paid from line 14600 of your return + 3 Line 1 plus li">
+    <!-- 3 Line 1 plus line 2 = 4 Overpayment of OAS benefits recover -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:32.197%;width:11.275%;height:1.424%;" title="3 Line 1 plus line 2 = 4 Overpayment of OAS benefits recovered (box 20 of your T">
+    <!-- 4 Overpayment of OAS benefits recovered (box 20 of your T4A( -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:34.091%;width:11.275%;height:1.424%;" title="4 Overpayment of OAS benefits recovered (box 20 of your T4A(OAS) slip) – 5 Line ">
+    <!-- 6 Net income before adjustments from line 23400 of your retu -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:36.743%;width:13.235%;height:1.424%;" title="6 Net income before adjustments from line 23400 of your return 7 EI benefits rep">
+    <!-- 6 Net income before adjustments from line 23400 of your retu -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:38.637%;width:13.235%;height:1.424%;" title="6 Net income before adjustments from line 23400 of your return 7 EI benefits rep">
+    <!-- 7 EI benefits repayment from line 4 of the repayment chart o -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:40.53%;width:11.275%;height:1.424%;" title="7 EI benefits repayment from line 4 of the repayment chart on your T4E slip, if ">
+    <!-- 8 Universal child care benefit (UCCB) from line 11700 of you -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:42.424%;width:11.275%;height:1.424%;" title="8 Universal child care benefit (UCCB) from line 11700 of your return + 9 Registe">
+    <!-- 9 Registered disability savings plan (RDSP) income from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:44.319%;width:11.275%;height:1.424%;" title="9 Registered disability savings plan (RDSP) income from line 12500 of your retur">
+    <!-- 9 Registered disability savings plan (RDSP) income from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:44.319%;width:11.275%;height:1.424%;" title="9 Registered disability savings plan (RDSP) income from line 12500 of your retur">
+    <!-- 10 Add lines 7 to 9. = ◄ – 11 Line 6 minus line 10 = 12 UCCB -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:46.212%;width:11.275%;height:1.424%;" title="10 Add lines 7 to 9. = ◄ – 11 Line 6 minus line 10 = 12 UCCB repayment from line">
+    <!-- 11 Line 6 minus line 10 = 12 UCCB repayment from line 21300  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:48.106%;width:13.235%;height:1.424%;" title="11 Line 6 minus line 10 = 12 UCCB repayment from line 21300 of your return 13 RD">
+    <!-- 12 UCCB repayment from line 21300 of your return 13 RDSP inc -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:50.0%;width:11.275%;height:1.424%;" title="12 UCCB repayment from line 21300 of your return 13 RDSP income repayment (inclu">
+    <!-- 13 RDSP income repayment (included in the amount on line 232 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:51.894%;width:11.275%;height:1.424%;" title="13 RDSP income repayment (included in the amount on line 23200 of your return) +">
+    <!-- 13 RDSP income repayment (included in the amount on line 232 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:51.894%;width:11.275%;height:1.424%;" title="13 RDSP income repayment (included in the amount on line 23200 of your return) +">
+    <!-- 14 Line 12 plus line 13 = ◄ + 15 Adjusted net income Line 11 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:53.788%;width:11.275%;height:1.424%;" title="14 Line 12 plus line 13 = ◄ + 15 Adjusted net income Line 11 plus line 14 = 16 O">
+    <!-- 15 Adjusted net income Line 11 plus line 14 = 16 OAS benefit -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:55.682%;width:10.34%;height:1.515%;" title="15 Adjusted net income Line 11 plus line 14 = 16 OAS benefits base amount – 17 L">
+    <!-- 16 OAS benefits base amount – 17 Line 15 minus line 16 (if n -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:57.576%;width:11.275%;height:1.424%;" title="16 OAS benefits base amount – 17 Line 15 minus line 16 (if negative, enter '0') ">
+    <!-- 18 Amount from line 17 × 15% = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:50.0%;top:60.227%;width:13.235%;height:1.424%;" title="18 Amount from line 17 × 15% =">
+    <!-- 18 Amount from line 17 × 15% = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:60.227%;width:13.235%;height:1.424%;" title="18 Amount from line 17 × 15% =">
+    <!-- 19 Enter whichever is less: amount from line 5 or line 18. 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:62.879%;width:13.235%;height:1.424%;" title="19 Enter whichever is less: amount from line 5 or line 18. 20 Amount from line 7">
+    <!-- 19 Enter whichever is less: amount from line 5 or line 18. 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;" title="19 Enter whichever is less: amount from line 5 or line 18. 20 Amount from line 7">
+    <!-- 20 Amount from line 7, if any + 21 Line 19 plus line 20.  En -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p2_L23500" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:66.667%;width:11.275%;height:2.94%;" title="20 Amount from line 7, if any + 21 Line 19 plus line 20.  Enter this amount on l">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page3.png" alt="5000-D1 Page 3">
+    <!-- Complete the following calculation if you reported net feder -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:8.333%;width:13.235%;height:1.424%;" title="Complete the following calculation if you reported net federal supplements on li">
+    <!-- 1 Amount from line 23400 of your return (if negative, enter  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:10.227%;width:13.235%;height:1.424%;" title="1 Amount from line 23400 of your return (if negative, enter 0 ) 2 Amount from li">
+    <!-- 2 Amount from line 11700 of your return 3 Amount from line 1 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:12.121%;width:11.275%;height:1.424%;" title="2 Amount from line 11700 of your return 3 Amount from line 12500 of your return ">
+    <!-- 3 Amount from line 12500 of your return + 4 Line 2 plus line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:14.015%;width:11.275%;height:1.424%;" title="3 Amount from line 12500 of your return + 4 Line 2 plus line 3 = ►– 5 Line 1 min">
+    <!-- 3 Amount from line 12500 of your return + 4 Line 2 plus line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:14.015%;width:11.275%;height:1.424%;" title="3 Amount from line 12500 of your return + 4 Line 2 plus line 3 = ►– 5 Line 1 min">
+    <!-- 4 Line 2 plus line 3 = ►– 5 Line 1 minus line 4 = 6 Amount f -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:15.909%;width:11.275%;height:1.424%;" title="4 Line 2 plus line 3 = ►– 5 Line 1 minus line 4 = 6 Amount from line 21300 of yo">
+    <!-- 5 Line 1 minus line 4 = 6 Amount from line 21300 of your ret -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:17.803%;width:13.235%;height:1.424%;" title="5 Line 1 minus line 4 = 6 Amount from line 21300 of your return 7 RDSP income re">
+    <!-- 6 Amount from line 21300 of your return 7 RDSP income repaym -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:19.697%;width:11.275%;height:1.424%;" title="6 Amount from line 21300 of your return 7 RDSP income repayment (included in the">
+    <!-- 7 RDSP income repayment (included in the amount on line 2320 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:21.591%;width:11.275%;height:1.424%;" title="7 RDSP income repayment (included in the amount on line 23200 of your return) + ">
+    <!-- 7 RDSP income repayment (included in the amount on line 2320 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:21.591%;width:11.275%;height:1.424%;" title="7 RDSP income repayment (included in the amount on line 23200 of your return) + ">
+    <!-- 8 Line 6 plus line 7 = ►+ 9 Line 5 plus line 8 = If the amou -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L25000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:23.485%;width:11.275%;height:1.424%;" title="8 Line 6 plus line 7 = ►+ 9 Line 5 plus line 8 = If the amount on line 9 is more">
+    <!-- , p 1 Base amount 2 Supplement amount  14,538.00 1 591 00 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:41.666%;width:12.301%;height:1.515%;" title=", p 1 Base amount 2 Supplement amount  14,538.00 1 591 00">
+    <!-- 1 Base amount 2 Supplement amount 3 Amount from line 23600 o -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:43.56%;width:12.301%;height:1.515%;" title="1 Base amount 2 Supplement amount 3 Amount from line 23600 of your return  14,53">
+    <!-- 2 Supplement amount 3 Amount from line 23600 of your return  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:47.549%;top:45.455%;width:13.235%;height:1.424%;" title="2 Supplement amount 3 Amount from line 23600 of your return 4 Income threshold –">
+    <!-- 3 Amount from line 23600 of your return 4 Income threshold – -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:47.348%;width:10.34%;height:1.515%;" title="3 Amount from line 23600 of your return 4 Income threshold – 5 Line 3 minus line">
+    <!-- 4 Income threshold – 5 Line 3 minus line 4 = 6 ÷  177,882.00 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:49.242%;width:11.275%;height:1.424%;" title="4 Income threshold – 5 Line 3 minus line 4 = 6 ÷  177,882.00 75 532 00">
+    <!-- 5 Line 3 minus line 4 = 6 ÷ 7 Line 5 divided by line 6 =  75 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:51.136%;width:10.34%;height:1.515%;" title="5 Line 3 minus line 4 = 6 ÷ 7 Line 5 divided by line 6 =  75,532.00">
+    <!-- 6 ÷ 7 Line 5 divided by line 6 = 8 ×  75,532.00 1 591 00 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:53.03%;width:11.275%;height:1.424%;" title="6 ÷ 7 Line 5 divided by line 6 = 8 ×  75,532.00 1 591 00">
+    <!-- 7 Line 5 divided by line 6 = 8 × 9 Line 7 multiplied by line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:54.924%;width:10.34%;height:1.515%;" title="7 Line 5 divided by line 6 = 8 × 9 Line 7 multiplied by line 8 = ◄ –  1,591.00">
+    <!-- 8 × 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:56.818%;width:11.275%;height:1.424%;" title="8 × 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 (if negative ente">
+    <!-- 8 × 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:56.818%;width:11.275%;height:1.424%;" title="8 × 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 (if negative ente">
+    <!-- 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 ( -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:58.712%;width:11.275%;height:1.424%;" title="9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 (if negative, enter '">
+    <!-- 9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 ( -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:58.712%;width:11.275%;height:1.424%;" title="9 Line 7 multiplied by line 8 = ◄ – 10 Line 2 minus line 9 (if negative, enter '">
+    <!-- 10 Line 2 minus line 9 (if negative, enter 0 ) = ◄ + 11 Line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p3_L30000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:60.606%;width:11.275%;height:2.94%;" title="10 Line 2 minus line 9 (if negative, enter 0 ) = ◄ + 11 Line 1 plus line 10  Ent">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page4.png" alt="5000-D1 Page 4">
+    <!-- Otherwise, complete the calculation below. 1 Maximum amount  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:14.015%;width:13.235%;height:1.424%;" title="Otherwise, complete the calculation below. 1 Maximum amount 2 Amount from line 2">
+    <!-- 1 Maximum amount 2 Amount from line 23600 of your return  3  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:15.909%;width:13.235%;height:1.424%;" title="1 Maximum amount 2 Amount from line 23600 of your return  3 Income threshold –  ">
+    <!-- 2 Amount from line 23600 of your return  3 Income threshold  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:17.803%;width:11.275%;height:1.424%;" title="2 Amount from line 23600 of your return  3 Income threshold – 4 Line 2 minus lin">
+    <!-- 3 Income threshold – 4 Line 2 minus line 3 (if negative, ent -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:19.697%;width:11.275%;height:1.424%;" title="3 Income threshold – 4 Line 2 minus line 3 (if negative, enter '0') = 5 Applicab">
+    <!-- 4 Line 2 minus line 3 (if negative, enter 0 ) = 5 Applicable -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:21.591%;width:11.275%;height:1.424%;" title="4 Line 2 minus line 3 (if negative, enter 0 ) = 5 Applicable rate × 6 Line 4 mul">
+    <!-- 5 Applicable rate × 6 Line 4 multiplied by the percentage fr -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:23.485%;width:11.275%;height:1.424%;" title="5 Applicable rate × 6 Line 4 multiplied by the percentage from line 5 = ◄ – Line">
+    <!-- 5 Applicable rate × 6 Line 4 multiplied by the percentage fr -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:23.485%;width:11.275%;height:1.424%;" title="5 Applicable rate × 6 Line 4 multiplied by the percentage from line 5 = ◄ – Line">
+    <!-- 6 Line 4 multiplied by the percentage from line 5 = ◄ – 7 Li -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L30100" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:25.379%;width:11.275%;height:2.94%;" title="6 Line 4 multiplied by the percentage from line 5 = ◄ – 7 Line 1 minus line 6 (i">
+    <!-- or contract (if applicable) applicable taxes) + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:4.039%;top:41.379%;width:11.529%;height:1.712%;" title="or contract (if applicable) applicable taxes) +">
+    <!-- or contract (if applicable) applicable taxes) + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:15.804%;top:41.379%;width:20.353%;height:1.712%;" title="or contract (if applicable) applicable taxes) +">
+    <!-- or contract (if applicable) applicable taxes) + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:36.392%;top:41.379%;width:12.51%;height:1.712%;" title="or contract (if applicable) applicable taxes) +">
+    <!-- or contract (if applicable) applicable taxes) + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.137%;top:41.379%;width:30.647%;height:1.712%;" title="or contract (if applicable) applicable taxes) +">
+    <!-- or contract (if applicable) applicable taxes) + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:80.02%;top:41.379%;width:13.0%;height:1.712%;" title="or contract (if applicable) applicable taxes) +">
+    <!-- + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:4.039%;top:43.273%;width:11.529%;height:1.712%;" title="+ +">
+    <!-- + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:15.804%;top:43.273%;width:20.353%;height:1.712%;" title="+ +">
+    <!-- + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:36.392%;top:43.273%;width:12.51%;height:1.712%;" title="+ +">
+    <!-- + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.137%;top:43.273%;width:30.647%;height:1.712%;" title="+ +">
+    <!-- + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:43.273%;width:11.157%;height:1.712%;" title="+ +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:4.039%;top:45.167%;width:11.529%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:15.804%;top:45.167%;width:20.353%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:36.392%;top:45.167%;width:12.51%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.137%;top:45.167%;width:30.647%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:45.167%;width:11.157%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:4.039%;top:47.061%;width:11.529%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:15.804%;top:47.061%;width:20.353%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:36.392%;top:47.061%;width:12.51%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.137%;top:47.061%;width:30.647%;height:1.712%;" title="+ + +">
+    <!-- + + + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:47.061%;width:11.157%;height:1.712%;" title="+ + +">
+    <!-- + + 1 Total eligible expenses = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:4.039%;top:48.955%;width:11.529%;height:1.712%;" title="+ + 1 Total eligible expenses =">
+    <!-- + + 1 Total eligible expenses = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:15.804%;top:48.955%;width:20.353%;height:1.712%;" title="+ + 1 Total eligible expenses =">
+    <!-- + + 1 Total eligible expenses = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:36.392%;top:48.955%;width:12.51%;height:1.712%;" title="+ + 1 Total eligible expenses =">
+    <!-- + + 1 Total eligible expenses = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.137%;top:48.955%;width:30.647%;height:1.712%;" title="+ + 1 Total eligible expenses =">
+    <!-- + + 1 Total eligible expenses = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:48.955%;width:11.157%;height:1.712%;" title="+ + 1 Total eligible expenses =">
+    <!-- + 1 Total eligible expenses = $ -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:50.758%;width:11.275%;height:1.424%;" title="+ 1 Total eligible expenses = $">
+    <!-- g p 2 Enter whichever is less: amount from line 1 or $20,000 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:53.409%;width:13.235%;height:1.424%;" title="g p 2 Enter whichever is less: amount from line 1 or $20,000. Enter the amount c">
+    <!-- 2 Enter whichever is less: amount from line 1 or $20,000. 3  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:55.303%;width:11.275%;height:2.94%;" title="2 Enter whichever is less: amount from line 1 or $20,000. 3 Enter the amount cla">
+    <!-- 3 same eligible dwelling from line 31285 of their return. –  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p4_L31285" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:58.712%;width:11.275%;height:2.94%;" title="3 same eligible dwelling from line 31285 of their return. – 4 Home accessibility">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page5.png" alt="5000-D1 Page 5">
+    <!-- y 1 Amount from line 11500 of your return Foreign pension in -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:10.227%;width:13.235%;height:1.424%;" title="y 1 Amount from line 11500 of your return Foreign pension income included in the">
+    <!-- 1 Amount from line 11500 of your return 2 Foreign pension in -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:12.121%;width:13.235%;height:2.94%;" title="1 Amount from line 11500 of your return 2 Foreign pension income included in the">
+    <!-- 2 and deducted on line 25600 of your return 3 Income from a  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:15.53%;width:11.275%;height:2.94%;" title="2 and deducted on line 25600 of your return 3 Income from a U.S. individual reti">
+    <!-- 3 on line 11500 of your return + 4 Amounts from a registered -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:18.939%;width:11.275%;height:5.591%;" title="3 on line 11500 of your return + 4 Amounts from a registered retirement income f">
+    <!-- 4 a RRIF, a PRPP, or an annuity + 5 Add lines 2 to 4. = ◄ –  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:25.0%;width:11.275%;height:1.424%;" title="4 a RRIF, a PRPP, or an annuity + 5 Add lines 2 to 4. = ◄ – 6 Line 1 minus line ">
+    <!-- 4 a RRIF, a PRPP, or an annuity + 5 Add lines 2 to 4. = ◄ –  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:25.0%;width:11.275%;height:1.424%;" title="4 a RRIF, a PRPP, or an annuity + 5 Add lines 2 to 4. = ◄ – 6 Line 1 minus line ">
+    <!-- 5 Add lines 2 to 4. = ◄ – 6 Line 1 minus line 5 = Annuity pa -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:26.894%;width:11.275%;height:1.424%;" title="5 Add lines 2 to 4. = ◄ – 6 Line 1 minus line 5 = Annuity payments from line 129">
+    <!-- 7 Annuity payments from line 12900 of your return (box 16 of -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:30.303%;width:11.275%;height:2.94%;" title="7 Annuity payments from line 12900 of your return (box 16 of all your T4RSP slip">
+    <!-- 7 of your spouse or common law partner + 8 Line 6 plus line  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31400" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:33.712%;width:11.275%;height:1.424%;" title="7 of your spouse or common law partner + 8 Line 6 plus line 7 = Enter on line 31">
+    <!-- 1 Base amount  2 Maximum supplement  10,138.00 5 914 00 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:64.015%;width:13.235%;height:1.515%;" title="1 Base amount  2 Maximum supplement  10,138.00 5 914 00">
+    <!-- 1 Base amount  2 Maximum supplement Total of child care and  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:65.909%;width:13.235%;height:1.515%;" title="1 Base amount  2 Maximum supplement Total of child care and attendant care expen">
+    <!-- 2 Maximum supplement 3 Total of child care and attendant car -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:47.549%;top:67.803%;width:13.235%;height:2.94%;" title="2 Maximum supplement 3 Total of child care and attendant care expenses for you  ">
+    <!-- 3 that you or another person claimed 4 Threshold for child c -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:71.212%;width:11.275%;height:1.515%;" title="3 that you or another person claimed 4 Threshold for child care and attendant ca">
+    <!-- 4 Threshold for child care and attendant care expenses – 5 L -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:73.106%;width:11.275%;height:1.424%;" title="4 Threshold for child care and attendant care expenses – 5 Line 3 minus line 4 (">
+    <!-- 4 Threshold for child care and attendant care expenses – 5 L -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:73.106%;width:11.275%;height:1.424%;" title="4 Threshold for child care and attendant care expenses – 5 Line 3 minus line 4 (">
+    <!-- 5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:75.0%;width:11.275%;height:1.424%;" title="5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 minus line 5 (if ne">
+    <!-- 5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:75.0%;width:11.275%;height:1.424%;" title="5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 minus line 5 (if ne">
+    <!-- 6 Line 2 minus line 5 (if negative, enter 0 ) = ◄ + 7 Line 1 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p5_L31600" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:76.894%;width:11.275%;height:2.94%;" title="6 Line 2 minus line 5 (if negative, enter 0 ) = ◄ + 7 Line 1 plus line 6  Enter ">
+  </div>
+
+  <div id="pg-anchor-6"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page6.png" alt="5000-D1 Page 6">
+    <!-- one dependant, use a separate sheet of paper. 1 Base amount  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:54.167%;width:13.235%;height:1.515%;" title="one dependant, use a separate sheet of paper. 1 Base amount  If the dependant wa">
+    <!-- p y g p 2 Maximum supplement Total of child care and attenda -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:60.228%;width:13.235%;height:1.515%;" title="p y g p 2 Maximum supplement Total of child care and attendant care expenses for">
+    <!-- 2 Maximum supplement 3 Total of child care and attendant car -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:47.549%;top:62.121%;width:13.235%;height:2.94%;" title="2 Maximum supplement 3 Total of child care and attendant care expenses for  your">
+    <!-- 3 your dependant that you or another person claimed 4 Thresh -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:65.53%;width:11.275%;height:1.515%;" title="3 your dependant that you or another person claimed 4 Threshold for child care a">
+    <!-- 4 Threshold for child care and attendant care expenses – 5 L -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:67.424%;width:11.275%;height:1.424%;" title="4 Threshold for child care and attendant care expenses – 5 Line 3 minus line 4 (">
+    <!-- 4 Threshold for child care and attendant care expenses – 5 L -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:67.424%;width:11.275%;height:1.424%;" title="4 Threshold for child care and attendant care expenses – 5 Line 3 minus line 4 (">
+    <!-- 5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:69.319%;width:11.275%;height:1.424%;" title="5 Line 3 minus line 4 (if negative, enter 0 ) = ◄ – 6 Line 2 minus line 5 (if ne">
+    <!-- 6 Line 2 minus line 5 (if negative, enter 0 ) = 7 If the dep -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:71.212%;width:11.275%;height:2.94%;" title="6 Line 2 minus line 5 (if negative, enter 0 ) = 7 If the dependant was under 18 ">
+    <!-- 7 If the dependant was 18 years of age or older, enter 0 . + -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;" title="7 If the dependant was 18 years of age or older, enter 0 . + 8 Line 1 plus line ">
+    <!-- 8 Line 1 plus line 7 (maximum $16,052) = 9 For provinces and -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:76.515%;width:11.275%;height:2.94%;" title="8 Line 1 plus line 7 (maximum $16,052) = 9 For provinces and territories other t">
+    <!-- 9 For Quebec: amount from line 102 of your dependant s retur -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;" title="9 For Quebec: amount from line 102 of your dependant s return + 10 Line 8 plus l">
+    <!-- 10 Line 8 plus line 9 = 11 Dependant's taxable income from l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:81.819%;width:11.275%;height:1.424%;" title="10 Line 8 plus line 9 = 11 Dependant's taxable income from line 26000 of their r">
+    <!-- 11 Dependant s taxable income from line 26000 of their retur -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;" title="11 Dependant s taxable income from line 26000 of their return – 12 Line 10 minus">
+    <!-- 13 Allowable amount for this dependant  Enter whichever is l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p6_L31800" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:86.364%;width:13.235%;height:2.94%;" title="13 Allowable amount for this dependant  Enter whichever is less:  amount from li">
+  </div>
+
+  <div id="pg-anchor-7"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page7.png" alt="5000-D1 Page 7">
+    <!-- Dependant 1 Medical expenses for other dependant For provinc -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:47.549%;top:27.273%;width:13.235%;height:1.424%;" title="Dependant 1 Medical expenses for other dependant For provinces and territories o">
+    <!-- For provinces and territories other than Quebec:  amount fro -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:30.681%;width:11.275%;height:2.94%;" title="For provinces and territories other than Quebec:  amount from line 109 of the de">
+    <!-- For Quebec: amount from line 113 of the dependant s return – -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:34.091%;width:11.275%;height:1.424%;" title="For Quebec: amount from line 113 of the dependant s return – Line 1 minus line 2">
+    <!-- Dependant 1 Medical expenses for other dependant For provinc -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:27.273%;width:13.235%;height:1.424%;" title="Dependant 1 Medical expenses for other dependant For provinces and territories o">
+    <!-- For provinces and territories other than Quebec:  amount fro -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:30.682%;width:11.275%;height:2.94%;" title="For provinces and territories other than Quebec:  amount from line 109 of the de">
+    <!-- For Quebec: amount from line 113 of the dependant s return – -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:34.091%;width:11.275%;height:1.424%;" title="For Quebec: amount from line 113 of the dependant s return – Line 1 minus line 2">
+    <!-- Dependant 1 Medical expenses for other dependant For provinc -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:27.273%;width:13.235%;height:1.424%;" title="Dependant 1 Medical expenses for other dependant For provinces and territories o">
+    <!-- For provinces and territories other than Quebec:  amount fro -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:30.682%;width:11.275%;height:2.94%;" title="For provinces and territories other than Quebec:  amount from line 109 of the de">
+    <!-- For Quebec: amount from line 113 of the dependant s return – -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:34.091%;width:11.275%;height:1.424%;" title="For Quebec: amount from line 113 of the dependant s return – Line 1 minus line 2">
+    <!-- 4 Add the amounts from line 3 of columns 1, 2, and 3 (and ot -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L33199" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:36.742%;width:13.235%;height:2.94%;" title="4 Add the amounts from line 3 of columns 1, 2, and 3 (and others, if any).  Ente">
+    <!-- p g y p p 1 Amount from line 33800 of your return 2 Amount f -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:47.003%;width:13.235%;height:1.424%;" title="p g y p p 1 Amount from line 33800 of your return 2 Amount from line 22 of your ">
+    <!-- 1 Amount from line 33800 of your return 2 Amount from line 2 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:48.897%;width:11.275%;height:1.424%;" title="1 Amount from line 33800 of your return 2 Amount from line 22 of your Schedule 9">
+    <!-- 2 Amount from line 22 of your Schedule 9 + 3 Line 1 plus lin -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:50.791%;width:11.275%;height:1.515%;" title="2 Amount from line 22 of your Schedule 9 + 3 Line 1 plus line 2 = 4 – 8 319 38">
+    <!-- 3 Line 1 plus line 2 = 4 – 5 Line 3 minus line 4 (if negativ -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:52.685%;width:11.275%;height:1.515%;" title="3 Line 1 plus line 2 = 4 – 5 Line 3 minus line 4 (if negative enter '0') =  8,31">
+    <!-- 4 – 5 Line 3 minus line 4 (if negative, enter "0") = 6 Appli -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:54.579%;width:11.275%;height:1.515%;" title="4 – 5 Line 3 minus line 4 (if negative, enter '0') = 6 Applicable rate ×  8,319.">
+    <!-- 5 Line 3 minus line 4 (if negative, enter 0 ) = 6 Applicable -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:56.473%;width:11.275%;height:1.424%;" title="5 Line 3 minus line 4 (if negative, enter 0 ) = 6 Applicable rate × Line 5 multi">
+    <!-- 6 Applicable rate × 7 Line 5 multiplied by the percentage fr -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p7_L34990" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.862%;top:58.367%;width:11.275%;height:2.94%;" title="6 Applicable rate × 7 Line 5 multiplied by the percentage from line 6  Enter thi">
+  </div>
+
+  <div id="pg-anchor-8"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page8.png" alt="5000-D1 Page 8">
+    <!-- Calculation of the federal dividend tax credit as shown on y -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:12.5%;width:13.235%;height:1.424%;" title="Calculation of the federal dividend tax credit as shown on your information slip">
+    <!-- 1 Boxes 39 and 51 of all T3 slips 2 Boxes 26 and 32 of all T -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:14.394%;width:11.275%;height:1.424%;" title="1 Boxes 39 and 51 of all T3 slips 2 Boxes 26 and 32 of all T4PS slips + 3 Boxes ">
+    <!-- 2 Boxes 26 and 32 of all T4PS slips + 3 Boxes 12 and 26 of a -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:16.288%;width:11.275%;height:1.424%;" title="2 Boxes 26 and 32 of all T4PS slips + 3 Boxes 12 and 26 of all T5 slips + 4 Boxe">
+    <!-- 3 Boxes 12 and 26 of all T5 slips + 4 Boxes 131 and 134 of a -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:18.181%;width:11.275%;height:1.424%;" title="3 Boxes 12 and 26 of all T5 slips + 4 Boxes 131 and 134 of all T5013 slips + 5 A">
+    <!-- 4 Boxes 131 and 134 of all T5013 slips + 5 Add lines 1 to 4. -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:20.166%;width:11.275%;height:1.333%;" title="4 Boxes 131 and 134 of all T5013 slips + 5 Add lines 1 to 4. = ◄ If you did not ">
+    <!-- 4 Boxes 131 and 134 of all T5013 slips + 5 Add lines 1 to 4. -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:20.076%;width:13.235%;height:1.424%;" title="4 Boxes 131 and 134 of all T5013 slips + 5 Add lines 1 to 4. = ◄ If you did not ">
+    <!-- Calculation of the federal dividend tax credit if you did no -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:31.373%;top:27.651%;width:13.235%;height:2.94%;" title="Calculation of the federal dividend tax credit if you did not receive an informa">
+    <!-- A of your return (1)  6 B Amount from line 12010  of your re -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:33.333%;top:31.06%;width:11.275%;height:2.94%;" title="A of your return (1)  6 B Amount from line 12010  of your return (1)  – × 9.0301">
+    <!-- A of your return (1)  6 B Amount from line 12010  of your re -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:31.06%;width:13.235%;height:2.94%;" title="A of your return (1)  6 B Amount from line 12010  of your return (1)  – × 9.0301">
+    <!-- 6 B of your return (1)  – × 9.0301% = 7 C Amount A minus amo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:33.333%;top:34.47%;width:11.275%;height:1.424%;" title="6 B of your return (1)  – × 9.0301% = 7 C Amount A minus amount B = × 15.0198% =">
+    <!-- 6 B of your return (1)  – × 9.0301% = 7 C Amount A minus amo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:34.47%;width:11.275%;height:1.424%;" title="6 B of your return (1)  – × 9.0301% = 7 C Amount A minus amount B = × 15.0198% =">
+    <!-- 7 C Amount A minus amount B = × 15.0198% = + 8 Line 6 plus l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:36.364%;width:11.275%;height:1.424%;" title="7 C Amount A minus amount B = × 15.0198% = + 8 Line 6 plus line 7 = ◄ + Line 5 p">
+    <!-- 7 C Amount A minus amount B = × 15.0198% = + 8 Line 6 plus l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:36.364%;width:11.275%;height:1.424%;" title="7 C Amount A minus amount B = × 15.0198% = + 8 Line 6 plus line 7 = ◄ + Line 5 p">
+    <!-- 8 Line 6 plus line 7 = ◄ + 9 Line 5 plus line 8  Enter this  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L40425" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:38.258%;width:11.275%;height:2.94%;" title="8 Line 6 plus line 7 = ◄ + 9 Line 5 plus line 8  Enter this amount on line 40425">
+    <!-- $400 or less Total federal political contributions from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:47.549%;top:65.341%;width:13.235%;height:2.94%;" title="$400 or less Total federal political contributions from line 40900   of your ret">
+    <!-- of your return – Line 1 minus line 2 (if negative enter "0") -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:68.75%;width:11.275%;height:1.515%;" title="of your return – Line 1 minus line 2 (if negative enter '0') = – = – = 1 2 3  0.">
+    <!-- – Line 1 minus line 2 (if negative, enter "0") = × – = × – = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:70.644%;width:11.275%;height:1.424%;" title="– Line 1 minus line 2 (if negative, enter '0') = × – = × – = × 2 3 4  0.00 75%  ">
+    <!-- Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multi -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:72.538%;width:11.275%;height:1.424%;" title="Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multiplied by the percent">
+    <!-- × Line 3 multiplied by the percentage from line 4 = + × = +  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:74.432%;width:11.275%;height:1.424%;" title="× Line 3 multiplied by the percentage from line 4 = + × = + × = + 4 5 6 75% 0 00">
+    <!-- Line 3 multiplied by the percentage from line 4 = + Line 5 p -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:76.326%;width:11.275%;height:1.515%;" title="Line 3 multiplied by the percentage from line 4 = + Line 5 plus line 6 = + = + 5">
+    <!-- + Line 5 plus line 6   Enter this amount on line 41000 of yo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:49.51%;top:78.22%;width:11.275%;height:2.94%;" title="+ Line 5 plus line 6   Enter this amount on line 41000 of your return. = + = + =">
+    <!-- $400 or less Total federal political contributions from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:65.341%;width:13.235%;height:2.94%;" title="$400 or less Total federal political contributions from line 40900   of your ret">
+    <!-- of your return – Line 1 minus line 2 (if negative enter "0") -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:68.75%;width:11.275%;height:1.515%;" title="of your return – Line 1 minus line 2 (if negative enter '0') = – = – = 1 2 3  0.">
+    <!-- – Line 1 minus line 2 (if negative, enter "0") = × – = × – = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:70.644%;width:11.275%;height:1.424%;" title="– Line 1 minus line 2 (if negative, enter '0') = × – = × – = × 2 3 4  0.00 75%  ">
+    <!-- Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multi -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:72.538%;width:11.275%;height:1.424%;" title="Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multiplied by the percent">
+    <!-- × Line 3 multiplied by the percentage from line 4 = + × = +  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:74.432%;width:11.275%;height:1.424%;" title="× Line 3 multiplied by the percentage from line 4 = + × = + × = + 4 5 6 75% 0 00">
+    <!-- Line 3 multiplied by the percentage from line 4 = + Line 5 p -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:76.326%;width:11.275%;height:1.515%;" title="Line 3 multiplied by the percentage from line 4 = + Line 5 plus line 6 = + = + 5">
+    <!-- + Line 5 plus line 6   Enter this amount on line 41000 of yo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:78.22%;width:11.275%;height:2.94%;" title="+ Line 5 plus line 6   Enter this amount on line 41000 of your return. = + = + =">
+    <!-- $400 or less Total federal political contributions from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:65.341%;width:13.235%;height:2.94%;" title="$400 or less Total federal political contributions from line 40900   of your ret">
+    <!-- of your return – Line 1 minus line 2 (if negative enter "0") -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:68.75%;width:11.275%;height:1.515%;" title="of your return – Line 1 minus line 2 (if negative enter '0') = – = – = 1 2 3  0.">
+    <!-- – Line 1 minus line 2 (if negative, enter "0") = × – = × – = -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:70.644%;width:11.275%;height:1.424%;" title="– Line 1 minus line 2 (if negative, enter '0') = × – = × – = × 2 3 4  0.00 75%  ">
+    <!-- Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multi -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:72.538%;width:11.275%;height:1.424%;" title="Line 1 minus line 2 (if negative, enter 0 ) = × Line 3 multiplied by the percent">
+    <!-- × Line 3 multiplied by the percentage from line 4 = + × = +  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:74.432%;width:11.275%;height:1.424%;" title="× Line 3 multiplied by the percentage from line 4 = + × = + × = + 4 5 6 75% 0 00">
+    <!-- Line 3 multiplied by the percentage from line 4 = + Line 5 p -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:76.326%;width:11.275%;height:1.515%;" title="Line 3 multiplied by the percentage from line 4 = + Line 5 plus line 6 = + = + 5">
+    <!-- + Line 5 plus line 6   Enter this amount on line 41000 of yo -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p8_L41000" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:78.22%;width:11.275%;height:2.94%;" title="+ Line 5 plus line 6   Enter this amount on line 41000 of your return. = + = + =">
+  </div>
+
+  <div id="pg-anchor-9"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/worksheet-fed_page9.png" alt="5000-D1 Page 9">
+    <!-- p 1 Net income amount from line 23600 of the return (or the  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.703%;top:47.349%;width:13.235%;height:2.94%;" title="p 1 Net income amount from line 23600 of the return (or the amount you would  ha">
+    <!-- p 1 Net income amount from line 23600 of the return (or the  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.88%;top:47.349%;width:13.235%;height:2.94%;" title="p 1 Net income amount from line 23600 of the return (or the amount you would  ha">
+    <!-- 1 have entered if the instructions on line 23600 said if neg -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:50.757%;width:11.275%;height:4.455%;" title="1 have entered if the instructions on line 23600 said if negative, show in brack">
+    <!-- 1 have entered if the instructions on line 23600 said if neg -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:50.757%;width:11.275%;height:4.455%;" title="1 have entered if the instructions on line 23600 said if negative, show in brack">
+    <!-- 2 (included in the amount on line 23200 of the return) + + 3 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:55.681%;width:11.275%;height:1.424%;" title="2 (included in the amount on line 23200 of the return) + + 3 Line 1 plus line 2 ">
+    <!-- 2 (included in the amount on line 23200 of the return) + + 3 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:55.681%;width:11.275%;height:1.424%;" title="2 (included in the amount on line 23200 of the return) + + 3 Line 1 plus line 2 ">
+    <!-- 3 Line 1 plus line 2 = = 4 Total of the UCCB income (line 11 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.664%;top:57.575%;width:11.275%;height:2.94%;" title="3 Line 1 plus line 2 = = 4 Total of the UCCB income (line 11700 of the return) a">
+    <!-- 3 Line 1 plus line 2 = = 4 Total of the UCCB income (line 11 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.841%;top:57.575%;width:11.275%;height:2.94%;" title="3 Line 1 plus line 2 = = 4 Total of the UCCB income (line 11700 of the return) a">
+    <!-- 4 (line 12500 of the return) – – 5 Line 3 minus line 4 (if n -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:60.984%;width:11.275%;height:1.424%;" title="4 (line 12500 of the return) – – 5 Line 3 minus line 4 (if negative, enter '0') ">
+    <!-- 4 (line 12500 of the return) – – 5 Line 3 minus line 4 (if n -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:60.984%;width:11.275%;height:1.424%;" title="4 (line 12500 of the return) – – 5 Line 3 minus line 4 (if negative, enter '0') ">
+    <!-- 6 Adjusted family net income Add the amounts from line 5 of  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:63.636%;width:13.235%;height:1.424%;" title="6 Adjusted family net income Add the amounts from line 5 of columns 1 and 2. 7 I">
+    <!-- 6 Adjusted family net income Add the amounts from line 5 of  -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:65.529%;width:11.275%;height:1.515%;" title="6 Adjusted family net income Add the amounts from line 5 of columns 1 and 2. 7 I">
+    <!-- 7 Income threshold – 8 Line 6 minus line 7 (if negative, ent -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:67.423%;width:11.275%;height:1.424%;" title="7 Income threshold – 8 Line 6 minus line 7 (if negative, enter '0') = 9 Amount f">
+    <!-- 8 Line 6 minus line 7 (if negative, enter 0 ) = 9 Amount fro -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:63.726%;top:69.317%;width:13.235%;height:1.424%;" title="8 Line 6 minus line 7 (if negative, enter 0 ) = 9 Amount from line 21500 of your">
+    <!-- 9 Amount from line 21500 of your return  10 Amount from line -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:71.211%;width:11.275%;height:1.424%;" title="9 Amount from line 21500 of your return  10 Amount from line 33200 of your retur">
+    <!-- 10 Amount from line 33200 of your return  + 11 Line 9 plus l -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:73.105%;width:11.275%;height:1.424%;" title="10 Amount from line 33200 of your return  + 11 Line 9 plus line 10 = 12 Applicab">
+    <!-- 11 Line 9 plus line 10 = 12 Applicable rate × 13 Line 11 mul -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:74.999%;width:11.275%;height:1.424%;" title="11 Line 9 plus line 10 = 12 Applicable rate × 13 Line 11 multiplied by the perce">
+    <!-- 12 Applicable rate × 13 Line 11 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:76.893%;width:11.275%;height:1.424%;" title="12 Applicable rate × 13 Line 11 multiplied by the percentage from line 12 = $ 25">
+    <!-- 14 Enter whichever is less: amount from line 13 or $1,504 15 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:79.902%;top:79.544%;width:13.235%;height:1.424%;" title="14 Enter whichever is less: amount from line 13 or $1,504 15 Amount from line 8 ">
+    <!-- 14 Enter whichever is less: amount from line 13 or $1,504 15 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:50.0%;top:81.438%;width:13.235%;height:1.424%;" title="14 Enter whichever is less: amount from line 13 or $1,504 15 Amount from line 8 ">
+    <!-- 14 Enter whichever is less: amount from line 13 or $1,504 15 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:65.686%;top:81.438%;width:9.314%;height:1.515%;" title="14 Enter whichever is less: amount from line 13 or $1,504 15 Amount from line 8 ">
+    <!-- 14 Enter whichever is less: amount from line 13 or $1,504 15 -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:81.438%;width:11.275%;height:1.424%;" title="14 Enter whichever is less: amount from line 13 or $1,504 15 Amount from line 8 ">
+    <!-- 15 Amount from line 8 × = – 16 Line 14 minus line 15 (if neg -->
+    <input type="text" data-numeric="1" id="f_worksheet_fed_p9_L45200" class="pdf-input" value="" inputmode="decimal" oninput="recalcWF(); autoSave();" style="left:81.863%;top:83.332%;width:11.275%;height:2.94%;" title="15 Amount from line 8 × = – 16 Line 14 minus line 15 (if negative, enter '0')   ">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_worksheet_fed_autosave';
+const FORM_INPUT_IDS = [
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12000',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p1_L12100',
+  'f_worksheet_fed_p2_L22100',
+  'f_worksheet_fed_p2_L22100',
+  'f_worksheet_fed_p2_L22100',
+  'f_worksheet_fed_p2_L22100',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500',
+  'f_worksheet_fed_p2_L23500'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcWF() using field IDs listed in FORM_INPUT_IDS
+function recalcWF() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_worksheet_fed_p1_Ltotal', g('f_worksheet_fed_p1_L1') + g('f_worksheet_fed_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcWF();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcWF();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcWF();
+});
+</script>
+{% endblock %}

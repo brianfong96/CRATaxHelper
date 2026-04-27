@@ -1,0 +1,744 @@
+{% extends "base.html" %}
+{% block title %}Schedule 8 &mdash; CPP/QPP Contributions 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">Schedule 8 &mdash; CPP/QPP Contributions</div>
+      <div class="form-subtitle">Form Schedule 8 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>Schedule 8-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA Schedule 8 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+    <a href="#pg-anchor-4">Page 4</a>
+    <a href="#pg-anchor-5">Page 5</a>
+    <a href="#pg-anchor-6">Page 6</a>
+    <a href="#pg-anchor-7">Page 7</a>
+    <a href="#pg-anchor-8">Page 8</a>
+    <a href="#pg-anchor-9">Page 9</a>
+    <a href="#pg-anchor-10">Page 10</a>
+    <a href="#pg-anchor-11">Page 11</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page1.png" alt="Schedule 8 Page 1">
+    
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page2.png" alt="Schedule 8 Page 2">
+    <!-- 50372 I elect to stop contributing to the CPP on my self-emp -->
+    <input type="text" data-numeric="1" id="f_schedule8_p2_L50372" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.491%;top:72.44%;width:5.647%;height:1.334%;" title="50372 I elect to stop contributing to the CPP on my self-employment earnings on ">
+    <!-- 50374 self-employment earnings and resume contributing to th -->
+    <input type="text" data-numeric="1" id="f_schedule8_p2_L50374" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.491%;top:77.364%;width:5.647%;height:1.334%;" title="50374 self-employment earnings and resume contributing to the CPP on the first d">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page3.png" alt="Schedule 8 Page 3">
+    <!-- A Enter the number of months that CPP applied in 2025. -->
+    <input type="text" data-numeric="1" id="f_schedule8_p3_number_1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:80.014%;top:42.872%;width:4.176%;height:1.333%;" title="A Enter the number of months that CPP applied in 2025.">
+    <!-- p g y p g B Your maximum pensionable earnings for 2025 (maxi -->
+    <input type="text" data-numeric="1" id="f_schedule8_p3_amount_2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:78.009%;width:13.235%;height:1.424%;" title="p g y p g B Your maximum pensionable earnings for 2025 (maximum $71,300)">
+    <!-- C Your maximum amount subject to second additional contribut -->
+    <input type="text" data-numeric="1" id="f_schedule8_p3_amount_3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:80.66%;width:13.235%;height:1.424%;" title="C Your maximum amount subject to second additional contributions for 2025 (maxim">
+    <!-- D Your additional maximum pensionable earnings for 2025 (max -->
+    <input type="text" data-numeric="1" id="f_schedule8_p3_amount_4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:83.312%;width:13.235%;height:1.424%;" title="D Your additional maximum pensionable earnings for 2025 (maximum $81,200)">
+    <!-- E Your maximum basic exemption for 2025 (maximum $3,500) -->
+    <input type="text" data-numeric="1" id="f_schedule8_p3_amount_5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:85.963%;width:13.235%;height:1.424%;" title="E Your maximum basic exemption for 2025 (maximum $3,500)">
+  </div>
+
+  <div id="pg-anchor-4"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page4.png" alt="Schedule 8 Page 4">
+    <!-- p y p y 50339 1 Total CPP pensionable earnings from box 26 o -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:7.554%;width:13.235%;height:2.94%;" title="p y p y 50339 1 Total CPP pensionable earnings from box 26 of all of your T4 sli">
+    <!-- 2 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.249%;top:11.72%;width:13.235%;height:1.424%;" title="2 Enter whichever is less: amount from line D of Part 2 or line 1. ◄ 3 Amount fr">
+    <!-- 2 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:11.72%;width:13.235%;height:1.424%;" title="2 Enter whichever is less: amount from line D of Part 2 or line 1. ◄ 3 Amount fr">
+    <!-- 2 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:13.614%;width:11.275%;height:1.424%;" title="2 Enter whichever is less: amount from line D of Part 2 or line 1. ◄ 3 Amount fr">
+    <!-- 3 Amount from line B of Part 2 – 4 Earnings subject to secon -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:15.508%;width:11.275%;height:2.94%;" title="3 Amount from line B of Part 2 – 4 Earnings subject to second additional contrib">
+    <!-- 3 Amount from line B of Part 2 – 4 Earnings subject to secon -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:15.508%;width:11.275%;height:2.94%;" title="3 Amount from line B of Part 2 – 4 Earnings subject to second additional contrib">
+    <!-- 4 Line 2 minus line 3 (if negative, enter 0 ) = ◄ – 5 Line 2 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:18.917%;width:11.275%;height:1.424%;" title="4 Line 2 minus line 3 (if negative, enter 0 ) = ◄ – 5 Line 2 minus line 4 (if ne">
+    <!-- 5 Line 2 minus line 4 (if negative, enter 0 ) = 6 Amount fro -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:20.811%;width:11.275%;height:1.424%;" title="5 Line 2 minus line 4 (if negative, enter 0 ) = 6 Amount from line E of Part 2 –">
+    <!-- 6 Amount from line E of Part 2 – 7 Earnings subject to base  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:22.705%;width:11.275%;height:2.94%;" title="6 Amount from line E of Part 2 – 7 Earnings subject to base and first additional">
+    <!-- 50340 8 Total actual base and first additional contributions -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:26.872%;width:13.235%;height:2.94%;" title="50340 8 Total actual base and first additional contributions on CPP pensionable ">
+    <!-- 9 Actual base contributions on CPP pensionable earnings: amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.602%;top:31.796%;width:13.235%;height:1.424%;" title="9 Actual base contributions on CPP pensionable earnings: amount from line 8 × 83">
+    <!-- 50340 8 of all of your T4 slips • 9 Actual base contribution -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:30.281%;width:11.275%;height:2.94%;" title="50340 8 of all of your T4 slips • 9 Actual base contributions on CPP pensionable">
+    <!-- 9 amount from line 8 × 83.1933% = – 10 Actual first addition -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:33.69%;width:11.275%;height:2.94%;" title="9 amount from line 8 × 83.1933% = – 10 Actual first additional contributions on ">
+    <!-- 11 Required base contributions on CPP pensionable earnings:  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:37.739%;top:39.372%;width:13.235%;height:1.424%;" title="11 Required base contributions on CPP pensionable earnings: amount from line 7 ×">
+    <!-- 11 Required base contributions on CPP pensionable earnings:  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:37.857%;width:13.235%;height:2.94%;" title="11 Required base contributions on CPP pensionable earnings: amount from line 7 ×">
+    <!-- 12 Required first additional contributions on CPP pensionabl -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:37.739%;top:42.781%;width:13.235%;height:1.424%;" title="12 Required first additional contributions on CPP pensionable earnings: amount f">
+    <!-- 11 amount from line 7 × 4.95% = (maximum $3,356.10) 12 Requi -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:41.266%;width:11.275%;height:2.94%;" title="11 amount from line 7 × 4.95% = (maximum $3,356.10) 12 Required first additional">
+    <!-- 12 amount from line 7 × 1% = (maximum $678.00) + 13 Required -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:44.675%;width:11.275%;height:2.94%;" title="12 amount from line 7 × 1% = (maximum $678.00) + 13 Required base and first addi">
+    <!-- 14 Amount from line 9 15 Amount from line 11 – -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:48.864%;width:13.235%;height:1.424%;" title="14 Amount from line 9 15 Amount from line 11 –">
+    <!-- 14 Amount from line 9 15 Amount from line 11 – 16 Line 14 mi -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:50.757%;width:11.275%;height:1.424%;" title="14 Amount from line 9 15 Amount from line 11 – 16 Line 14 minus line 15 (if nega">
+    <!-- 15 Amount from line 11 – 16 Line 14 minus line 15 (if negati -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:52.651%;width:11.275%;height:1.424%;" title="15 Amount from line 11 – 16 Line 14 minus line 15 (if negative, show in brackets">
+    <!-- 16 Line 14 minus line 15 (if negative, show in brackets) = 1 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.249%;top:54.545%;width:13.235%;height:1.424%;" title="16 Line 14 minus line 15 (if negative, show in brackets) = 17 Amount from line 1">
+    <!-- 17 Amount from line 10 18 Amount from line 12 – 19 Line 17 m -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L18" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:56.439%;width:11.275%;height:1.424%;" title="17 Amount from line 10 18 Amount from line 12 – 19 Line 17 minus line 18 (if neg">
+    <!-- 18 Amount from line 12 – 19 Line 17 minus line 18 (if negati -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:58.333%;width:11.275%;height:1.424%;" title="18 Amount from line 12 – 19 Line 17 minus line 18 (if negative, show in brackets">
+    <!-- 18 Amount from line 12 – 19 Line 17 minus line 18 (if negati -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:58.333%;width:11.275%;height:1.424%;" title="18 Amount from line 12 – 19 Line 17 minus line 18 (if negative, show in brackets">
+    <!-- 19 Line 17 minus line 18 (if negative, show in brackets) = ◄ -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:60.227%;width:11.275%;height:1.424%;" title="19 Line 17 minus line 18 (if negative, show in brackets) = ◄ + 20 Line 16 plus l">
+    <!-- 20 p ( g , ) 50341 21 Total actual second additional contrib -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:62.522%;width:13.235%;height:2.94%;" title="20 p ( g , ) 50341 21 Total actual second additional contributions on CPP pensio">
+    <!-- 22 Required second additional contributions on CPP pensionab -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:22.059%;top:67.446%;width:13.235%;height:1.424%;" title="22 Required second additional contributions on CPP pensionable earnings: amount ">
+    <!-- 50341 21 earnings from box 16A of all of your T4 slips • 22  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:65.931%;width:11.275%;height:2.94%;" title="50341 21 earnings from box 16A of all of your T4 slips • 22 Required second addi">
+    <!-- 22 amount from line 4 × 4% = (maximum $396.00) – 23 Line 21  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:69.34%;width:11.275%;height:1.424%;" title="22 amount from line 4 × 4% = (maximum $396.00) – 23 Line 21 minus line 22 (if ne">
+    <!-- 22 amount from line 4 × 4% = (maximum $396.00) – 23 Line 21  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:69.34%;width:11.275%;height:1.424%;" title="22 amount from line 4 × 4% = (maximum $396.00) – 23 Line 21 minus line 22 (if ne">
+    <!-- 23 Line 21 minus line 22 (if negative, show in brackets) = ◄ -->
+    <input type="text" data-numeric="1" id="f_schedule8_p4_L24" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:71.234%;width:11.275%;height:1.424%;" title="23 Line 21 minus line 22 (if negative, show in brackets) = ◄ + 24 Line 20 plus l">
+  </div>
+
+  <div id="pg-anchor-5"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page5.png" alt="Schedule 8 Page 5">
+    <!-- Part 3a  Amount from line 24 is positive 25 Base CPP contrib -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L25" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:25.849%;width:13.235%;height:4.364%;" title="Part 3a  Amount from line 24 is positive 25 Base CPP contributions through emplo">
+    <!-- 26 Amount from line 18 27 Amount from line 22 (if any) + -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L26" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:31.44%;width:13.235%;height:1.424%;" title="26 Amount from line 18 27 Amount from line 22 (if any) +">
+    <!-- 26 Amount from line 18 27 Amount from line 22 (if any) + Ded -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L27" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:33.333%;width:11.275%;height:1.424%;" title="26 Amount from line 18 27 Amount from line 22 (if any) + Deduction for CPP enhan">
+    <!-- 27 Amount from line 22 (if any) + 28 Deduction for CPP enhan -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L28" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:35.318%;width:11.275%;height:4.364%;" title="27 Amount from line 22 (if any) + 28 Deduction for CPP enhanced contributions on">
+    <!-- 29 CPP overpayment:  Enter the amount from line 24. Enter th -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:41.0%;width:13.235%;height:2.849%;" title="29 CPP overpayment:  Enter the amount from line 24. Enter this amount (in dollar">
+    <!-- Part 3b  Amount from line 24 is 0  or negative 30 If line 16 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L30" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.896%;top:47.461%;width:13.235%;height:2.849%;" title="Part 3b  Amount from line 24 is 0  or negative 30 If line 16 is positive or '0',">
+    <!-- If line 16 is negative: 31 Enter the amount from line 16 as  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L31" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:53.03%;width:13.235%;height:1.424%;" title="If line 16 is negative: 31 Enter the amount from line 16 as a positive amount. I">
+    <!-- 31 Enter the amount from line 16 as a positive amount. 32 If -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L32" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.222%;top:54.924%;width:11.274%;height:2.94%;" title="31 Enter the amount from line 16 as a positive amount. 32 If line 16 is negative">
+    <!-- 31 Enter the amount from line 16 as a positive amount. 32 If -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L32" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.868%;top:54.924%;width:11.275%;height:2.94%;" title="31 Enter the amount from line 16 as a positive amount. 32 If line 16 is negative">
+    <!-- 32 amount from line 19 or line 31. If not, enter 0 . – ◄ + 3 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L33" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.21%;top:58.334%;width:11.274%;height:1.424%;" title="32 amount from line 19 or line 31. If not, enter 0 . – ◄ + 33 Line 31 minus line">
+    <!-- 33 Line 31 minus line 32 = 34 Line 30 plus line 32 = 35 If l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L34" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:60.228%;width:11.274%;height:1.424%;" title="33 Line 31 minus line 32 = 34 Line 30 plus line 32 = 35 If line 23 and line 33 a">
+    <!-- 34 Line 30 plus line 32 = 35 If line 23 and line 33 are both -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L35" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:62.212%;width:11.274%;height:1.333%;" title="34 Line 30 plus line 32 = 35 If line 23 and line 33 are both positive, enter whi">
+    <!-- 35 If line 23 and line 33 are both positive, enter whichever -->
+    <input type="text" data-numeric="1" id="f_schedule8_p5_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:64.015%;width:11.274%;height:4.455%;" title="35 If line 23 and line 33 are both positive, enter whichever is less. If not, en">
+  </div>
+
+  <div id="pg-anchor-6"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page6.png" alt="Schedule 8 Page 6">
+    <!-- 37 If line 19 is positive or "0", enter the amount from line -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:7.955%;width:13.235%;height:2.94%;" title="37 If line 19 is positive or '0', enter the amount from line 18 at line 37 and l">
+    <!-- If line 19 is negative: 38 Enter the amount from line 19 as  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:12.879%;width:13.235%;height:1.424%;" title="If line 19 is negative: 38 Enter the amount from line 19 as a positive amount. I">
+    <!-- 38 Enter the amount from line 19 as a positive amount. 39 If -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:14.751%;width:11.275%;height:2.94%;" title="38 Enter the amount from line 19 as a positive amount. 39 If line 16 is positive">
+    <!-- 38 Enter the amount from line 19 as a positive amount. 39 If -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:14.751%;width:11.275%;height:2.94%;" title="38 Enter the amount from line 19 as a positive amount. 39 If line 16 is positive">
+    <!-- 39 amount from line 16 or line 38. If not, enter 0 . – ◄ + 4 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:18.182%;width:11.275%;height:1.424%;" title="39 amount from line 16 or line 38. If not, enter 0 . – ◄ + 40 Line 38 minus line">
+    <!-- 40 Line 38 minus line 39 = 41 Line 37 plus line 39 = If line -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:20.076%;width:11.275%;height:1.424%;" title="40 Line 38 minus line 39 = 41 Line 37 plus line 39 = If line 23 and line 40 are ">
+    <!-- 41 Line 37 plus line 39 = 42 If line 23 and line 40 are both -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:21.97%;width:11.274%;height:2.94%;" title="41 Line 37 plus line 39 = 42 If line 23 and line 40 are both positive, enter whi">
+    <!-- 42 the result of line 23 minus line 35. If not, enter 0 . +  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L43" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:25.379%;width:11.275%;height:1.424%;" title="42 the result of line 23 minus line 35. If not, enter 0 . + 43 Line 41 plus line">
+    <!-- 44 If line 23 is positive or "0", enter the amount from line -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L44" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:28.81%;width:13.235%;height:2.94%;" title="44 If line 23 is positive or '0', enter the amount from line 22 on line 44 and  ">
+    <!-- 45 Enter the amount from line 23 as a  positive amount. If l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L45" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.608%;top:35.249%;width:13.235%;height:1.424%;" title="45 Enter the amount from line 23 as a  positive amount. If line 20 is positive e">
+    <!-- 45 positive amount. 46 If line 20 is positive, enter whichev -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L46" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:37.143%;width:11.275%;height:2.94%;" title="45 positive amount. 46 If line 20 is positive, enter whichever is less:  amount ">
+    <!-- 46 amount from line 20 or line 45. If not, enter 0 . + 47 Li -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L47" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:40.552%;width:11.275%;height:1.424%;" title="46 amount from line 20 or line 45. If not, enter 0 . + 47 Line 44 plus line 46 =">
+    <!-- 46 amount from line 20 or line 45. If not, enter 0 . + 47 Li -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L47" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:40.552%;width:11.275%;height:1.424%;" title="46 amount from line 20 or line 45. If not, enter 0 . + 47 Line 44 plus line 46 =">
+    <!-- 47 Line 44 plus line 46 = ◄ + 48 Deduction for CPP enhanced  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L48" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:42.537%;width:11.275%;height:4.364%;" title="47 Line 44 plus line 46 = ◄ + 48 Deduction for CPP enhanced contributions on emp">
+    <!-- 1 Pensionable net self-employment earnings: (1) amount from  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:54.545%;width:13.235%;height:2.94%;" title="1 Pensionable net self-employment earnings: (1) amount from line 12200 of your r">
+    <!-- 1 amount from line 12200 of your return plus line 27 of your -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:57.954%;width:11.275%;height:2.94%;" title="1 amount from line 12200 of your return plus line 27 of your return 50373 2 Empl">
+    <!-- 50373 2 CPP contributions on (complete Form CPT20) + 3 CPP p -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:61.363%;width:11.275%;height:2.94%;" title="50373 2 CPP contributions on (complete Form CPT20) + 3 CPP pensionable earnings:">
+    <!-- 4 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:65.53%;width:13.235%;height:1.424%;" title="4 Enter whichever is less: amount from line D of Part 2 or line 3. ◄ 5 Amount fr">
+    <!-- 4 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:65.53%;width:13.235%;height:1.424%;" title="4 Enter whichever is less: amount from line D of Part 2 or line 3. ◄ 5 Amount fr">
+    <!-- 4 Enter whichever is less: amount from line D of Part 2 or l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:67.424%;width:11.275%;height:1.424%;" title="4 Enter whichever is less: amount from line D of Part 2 or line 3. ◄ 5 Amount fr">
+    <!-- 5 Amount from line B of Part 2 – 6 Earnings subject to secon -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:69.318%;width:11.275%;height:2.94%;" title="5 Amount from line B of Part 2 – 6 Earnings subject to second additional contrib">
+    <!-- 5 Amount from line B of Part 2 – 6 Earnings subject to secon -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:69.318%;width:11.275%;height:2.94%;" title="5 Amount from line B of Part 2 – 6 Earnings subject to second additional contrib">
+    <!-- 6 Line 4 minus line 5 (if negative, enter 0 ) = ◄ – 7 Line 4 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:72.727%;width:11.275%;height:1.424%;" title="6 Line 4 minus line 5 (if negative, enter 0 ) = ◄ – 7 Line 4 minus line 6 (if ne">
+    <!-- 7 Line 4 minus line 6 (if negative, enter 0 ) = 8 Amount fro -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:74.621%;width:11.275%;height:1.424%;" title="7 Line 4 minus line 6 (if negative, enter 0 ) = 8 Amount from line E of Part 2 –">
+    <!-- 8 Amount from line E of Part 2 – 9 Earnings subject to base  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p6_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:76.515%;width:11.275%;height:2.94%;" title="8 Amount from line E of Part 2 – 9 Earnings subject to base and first additional">
+  </div>
+
+  <div id="pg-anchor-7"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page7.png" alt="Schedule 8 Page 7">
+    <!-- 10 Required base contributions on CPP pensionable earnings:  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:31.372%;top:15.53%;width:13.235%;height:1.424%;" title="10 Required base contributions on CPP pensionable earnings: amount from line 9 ×">
+    <!-- and other earnings 10 Required base contributions on CPP pen -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:14.015%;width:13.235%;height:2.94%;" title="and other earnings 10 Required base contributions on CPP pensionable earnings: a">
+    <!-- 11 Required first additional contributions on CPP pensionabl -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:20.588%;top:18.939%;width:13.235%;height:1.424%;" title="11 Required first additional contributions on CPP pensionable earnings: amount f">
+    <!-- 10 amount from line 9 × 9.9% = (maximum $6,712.20) 11 Requir -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:17.424%;width:13.235%;height:2.94%;" title="10 amount from line 9 × 9.9% = (maximum $6,712.20) 11 Required first additional ">
+    <!-- 12 Required second additional contributions on CPP pensionab -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:20.588%;top:22.348%;width:13.235%;height:1.424%;" title="12 Required second additional contributions on CPP pensionable earnings: amount ">
+    <!-- 11 amount from line 9 × 2% = (maximum $1,356.00) 12 Required -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:20.833%;width:11.275%;height:2.94%;" title="11 amount from line 9 × 2% = (maximum $1,356.00) 12 Required second additional c">
+    <!-- 12 amount from line 6 × 8% = (maximum $792.00) + 13 Line 11  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:24.242%;width:11.275%;height:1.424%;" title="12 amount from line 6 × 8% = (maximum $792.00) + 13 Line 11 plus line 12 = ◄ + C">
+    <!-- 12 amount from line 6 × 8% = (maximum $792.00) + 13 Line 11  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:24.242%;width:11.275%;height:1.424%;" title="12 amount from line 6 × 8% = (maximum $792.00) + 13 Line 11 plus line 12 = ◄ + C">
+    <!-- 13 Line 11 plus line 12 = ◄ + 14 CPP contributions payable o -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:26.227%;width:11.275%;height:4.364%;" title="13 Line 11 plus line 12 = ◄ + 14 CPP contributions payable on self-employment in">
+    <!-- 15 Enter the result of the following calculation (in dollars -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.608%;top:34.849%;width:13.235%;height:1.424%;" title="15 Enter the result of the following calculation (in dollars and cents) on line ">
+    <!-- 15 Base CPP contributions on self-employment income and othe -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:31.909%;width:13.235%;height:4.364%;" title="15 Base CPP contributions on self-employment income and other earnings:  Enter t">
+    <!-- 15 amount from line 10 × 50% = 16 Amount from line 13 + Dedu -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:36.742%;width:11.275%;height:1.424%;" title="15 amount from line 10 × 50% = 16 Amount from line 13 + Deduction for CPP contri">
+    <!-- 16 Amount from line 13 + 17 Deduction for CPP contributions  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:38.728%;width:11.275%;height:4.364%;" title="16 Amount from line 13 + 17 Deduction for CPP contributions on self-employment i">
+    <!-- 1 Pensionable net self-employment earnings: (2) amount from  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:51.515%;width:13.235%;height:2.94%;" title="1 Pensionable net self-employment earnings: (2) amount from line 12200 of your r">
+    <!-- 1 amount from line 12200 of your return plus line 27 of your -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:54.924%;width:11.275%;height:2.94%;" title="1 amount from line 12200 of your return plus line 27 of your return 50373 2 Empl">
+    <!-- 50373 2 CPP contributions on (complete Form CPT20) + 50399 3 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:58.333%;width:11.275%;height:2.94%;" title="50373 2 CPP contributions on (complete Form CPT20) + 50399 3 Employment earnings">
+    <!-- 50399 3 CPP contributions on (complete Form CPT20) + 4 Add l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.857%;top:61.742%;width:11.275%;height:1.424%;" title="50399 3 CPP contributions on (complete Form CPT20) + 4 Add lines 1 to 3. =">
+    <!-- 5 Total actual base and first additional contributions from  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:64.394%;width:13.235%;height:1.424%;" title="5 Total actual base and first additional contributions from line 8 of Part 3 6 E">
+    <!-- 5 Total actual base and first additional contributions from  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:66.309%;width:11.275%;height:1.424%;" title="5 Total actual base and first additional contributions from line 8 of Part 3 6 E">
+    <!-- 6 Enter the amount from line 20 of Part 3 if positive. If no -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:68.203%;width:11.275%;height:1.424%;" title="6 Enter the amount from line 20 of Part 3 if positive. If not, enter 0 . – 7 Lin">
+    <!-- 8 Enter the amount from line 20 of Part 3 as a positive amou -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:74.621%;width:13.235%;height:1.424%;" title="8 Enter the amount from line 20 of Part 3 as a positive amount. 9 Enter whicheve">
+    <!-- 8 Enter the amount from line 20 of Part 3 as a positive amou -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:76.537%;width:11.275%;height:1.424%;" title="8 Enter the amount from line 20 of Part 3 as a positive amount. 9 Enter whicheve">
+    <!-- 9 Enter whichever is less: amount from line 23 of Part 3 or  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p7_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:78.431%;width:11.275%;height:1.424%;" title="9 Enter whichever is less: amount from line 23 of Part 3 or line 8. + 10 Line 7 ">
+  </div>
+
+  <div id="pg-anchor-8"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page8.png" alt="Schedule 8 Page 8">
+    <!-- 11 Total actual second additional contributions from line 21 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:10.227%;width:13.235%;height:1.424%;" title="11 Total actual second additional contributions from line 21 of Part 3 12 Enter ">
+    <!-- 11 Total actual second additional contributions from line 21 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.868%;top:12.1%;width:11.275%;height:1.424%;" title="11 Total actual second additional contributions from line 21 of Part 3 12 Enter ">
+    <!-- 12 Enter the amount from line 23 of Part 3 if positive. If n -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.868%;top:13.994%;width:11.275%;height:1.424%;" title="12 Enter the amount from line 23 of Part 3 if positive. If not, enter 0 . – 13 L">
+    <!-- 14 Enter the amount from line 23 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:20.455%;width:13.235%;height:1.424%;" title="14 Enter the amount from line 23 of Part 3 as a positive amount. 15 Enter whiche">
+    <!-- 14 Enter the amount from line 23 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:22.349%;width:11.275%;height:1.424%;" title="14 Enter the amount from line 23 of Part 3 as a positive amount. 15 Enter whiche">
+    <!-- 15 Enter whichever is less: amount from line 20 of Part 3 or -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:24.243%;width:11.275%;height:1.424%;" title="15 Enter whichever is less: amount from line 20 of Part 3 or line 14. + 16 Line ">
+    <!-- 17 Amount from line B of Part 2 18 Amount from line E of Par -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.908%;top:26.894%;width:13.235%;height:1.424%;" title="17 Amount from line B of Part 2 18 Amount from line E of Part 2 –">
+    <!-- 17 Amount from line B of Part 2 18 Amount from line E of Par -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L18" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:28.788%;width:11.275%;height:1.424%;" title="17 Amount from line B of Part 2 18 Amount from line E of Part 2 – 19 Line 17 min">
+    <!-- 18 Amount from line E of Part 2 – 19 Line 17 minus line 18 ( -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:30.682%;width:11.275%;height:1.424%;" title="18 Amount from line E of Part 2 – 19 Line 17 minus line 18 (if negative, enter '">
+    <!-- 19 Line 17 minus line 18 (if negative, enter 0 ) (maximum $6 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.614%;top:32.576%;width:13.235%;height:1.424%;" title="19 Line 17 minus line 18 (if negative, enter 0 ) (maximum $67,800)  = 20 Amount ">
+    <!-- 19 Line 17 minus line 18 (if negative, enter 0 ) (maximum $6 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:32.576%;width:11.275%;height:1.424%;" title="19 Line 17 minus line 18 (if negative, enter 0 ) (maximum $67,800)  = 20 Amount ">
+    <!-- 20 Amount from line 10 × 16.80672 = – 21 Line 19 minus line  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:34.47%;width:11.275%;height:1.424%;" title="20 Amount from line 10 × 16.80672 = – 21 Line 19 minus line 20 (if negative, ent">
+    <!-- 22 Enter whichever is less: amount from line 4 or line 21. I -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.908%;top:37.121%;width:13.235%;height:1.424%;" title="22 Enter whichever is less: amount from line 4 or line 21. If the amount from li">
+    <!-- 23 Amount from line 18 24 Amount from line 1 of Part 3 – -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.261%;top:43.182%;width:13.235%;height:1.424%;" title="23 Amount from line 18 24 Amount from line 1 of Part 3 –">
+    <!-- 23 Amount from line 18 24 Amount from line 1 of Part 3 – Lin -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L24" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.221%;top:45.076%;width:11.275%;height:1.424%;" title="23 Amount from line 18 24 Amount from line 1 of Part 3 – Line 23 minus line 24">
+    <!-- 24 Amount from line 1 of Part 3 – 25 Line 23 minus line 24   -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L25" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.221%;top:46.97%;width:11.275%;height:2.94%;" title="24 Amount from line 1 of Part 3 – 25 Line 23 minus line 24  (if negative, enter ">
+    <!-- 25 (if negative, enter 0  on lines 25 and 29, and continue a -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L26" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.614%;top:50.379%;width:13.235%;height:1.424%;" title="25 (if negative, enter 0  on lines 25 and 29, and continue at line 30) = 26 Amou">
+    <!-- 26 Amount from line 4 27 Amount from line 19 – 28 Line 26 mi -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L27" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:46.574%;top:52.273%;width:11.275%;height:1.424%;" title="26 Amount from line 4 27 Amount from line 19 – 28 Line 26 minus line 27 (if nega">
+    <!-- 27 Amount from line 19 – 28 Line 26 minus line 27 (if negati -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L28" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:46.574%;top:54.166%;width:11.275%;height:1.424%;" title="27 Amount from line 19 – 28 Line 26 minus line 27 (if negative, enter '0') = ◄ –">
+    <!-- 27 Amount from line 19 – 28 Line 26 minus line 27 (if negati -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L28" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.221%;top:54.166%;width:11.275%;height:1.424%;" title="27 Amount from line 19 – 28 Line 26 minus line 27 (if negative, enter '0') = ◄ –">
+    <!-- 28 Line 26 minus line 27 (if negative, enter 0 ) = ◄ – 29 Li -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.221%;top:56.06%;width:11.275%;height:1.424%;" title="28 Line 26 minus line 27 (if negative, enter 0 ) = ◄ – 29 Line 25 minus line 28 ">
+    <!-- 28 Line 26 minus line 27 (if negative, enter 0 ) = ◄ – 29 Li -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.868%;top:56.06%;width:11.275%;height:1.424%;" title="28 Line 26 minus line 27 (if negative, enter 0 ) = ◄ – 29 Line 25 minus line 28 ">
+    <!-- 29 Line 25 minus line 28 (if negative, enter 0 ) = ◄ – 30 Se -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L30" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.868%;top:57.955%;width:11.275%;height:2.94%;" title="29 Line 25 minus line 28 (if negative, enter 0 ) = ◄ – 30 Self-employment income">
+    <!-- 31 Amount from line 4 32 Amount from line 2 of Part 3 + -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L31" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:62.121%;width:13.235%;height:1.424%;" title="31 Amount from line 4 32 Amount from line 2 of Part 3 +">
+    <!-- 31 Amount from line 4 32 Amount from line 2 of Part 3 + 33 L -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L32" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:64.015%;width:11.275%;height:1.424%;" title="31 Amount from line 4 32 Amount from line 2 of Part 3 + 33 Line 31 plus line 32 ">
+    <!-- 32 Amount from line 2 of Part 3 + 33 Line 31 plus line 32 =  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L33" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:65.909%;width:11.275%;height:1.424%;" title="32 Amount from line 2 of Part 3 + 33 Line 31 plus line 32 = If h f li 33 i h li ">
+    <!-- 34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L34" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:72.349%;width:13.235%;height:1.424%;" title="34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4% = –">
+    <!-- 34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L35" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:31.372%;top:74.243%;width:13.235%;height:1.424%;" title="34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4% = – 36 Line 34 minus">
+    <!-- 34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L35" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:74.243%;width:11.275%;height:1.424%;" title="34 Amount from line C of Part 2 35 Amount from line 16 ÷ 4% = – 36 Line 34 minus">
+    <!-- 35 Amount from line 16 ÷ 4% = – 36 Line 34 minus line 35 = -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:76.137%;width:11.275%;height:1.424%;" title="35 Amount from line 16 ÷ 4% = – 36 Line 34 minus line 35 =">
+    <!-- 37 Amount from line 4 38 Amount from line 25 (if any) – -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:78.788%;width:13.235%;height:1.424%;" title="37 Amount from line 4 38 Amount from line 25 (if any) –">
+    <!-- 37 Amount from line 4 38 Amount from line 25 (if any) – 39 L -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:80.682%;width:11.275%;height:1.424%;" title="37 Amount from line 4 38 Amount from line 25 (if any) – 39 Line 37 minus line 38">
+    <!-- 38 Amount from line 25 (if any) – 39 Line 37 minus line 38 = -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:82.576%;width:11.275%;height:1.424%;" title="38 Amount from line 25 (if any) – 39 Line 37 minus line 38 = 40 Amount from line">
+    <!-- 39 Line 37 minus line 38 = 40 Amount from line 30 – 41 Line  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:84.47%;width:11.275%;height:1.424%;" title="39 Line 37 minus line 38 = 40 Amount from line 30 – 41 Line 39 minus line 40 =">
+    <!-- 40 Amount from line 30 – 41 Line 39 minus line 40 = -->
+    <input type="text" data-numeric="1" id="f_schedule8_p8_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:86.364%;width:11.275%;height:1.424%;" title="40 Amount from line 30 – 41 Line 39 minus line 40 =">
+  </div>
+
+  <div id="pg-anchor-9"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page9.png" alt="Schedule 8 Page 9">
+    <!-- 42 Self-employment income and other earnings subject to seco -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:10.227%;width:13.235%;height:2.94%;" title="42 Self-employment income and other earnings subject to second additional contri">
+    <!-- 43 Required base contributions on CPP pensionable earnings:  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L43" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:31.373%;top:24.242%;width:13.235%;height:1.424%;" title="43 Required base contributions on CPP pensionable earnings: amount from line 30 ">
+    <!-- self employment income, and other earnings 43 Required base  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L43" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:22.727%;width:13.235%;height:2.94%;" title="self employment income, and other earnings 43 Required base contributions on CPP">
+    <!-- 44 Required first additional contributions on CPP pensionabl -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L44" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:21.569%;top:27.651%;width:13.235%;height:1.424%;" title="44 Required first additional contributions on CPP pensionable earnings: amount f">
+    <!-- 43 amount from line 30 × 9.9% = (maximum $6,712.20) 44 Requi -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L44" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:26.136%;width:13.235%;height:2.94%;" title="43 amount from line 30 × 9.9% = (maximum $6,712.20) 44 Required first additional">
+    <!-- 45 Required second additional contributions on CPP pensionab -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L45" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:21.569%;top:31.06%;width:13.235%;height:1.424%;" title="45 Required second additional contributions on CPP pensionable earnings: amount ">
+    <!-- 44 amount from line 30 × 2% = (maximum $1,356.00) 45 Require -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L45" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:29.545%;width:11.275%;height:2.94%;" title="44 amount from line 30 × 2% = (maximum $1,356.00) 45 Required second additional ">
+    <!-- 45 amount from line 42 × 8% = (maximum $792.00) + 46 Line 44 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L46" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:32.955%;width:11.275%;height:1.424%;" title="45 amount from line 42 × 8% = (maximum $792.00) + 46 Line 44 plus line 45 = ◄ + ">
+    <!-- 45 amount from line 42 × 8% = (maximum $792.00) + 46 Line 44 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L46" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:32.955%;width:11.275%;height:1.424%;" title="45 amount from line 42 × 8% = (maximum $792.00) + 46 Line 44 plus line 45 = ◄ + ">
+    <!-- 46 Line 44 plus line 45 = ◄ + 47 Line 43 plus line 46 = 48 A -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L47" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:34.849%;width:11.275%;height:1.424%;" title="46 Line 44 plus line 45 = ◄ + 47 Line 43 plus line 46 = 48 Amount from line 24 o">
+    <!-- 47 Line 43 plus line 46 = 48 Amount from line 24 of Part 3 ( -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L48" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.608%;top:36.742%;width:13.235%;height:1.424%;" title="47 Line 43 plus line 46 = 48 Amount from line 24 of Part 3 (if positive) × 2 = –">
+    <!-- 47 Line 43 plus line 46 = 48 Amount from line 24 of Part 3 ( -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L48" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:36.742%;width:11.275%;height:1.424%;" title="47 Line 43 plus line 46 = 48 Amount from line 24 of Part 3 (if positive) × 2 = –">
+    <!-- 48 Amount from line 24 of Part 3 (if positive) × 2 = – 49 CP -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L49" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:38.727%;width:11.275%;height:4.364%;" title="48 Amount from line 24 of Part 3 (if positive) × 2 = – 49 CPP contributions paya">
+    <!-- 50 Enter the result of the following calculation (in dollars -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L50" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.608%;top:47.349%;width:13.235%;height:1.424%;" title="50 Enter the result of the following calculation (in dollars and cents) on line ">
+    <!-- 50 CPP overpayment:  Enter the result of the following calcu -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L50" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:44.409%;width:13.235%;height:4.364%;" title="50 CPP overpayment:  Enter the result of the following calculation (in dollars a">
+    <!-- 51 If line 16 of Part 3 is positive or "0", enter the amount -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L51" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:50.091%;width:13.235%;height:2.849%;" title="51 If line 16 of Part 3 is positive or '0', enter the amount from line 11 of Par">
+    <!-- If line 16 of Part 3 is negative: 52 Enter the amount from l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L52" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:55.303%;width:13.235%;height:1.424%;" title="If line 16 of Part 3 is negative: 52 Enter the amount from line 16 of Part 3 as ">
+    <!-- 52 Enter the amount from line 16 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L53" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:57.197%;width:11.274%;height:4.455%;" title="52 Enter the amount from line 16 of Part 3 as a positive amount. 53 If line 16 o">
+    <!-- 52 Enter the amount from line 16 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L53" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:57.197%;width:11.275%;height:4.455%;" title="52 Enter the amount from line 16 of Part 3 as a positive amount. 53 If line 16 o">
+    <!-- 53 enter 0 . – ◄ + 54 Line 52 minus line 53 = 55 Line 51 plu -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L54" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:62.121%;width:11.274%;height:1.424%;" title="53 enter 0 . – ◄ + 54 Line 52 minus line 53 = 55 Line 51 plus line 53 =">
+    <!-- 54 Line 52 minus line 53 = 55 Line 51 plus line 53 = 56 If l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L55" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:64.015%;width:11.274%;height:1.424%;" title="54 Line 52 minus line 53 = 55 Line 51 plus line 53 = 56 If line 23 of Part 3 and">
+    <!-- 55 Line 51 plus line 53 = 56 If line 23 of Part 3 and line 5 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L56" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:66.0%;width:11.274%;height:1.333%;" title="55 Line 51 plus line 53 = 56 If line 23 of Part 3 and line 54 are both positive,">
+    <!-- 56 If line 23 of Part 3 and line 54 are both positive, enter -->
+    <input type="text" data-numeric="1" id="f_schedule8_p9_L57" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:67.894%;width:11.274%;height:4.364%;" title="56 If line 23 of Part 3 and line 54 are both positive, enter whichever is less. ">
+  </div>
+
+  <div id="pg-anchor-10"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page10.png" alt="Schedule 8 Page 10">
+    <!-- 58 If line 19 of Part 3 is positive or "0", enter the amount -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L58" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.902%;top:10.227%;width:13.235%;height:2.94%;" title="58 If line 19 of Part 3 is positive or '0', enter the amount from line 12 of Par">
+    <!-- If line 19 of Part 3 is negative: 59 Enter the amount from l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L59" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:15.53%;width:13.235%;height:1.424%;" title="If line 19 of Part 3 is negative: 59 Enter the amount from line 19 of Part 3 as ">
+    <!-- 59 Enter the amount from line 19 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L60" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:17.403%;width:11.275%;height:2.94%;" title="59 Enter the amount from line 19 of Part 3 as a positive amount. 60 If line 16 o">
+    <!-- 59 Enter the amount from line 19 of Part 3 as a positive amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L60" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:17.402%;width:11.275%;height:2.94%;" title="59 Enter the amount from line 19 of Part 3 as a positive amount. 60 If line 16 o">
+    <!-- 60 amount from line 16 of Part 3 or line 59. If not, enter 0 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L61" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.216%;top:20.834%;width:11.275%;height:1.424%;" title="60 amount from line 16 of Part 3 or line 59. If not, enter 0 . – ◄ + 61 Line 59 ">
+    <!-- 61 Line 59 minus line 60 = 62 Line 58 plus line 60 = If line -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L62" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:22.727%;width:11.275%;height:1.424%;" title="61 Line 59 minus line 60 = 62 Line 58 plus line 60 = If line 23 of Part 3 and li">
+    <!-- 62 Line 58 plus line 60 = 63 If line 23 of Part 3 and line 6 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L63" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:24.621%;width:11.274%;height:2.94%;" title="62 Line 58 plus line 60 = 63 If line 23 of Part 3 and line 61 are both positive,">
+    <!-- 63 the result of line 23 of Part 3 minus line 56. If not, en -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L64" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:28.03%;width:11.275%;height:1.424%;" title="63 the result of line 23 of Part 3 minus line 56. If not, enter 0 . + 64 Line 62">
+    <!-- 65 If line 23 of Part 3 is positive or "0", enter the amount -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L65" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.255%;top:32.197%;width:13.235%;height:2.94%;" title="65 If line 23 of Part 3 is positive or '0', enter the amount from line 22 of Par">
+    <!-- 66 Enter the amount from line 23 of Part 3 as  a positive am -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L66" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.608%;top:39.015%;width:13.235%;height:1.424%;" title="66 Enter the amount from line 23 of Part 3 as  a positive amount. If line 20 of ">
+    <!-- 66 a positive amount. 67 If line 20 of Part 3 is positive, e -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L67" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:40.909%;width:11.275%;height:2.94%;" title="66 a positive amount. 67 If line 20 of Part 3 is positive, enter whichever is le">
+    <!-- 67 amount from line 20 of Part 3 or line 66. If not, enter 0 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L68" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.215%;top:44.318%;width:11.275%;height:1.424%;" title="67 amount from line 20 of Part 3 or line 66. If not, enter 0 . + 68 Line 65 plus">
+    <!-- 67 amount from line 20 of Part 3 or line 66. If not, enter 0 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L68" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.863%;top:44.318%;width:11.275%;height:1.424%;" title="67 amount from line 20 of Part 3 or line 66. If not, enter 0 . + 68 Line 65 plus">
+    <!-- 68 Line 65 plus line 67 = ◄ + 69 Deduction for CPP enhanced  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L69" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.862%;top:46.303%;width:11.275%;height:4.364%;" title="68 Line 65 plus line 67 = ◄ + 69 Deduction for CPP enhanced contributions on emp">
+    <!-- 70 Enter the result of the following calculation (in dollars -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L70" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.615%;top:54.924%;width:13.235%;height:1.424%;" title="70 Enter the result of the following calculation (in dollars and cents) on line ">
+    <!-- 70 Base CPP contributions through self-employment income and -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L70" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.909%;top:51.985%;width:13.235%;height:4.364%;" title="70 Base CPP contributions through self-employment income and other earnings:  En">
+    <!-- 70 amount from line 43 × 50% = 71 Amount from line 44 × 50%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L71" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.615%;top:56.818%;width:13.235%;height:1.424%;" title="70 amount from line 43 × 50% = 71 Amount from line 44 × 50% = + 72 Line 70 plus ">
+    <!-- 70 amount from line 43 × 50% = 71 Amount from line 44 × 50%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L71" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.87%;top:56.819%;width:11.275%;height:1.424%;" title="70 amount from line 43 × 50% = 71 Amount from line 44 × 50% = + 72 Line 70 plus ">
+    <!-- 71 Amount from line 44 × 50% = + 72 Line 70 plus line 71 = 7 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L72" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:58.712%;width:11.275%;height:1.424%;" title="71 Amount from line 44 × 50% = + 72 Line 70 plus line 71 = 73 Enter the amount f">
+    <!-- 72 Line 70 plus line 71 = 73 Enter the amount from line 24 o -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L73" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.869%;top:60.606%;width:11.275%;height:1.424%;" title="72 Line 70 plus line 71 = 73 Enter the amount from line 24 of Part 3 if positive">
+    <!-- 73 Enter the amount from line 24 of Part 3 if positive. If n -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L74" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.87%;top:62.5%;width:11.275%;height:1.424%;" title="73 Enter the amount from line 24 of Part 3 if positive. If not, enter 0 . – 74 L">
+    <!-- 75 A Enter whichever is less:  amount from line 72 or line 7 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L75" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.615%;top:65.152%;width:13.235%;height:2.94%;" title="75 A Enter whichever is less:  amount from line 72 or line 73. × 83.1933% = 76 A">
+    <!-- 75 A Enter whichever is less:  amount from line 72 or line 7 -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L75" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.909%;top:66.667%;width:13.235%;height:1.424%;" title="75 A Enter whichever is less:  amount from line 72 or line 73. × 83.1933% = 76 A">
+    <!-- 75 A amount from line 72 or line 73. × 83.1933% = 76 Amount  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L76" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:46.575%;top:68.561%;width:11.275%;height:1.424%;" title="75 A amount from line 72 or line 73. × 83.1933% = 76 Amount from line 75 – 77 Am">
+    <!-- 76 Amount from line 75 – 77 Amount A minus line 76 = -->
+    <input type="text" data-numeric="1" id="f_schedule8_p10_L77" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:46.575%;top:70.455%;width:11.275%;height:1.424%;" title="76 Amount from line 75 – 77 Amount A minus line 76 =">
+  </div>
+
+  <div id="pg-anchor-11"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/schedule8_page11.png" alt="Schedule 8 Page 11">
+    <!-- 78 Amount from line 70 79 Amount from line 75 – -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L79" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.239%;top:10.233%;width:13.235%;height:1.424%;" title="78 Amount from line 70 79 Amount from line 75 –">
+    <!-- 78 Amount from line 70 79 Amount from line 75 – 80 Line 78 m -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L80" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:12.127%;width:11.275%;height:1.424%;" title="78 Amount from line 70 79 Amount from line 75 – 80 Line 78 minus line 79 = ◄">
+    <!-- 79 Amount from line 75 – 80 Line 78 minus line 79 = ◄ 81 Amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L81" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:14.021%;width:11.275%;height:1.424%;" title="79 Amount from line 75 – 80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ +">
+    <!-- 79 Amount from line 75 – 80 Line 78 minus line 79 = ◄ 81 Amo -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L81" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:79.892%;top:14.021%;width:13.235%;height:1.424%;" title="79 Amount from line 75 – 80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ +">
+    <!-- 80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ + 82 A -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L82" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.239%;top:15.915%;width:13.235%;height:1.424%;" title="80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ + 82 Amount from line 77 –">
+    <!-- 80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ + 82 A -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L82" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.853%;top:15.916%;width:11.275%;height:1.424%;" title="80 Line 78 minus line 79 = ◄ 81 Amount from line 71 ◄ + 82 Amount from line 77 –">
+    <!-- 81 Amount from line 71 ◄ + 82 Amount from line 77 – 83 Line  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L83" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:17.809%;width:11.275%;height:1.424%;" title="81 Amount from line 71 ◄ + 82 Amount from line 77 – 83 Line 81 minus line 82 = ◄">
+    <!-- 82 Amount from line 77 – 83 Line 81 minus line 82 = ◄ + 84 A -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L84" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:19.703%;width:11.275%;height:1.424%;" title="82 Amount from line 77 – 83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 ×">
+    <!-- 82 Amount from line 77 – 83 Line 81 minus line 82 = ◄ + 84 A -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L84" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.847%;top:19.703%;width:11.275%;height:1.424%;" title="82 Amount from line 77 – 83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 ×">
+    <!-- 83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 × 50%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L85" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:44.592%;top:21.597%;width:13.235%;height:1.424%;" title="83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 × 50% = + 85 Amount from l">
+    <!-- 83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 × 50%  -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L85" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.847%;top:21.597%;width:11.275%;height:1.424%;" title="83 Line 81 minus line 82 = ◄ + 84 Amount from line 45 × 50% = + 85 Amount from l">
+    <!-- 84 Amount from line 45 × 50% = + 85 Amount from line 84 If l -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L86" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:62.239%;top:23.491%;width:13.235%;height:1.424%;" title="84 Amount from line 45 × 50% = + 85 Amount from line 84 If line 74 is negative e">
+    <!-- 85 Amount from line 84 86 If line 74 is negative, enter it a -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L87" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:25.384%;width:11.275%;height:4.455%;" title="85 Amount from line 84 86 If line 74 is negative, enter it as a positive amount.">
+    <!-- 86 and continue at line 88. – 87 Line 85 minus line 86 (if n -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L88" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:64.2%;top:30.309%;width:11.275%;height:1.424%;" title="86 and continue at line 88. – 87 Line 85 minus line 86 (if negative, enter '0') ">
+    <!-- 86 and continue at line 88. – 87 Line 85 minus line 86 (if n -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L88" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.847%;top:30.309%;width:11.275%;height:1.424%;" title="86 and continue at line 88. – 87 Line 85 minus line 86 (if negative, enter '0') ">
+    <!-- 87 Line 85 minus line 86 (if negative, enter 0 ) = ◄ + 88 De -->
+    <input type="text" data-numeric="1" id="f_schedule8_p11_L89" class="pdf-input" value="" inputmode="decimal" oninput="recalcS8(); autoSave();" style="left:81.847%;top:32.294%;width:11.275%;height:4.364%;" title="87 Line 85 minus line 86 (if negative, enter 0 ) = ◄ + 88 Deduction for CPP enha">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_schedule8_autosave';
+const FORM_INPUT_IDS = [
+  'f_schedule8_p2_L50372',
+  'f_schedule8_p2_L50374',
+  'f_schedule8_p3_number_1',
+  'f_schedule8_p3_amount_2',
+  'f_schedule8_p3_amount_3',
+  'f_schedule8_p3_amount_4',
+  'f_schedule8_p3_amount_5',
+  'f_schedule8_p4_L1',
+  'f_schedule8_p4_L2',
+  'f_schedule8_p4_L2',
+  'f_schedule8_p4_L3',
+  'f_schedule8_p4_L4',
+  'f_schedule8_p4_L4',
+  'f_schedule8_p4_L5',
+  'f_schedule8_p4_L6',
+  'f_schedule8_p4_L7',
+  'f_schedule8_p4_L8',
+  'f_schedule8_p4_L9',
+  'f_schedule8_p4_L9',
+  'f_schedule8_p4_L10',
+  'f_schedule8_p4_L11',
+  'f_schedule8_p4_L11',
+  'f_schedule8_p4_L12',
+  'f_schedule8_p4_L12',
+  'f_schedule8_p4_L13',
+  'f_schedule8_p4_L14',
+  'f_schedule8_p4_L15',
+  'f_schedule8_p4_L16',
+  'f_schedule8_p4_L17',
+  'f_schedule8_p4_L18',
+  'f_schedule8_p4_L19',
+  'f_schedule8_p4_L19',
+  'f_schedule8_p4_L20',
+  'f_schedule8_p4_L21',
+  'f_schedule8_p4_L22',
+  'f_schedule8_p4_L22',
+  'f_schedule8_p4_L23',
+  'f_schedule8_p4_L23',
+  'f_schedule8_p4_L24',
+  'f_schedule8_p5_L25',
+  'f_schedule8_p5_L26',
+  'f_schedule8_p5_L27',
+  'f_schedule8_p5_L28',
+  'f_schedule8_p5_L29',
+  'f_schedule8_p5_L30',
+  'f_schedule8_p5_L31',
+  'f_schedule8_p5_L32',
+  'f_schedule8_p5_L32',
+  'f_schedule8_p5_L33',
+  'f_schedule8_p5_L34'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcS8() using field IDs listed in FORM_INPUT_IDS
+function recalcS8() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_schedule8_p1_Ltotal', g('f_schedule8_p1_L1') + g('f_schedule8_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcS8();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcS8();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcS8();
+});
+</script>
+{% endblock %}

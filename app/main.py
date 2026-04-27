@@ -246,6 +246,39 @@ async def compare(request: Request):
     return templates.TemplateResponse(request, "compare.html", _ctx(request))
 
 
+# ── PDF.js hybrid viewer (live PDF rendered in browser) ───────────────────────
+
+_PDFJS_FORMS: dict[str, dict] = {
+    "t1":           {"number": "T1",        "title": "General Income and Benefit Return",       "filename": "t1-2025.pdf"},
+    "bc428":        {"number": "BC428",      "title": "British Columbia Tax",                    "filename": "bc428-2025.pdf"},
+    "schedule3":    {"number": "Schedule 3", "title": "Capital Gains (or Losses)",               "filename": "schedule3-2025.pdf"},
+    "schedule5":    {"number": "Schedule 5", "title": "Amounts for Spouse / Dependants",         "filename": "schedule5-2025.pdf"},
+    "schedule7":    {"number": "Schedule 7", "title": "RRSP, PRPP and SPP Contributions",        "filename": "schedule7-2025.pdf"},
+    "schedule8":    {"number": "Schedule 8", "title": "CPP/QPP Contributions",                   "filename": "schedule8-2025.pdf"},
+    "schedule9":    {"number": "Schedule 9", "title": "Donations and Gifts",                     "filename": "schedule9-2025.pdf"},
+    "t777":         {"number": "T777",       "title": "Statement of Employment Expenses",         "filename": "t777-2025.pdf"},
+    "t2209":        {"number": "T2209",      "title": "Federal Foreign Tax Credits",              "filename": "t2209-2025.pdf"},
+    "worksheet_fed":{"number": "5000-D1",    "title": "Federal Worksheet",                        "filename": "worksheet-fed-2025.pdf"},
+}
+
+
+@app.get("/tax/live/{form_key}", response_class=HTMLResponse)
+async def pdfjs_viewer(form_key: str, request: Request):
+    """PDF.js hybrid viewer — renders the actual CRA PDF with interactive fields."""
+    meta = _PDFJS_FORMS.get(form_key)
+    if not meta:
+        raise HTTPException(404, f"Unknown form '{form_key}'")
+    ctx = _ctx(
+        request,
+        form_key=form_key,
+        form_number=meta["number"],
+        form_title=meta["title"],
+        pdf_filename=meta["filename"],
+        pdf_url=f"{settings.ROOT_PATH}/static/forms/{meta['filename']}",
+    )
+    return templates.TemplateResponse(request, "pdfjs_viewer.html", ctx)
+
+
 # ── User data API (server-side per-user persistence via Archive) ──────────────
 
 _ALLOWED_FORMS = {"t1", "bc428", "schedule9", "bc479", "schedule3",

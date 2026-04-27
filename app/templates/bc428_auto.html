@@ -1,0 +1,575 @@
+{% extends "base.html" %}
+{% block title %}BC428 &mdash; British Columbia Tax 2025{% endblock %}
+
+{% block content %}
+<style>
+.pdf-form-container { max-width: 850px; margin: 0 auto; }
+.pdf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #26374a; padding: 6px 12px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.pdf-nav a {
+  color: #fff; text-decoration: none;
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 12px; border: 1px solid rgba(255,255,255,.35);
+}
+.pdf-nav a:hover { background: rgba(255,255,255,.18); }
+.pdf-page { position: relative; width: 100%; margin-bottom: 8px; }
+.pdf-bg { width: 100%; display: block; }
+.pdf-input {
+  position: absolute;
+  background: rgba(255,255,200,0.75);
+  border: 1px solid #0066cc;
+  font-size: 0.60em;
+  padding: 0 2px;
+  text-align: right;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  line-height: 1;
+}
+.pdf-input:focus {
+  background: rgba(255,255,200,1);
+  border-color: #003399;
+  outline: 2px solid rgba(0,51,153,0.4);
+  z-index: 10;
+}
+.pdf-input[readonly] {
+  background: rgba(200,230,255,0.65);
+  border-color: #888;
+  cursor: default;
+}
+.pdf-input.text-left { text-align: left; }
+</style>
+
+<div class="cra-form pdf-form-container">
+
+  <div class="form-header">
+    <div>
+      <div class="form-title">BC428 &mdash; British Columbia Tax</div>
+      <div class="form-subtitle">Form BC428 &nbsp;&middot;&nbsp; 2025 tax year</div>
+    </div>
+    <div class="form-number" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <strong>BC428-2025</strong>
+      Canada Revenue Agency
+      <a class="cra-orig-badge"
+         href="https://www.canada.ca/en/revenue-agency/services/forms-publications.html"
+         target="_blank" rel="noopener" title="Open official CRA BC428 PDF">
+        <svg class="icon"><use href="#ic-external"/></svg> Official CRA form
+      </a>
+    </div>
+  </div>
+  <div class="form-meta-bar">
+    <span>Protected B when completed</span>
+    <span>2025 tax year</span>
+  </div>
+
+  <nav class="pdf-nav">
+    <a href="#pg-anchor-1">Page 1</a>
+    <a href="#pg-anchor-2">Page 2</a>
+    <a href="#pg-anchor-3">Page 3</a>
+  </nav>
+
+  <div id="pg-anchor-1"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page1.png" alt="BC428 Page 1">
+    <!-- 1 Enter your taxable income from line 26000 of your return.  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L1" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:15.53%;width:13.235%;height:1.424%;" title="1 Enter your taxable income from line 26000 of your return. U h f li 1 l h i l b">
+    <!-- $49,279 or less   Amount from line 1 – Line 2 minus line 3 m -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:32.843%;top:24.242%;width:13.235%;height:1.424%;" title="$49,279 or less   Amount from line 1 – Line 2 minus line 3 more than $98,560  – ">
+    <!-- Amount from line 1 – Line 2 minus line 3  (cannot be negativ -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:26.136%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 2 minus line 3  (cannot be negative) = – = – = – = 2 3">
+    <!-- – Line 2 minus line 3  (cannot be negative) = × Li 4 lti li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:28.03%;width:11.275%;height:1.424%;" title="– Line 2 minus line 3  (cannot be negative) = × Li 4 lti li d b – = × – = × – = ">
+    <!-- (cannot be negative) = × Line 4 multiplied by  the percentag -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:29.924%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 4 multiplied by  the percentage from line 5 = = × ">
+    <!-- × Line 4 multiplied by  the percentage from line 5 = + Li 6  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:31.818%;width:11.275%;height:1.424%;" title="× Line 4 multiplied by  the percentage from line 5 = + Li 6 l li 7 × = + × = + ×">
+    <!-- the percentage from line 5 = + British Columbia tax Line 6 p -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:33.712%;width:11.275%;height:1.515%;" title="the percentage from line 5 = + British Columbia tax Line 6 plus line 7 = + = + =">
+    <!-- + British Columbia tax  on taxable income Line 6 plus line 7 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:35.606%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 6 plus line 7 = + = + = + = 7 8 I">
+    <!-- $49,279 or less   Amount from line 1 – Line 2 minus line 3 m -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:48.529%;top:24.242%;width:13.235%;height:1.424%;" title="$49,279 or less   Amount from line 1 – Line 2 minus line 3 more than $98,560  – ">
+    <!-- Amount from line 1 – Line 2 minus line 3  (cannot be negativ -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:26.136%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 2 minus line 3  (cannot be negative) = – = – = – = 2 3">
+    <!-- – Line 2 minus line 3  (cannot be negative) = × Li 4 lti li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:28.03%;width:11.275%;height:1.424%;" title="– Line 2 minus line 3  (cannot be negative) = × Li 4 lti li d b – = × – = × – = ">
+    <!-- (cannot be negative) = × Line 4 multiplied by  the percentag -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:29.924%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 4 multiplied by  the percentage from line 5 = = × ">
+    <!-- × Line 4 multiplied by  the percentage from line 5 = + Li 6  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:31.818%;width:11.275%;height:1.424%;" title="× Line 4 multiplied by  the percentage from line 5 = + Li 6 l li 7 × = + × = + ×">
+    <!-- the percentage from line 5 = + British Columbia tax Line 6 p -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:33.712%;width:11.275%;height:1.515%;" title="the percentage from line 5 = + British Columbia tax Line 6 plus line 7 = + = + =">
+    <!-- + British Columbia tax  on taxable income Line 6 plus line 7 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:35.606%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 6 plus line 7 = + = + = + = 7 8 I">
+    <!-- $49,279 or less   Amount from line 1 – Line 2 minus line 3 m -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:24.242%;width:13.235%;height:1.424%;" title="$49,279 or less   Amount from line 1 – Line 2 minus line 3 more than $98,560  – ">
+    <!-- Amount from line 1 – Line 2 minus line 3  (cannot be negativ -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:26.136%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 2 minus line 3  (cannot be negative) = – = – = – = 2 3">
+    <!-- – Line 2 minus line 3  (cannot be negative) = × Li 4 lti li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:28.03%;width:11.275%;height:1.424%;" title="– Line 2 minus line 3  (cannot be negative) = × Li 4 lti li d b – = × – = × – = ">
+    <!-- (cannot be negative) = × Line 4 multiplied by  the percentag -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:29.924%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 4 multiplied by  the percentage from line 5 = = × ">
+    <!-- × Line 4 multiplied by  the percentage from line 5 = + Li 6  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:31.818%;width:11.275%;height:1.424%;" title="× Line 4 multiplied by  the percentage from line 5 = + Li 6 l li 7 × = + × = + ×">
+    <!-- the percentage from line 5 = + British Columbia tax Line 6 p -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:33.712%;width:11.275%;height:1.515%;" title="the percentage from line 5 = + British Columbia tax Line 6 plus line 7 = + = + =">
+    <!-- + British Columbia tax  on taxable income Line 6 plus line 7 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:35.606%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 6 plus line 7 = + = + = + = 7 8 I">
+    <!-- $49,279 or less   Amount from line 1 – Line 2 minus line 3 m -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L2" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:24.242%;width:13.235%;height:1.424%;" title="$49,279 or less   Amount from line 1 – Line 2 minus line 3 more than $98,560  – ">
+    <!-- Amount from line 1 – Line 2 minus line 3  (cannot be negativ -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L3" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:26.136%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 2 minus line 3  (cannot be negative) = – = – = – = 2 3">
+    <!-- – Line 2 minus line 3  (cannot be negative) = × Li 4 lti li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L4" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:28.03%;width:11.275%;height:1.424%;" title="– Line 2 minus line 3  (cannot be negative) = × Li 4 lti li d b – = × – = × – = ">
+    <!-- (cannot be negative) = × Line 4 multiplied by  the percentag -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L5" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:29.924%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 4 multiplied by  the percentage from line 5 = = × ">
+    <!-- × Line 4 multiplied by  the percentage from line 5 = + Li 6  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L6" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;" title="× Line 4 multiplied by  the percentage from line 5 = + Li 6 l li 7 × = + × = + ×">
+    <!-- the percentage from line 5 = + British Columbia tax Line 6 p -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L7" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:33.712%;width:11.275%;height:1.515%;" title="the percentage from line 5 = + British Columbia tax Line 6 plus line 7 = + = + =">
+    <!-- + British Columbia tax  on taxable income Line 6 plus line 7 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L8" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:35.606%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 6 plus line 7 = + = + = + = 7 8 I">
+    <!-- more than $186,306 Amount from line 1 – Line 9 minus line 10 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:48.529%;top:46.212%;width:13.235%;height:1.424%;" title="more than $186,306 Amount from line 1 – Line 9 minus line 10 more than $259,829 ">
+    <!-- Amount from line 1 – Line 9 minus line 10  (cannot be negati -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:48.106%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 9 minus line 10  (cannot be negative) = – = – = 9 10 1">
+    <!-- – Line 9 minus line 10  (cannot be negative) = × Li 11 lti l -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.491%;top:50.0%;width:11.275%;height:1.424%;" title="– Line 9 minus line 10  (cannot be negative) = × Li 11 lti li d b – = × – = × 10">
+    <!-- (cannot be negative) = × Line 11 multiplied by  the percenta -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:51.894%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 11 multiplied by  the percentage from line 12 = = ">
+    <!-- × Line 11 multiplied by  the percentage from line 12 = + Li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.491%;top:53.788%;width:11.275%;height:1.424%;" title="× Line 11 multiplied by  the percentage from line 12 = + Li 13 l li 14 × = + × =">
+    <!-- the percentage from line 12 = + British Columbia tax Line 13 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.49%;top:55.682%;width:11.275%;height:1.515%;" title="the percentage from line 12 = + British Columbia tax Line 13 plus line 14 = + = ">
+    <!-- + British Columbia tax  on taxable income Line 13 plus line  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:50.491%;top:57.576%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 13 plus line 14 = + = + = 14 15 I">
+    <!-- more than $186,306 Amount from line 1 – Line 9 minus line 10 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:46.212%;width:13.235%;height:1.424%;" title="more than $186,306 Amount from line 1 – Line 9 minus line 10 more than $259,829 ">
+    <!-- Amount from line 1 – Line 9 minus line 10  (cannot be negati -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:48.106%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 9 minus line 10  (cannot be negative) = – = – = 9 10 1">
+    <!-- – Line 9 minus line 10  (cannot be negative) = × Li 11 lti l -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:50.0%;width:11.275%;height:1.424%;" title="– Line 9 minus line 10  (cannot be negative) = × Li 11 lti li d b – = × – = × 10">
+    <!-- (cannot be negative) = × Line 11 multiplied by  the percenta -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:51.894%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 11 multiplied by  the percentage from line 12 = = ">
+    <!-- × Line 11 multiplied by  the percentage from line 12 = + Li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:53.788%;width:11.275%;height:1.424%;" title="× Line 11 multiplied by  the percentage from line 12 = + Li 13 l li 14 × = + × =">
+    <!-- the percentage from line 12 = + British Columbia tax Line 13 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:55.682%;width:11.275%;height:1.515%;" title="the percentage from line 12 = + British Columbia tax Line 13 plus line 14 = + = ">
+    <!-- + British Columbia tax  on taxable income Line 13 plus line  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:66.176%;top:57.576%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 13 plus line 14 = + = + = 14 15 I">
+    <!-- more than $186,306 Amount from line 1 – Line 9 minus line 10 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L9" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:46.212%;width:13.235%;height:1.424%;" title="more than $186,306 Amount from line 1 – Line 9 minus line 10 more than $259,829 ">
+    <!-- Amount from line 1 – Line 9 minus line 10  (cannot be negati -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L10" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:48.106%;width:11.275%;height:1.515%;" title="Amount from line 1 – Line 9 minus line 10  (cannot be negative) = – = – = 9 10 1">
+    <!-- – Line 9 minus line 10  (cannot be negative) = × Li 11 lti l -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L11" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:50.0%;width:11.275%;height:1.424%;" title="– Line 9 minus line 10  (cannot be negative) = × Li 11 lti li d b – = × – = × 10">
+    <!-- (cannot be negative) = × Line 11 multiplied by  the percenta -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L12" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:51.894%;width:11.275%;height:1.515%;" title="(cannot be negative) = × Line 11 multiplied by  the percentage from line 12 = = ">
+    <!-- × Line 11 multiplied by  the percentage from line 12 = + Li  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L13" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:53.788%;width:11.275%;height:1.424%;" title="× Line 11 multiplied by  the percentage from line 12 = + Li 13 l li 14 × = + × =">
+    <!-- the percentage from line 12 = + British Columbia tax Line 13 -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L14" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:55.682%;width:11.275%;height:1.515%;" title="the percentage from line 12 = + British Columbia tax Line 13 plus line 14 = + = ">
+    <!-- + British Columbia tax  on taxable income Line 13 plus line  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L15" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:57.576%;width:11.275%;height:2.94%;" title="+ British Columbia tax  on taxable income Line 13 plus line 14 = + = + = 14 15 I">
+    <!-- 56090 Internal use 58040 16 Basic personal amount Claim $12, -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L16" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:67.424%;width:13.235%;height:1.424%;" title="56090 Internal use 58040 16 Basic personal amount Claim $12,932 58080 17 Age amo">
+    <!-- 58040 16 Basic personal amount Claim $12,932 58080 17 Age am -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L17" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:69.318%;width:11.275%;height:1.424%;" title="58040 16 Basic personal amount Claim $12,932 58080 17 Age amount (if you were bo">
+    <!-- Spouse or common-law partner amount: 18 Base amount Your spo -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L18" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:72.727%;width:13.235%;height:1.515%;" title="Spouse or common-law partner amount: 18 Base amount Your spouse's or common-law ">
+    <!-- 18 Base amount 19 Your spouse's or common-law partner's net  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L19" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:74.621%;width:11.275%;height:2.94%;" title="18 Base amount 19 Your spouse's or common-law partner's net income   from line 2">
+    <!-- 19 from line 23600 of their return – 58120 20 Line 18 minus  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:78.03%;width:11.275%;height:1.424%;" title="19 from line 23600 of their return – 58120 20 Line 18 minus line 19 (if negative">
+    <!-- 19 from line 23600 of their return – 58120 20 Line 18 minus  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L20" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:78.03%;width:11.275%;height:1.424%;" title="19 from line 23600 of their return – 58120 20 Line 18 minus line 19 (if negative">
+    <!-- Amount for an eligible dependant: 21 Base amount 22 Your eli -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L21" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:81.439%;width:13.235%;height:1.515%;" title="Amount for an eligible dependant: 21 Base amount 22 Your eligible dependant's ne">
+    <!-- 21 Base amount 22 Your eligible dependant's net income from  -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L22" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:83.333%;width:11.275%;height:1.424%;" title="21 Base amount 22 Your eligible dependant's net income from line 23600 of their ">
+    <!-- 22 Your eligible dependant s net income from line 23600 of t -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:85.227%;width:11.275%;height:1.424%;" title="22 Your eligible dependant s net income from line 23600 of their return – 58160 ">
+    <!-- 22 Your eligible dependant s net income from line 23600 of t -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L23" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:85.227%;width:11.275%;height:1.424%;" title="22 Your eligible dependant s net income from line 23600 of their return – 58160 ">
+    <!-- 58160 23 Line 21 minus line 22 (if negative, enter 0 ) (maxi -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L24" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:87.121%;width:11.275%;height:1.424%;" title="58160 23 Line 21 minus line 22 (if negative, enter 0 ) (maximum $11,073) = ◄ + 5">
+    <!-- 58175 24 British Columbia caregiver amount (use Worksheet BC -->
+    <input type="text" data-numeric="1" id="f_bc428_p1_L25" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:89.015%;width:11.275%;height:1.424%;" title="58175 24 British Columbia caregiver amount (use Worksheet BC428) + 25 Add lines ">
+  </div>
+
+  <div id="pg-anchor-2"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page2.png" alt="BC428 Page 2">
+    <!-- ( ) 26 Amount from line 25 of the previous page CPP or QPP c -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L26" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:6.44%;width:13.235%;height:1.424%;" title="( ) 26 Amount from line 25 of the previous page CPP or QPP contributions:">
+    <!-- 26 Amount from line 25 of the previous page CPP or QPP contr -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L27" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:8.333%;width:13.235%;height:2.94%;" title="26 Amount from line 25 of the previous page CPP or QPP contributions: 58240 27 A">
+    <!-- 58240 27 Amount from line 30800 of your return • 58280 28 Am -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L28" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:11.742%;width:11.275%;height:1.424%;" title="58240 27 Amount from line 30800 of your return • 58280 28 Amount from line 31000">
+    <!-- 58280 28 Amount from line 31000 of your return + • Employmen -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L29" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:13.636%;width:11.275%;height:2.94%;" title="58280 28 Amount from line 31000 of your return + • Employment insurance premiums">
+    <!-- 58300 29 Amount from line 31200 of your return + • 58305 30  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L30" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:17.045%;width:11.275%;height:1.424%;" title="58300 29 Amount from line 31200 of your return + • 58305 30 Amount from line 312">
+    <!-- 58305 30 Amount from line 31217 of your return + • 58315 31  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L31" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:18.94%;width:11.275%;height:1.424%;" title="58305 30 Amount from line 31217 of your return + • 58315 31 Volunteer firefighte">
+    <!-- 58315 31 Volunteer firefighters  amount + 58316 32 Search an -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L32" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;" title="58315 31 Volunteer firefighters  amount + 58316 32 Search and rescue volunteers'">
+    <!-- 58316 32 Search and rescue volunteers  amount + 33 Add lines -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L33" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:22.727%;width:11.275%;height:1.424%;" title="58316 32 Search and rescue volunteers  amount + 33 Add lines 27 to 32. = ◄ + 583">
+    <!-- 58316 32 Search and rescue volunteers  amount + 33 Add lines -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L33" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;" title="58316 32 Search and rescue volunteers  amount + 33 Add lines 27 to 32. = ◄ + 583">
+    <!-- 33 Add lines 27 to 32. = ◄ + 58330 34 Adoption expenses + 35 -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L34" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:24.621%;width:11.275%;height:1.424%;" title="33 Add lines 27 to 32. = ◄ + 58330 34 Adoption expenses + 35 Add lines 26 33 and">
+    <!-- 58330 34 Adoption expenses + 35 Add lines 26, 33 and 34. = 5 -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L35" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:26.515%;width:11.275%;height:1.424%;" title="58330 34 Adoption expenses + 35 Add lines 26, 33 and 34. = 58360 36 Pension inco">
+    <!-- 35 Add lines 26, 33 and 34. = 58360 36 Pension income amount -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L36" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:28.409%;width:11.275%;height:1.424%;" title="35 Add lines 26, 33 and 34. = 58360 36 Pension income amount (maximum $1,000) + ">
+    <!-- 58360 36 Pension income amount (maximum $1,000) + 37 Line 35 -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L37" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:30.303%;width:11.275%;height:1.424%;" title="58360 36 Pension income amount (maximum $1,000) + 37 Line 35 plus line 36 = Disa">
+    <!-- 37 Line 35 plus line 36 = 58440 38 Disability amount for sel -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L38" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:32.197%;width:11.275%;height:2.94%;" title="37 Line 35 plus line 36 = 58440 38 Disability amount for self  (claim $9,699 or,">
+    <!-- 58440 38 (claim $9,699 or, if you were under 18 years of age -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L39" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:35.606%;width:11.275%;height:1.424%;" title="58440 38 (claim $9,699 or, if you were under 18 years of age, use Worksheet BC42">
+    <!-- 58480 39 Disability amount transferred from a dependant (use -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L40" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:37.5%;width:11.275%;height:1.424%;" title="58480 39 Disability amount transferred from a dependant (use Worksheet BC428) + ">
+    <!-- 40 Add lines 37 to 39. = 58520 41 Interest paid on your stud -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L41" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:39.394%;width:11.275%;height:1.424%;" title="40 Add lines 37 to 39. = 58520 41 Interest paid on your student loans (amount fr">
+    <!-- 58520 41 Interest paid on your student loans (amount from li -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L42" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:41.288%;width:11.275%;height:1.424%;" title="58520 41 Interest paid on your student loans (amount from line 31900 of your ret">
+    <!-- 58560 42 Your tuition and education amounts (attach Schedule -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L43" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:43.182%;width:11.275%;height:1.424%;" title="58560 42 Your tuition and education amounts (attach Schedule BC(S11)) + 58600 43">
+    <!-- 58600 43 Tuition amounts transferred from a child or grandch -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L44" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:45.076%;width:11.275%;height:1.424%;" title="58600 43 Tuition amounts transferred from a child or grandchild + 58640 44 Amoun">
+    <!-- 58640 44 Amounts transferred from your spouse or common-law  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L45" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:46.97%;width:11.275%;height:1.424%;" title="58640 44 Amounts transferred from your spouse or common-law partner (attach Sche">
+    <!-- Medical expenses: 58689 46 Amount from line 33099 of your re -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L46" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:50.379%;width:13.235%;height:1.424%;" title="Medical expenses: 58689 46 Amount from line 33099 of your return 47 Amount from ">
+    <!-- 58689 46 Amount from line 33099 of your return 47 Amount fro -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L47" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:44.608%;top:52.273%;width:13.235%;height:1.424%;" title="58689 46 Amount from line 33099 of your return 47 Amount from line 23600 of your">
+    <!-- 47 Amount from line 23600 of your return 48 Applicable rate  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L48" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:54.167%;width:11.275%;height:1.515%;" title="47 Amount from line 23600 of your return 48 Applicable rate × 49 Line 47 multipl">
+    <!-- 48 Applicable rate × 49 Line 47 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L49" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:56.06%;width:11.275%;height:1.424%;" title="48 Applicable rate × 49 Line 47 multiplied by the percentage from line 48 = 50 E">
+    <!-- 49 Line 47 multiplied by the percentage from line 48 = 50 En -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L50" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:57.955%;width:11.275%;height:1.424%;" title="49 Line 47 multiplied by the percentage from line 48 = 50 Enter whichever is les">
+    <!-- 50 Enter whichever is less: $2,689 or the amount from line 4 -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L51" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:59.849%;width:11.275%;height:1.424%;" title="50 Enter whichever is less: $2,689 or the amount from line 49. – 51 Line 46 minu">
+    <!-- 51 Line 46 minus line 50 (if negative, enter 0 ) = 58729 52  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L52" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:61.742%;width:11.275%;height:2.94%;" title="51 Line 46 minus line 50 (if negative, enter 0 ) = 58729 52 Allowable amount of ">
+    <!-- 58729 52 (use Worksheet BC428) + 58769 53 Line 51 plus line  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L53" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:65.151%;width:11.275%;height:1.424%;" title="58729 52 (use Worksheet BC428) + 58769 53 Line 51 plus line 52 = ◄ + 58800 54 Li">
+    <!-- 58729 52 (use Worksheet BC428) + 58769 53 Line 51 plus line  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L53" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:65.151%;width:11.275%;height:1.424%;" title="58729 52 (use Worksheet BC428) + 58769 53 Line 51 plus line 52 = ◄ + 58800 54 Li">
+    <!-- 58769 53 Line 51 plus line 52 = ◄ + 58800 54 Line 45 plus li -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L54" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:67.045%;width:11.275%;height:1.424%;" title="58769 53 Line 51 plus line 52 = ◄ + 58800 54 Line 45 plus line 53 = 55 British C">
+    <!-- 58800 54 Line 45 plus line 53 = 55 British Columbia non-refu -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L55" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:68.94%;width:11.275%;height:1.515%;" title="58800 54 Line 45 plus line 53 = 55 British Columbia non-refundable tax credit ra">
+    <!-- 55 British Columbia non-refundable tax credit rate × 58840 5 -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L56" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:70.833%;width:11.275%;height:1.424%;" title="55 British Columbia non-refundable tax credit rate × 58840 56 Line 54 multiplied">
+    <!-- 58840 56 Line 54 multiplied by the percentage from line 55 = -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L57" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:72.727%;width:11.275%;height:1.424%;" title="58840 56 Line 54 multiplied by the percentage from line 55 = 58969 57 Donations ">
+    <!-- 58969 57 Donations and gifts (use Worksheet BC428) + 58 Line -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L58" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:74.621%;width:11.275%;height:1.424%;" title="58969 57 Donations and gifts (use Worksheet BC428) + 58 Line 56 plus line 57 = F">
+    <!-- 58980 59 Farmers' food donation tax credit: Amount of qualif -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L59" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:52.941%;top:78.03%;width:13.235%;height:1.424%;" title="58980 59 Farmers' food donation tax credit: Amount of qualifying gifts also clai">
+    <!-- 58 Line 56 plus line 57 = 58980 59 Farmers' food donation ta -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L59" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:76.515%;width:11.275%;height:2.94%;" title="58 Line 56 plus line 57 = 58980 59 Farmers' food donation tax credit: Amount of ">
+    <!-- 58980 59 Amount of qualifying gifts also claimed on line 57  -->
+    <input type="text" data-numeric="1" id="f_bc428_p2_L60" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:79.924%;width:11.275%;height:2.94%;" title="58980 59 Amount of qualifying gifts also claimed on line 57 × 25% = + 61500 60 B">
+  </div>
+
+  <div id="pg-anchor-3"></div>
+  <div class="pdf-page">
+    <img class="pdf-bg" src="{{ root_path }}/static/forms/screenshots/bc428_page3.png" alt="BC428 Page 3">
+    <!-- 61 British Columbia tax on taxable income from line 8 or 15  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L61" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:79.902%;top:6.44%;width:13.235%;height:1.424%;" title="61 British Columbia tax on taxable income from line 8 or 15 61510 62 British Col">
+    <!-- 61 British Columbia tax on taxable income from line 8 or 15  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L62" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:8.333%;width:11.275%;height:1.424%;" title="61 British Columbia tax on taxable income from line 8 or 15 61510 62 British Col">
+    <!-- 61510 62 British Columbia tax on split income (complete Form -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L63" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:10.227%;width:11.275%;height:1.424%;" title="61510 62 British Columbia tax on split income (complete Form T1206) + • 63 Line ">
+    <!-- 63 Line 61 plus line 62 = 64 British Columbia non-refundable -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L64" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:12.121%;width:13.235%;height:1.424%;" title="63 Line 61 plus line 62 = 64 British Columbia non-refundable tax credits from li">
+    <!-- 64 British Columbia non-refundable tax credits from line 60  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L65" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:14.015%;width:11.275%;height:1.424%;" title="64 British Columbia non-refundable tax credits from line 60 61520 65 British Col">
+    <!-- 61540 66 British Columbia minimum tax carryover: Amount from -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L40427" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:34.804%;top:17.424%;width:13.235%;height:2.94%;" title="61540 66 British Columbia minimum tax carryover: Amount from line 40427  of your">
+    <!-- 61520 65 British Columbia dividend tax credit (use Worksheet -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L66" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:15.909%;width:11.275%;height:4.455%;" title="61520 65 British Columbia dividend tax credit (use Worksheet BC428) + • 61540 66">
+    <!-- 61540 66 of your return × 34.9% = + • 67 Add lines 64 to 66. -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L67" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:20.833%;width:11.275%;height:1.424%;" title="61540 66 of your return × 34.9% = + • 67 Add lines 64 to 66. = ◄ – 68 Line 63 mi">
+    <!-- 61540 66 of your return × 34.9% = + • 67 Add lines 64 to 66. -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L67" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:20.833%;width:11.275%;height:1.424%;" title="61540 66 of your return × 34.9% = + • 67 Add lines 64 to 66. = ◄ – 68 Line 63 mi">
+    <!-- 67 Add lines 64 to 66. = ◄ – 68 Line 63 minus line 67 (if ne -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L68" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:22.727%;width:11.275%;height:1.424%;" title="67 Add lines 64 to 66. = ◄ – 68 Line 63 minus line 67 (if negative, enter '0') =">
+    <!-- 69 British Columbia additional tax for minimum tax purposes: -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L69" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:52.451%;top:26.136%;width:13.235%;height:1.424%;" title="69 British Columbia additional tax for minimum tax purposes: Amount from line 14">
+    <!-- 68 Line 63 minus line 67 (if negative, enter 0 ) = 69 Britis -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L69" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:24.621%;width:11.275%;height:2.94%;" title="68 Line 63 minus line 67 (if negative, enter 0 ) = 69 British Columbia additiona">
+    <!-- 69 Amount from line 14 of Part 7 of Form T691 × 34.9% = + 70 -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L70" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:28.03%;width:11.275%;height:1.424%;" title="69 Amount from line 14 of Part 7 of Form T691 × 34.9% = + 70 Line 68 plus line 6">
+    <!-- 70 Line 68 plus line 69 = 71 Provincial foreign tax credit ( -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L71" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:29.924%;width:11.275%;height:1.424%;" title="70 Line 68 plus line 69 = 71 Provincial foreign tax credit (complete Form T2036)">
+    <!-- 71 Provincial foreign tax credit (complete Form T2036) – 72  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L72" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:31.818%;width:11.275%;height:1.424%;" title="71 Provincial foreign tax credit (complete Form T2036) – 72 Line 70 minus line 7">
+    <!-- , p g 73 Basic reduction Claim $562 Enter your net income fr -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L73" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:40.909%;width:13.235%;height:1.424%;" title=", p g 73 Basic reduction Claim $562 Enter your net income from line 23600">
+    <!-- 73 Basic reduction Claim $562 74 Enter your net income from  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L74" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:44.608%;top:42.803%;width:13.235%;height:2.94%;" title="73 Basic reduction Claim $562 74 Enter your net income from line 23600   of your">
+    <!-- 74 of your return. 75 Base amount – 76 Line 74 minus line 75 -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L75" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:46.212%;width:11.275%;height:1.515%;" title="74 of your return. 75 Base amount – 76 Line 74 minus line 75 (if negative, enter">
+    <!-- 75 Base amount – 76 Line 74 minus line 75 (if negative, ente -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L76" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:48.106%;width:11.275%;height:1.424%;" title="75 Base amount – 76 Line 74 minus line 75 (if negative, enter '0') = 77 Applicab">
+    <!-- 76 Line 74 minus line 75 (if negative, enter 0 ) = 77 Applic -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L77" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:50.0%;width:11.275%;height:1.515%;" title="76 Line 74 minus line 75 (if negative, enter 0 ) = 77 Applicable rate × 78 Line ">
+    <!-- 77 Applicable rate × 78 Line 76 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L78" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:46.569%;top:51.894%;width:11.275%;height:1.424%;" title="77 Applicable rate × 78 Line 76 multiplied by the percentage from line 77 = ◄ – ">
+    <!-- 77 Applicable rate × 78 Line 76 multiplied by the percentage -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L78" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:51.894%;width:11.275%;height:1.424%;" title="77 Applicable rate × 78 Line 76 multiplied by the percentage from line 77 = ◄ – ">
+    <!-- 78 Line 76 multiplied by the percentage from line 77 = ◄ – 7 -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L79" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:53.788%;width:11.275%;height:2.94%;" title="78 Line 76 multiplied by the percentage from line 77 = ◄ – 79 British Columbia t">
+    <!-- 79 British Columbia tax reduction  Line 73 minus line 78  (i -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L79" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:55.303%;width:11.275%;height:1.424%;" title="79 British Columbia tax reduction  Line 73 minus line 78  (if negative, enter '0">
+    <!-- 79 British Columbia tax reduction  (if negative, enter 0 ) = -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L80" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:57.197%;width:11.275%;height:1.424%;" title="79 British Columbia tax reduction  (if negative, enter 0 ) = ◄ – 80 Line 72 minu">
+    <!-- 80 Line 72 minus line 79 (if negative, enter 0 ) = 81 Britis -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L81" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:59.091%;width:11.275%;height:1.424%;" title="80 Line 72 minus line 79 (if negative, enter 0 ) = 81 British Columbia logging t">
+    <!-- 81 British Columbia logging tax credit from Form FIN 542S or -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L82" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:60.985%;width:11.275%;height:1.424%;" title="81 British Columbia logging tax credit from Form FIN 542S or Form FIN 542P – 82 ">
+    <!-- 82 Line 80 minus line 81 (if negative, enter 0 ) = 60400 83  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L83" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:62.879%;width:13.235%;height:1.424%;" title="82 Line 80 minus line 81 (if negative, enter 0 ) = 60400 83 British Columbia pol">
+    <!-- 60400 83 British Columbia political contributions made in 20 -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L84" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:64.773%;width:11.275%;height:1.424%;" title="60400 83 British Columbia political contributions made in 2025 84 British Columb">
+    <!-- 84 British Columbia political contribution tax credit (use W -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L85" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:66.667%;width:11.275%;height:1.424%;" title="84 British Columbia political contribution tax credit (use Worksheet BC428) (max">
+    <!-- 60450 86 ESOP 20  certificate number Tax credit amount indic -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L86" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:18.3%;top:71.591%;width:12.908%;height:1.389%;" title="60450 86 ESOP 20  certificate number Tax credit amount indicated   on the certif">
+    <!-- 60450 86 British Columbia employee share ownership plan tax  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L86" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:62.255%;top:70.076%;width:13.235%;height:2.94%;" title="60450 86 British Columbia employee share ownership plan tax credit: ESOP 20  cer">
+    <!-- 60470 87 EVCC 30  certificate number Tax credit amount indic -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L87" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:18.3%;top:76.515%;width:12.908%;height:1.389%;" title="60470 87 EVCC 30  certificate number Tax credit amount indicated   on the certif">
+    <!-- 60450 86 certificate number on the certificate • 60470 87 Br -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L87" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:73.485%;width:11.275%;height:4.455%;" title="60450 86 certificate number on the certificate • 60470 87 British Columbia emplo">
+    <!-- 60470 87 certificate number on the certificate + • 88 Total  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L88" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:64.216%;top:78.409%;width:11.275%;height:2.94%;" title="60470 87 certificate number on the certificate + • 88 Total ESOP and EVCC credit">
+    <!-- 88 Total ESOP and EVCC credits:  Line 86 plus line 87 (maxim -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L88" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:79.924%;width:11.275%;height:1.424%;" title="88 Total ESOP and EVCC credits:  Line 86 plus line 87 (maximum $2,000) = ◄ – 89 ">
+    <!-- 88 Line 86 plus line 87 (maximum $2,000) = ◄ – 89 Line 85 mi -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L89" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:81.818%;width:11.275%;height:1.424%;" title="88 Line 86 plus line 87 (maximum $2,000) = ◄ – 89 Line 85 minus line 88 (if nega">
+    <!-- 89 Line 85 minus line 88 (if negative, enter 0 ) = 68810 90  -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L90" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:83.712%;width:11.275%;height:1.424%;" title="89 Line 85 minus line 88 (if negative, enter 0 ) = 68810 90 British Columbia min">
+    <!-- 68810 90 British Columbia mining flow-through share tax cred -->
+    <input type="text" data-numeric="1" id="f_bc428_p3_L91" class="pdf-input" value="" inputmode="decimal" oninput="recalcBC428(); autoSave();" style="left:81.863%;top:85.697%;width:11.275%;height:2.849%;" title="68810 90 British Columbia mining flow-through share tax credit (complete Form T1">
+  </div>
+
+  <!-- Toolbar -->
+  <div class="form-toolbar">
+    <button class="btn btn-primary" onclick="saveAndReturnToT1()"><svg class="icon"><use href="#ic-arrow-left"/></svg> Save &amp; Return to T1</button>
+    <button class="btn btn-success" onclick="saveSnapshot()"><svg class="icon"><use href="#ic-save"/></svg> Save Snapshot</button>
+    <button class="btn btn-outline" onclick="window.print()"><svg class="icon"><use href="#ic-printer"/></svg> Print</button>
+    <a class="btn btn-outline" href="{{ root_path }}/tax/t1"><svg class="icon"><use href="#ic-arrow-left"/></svg> Back to T1</a>
+    <button class="btn btn-outline" onclick="clearForm()"><svg class="icon"><use href="#ic-trash"/></svg> Clear</button>
+    <button class="btn btn-outline" onclick="loadLastSnapshot()"><svg class="icon"><use href="#ic-history"/></svg> Load Last Snapshot</button>
+    <span style="font-size:11px; color:var(--muted); margin-left:auto;" id="last-saved"></span>
+  </div>
+
+</div>{# /.cra-form #}
+{% endblock %}
+
+{% block scripts %}
+<script>
+const ROOT = '{{ root_path }}';
+const FORM_KEY = 'cra_bc428_autosave';
+const FORM_INPUT_IDS = [
+  'f_bc428_p1_L1',
+  'f_bc428_p1_L2',
+  'f_bc428_p1_L3',
+  'f_bc428_p1_L4',
+  'f_bc428_p1_L5',
+  'f_bc428_p1_L6',
+  'f_bc428_p1_L7',
+  'f_bc428_p1_L8',
+  'f_bc428_p1_L2',
+  'f_bc428_p1_L3',
+  'f_bc428_p1_L4',
+  'f_bc428_p1_L5',
+  'f_bc428_p1_L6',
+  'f_bc428_p1_L7',
+  'f_bc428_p1_L8',
+  'f_bc428_p1_L2',
+  'f_bc428_p1_L3',
+  'f_bc428_p1_L4',
+  'f_bc428_p1_L5',
+  'f_bc428_p1_L6',
+  'f_bc428_p1_L7',
+  'f_bc428_p1_L8',
+  'f_bc428_p1_L2',
+  'f_bc428_p1_L3',
+  'f_bc428_p1_L4',
+  'f_bc428_p1_L5',
+  'f_bc428_p1_L6',
+  'f_bc428_p1_L7',
+  'f_bc428_p1_L8',
+  'f_bc428_p1_L9',
+  'f_bc428_p1_L10',
+  'f_bc428_p1_L11',
+  'f_bc428_p1_L12',
+  'f_bc428_p1_L13',
+  'f_bc428_p1_L14',
+  'f_bc428_p1_L15',
+  'f_bc428_p1_L9',
+  'f_bc428_p1_L10',
+  'f_bc428_p1_L11',
+  'f_bc428_p1_L12',
+  'f_bc428_p1_L13',
+  'f_bc428_p1_L14',
+  'f_bc428_p1_L15',
+  'f_bc428_p1_L9',
+  'f_bc428_p1_L10',
+  'f_bc428_p1_L11',
+  'f_bc428_p1_L12',
+  'f_bc428_p1_L13',
+  'f_bc428_p1_L14',
+  'f_bc428_p1_L15'
+];
+const CHECKBOX_IDS = [
+  
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const dollars = Math.max(0, parseFloat((el.value||'').replace(/,/g,'')) || 0);
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  return dollars + (ci ? (parseInt(ci.value,10)||0) : 0) / 100;
+}
+function s(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const formatted = Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dot = formatted.indexOf('.');
+  el.value = dot >= 0 ? formatted.slice(0, dot) : formatted;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? formatted.slice(dot+1) : '00';
+}
+function fmtInput(el) {
+  const raw = parseFloat((el.value||'').replace(/,/g,'')) || 0;
+  el.setAttribute('data-raw', String(raw));
+  if (raw === 0) { el.value = ''; return; }
+  const fmt = raw.toLocaleString('en-CA', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const dot = fmt.indexOf('.');
+  el.value = dot >= 0 ? fmt.slice(0, dot) : fmt;
+  const ci = el.parentElement ? el.parentElement.querySelector('.cents-input[data-for="'+el.id+'"]') : null;
+  if (ci) ci.value = dot >= 0 ? fmt.slice(dot+1) : '00';
+}
+function initAmountBoxes() {
+  document.querySelectorAll('.pdf-input[data-numeric], .pdf-input[readonly]').forEach(inp => {
+    const left = parseFloat(inp.style.left);
+    const wrap = document.createElement('span');
+    wrap.style.cssText = `position:absolute;left:${inp.style.left};top:${inp.style.top};width:${inp.style.width};height:${inp.style.height};display:flex;gap:1px;`;
+    inp.style.cssText = 'position:static;width:calc(100% - 28px);height:100%;font-size:0.60em;padding:0 2px;text-align:right;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;background:inherit;border:inherit;';
+    const ci = document.createElement('input');
+    ci.type = 'text'; ci.className = 'cents-input';
+    ci.setAttribute('data-for', inp.id);
+    ci.style.cssText = 'width:26px;height:100%;font-size:0.60em;padding:0 1px;text-align:center;box-sizing:border-box;font-family:"Courier New",monospace;line-height:1;border:1px solid #aaa;background:rgba(255,255,200,0.75);';
+    ci.maxLength = 2; ci.placeholder='00';
+    ci.addEventListener('input', () => { if (ci.value.length===2 || ci.value==='') autoSave(); });
+    inp.parentElement.insertBefore(wrap, inp);
+    wrap.appendChild(inp); wrap.appendChild(ci);
+  });
+}
+
+// ── Calculations ─────────────────────────────────────────────────────────────
+// TODO: implement recalcBC428() using field IDs listed in FORM_INPUT_IDS
+function recalcBC428() {
+  // Add your calculation logic here.
+  // Use g(id) to read values, s(id, value) to write computed results.
+  // Example: s('f_bc428_p1_Ltotal', g('f_bc428_p1_L1') + g('f_bc428_p1_L2'));
+}
+
+// ── Auto-save ────────────────────────────────────────────────────────────────
+let _saveTimer;
+function autoSave() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    const data = {};
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+    try {
+      const enc = typeof CRAEncrypt === 'function' ? CRAEncrypt(JSON.stringify(data)) : JSON.stringify(data);
+      localStorage.setItem(FORM_KEY, enc);
+      document.getElementById('last-saved').textContent = 'Saved ' + new Date().toLocaleTimeString();
+    } catch(e) {}
+  }, 400);
+}
+
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem(FORM_KEY);
+    if (!raw) return;
+    const str = typeof CRADecrypt === 'function' ? CRADecrypt(raw) : raw;
+    const data = JSON.parse(str);
+    FORM_INPUT_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+    CHECKBOX_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  } catch(e) {}
+}
+
+function clearForm() {
+  if (!confirm('Clear all data?')) return;
+  localStorage.removeItem(FORM_KEY);
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.checked=false; });
+  recalcBC428();
+}
+
+function saveSnapshot() {
+  const data = {};
+  FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.value; });
+  CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el) data[id]=el.checked; });
+  localStorage.setItem(FORM_KEY + '_snap', JSON.stringify(data));
+  alert('Snapshot saved!');
+}
+
+function loadLastSnapshot() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FORM_KEY + '_snap') || '{}');
+    FORM_INPUT_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]) el.value=data[id]; });
+    CHECKBOX_IDS.forEach(id => { const el = document.getElementById(id); if(el && data[id]!==undefined) el.checked=data[id]; });
+    recalcBC428();
+  } catch(e) {}
+}
+
+function saveAndReturnToT1() {
+  autoSave();
+  setTimeout(() => window.location.href = ROOT + '/tax/t1', 500);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initAmountBoxes();
+  loadFormData();
+  document.querySelectorAll('.pdf-input[data-numeric]').forEach(el => {
+    el.addEventListener('blur', () => fmtInput(el));
+    el.addEventListener('focus', () => {
+      const raw = el.getAttribute('data-raw');
+      if (raw && raw !== '0') el.value = raw;
+    });
+  });
+  recalcBC428();
+});
+</script>
+{% endblock %}
