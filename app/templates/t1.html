@@ -1157,9 +1157,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     history.replaceState({}, '', location.pathname);
   }
 
+  // Check if returning from Schedule 7 with RRSP deduction
+  if (urlP.has('s7_20800')) {
+    const v = parseFloat(urlP.get('s7_20800')) || 0;
+    const el = document.getElementById('f20800');
+    if (el) { el.value = String(v); fmtInput(el); }
+    localStorage.setItem('cra_s7_20800', v.toString());
+    toast('Schedule 7 RRSP deduction updated: $' + v.toFixed(2));
+    recalcT1();
+    history.replaceState({}, '', location.pathname);
+  }
+
   // Check if returning from T777 with employment expenses
-  if (urlP.has('t777_22900')) {
-    const v = parseFloat(urlP.get('t777_22900')) || 0;
+  if (urlP.has('t777_22900')) {    const v = parseFloat(urlP.get('t777_22900')) || 0;
     const el = document.getElementById('f22900');
     if (el) { el.value = String(v); fmtInput(el); }
     localStorage.setItem('cra_t777_22900', v.toString());
@@ -1228,6 +1238,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sv = localStorage.getItem('cra_s3_cap_gains');
     if (sv) {
       const el = document.getElementById('f12700');
+      if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
+    }
+  }
+  if (!urlP.has('s7_20800')) {
+    const sv = localStorage.getItem('cra_s7_20800');
+    if (sv) {
+      const el = document.getElementById('f20800');
       if (el && !parseFloat(el.value)) { el.value = String(parseFloat(sv) || 0); fmtInput(el); recalcT1(); }
     }
   }

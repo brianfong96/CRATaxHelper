@@ -301,6 +301,9 @@ function recalcS7() {
   // HBP min repayment (balance / 15)
   const hbp_bal = g('f_s7_p3_11');
   s('f_s7_p3_13', hbp_bal > 0 ? hbp_bal / 15 : 0);
+
+  // Publish RRSP deduction (line 20800) for T1 to read
+  localStorage.setItem('cra_s7_20800', g('f_s7_p2_6').toFixed(2));
 }
 
 // ── Save and return to T1 ──────────────────────────────────────────────────────

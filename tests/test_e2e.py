@@ -293,3 +293,142 @@ def test_worksheet_fed_loads(page: Page, live_server):
         except Exception:
             continue
     pytest.fail("Worksheet Fed form not found at /tax/worksheet-fed or /tax/worksheet_fed")
+
+
+# ── Nav dropdown ──────────────────────────────────────────────────────────────
+
+def test_nav_dropdown_shows_all_forms(page: Page, live_server):
+    """Year dropdown must list all 10 CRA forms."""
+    expected = ["T1 General", "BC 428", "Schedule 3", "Schedule 5",
+                "Schedule 7", "Schedule 8", "Schedule 9", "T777", "T2209", "Worksheet Fed"]
+    page.goto(f"{live_server}/tax/t1")
+    page.wait_for_load_state("networkidle")
+    year_btn = page.locator("#yearBtn, .year-btn").first
+    if year_btn.count() == 0:
+        pytest.skip("Year button not found")
+    year_btn.click()
+    page.wait_for_timeout(300)
+    dropdown = page.locator("#yearDropdown, .year-dropdown").first
+    assert dropdown.is_visible(), "Year dropdown did not open"
+    content = dropdown.inner_text()
+    for name in expected:
+        assert name in content, f"'{name}' not visible in year dropdown"
+
+
+def test_nav_dropdown_links_are_reachable(page: Page, live_server):
+    """Every link in the year dropdown must return HTTP 200."""
+    page.goto(f"{live_server}/tax/t1")
+    page.wait_for_load_state("networkidle")
+    year_btn = page.locator("#yearBtn, .year-btn").first
+    if year_btn.count() == 0:
+        pytest.skip("Year button not found")
+    year_btn.click()
+    page.wait_for_timeout(300)
+    hrefs = page.locator(".year-dropdown a.yd-form").evaluate_all(
+        "els => els.map(e => e.href)"
+    )
+    assert len(hrefs) >= 9, f"Expected ≥9 form links in dropdown, got {len(hrefs)}"
+    import httpx
+    for href in hrefs:
+        resp = httpx.get(href, timeout=5, follow_redirects=True)
+        assert resp.status_code == 200, f"Dropdown link {href} returned {resp.status_code}"
+
+
+# ── Cross-form data flow (E2E) ────────────────────────────────────────────────
+
+def test_t1_to_bc428_auto_sync(page: Page, live_server):
+    """Enter income in T1; navigate to BC428 via URL — it should auto-fill taxable income."""
+    page.goto(f"{live_server}/tax/t1")
+    page.wait_for_load_state("networkidle")
+    income = page.locator("#f10100, [id*='10100']").first
+    if income.count() == 0:
+        pytest.skip("T1 income input not found")
+    income.click()
+    income.fill("95000")
+    income.press("Tab")
+    page.wait_for_timeout(800)
+    ls_26000 = page.evaluate("() => localStorage.getItem('cra_t1_line26000')")
+    assert ls_26000 is not None, "T1 did not write cra_t1_line26000 after income entry"
+
+    # Navigate to BC428 directly (simulates dropdown nav, not T1's button)
+    page.goto(f"{live_server}/tax/bc428")
+    page.wait_for_load_state("networkidle")
+    page.wait_for_timeout(600)
+    ti_el = page.locator("#fTaxableIncome, #fTaxableIncome_supp").first
+    if ti_el.count() > 0:
+        val = ti_el.input_value()
+        assert val and float(val.replace(",", "")) > 0, \
+            "BC428 did not auto-sync taxable income from T1 localStorage"
+
+
+def test_t1_reads_subform_results_from_localstorage(page: Page, live_server):
+    """Pre-seeding a sub-form localStorage key should cause T1 to pre-fill that line."""
+    page.goto(f"{live_server}/tax/t1")
+    page.wait_for_load_state("networkidle")
+    page.evaluate("() => { localStorage.setItem('cra_s3_cap_gains', '12500'); }")
+    page.reload()
+    page.wait_for_load_state("networkidle")
+    page.wait_for_timeout(600)
+    el = page.locator("#f12700").first
+    if el.count() == 0:
+        pytest.skip("T1 line 12700 field not found")
+    val = el.input_value().replace(",", "")
+    assert float(val or "0") == pytest.approx(12500, abs=1), \
+        f"T1 line 12700 not pre-filled from cra_s3_cap_gains; got '{val}'"
+
+
+@pytest.mark.parametrize("form_path,form_name", [
+    ("/tax/schedule3",  "Schedule 3"),
+    ("/tax/schedule5",  "Schedule 5"),
+    ("/tax/schedule7",  "Schedule 7"),
+    ("/tax/schedule8",  "Schedule 8"),
+    ("/tax/schedule9",  "Schedule 9"),
+    ("/tax/t777",       "T777"),
+    ("/tax/t2209",      "T2209"),
+])
+def test_subform_has_send_to_t1_button(page: Page, live_server, form_path, form_name):
+    """Every sub-form must expose a button/link to send data back to T1."""
+    page.goto(f"{live_server}{form_path}")
+    page.wait_for_load_state("domcontentloaded", timeout=8000)
+    has_return = (
+        page.locator("button:has-text('T1')").count() > 0
+        or page.locator("a[href*='t1']").count() > 0
+        or page.locator("button:has-text('Save')").count() > 0
+        or page.locator("button:has-text('Return')").count() > 0
+    )
+    assert has_return, f"{form_name}: no 'Send/Return to T1' action found in page"
+
+
+def test_bc428_autosave_persists_across_navigation(page: Page, live_server):
+    """BC428 data should survive a round-trip via T1 and back."""
+    page.goto(f"{live_server}/tax/bc428")
+    page.wait_for_load_state("networkidle")
+    el = page.locator("#f58040").first
+    if el.count() == 0:
+        pytest.skip("BC428 basic personal amount field not found")
+    el.click()
+    el.fill("16129")
+    el.press("Tab")
+    page.wait_for_timeout(700)
+    page.goto(f"{live_server}/tax/t1")
+    page.wait_for_load_state("networkidle")
+    page.goto(f"{live_server}/tax/bc428")
+    page.wait_for_load_state("networkidle")
+    page.wait_for_timeout(500)
+    saved = page.evaluate("() => localStorage.getItem('cra_bc428_autosave')")
+    assert saved is not None and "16129" in saved, \
+        "BC428 data was not persisted in localStorage across navigation"
+
+
+def test_all_forms_render_pdf_background(page: Page, live_server):
+    """Every form route must render at least one PDF background image."""
+    form_routes = [
+        "/tax/t1", "/tax/bc428", "/tax/schedule3", "/tax/schedule5",
+        "/tax/schedule7", "/tax/schedule8", "/tax/schedule9",
+        "/tax/t777", "/tax/t2209", "/tax/worksheet_fed",
+    ]
+    for route in form_routes:
+        page.goto(f"{live_server}{route}")
+        page.wait_for_load_state("domcontentloaded", timeout=8000)
+        bg = page.locator("img.pdf-bg").count()
+        assert bg > 0, f"{route}: no PDF background image — form may not have rendered"
