@@ -618,6 +618,9 @@ function syncFromT1() {
   const elD1 = document.getElementById('fDiv12000');
   const elD2 = document.getElementById('fDiv12010');
   if (elTI) { elTI.value = String(ti); fmtInput(elTI); }
+  // Also sync the visible supplementary input at the top of the form
+  const suppTI = document.getElementById('fTaxableIncome_supp');
+  if (suppTI) { suppTI.value = String(ti); fmtInput(suppTI); }
   if (elD1) { elD1.value = String(d1); fmtInput(elD1); }
   if (elD2) { elD2.value = String(d2); fmtInput(elD2); }
   recalcBC428();
@@ -680,6 +683,11 @@ function loadFormData(data) {
       }
     }
   });
+  // Sync visible supplementary input from loaded PDF overlay value
+  if (data.fTaxableIncome !== undefined) {
+    const supp = document.getElementById('fTaxableIncome_supp');
+    if (supp) { supp.value = String(data.fTaxableIncome); fmtInput(supp); }
+  }
   recalcBC428();
 }
 
@@ -801,7 +809,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Pre-fill from URL params(passed from T1 "Open BC428" button)
   const urlP = new URLSearchParams(location.search);
-  if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) { el.value = urlP.get('ti'); fmtInput(el); } }
+  if (urlP.has('ti'))  {
+    const el = document.getElementById('fTaxableIncome');
+    if (el) { el.value = urlP.get('ti'); fmtInput(el); }
+    const supp = document.getElementById('fTaxableIncome_supp');
+    if (supp) { supp.value = urlP.get('ti'); fmtInput(supp); }
+  }
   if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) { el.value = urlP.get('d1'); fmtInput(el); } }
   if (urlP.has('d2'))  { const el = document.getElementById('fDiv12010');      if (el) { el.value = urlP.get('d2'); fmtInput(el); } }
 
