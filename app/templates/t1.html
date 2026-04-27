@@ -1090,8 +1090,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Build char-box inputs and split amount boxes before loading any data
   initCharBoxes();
   initAmountBoxes();
-
-  // Try server data first; fall back to localStorage
+  recalcT1();
   let loaded = false;
   try {
     const r = await fetch(ROOT + '/api/userdata/t1');

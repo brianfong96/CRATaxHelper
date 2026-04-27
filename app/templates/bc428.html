@@ -796,8 +796,9 @@ async function exportPDF() {
 document.addEventListener('DOMContentLoaded', async () => {
   // Build dollar/cents split for all amount inputs before any data is loaded
   initAmountBoxes();
+  recalcBC428();
 
-  // Pre-fill from URL params (passed from T1 "Open BC428" button)
+  // Pre-fill from URL params(passed from T1 "Open BC428" button)
   const urlP = new URLSearchParams(location.search);
   if (urlP.has('ti'))  { const el = document.getElementById('fTaxableIncome'); if (el) { el.value = urlP.get('ti'); fmtInput(el); } }
   if (urlP.has('d1'))  { const el = document.getElementById('fDiv12000');      if (el) { el.value = urlP.get('d1'); fmtInput(el); } }

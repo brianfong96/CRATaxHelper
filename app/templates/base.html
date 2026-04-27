@@ -105,26 +105,74 @@
       border-color: transparent;
     }
     .app-nav a.nav-icon:hover { border-color: rgba(255,255,255,.4); }
-    .year-select {
+    /* ── Year + forms dropdown ── */
+    .year-menu { position: relative; }
+    .year-btn {
       background: rgba(255,255,255,.12);
       color: #fff;
       border: 1px solid rgba(255,255,255,.4);
       border-radius: 3px;
-      padding: 4px 8px;
+      padding: 4px 10px 4px 12px;
       font-size: 13px;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-      padding-right: 22px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,.7)'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 6px center;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: background .15s, border-color .15s;
     }
-    .year-select:focus { border-color: rgba(255,255,255,.7); }
-    .year-select option { background: var(--cra-navy); color: #fff; }
+    .year-btn:hover, .year-menu.open .year-btn {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.65);
+    }
+    .year-btn .chev { transition: transform .2s; flex-shrink: 0; }
+    .year-menu.open .year-btn .chev { transform: rotate(180deg); }
+    .year-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      min-width: 175px;
+      background: #fff;
+      border: 1px solid #d0d5dd;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      z-index: 200;
+      padding: 4px 0;
+      overflow: hidden;
+    }
+    .year-menu.open .year-dropdown { display: block; }
+    .yd-years { display: flex; gap: 6px; padding: 7px 10px; }
+    .yd-yr {
+      flex: 1;
+      padding: 4px 0;
+      border: 1px solid #d0d5dd;
+      border-radius: 3px;
+      background: #f5f7fa;
+      color: #444;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: center;
+      transition: background .15s;
+    }
+    .yd-yr:hover { background: #e4eaf3; }
+    .yd-yr.active { background: var(--cra-navy); color: #fff; border-color: var(--cra-navy); }
+    .yd-sep { height: 1px; background: #e5e7eb; margin: 3px 0; }
+    .yd-form {
+      display: block;
+      padding: 7px 14px;
+      font-size: 13px;
+      color: #1a1a2e;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .1s;
+    }
+    .yd-form:hover { background: #f0f4f8; color: var(--cra-navy); }
+    .yd-form.active { background: var(--cra-light); color: var(--cra-navy); font-weight: 600; }
     .nav-divider {
       width: 1px;
       height: 22px;
@@ -617,17 +665,32 @@
   </a>
 
   <nav class="app-nav">
-    <select class="year-select" id="nav-year" title="Tax Year" onchange="navYear(this.value)">
-      <option value="2025" {% if '2025' in request.url.path or True %}selected{% endif %}>2025</option>
-      <option value="2024">2024</option>
-    </select>
-
-    <div class="nav-divider"></div>
-
-    <a href="{{ root_path }}/tax/t1"
-       {% if 't1' in request.url.path and 'bc428' not in request.url.path %}class="active"{% endif %}>T1 General</a>
-    <a href="{{ root_path }}/tax/bc428"
-       {% if 'bc428' in request.url.path %}class="active"{% endif %}>BC 428</a>
+    {% set p = request.url.path %}
+    <div class="year-menu" id="yearMenu">
+      <button class="year-btn" id="yearBtn" onclick="toggleYearMenu(event)" aria-haspopup="true" aria-expanded="false">
+        <span id="yearLabel">2025</span>
+        <svg class="icon chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="year-dropdown" id="yearDropdown" role="menu">
+        <div class="yd-years">
+          <button class="yd-yr active" data-year="2025" onclick="setYear('2025',event)">2025</button>
+          <button class="yd-yr" data-year="2024" onclick="setYear('2024',event)">2024</button>
+        </div>
+        <div class="yd-sep"></div>
+        <a class="yd-form{% if '/tax/t1' in p and 'schedule' not in p and 'worksheet' not in p %} active{% endif %}" href="{{ root_path }}/tax/t1" role="menuitem">T1 General</a>
+        <a class="yd-form{% if 'bc428' in p %} active{% endif %}" href="{{ root_path }}/tax/bc428" role="menuitem">BC 428</a>
+        <div class="yd-sep"></div>
+        <a class="yd-form{% if 'schedule3' in p %} active{% endif %}" href="{{ root_path }}/tax/schedule3" role="menuitem">Schedule 3</a>
+        <a class="yd-form{% if 'schedule5' in p %} active{% endif %}" href="{{ root_path }}/tax/schedule5" role="menuitem">Schedule 5</a>
+        <a class="yd-form{% if 'schedule7' in p %} active{% endif %}" href="{{ root_path }}/tax/schedule7" role="menuitem">Schedule 7</a>
+        <a class="yd-form{% if 'schedule8' in p %} active{% endif %}" href="{{ root_path }}/tax/schedule8" role="menuitem">Schedule 8</a>
+        <a class="yd-form{% if 'schedule9' in p %} active{% endif %}" href="{{ root_path }}/tax/schedule9" role="menuitem">Schedule 9</a>
+        <div class="yd-sep"></div>
+        <a class="yd-form{% if 't777' in p %} active{% endif %}" href="{{ root_path }}/tax/t777" role="menuitem">T777</a>
+        <a class="yd-form{% if 't2209' in p %} active{% endif %}" href="{{ root_path }}/tax/t2209" role="menuitem">T2209</a>
+        <a class="yd-form{% if 'worksheet' in p %} active{% endif %}" href="{{ root_path }}/tax/worksheet_fed" role="menuitem">Worksheet Fed</a>
+      </div>
+    </div>
 
     <div class="nav-divider"></div>
 
@@ -650,9 +713,26 @@
 <script>
   const ROOT = "{{ root_path }}";
 
-  function navYear(year) {
-    // Navigate to same form with new year when multi-year routing is added
+  function toggleYearMenu(e) {
+    e.stopPropagation();
+    const m = document.getElementById('yearMenu');
+    const open = m.classList.toggle('open');
+    document.getElementById('yearBtn').setAttribute('aria-expanded', open);
   }
+
+  function setYear(yr, e) {
+    if (e) e.stopPropagation();
+    document.getElementById('yearLabel').textContent = yr;
+    document.querySelectorAll('.yd-yr').forEach(b => b.classList.toggle('active', b.dataset.year === yr));
+  }
+
+  document.addEventListener('click', () => {
+    const m = document.getElementById('yearMenu');
+    if (m) {
+      m.classList.remove('open');
+      document.getElementById('yearBtn').setAttribute('aria-expanded', 'false');
+    }
+  });
 
   function toast(msg, ok = true) {
     const el = document.getElementById('toast');
