@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Customize Forms — CRA Tax Helper{% endblock %}
+
+{% block content %}
+<div class="cust-landing">
+  <div class="cust-hero">
+    <h1>Customize a Tax Form</h1>
+    <p>Pick a form, place your own input boxes anywhere on the PDF, name them, write
+       Excel-like formulas between them, and print the filled form as a PDF.</p>
+  </div>
+
+  <div class="cust-grid">
+    {% for c in cards %}
+    <a class="cust-card {% if not c.pdf_ready %}cust-card--no-pdf{% endif %}"
+       href="{{ root_path }}/customize/{{ c.key }}">
+      <div class="cust-card-number">{{ c.number }}</div>
+      <div class="cust-card-title">{{ c.title }}</div>
+      <div class="cust-card-badge {% if c.pdf_ready %}badge--ready{% else %}badge--missing{% endif %}">
+        {% if c.pdf_ready %}
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" width="12" height="12">
+            <polyline points="2 8 6 12 14 4"/>
+          </svg>
+          PDF ready
+        {% else %}
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" width="12" height="12">
+            <circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8.5"/><circle cx="8" cy="11" r=".5" fill="currentColor" stroke="none"/>
+          </svg>
+          No PDF — blank canvas
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <p class="cust-hint">
+    <strong>No PDF installed?</strong>
+    Go to <a href="{{ root_path }}/admin/setup">Admin → Setup</a> to upload the official CRA fillable PDFs.
+    The editor also works without them — it uses a blank white canvas.
+  </p>
+</div>
+
+<style>
+.cust-landing {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+.cust-hero {
+  margin-bottom: 32px;
+}
+.cust-hero h1 {
+  font-size: 26px;
+  color: var(--cra-navy);
+  margin-bottom: 8px;
+}
+.cust-hero p {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+.cust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.cust-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 18px 16px;
+  border: 1px solid var(--cra-border);
+  border-radius: 6px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .15s, border-color .15s, transform .1s;
+  cursor: pointer;
+}
+.cust-card:hover {
+  box-shadow: 0 3px 12px rgba(38,55,74,.18);
+  border-color: var(--cra-mid);
+  transform: translateY(-2px);
+}
+.cust-card--no-pdf {
+  opacity: .8;
+}
+.cust-card-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--cra-mid);
+}
+.cust-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cra-navy);
+  line-height: 1.4;
+  flex: 1;
+}
+.cust-card-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 6px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.badge--ready   { background: #e6f4ea; color: var(--green); }
+.badge--missing { background: #fff8e1; color: #8a6900; }
+
+.cust-hint {
+  font-size: 13px;
+  color: var(--muted);
+  border-left: 3px solid var(--cra-border);
+  padding-left: 12px;
+}
+.cust-hint a { color: var(--cra-mid); }
+</style>
+{% endblock %}

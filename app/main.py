@@ -292,6 +292,88 @@ async def pdfjs_viewer(form_key: str, request: Request):
     return templates.TemplateResponse(request, "pdfjs_viewer.html", ctx)
 
 
+# ── Customize: PDF overlay editor ─────────────────────────────────────────────
+
+_CUSTOMIZE_FORMS: list[dict] = [
+    {"key": "t1",           "number": "T1",          "title": "General Income and Benefit Return",    "filename": "t1-2025.pdf"},
+    {"key": "bc428",        "number": "BC428",        "title": "British Columbia Tax",                 "filename": "bc428-2025.pdf"},
+    {"key": "schedule3",    "number": "Schedule 3",   "title": "Capital Gains (or Losses)",            "filename": "schedule3-2025.pdf"},
+    {"key": "schedule5",    "number": "Schedule 5",   "title": "Amounts for Spouse / Dependants",      "filename": "schedule5-2025.pdf"},
+    {"key": "schedule7",    "number": "Schedule 7",   "title": "RRSP, PRPP and SPP Contributions",     "filename": "schedule7-2025.pdf"},
+    {"key": "schedule8",    "number": "Schedule 8",   "title": "CPP/QPP Contributions",                "filename": "schedule8-2025.pdf"},
+    {"key": "schedule9",    "number": "Schedule 9",   "title": "Donations and Gifts",                  "filename": "schedule9-2025.pdf"},
+    {"key": "t777",         "number": "T777",         "title": "Statement of Employment Expenses",     "filename": "t777-2025.pdf"},
+    {"key": "t2209",        "number": "T2209",        "title": "Federal Foreign Tax Credits",          "filename": "t2209-2025.pdf"},
+    {"key": "worksheet_fed","number": "5000-D1",      "title": "Federal Worksheet",                    "filename": "worksheet-fed-2025.pdf"},
+]
+_CUSTOMIZE_FORMS_BY_KEY: dict[str, dict] = {f["key"]: f for f in _CUSTOMIZE_FORMS}
+
+
+@app.get("/customize", response_class=HTMLResponse)
+async def customize_landing(request: Request):
+    """Customize landing: grid of form cards to choose from."""
+    forms_dir = Path(__file__).parent / "static" / "forms"
+    cards = []
+    for f in _CUSTOMIZE_FORMS:
+        pdf_path = forms_dir / f["filename"]
+        cards.append({**f, "pdf_ready": pdf_path.exists()})
+    return templates.TemplateResponse(
+        request, "customize.html", _ctx(request, cards=cards)
+    )
+
+
+@app.get("/customize/{form_key}", response_class=HTMLResponse)
+async def customize_editor(form_key: str, request: Request):
+    """Customize editor: PDF overlay with drag-and-drop input boxes + formula sidebar."""
+    meta = _CUSTOMIZE_FORMS_BY_KEY.get(form_key)
+    if not meta:
+        raise HTTPException(404, f"Unknown form '{form_key}'")
+    forms_dir = Path(__file__).parent / "static" / "forms"
+    pdf_ready = (forms_dir / meta["filename"]).exists()
+    ctx = _ctx(
+        request,
+        form_key=form_key,
+        form_number=meta["number"],
+        form_title=meta["title"],
+        pdf_filename=meta["filename"],
+        pdf_url=f"{settings.ROOT_PATH}/static/forms/{meta['filename']}" if pdf_ready else "",
+        pdf_ready=pdf_ready,
+    )
+    return templates.TemplateResponse(request, "customize_editor.html", ctx)
+
+
+@app.get("/api/customize/{form_key}")
+async def customize_get(form_key: str, request: Request):
+    """Return saved custom layout for a form."""
+    if form_key not in _CUSTOMIZE_FORMS_BY_KEY:
+        raise HTTPException(400, f"Unknown form '{form_key}'")
+    cookie = request.cookies.get("aether_session", "")
+    data = await get_form_data(cookie, f"custom__{form_key}")
+    if data is None:
+        return {"boxes": []}
+    return data
+
+
+@app.post("/api/customize/{form_key}")
+async def customize_post(form_key: str, request: Request):
+    """Save custom layout for a form."""
+    if form_key not in _CUSTOMIZE_FORMS_BY_KEY:
+        raise HTTPException(400, f"Unknown form '{form_key}'")
+    user = getattr(request.state, "user", {}) or {}
+    email = user.get("email", "")
+    if not email:
+        raise HTTPException(401, "Not authenticated")
+    cookie = request.cookies.get("aether_session", "")
+    try:
+        body = await request.json()
+    except Exception:
+        raise HTTPException(400, "Invalid JSON body")
+    ok = await save_form_data(cookie, email, f"custom__{form_key}", body)
+    if not ok:
+        raise HTTPException(502, "Archive save failed; layout kept in localStorage")
+    return {"saved": True}
+
+
 # ── User data API (server-side per-user persistence via Archive) ──────────────
 
 _ALLOWED_FORMS = {"t1", "bc428", "schedule9", "bc479", "schedule3",

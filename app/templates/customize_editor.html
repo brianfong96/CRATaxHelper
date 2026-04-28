@@ -1,0 +1,1133 @@
+{% extends "base.html" %}
+{% block title %}Customize {{ form_number }} — CRA Tax Helper{% endblock %}
+
+{% block head_extra %}
+<style>
+  .page-wrap { max-width: none !important; padding: 0 !important; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ── Toolbar ─────────────────────────────────────────────────────────── -->
+<div class="ce-toolbar" id="ceToolbar">
+  <a class="ce-back" href="{{ root_path }}/customize">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+         stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Forms
+  </a>
+  <span class="ce-title">{{ form_number }} — {{ form_title }}</span>
+  <div class="ce-tools">
+    <button id="btnAddMode" class="ce-btn ce-btn--primary" onclick="toggleAddMode()" title="Click on the PDF to place a field (A)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      Add Field
+    </button>
+    <button class="ce-btn" onclick="clearAll()" title="Remove all fields">Clear All</button>
+    <div class="ce-page-nav">
+      <button onclick="changePage(-1)" title="Prev page">&#8249;</button>
+      <span id="pageInfo">1 / 1</span>
+      <button onclick="changePage(1)"  title="Next page">&#8250;</button>
+    </div>
+    <button class="ce-btn ce-btn--save" id="btnSave" onclick="saveLayout()" title="Save layout to server">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+        <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+      </svg>
+      Save
+    </button>
+    <button class="ce-btn" onclick="window.print()" title="Print filled form">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+      Print
+    </button>
+  </div>
+</div>
+
+<!-- ── Main layout ──────────────────────────────────────────────────────── -->
+<div class="ce-layout" id="ceLayout">
+
+  <!-- Canvas area -->
+  <div class="ce-canvas-wrap" id="ceCanvasWrap">
+    <div class="ce-canvas-scroller" id="ceScroller">
+      <div class="ce-canvas-host" id="ceHost">
+        <canvas id="pdfCanvas"></canvas>
+        <div class="ce-overlay" id="ceOverlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="ce-sidebar" id="ceSidebar">
+
+    <!-- Field list -->
+    <div class="ce-sidebar-section">
+      <div class="ce-sidebar-hdr">Fields <span class="ce-count" id="fieldCount">0</span></div>
+      <div class="ce-field-list" id="fieldList"></div>
+    </div>
+
+    <!-- Properties panel (shown when a field is selected) -->
+    <div class="ce-sidebar-section ce-props" id="ceProps" style="display:none">
+      <div class="ce-sidebar-hdr">Properties</div>
+
+      <label class="ce-label">Name (variable)</label>
+      <input class="ce-input" id="propName" placeholder="e.g. Employment_Income"
+             oninput="updateSelectedProp('name', this.value)">
+
+      <label class="ce-label">Format</label>
+      <select class="ce-input" id="propFormat" onchange="updateSelectedProp('format', this.value)">
+        <option value="number">Number (1,234.56)</option>
+        <option value="integer">Integer (1,234)</option>
+        <option value="currency">Currency ($1,234.56)</option>
+        <option value="percent">Percent (12.34%)</option>
+        <option value="text">Text (raw)</option>
+      </select>
+
+      <label class="ce-label">Formula  <span class="ce-hint">=Field_A + Field_B</span></label>
+      <textarea class="ce-input ce-formula" id="propFormula" rows="3"
+                placeholder="Leave blank to enter value manually&#10;=Field_A + Field_B&#10;=IF(income > 50000, income * 0.29, income * 0.205)"
+                oninput="updateSelectedProp('formula', this.value)"></textarea>
+      <div class="ce-formula-err" id="formulaErr"></div>
+
+      <label class="ce-label">Value <span class="ce-hint">(manual if no formula)</span></label>
+      <input class="ce-input" id="propValue" placeholder="0"
+             oninput="updateSelectedProp('value', this.value)">
+
+      <button class="ce-btn ce-btn--danger" onclick="deleteSelected()" style="margin-top:10px;width:100%">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+        </svg>
+        Delete Field
+      </button>
+    </div>
+
+    <!-- No-selection placeholder -->
+    <div class="ce-no-sel" id="ceNoSel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" width="32" height="32" opacity=".4">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="12" x2="15" y2="12"/>
+        <line x1="9" y1="15" x2="12" y2="15"/>
+      </svg>
+      <p>Click <strong>Add Field</strong> then click anywhere on the form to place an input box.</p>
+      <p>Click a field to select it and edit its name, format, or formula.</p>
+    </div>
+
+    <!-- Formula reference -->
+    <details class="ce-ref">
+      <summary>Formula reference</summary>
+      <div class="ce-ref-body">
+        <p><strong>Arithmetic:</strong> <code>+  -  *  /  ( )</code></p>
+        <p><strong>Compare:</strong> <code>&gt;  &lt;  &gt;=  &lt;=  ==  !=</code></p>
+        <p><strong>Functions:</strong></p>
+        <ul>
+          <li><code>SUM(a, b, ...)</code></li>
+          <li><code>MIN(a, b)</code> / <code>MAX(a, b)</code></li>
+          <li><code>ABS(x)</code></li>
+          <li><code>ROUND(x, n)</code></li>
+          <li><code>FLOOR(x)</code> / <code>CEIL(x)</code></li>
+          <li><code>IF(cond, yes, no)</code></li>
+          <li><code>AND(a, b)</code> / <code>OR(a, b)</code> / <code>NOT(a)</code></li>
+        </ul>
+        <p>Reference other fields by their <em>Name</em>.</p>
+      </div>
+    </details>
+  </aside>
+</div>
+
+<!-- ────────────────────────────────────────────────────────────────────────
+     Styles
+     ──────────────────────────────────────────────────────────────────────── -->
+<style>
+/* ── Toolbar ── */
+.ce-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 50px;
+  background: var(--cra-navy);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  flex-shrink: 0;
+}
+.ce-back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255,255,255,.75);
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background .15s;
+}
+.ce-back:hover { background: rgba(255,255,255,.12); color: #fff; }
+.ce-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  white-space: nowrap;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ce-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.ce-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+.ce-btn:hover            { background: rgba(255,255,255,.2); }
+.ce-btn--primary         { background: rgba(38,117,255,.7); border-color: rgba(38,117,255,.9); }
+.ce-btn--primary:hover   { background: rgba(38,117,255,.9); }
+.ce-btn--primary.active  { background: #e74c3c; border-color: #c0392b; }
+.ce-btn--save            { background: rgba(39,132,0,.7); border-color: rgba(39,132,0,.9); }
+.ce-btn--save:hover      { background: rgba(39,132,0,.9); }
+.ce-btn--danger          { background: #e74c3c; border-color: #c0392b; color: #fff; border-width: 1px; }
+.ce-btn--danger:hover    { background: #c0392b; }
+.ce-page-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,.8);
+}
+.ce-page-nav button {
+  background: none;
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background .15s;
+}
+.ce-page-nav button:hover { background: rgba(255,255,255,.15); }
+
+/* ── Layout ── */
+.ce-layout {
+  display: flex;
+  height: calc(100vh - 50px - 54px); /* subtract toolbar + app header */
+  overflow: hidden;
+}
+
+/* ── Canvas ── */
+.ce-canvas-wrap {
+  flex: 1;
+  overflow: hidden;
+  background: #888;
+  position: relative;
+}
+.ce-canvas-scroller {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+}
+.ce-canvas-host {
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 4px 24px rgba(0,0,0,.5);
+  cursor: default;
+}
+.ce-canvas-host.add-mode { cursor: crosshair; }
+#pdfCanvas { display: block; }
+.ce-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── Field boxes on canvas ── */
+.ce-field-box {
+  position: absolute;
+  pointer-events: all;
+  box-sizing: border-box;
+  border: 1.5px solid rgba(38,55,74,.55);
+  background: rgba(255,255,255,.88);
+  border-radius: 2px;
+  cursor: move;
+  user-select: none;
+  overflow: hidden;
+}
+.ce-field-box.selected {
+  border: 2px solid #2675ff;
+  box-shadow: 0 0 0 2px rgba(38,117,255,.2);
+  z-index: 10;
+}
+.ce-field-box input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 1px 3px;
+  font-size: 11px;
+  font-family: "Noto Sans", Arial, sans-serif;
+  color: #1a1a2e;
+  outline: none;
+  cursor: text;
+}
+.ce-field-box .ce-resize {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: se-resize;
+  background: linear-gradient(135deg, transparent 60%, rgba(38,117,255,.6) 60%);
+  z-index: 5;
+}
+.ce-field-label {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  font-size: 9px;
+  font-family: Arial, sans-serif;
+  color: #2675ff;
+  white-space: nowrap;
+  pointer-events: none;
+  background: rgba(255,255,255,.85);
+  padding: 0 2px;
+  border-radius: 2px;
+  line-height: 14px;
+}
+
+/* ── Sidebar ── */
+.ce-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #f8f9fb;
+  border-left: 1px solid var(--cra-border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.ce-sidebar-section {
+  border-bottom: 1px solid var(--cra-border);
+}
+.ce-sidebar-hdr {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--cra-mid);
+  padding: 10px 14px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ce-count {
+  background: var(--cra-mid);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 1px 6px;
+  font-weight: 700;
+}
+.ce-field-list {
+  padding: 0 6px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.ce-frow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text);
+  transition: background .12s;
+}
+.ce-frow:hover    { background: var(--cra-light); }
+.ce-frow.selected { background: var(--cra-light); font-weight: 600; color: var(--cra-mid); }
+.ce-frow-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ce-frow-page { font-size: 10px; color: var(--muted); }
+
+/* ── Props panel ── */
+.ce-props { padding: 0 14px 14px; }
+.ce-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 10px 0 3px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.ce-hint {
+  font-size: 10px;
+  font-weight: 400;
+  color: #aaa;
+  margin-left: 4px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.ce-input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--cra-border);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text);
+  background: #fff;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.ce-input:focus { outline: none; border-color: var(--cra-mid); box-shadow: 0 0 0 2px rgba(38,80,117,.15); }
+.ce-formula { font-family: "Courier New", monospace; resize: vertical; }
+.ce-formula-err { color: var(--red); font-size: 11px; min-height: 14px; margin-top: 2px; }
+
+/* ── No selection / hint ── */
+.ce-no-sel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  flex: 1;
+}
+.ce-no-sel p { margin: 0; }
+
+/* ── Formula reference ── */
+.ce-ref { font-size: 12px; padding: 10px 14px; color: var(--text); }
+.ce-ref summary { cursor: pointer; font-weight: 600; color: var(--cra-mid); font-size: 12px; }
+.ce-ref-body { margin-top: 8px; line-height: 1.7; }
+.ce-ref-body code { background: #eee; border-radius: 3px; padding: 0 3px; font-size: 11px; }
+.ce-ref-body ul { padding-left: 18px; margin: 4px 0; }
+
+/* ── Add-mode overlay hint ── */
+.ce-add-hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(38,55,74,.92);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 999;
+}
+.ce-add-hint.visible { opacity: 1; }
+
+/* ── Print ── */
+@media print {
+  .app-header, .ce-toolbar, .ce-sidebar, .ce-add-hint { display: none !important; }
+  .ce-layout { height: auto !important; }
+  .ce-canvas-wrap { overflow: visible !important; background: #fff !important; }
+  .ce-canvas-scroller { overflow: visible !important; padding: 0 !important; }
+  .ce-canvas-host { box-shadow: none !important; }
+  .ce-field-box { border: none !important; background: transparent !important; }
+  .ce-field-box.selected { box-shadow: none !important; }
+  .ce-field-label, .ce-resize { display: none !important; }
+  .ce-field-box input { color: #000 !important; background: transparent !important; }
+}
+</style>
+
+<!-- ── Add-mode hint ── -->
+<div class="ce-add-hint" id="ceAddHint">Click anywhere on the form to place a field · Esc to cancel</div>
+
+<!-- ────────────────────────────────────────────────────────────────────────
+     JavaScript
+     ──────────────────────────────────────────────────────────────────────── -->
+<script>
+"use strict";
+
+const FORM_KEY  = {{ form_key | tojson }};
+const PDF_URL   = {{ pdf_url  | tojson }};
+const PDF_READY = {{ 'true' if pdf_ready else 'false' }};
+const ROOT      = {{ root_path | tojson }};
+
+/* ── State ───────────────────────────────────────────────────────────────── */
+let boxes       = [];   // {id, name, page, xPct, yPct, wPct, hPct, value, formula, format}
+let selectedId  = null;
+let addMode     = false;
+let currentPage = 1;
+let totalPages  = 1;
+let pdfDoc      = null;
+let renderTask  = null;
+
+const canvas  = document.getElementById('pdfCanvas');
+const ctx2d   = canvas.getContext('2d');
+const overlay = document.getElementById('ceOverlay');
+const host    = document.getElementById('ceHost');
+
+/* ── PDF.js ──────────────────────────────────────────────────────────────── */
+let pdfjsLib = null;
+
+async function initPdf() {
+  if (!PDF_READY || !PDF_URL) { drawBlankCanvas(); return; }
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js');
+    pdfjsLib = window.pdfjsLib;
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
+    totalPages = pdfDoc.numPages;
+    await renderPage(currentPage);
+  } catch (e) {
+    console.warn('PDF.js load failed, using blank canvas:', e);
+    drawBlankCanvas();
+  }
+}
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+async function renderPage(pageNum) {
+  if (!pdfDoc) { drawBlankCanvas(); return; }
+  if (renderTask) { try { renderTask.cancel(); } catch(_) {} }
+  const page = await pdfDoc.getPage(pageNum);
+  const scale = Math.min(window.devicePixelRatio || 1, 2);
+  const vp    = page.getViewport({ scale: 1.5 * scale });
+  canvas.width  = vp.width;
+  canvas.height = vp.height;
+  canvas.style.width  = (vp.width  / scale) + 'px';
+  canvas.style.height = (vp.height / scale) + 'px';
+  overlay.style.width  = canvas.style.width;
+  overlay.style.height = canvas.style.height;
+  renderTask = page.render({ canvasContext: ctx2d, viewport: vp });
+  await renderTask.promise;
+  renderTask = null;
+  updatePageInfo();
+  renderBoxes();
+}
+
+function drawBlankCanvas() {
+  const W = 816, H = 1056;
+  canvas.width  = W; canvas.height = H;
+  canvas.style.width  = W + 'px'; canvas.style.height = H + 'px';
+  overlay.style.width = W + 'px'; overlay.style.height = H + 'px';
+  ctx2d.fillStyle = '#fff';
+  ctx2d.fillRect(0, 0, W, H);
+  ctx2d.strokeStyle = '#ccc';
+  ctx2d.strokeRect(1, 1, W - 2, H - 2);
+  ctx2d.fillStyle = '#bbb';
+  ctx2d.font = '16px Arial';
+  ctx2d.textAlign = 'center';
+  ctx2d.fillText('No PDF installed — click Add Field to place input boxes', W / 2, H / 2);
+  ctx2d.textAlign = 'left';
+  totalPages = 1;
+  updatePageInfo();
+  renderBoxes();
+}
+
+function updatePageInfo() {
+  document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages}`;
+}
+
+async function changePage(delta) {
+  const np = currentPage + delta;
+  if (np < 1 || np > totalPages) return;
+  currentPage = np;
+  if (pdfDoc) await renderPage(currentPage);
+  else renderBoxes();
+}
+
+/* ── Canvas dimensions (for % ↔ px conversion) ───────────────────────────── */
+function canvasW() { return parseFloat(canvas.style.width)  || canvas.width;  }
+function canvasH() { return parseFloat(canvas.style.height) || canvas.height; }
+
+function pctToPx(b) {
+  const W = canvasW(), H = canvasH();
+  return { x: b.xPct * W, y: b.yPct * H, w: b.wPct * W, h: b.hPct * H };
+}
+
+function pxToPct(x, y, w, h) {
+  const W = canvasW(), H = canvasH();
+  return { xPct: x / W, yPct: y / H, wPct: w / W, hPct: h / H };
+}
+
+/* ── Formula engine ──────────────────────────────────────────────────────── */
+
+/**
+ * Tokenise a formula string into an array of tokens.
+ * Returns [] on empty input.
+ */
+function tokenise(src) {
+  const tokens = [];
+  let i = 0;
+  while (i < src.length) {
+    // skip whitespace
+    if (/\s/.test(src[i])) { i++; continue; }
+    // number literal
+    if (/[0-9.]/.test(src[i])) {
+      let s = '';
+      while (i < src.length && /[0-9.]/.test(src[i])) s += src[i++];
+      tokens.push({ t: 'NUM', v: parseFloat(s) });
+      continue;
+    }
+    // identifier or keyword
+    if (/[A-Za-z_]/.test(src[i])) {
+      let s = '';
+      while (i < src.length && /[A-Za-z0-9_]/.test(src[i])) s += src[i++];
+      tokens.push({ t: 'ID', v: s });
+      continue;
+    }
+    // two-char operators
+    if (i + 1 < src.length) {
+      const two = src[i] + src[i + 1];
+      if (['>=', '<=', '==', '!='].includes(two)) {
+        tokens.push({ t: 'OP', v: two }); i += 2; continue;
+      }
+    }
+    // single-char
+    const ch = src[i++];
+    if ('+-*/(),><'.includes(ch)) tokens.push({ t: 'OP', v: ch });
+    else throw new Error(`Unexpected character: ${ch}`);
+  }
+  return tokens;
+}
+
+function parseFormula(src, env) {
+  if (!src.trim()) return 0;
+  const formula = src.startsWith('=') ? src.slice(1) : src;
+  const tokens = tokenise(formula);
+  let pos = 0;
+
+  function peek()    { return tokens[pos]; }
+  function consume() { return tokens[pos++]; }
+  function expect(v) {
+    const tok = consume();
+    if (!tok || tok.v !== v) throw new Error(`Expected '${v}'`);
+    return tok;
+  }
+
+  function expr()    { return cmp(); }
+
+  function cmp() {
+    let left = add();
+    while (peek() && ['>', '<', '>=', '<=', '==', '!='].includes(peek().v)) {
+      const op = consume().v;
+      const right = add();
+      if      (op === '>' ) left = left >  right ? 1 : 0;
+      else if (op === '<' ) left = left <  right ? 1 : 0;
+      else if (op === '>=') left = left >= right ? 1 : 0;
+      else if (op === '<=') left = left <= right ? 1 : 0;
+      else if (op === '==') left = left === right ? 1 : 0;
+      else if (op === '!=') left = left !== right ? 1 : 0;
+    }
+    return left;
+  }
+
+  function add() {
+    let v = mul();
+    while (peek() && (peek().v === '+' || peek().v === '-')) {
+      const op = consume().v;
+      v = op === '+' ? v + mul() : v - mul();
+    }
+    return v;
+  }
+
+  function mul() {
+    let v = una();
+    while (peek() && (peek().v === '*' || peek().v === '/')) {
+      const op = consume().v;
+      const r = una();
+      if (op === '/') { if (r === 0) throw new Error('Division by zero'); v = v / r; }
+      else v = v * r;
+    }
+    return v;
+  }
+
+  function una() {
+    if (peek() && peek().v === '-') { consume(); return -una(); }
+    return atom();
+  }
+
+  function atom() {
+    const tok = peek();
+    if (!tok) throw new Error('Unexpected end of formula');
+
+    // parenthesised expression
+    if (tok.v === '(') {
+      consume(); const v = expr(); expect(')'); return v;
+    }
+
+    // number literal
+    if (tok.t === 'NUM') { consume(); return tok.v; }
+
+    // identifier: function or variable
+    if (tok.t === 'ID') {
+      consume();
+      const name = tok.v.toUpperCase();
+
+      // function call?
+      if (peek() && peek().v === '(') {
+        consume();
+        const args = [];
+        while (!(peek() && peek().v === ')')) {
+          args.push(expr());
+          if (peek() && peek().v === ',') consume();
+        }
+        expect(')');
+        switch (name) {
+          case 'SUM':   return args.reduce((a, b) => a + b, 0);
+          case 'MIN':   return Math.min(...args);
+          case 'MAX':   return Math.max(...args);
+          case 'ABS':   return Math.abs(args[0]);
+          case 'ROUND': return Math.round((args[0] || 0) * Math.pow(10, args[1] || 0)) / Math.pow(10, args[1] || 0);
+          case 'FLOOR': return Math.floor(args[0] || 0);
+          case 'CEIL':  return Math.ceil(args[0] || 0);
+          case 'IF':    return args[0] ? args[1] : (args[2] ?? 0);
+          case 'AND':   return args.every(Boolean) ? 1 : 0;
+          case 'OR':    return args.some(Boolean)  ? 1 : 0;
+          case 'NOT':   return args[0] ? 0 : 1;
+          default: throw new Error(`Unknown function: ${name}`);
+        }
+      }
+
+      // variable reference — use original case for lookup
+      const varName = tok.v;
+      if (!(varName in env)) throw new Error(`Unknown variable: ${varName}`);
+      const val = parseFloat(env[varName]);
+      return isNaN(val) ? 0 : val;
+    }
+
+    throw new Error(`Unexpected token: ${tok.v}`);
+  }
+
+  const result = expr();
+  if (pos < tokens.length) throw new Error(`Unexpected token: ${tokens[pos].v}`);
+  return result;
+}
+
+/* Topological sort (Kahn's algorithm) to evaluate formulas in dependency order. */
+function topoSortBoxes(bs) {
+  const nameToId = {};
+  bs.forEach(b => { if (b.name) nameToId[b.name] = b.id; });
+
+  const deps  = {};  // id → Set<id>
+  const rdeps = {};  // id → Set<id>  (reverse)
+  bs.forEach(b => { deps[b.id] = new Set(); rdeps[b.id] = new Set(); });
+
+  bs.forEach(b => {
+    if (!b.formula) return;
+    const src = b.formula.startsWith('=') ? b.formula.slice(1) : b.formula;
+    let toks;
+    try { toks = tokenise(src); } catch(_) { return; }
+    toks.forEach(tok => {
+      if (tok.t === 'ID' && tok.v in nameToId) {
+        const depId = nameToId[tok.v];
+        if (depId !== b.id) {
+          deps[b.id].add(depId);
+          rdeps[depId].add(b.id);
+        }
+      }
+    });
+  });
+
+  const inDeg = {};
+  bs.forEach(b => { inDeg[b.id] = deps[b.id].size; });
+
+  const queue = bs.filter(b => inDeg[b.id] === 0).map(b => b.id);
+  const order = [];
+  while (queue.length) {
+    const id = queue.shift();
+    order.push(id);
+    rdeps[id].forEach(rid => {
+      inDeg[rid]--;
+      if (inDeg[rid] === 0) queue.push(rid);
+    });
+  }
+  // any boxes not in order (circular) appended at end
+  bs.forEach(b => { if (!order.includes(b.id)) order.push(b.id); });
+
+  const idToBox = {};
+  bs.forEach(b => { idToBox[b.id] = b; });
+  return order.map(id => idToBox[id]);
+}
+
+function recalcAll() {
+  const env = {};
+  const sorted = topoSortBoxes(boxes);
+  sorted.forEach(b => {
+    if (b.formula) {
+      try {
+        const val = parseFormula(b.formula, env);
+        b.value = String(val);
+        if (selectedId === b.id) {
+          document.getElementById('formulaErr').textContent = '';
+          document.getElementById('propValue').value = b.value;
+        }
+      } catch(e) {
+        if (selectedId === b.id)
+          document.getElementById('formulaErr').textContent = '⚠ ' + e.message;
+      }
+    }
+    if (b.name) env[b.name] = parseFloat(b.value) || 0;
+  });
+  renderBoxes();
+}
+
+/* ── Format helpers ──────────────────────────────────────────────────────── */
+function formatValue(value, fmt) {
+  const n = parseFloat(value);
+  if (isNaN(n)) return value;
+  switch (fmt) {
+    case 'integer':  return n.toLocaleString('en-CA', { maximumFractionDigits: 0 });
+    case 'currency': return n.toLocaleString('en-CA', { style: 'currency', currency: 'CAD' });
+    case 'percent':  return n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+    case 'text':     return value;
+    default:         return n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+}
+
+/* ── Render boxes onto the overlay ──────────────────────────────────────── */
+function renderBoxes() {
+  overlay.innerHTML = '';
+  boxes.filter(b => b.page === currentPage).forEach(b => {
+    const px = pctToPx(b);
+    const div = document.createElement('div');
+    div.className = 'ce-field-box' + (b.id === selectedId ? ' selected' : '');
+    div.id = 'fbox-' + b.id;
+    div.style.left   = px.x + 'px';
+    div.style.top    = px.y + 'px';
+    div.style.width  = px.w + 'px';
+    div.style.height = px.h + 'px';
+
+    // label
+    if (b.name) {
+      const lbl = document.createElement('div');
+      lbl.className = 'ce-field-label';
+      lbl.textContent = b.name;
+      div.appendChild(lbl);
+    }
+
+    // input
+    const inp = document.createElement('input');
+    inp.type  = 'text';
+    inp.value = b.formula ? formatValue(b.value, b.format) : b.value;
+    inp.readOnly = !!b.formula;
+    inp.title = b.name || '';
+
+    inp.addEventListener('focus', () => selectBox(b.id));
+    inp.addEventListener('blur',  e => {
+      b.value = e.target.value.replace(/[$,%\s,]/g, '');
+      e.target.value = formatValue(b.value, b.format);
+      recalcAll();
+      autoSave();
+    });
+    inp.addEventListener('click', e => e.stopPropagation());
+    div.appendChild(inp);
+
+    // resize handle
+    const rh = document.createElement('div');
+    rh.className = 'ce-resize';
+    rh.addEventListener('mousedown', e => startResize(e, b));
+    div.appendChild(rh);
+
+    // drag
+    div.addEventListener('mousedown', e => {
+      if (e.target === rh || e.target === inp) return;
+      startDrag(e, b);
+    });
+    div.addEventListener('click', e => { e.stopPropagation(); selectBox(b.id); });
+
+    overlay.appendChild(div);
+  });
+
+  updateFieldList();
+}
+
+/* ── Add mode ────────────────────────────────────────────────────────────── */
+function toggleAddMode() {
+  addMode = !addMode;
+  host.classList.toggle('add-mode', addMode);
+  document.getElementById('btnAddMode').classList.toggle('active', addMode);
+  document.getElementById('ceAddHint').classList.toggle('visible', addMode);
+}
+
+host.addEventListener('click', e => {
+  if (!addMode) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvasW() / rect.width;
+  const scaleY = canvasH() / rect.height;
+  const x = (e.clientX - rect.left) * scaleX;
+  const y = (e.clientY - rect.top)  * scaleY;
+  const W = 120, H = 22;
+  const pct = pxToPct(x - W / 2, y - H / 2, W, H);
+  const count = boxes.filter(b => b.page === currentPage).length + 1;
+  const box = {
+    id:      'f_' + Date.now(),
+    name:    `Field_${boxes.length + 1}`,
+    page:    currentPage,
+    ...pct,
+    value:   '',
+    formula: '',
+    format:  'number',
+  };
+  boxes.push(box);
+  toggleAddMode();
+  selectBox(box.id);
+  recalcAll();
+  autoSave();
+});
+
+/* ── Selection ───────────────────────────────────────────────────────────── */
+function selectBox(id) {
+  selectedId = id;
+  renderBoxes();
+  const b = boxes.find(x => x.id === id);
+  if (!b) { showNoSel(); return; }
+
+  document.getElementById('ceProps').style.display = '';
+  document.getElementById('ceNoSel').style.display = 'none';
+  document.getElementById('propName').value    = b.name    || '';
+  document.getElementById('propFormat').value  = b.format  || 'number';
+  document.getElementById('propFormula').value = b.formula || '';
+  document.getElementById('propValue').value   = b.value   || '';
+  document.getElementById('formulaErr').textContent = '';
+
+  // highlight in field list
+  document.querySelectorAll('.ce-frow').forEach(r => {
+    r.classList.toggle('selected', r.dataset.id === id);
+  });
+}
+
+function showNoSel() {
+  document.getElementById('ceProps').style.display = 'none';
+  document.getElementById('ceNoSel').style.display = '';
+}
+
+document.getElementById('ceOverlay').addEventListener('click', () => {
+  if (addMode) return;
+  selectedId = null;
+  renderBoxes();
+  showNoSel();
+});
+
+/* ── Property updates ────────────────────────────────────────────────────── */
+function updateSelectedProp(key, value) {
+  const b = boxes.find(x => x.id === selectedId);
+  if (!b) return;
+  b[key] = value;
+  if (key === 'formula' || key === 'format') recalcAll();
+  else renderBoxes();
+  autoSave();
+}
+
+/* ── Drag ────────────────────────────────────────────────────────────────── */
+function startDrag(e, b) {
+  e.preventDefault();
+  selectBox(b.id);
+  const rect  = canvas.getBoundingClientRect();
+  const scaleX = canvasW() / rect.width;
+  const scaleY = canvasH() / rect.height;
+  const startX = e.clientX, startY = e.clientY;
+  const px0   = pctToPx(b);
+  const ox0   = px0.x, oy0 = px0.y;
+
+  function onMove(mv) {
+    const dx = (mv.clientX - startX) * scaleX;
+    const dy = (mv.clientY - startY) * scaleY;
+    const np = pxToPct(ox0 + dx, oy0 + dy, px0.w, px0.h);
+    b.xPct = Math.max(0, Math.min(1 - b.wPct, np.xPct));
+    b.yPct = Math.max(0, Math.min(1 - b.hPct, np.yPct));
+    renderBoxes();
+  }
+  function onUp() {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup',   onUp);
+    autoSave();
+  }
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup',   onUp);
+}
+
+/* ── Resize ──────────────────────────────────────────────────────────────── */
+function startResize(e, b) {
+  e.preventDefault(); e.stopPropagation();
+  const rect   = canvas.getBoundingClientRect();
+  const scaleX = canvasW() / rect.width;
+  const scaleY = canvasH() / rect.height;
+  const startX = e.clientX, startY = e.clientY;
+  const px0    = pctToPx(b);
+  const w0 = px0.w, h0 = px0.h;
+
+  function onMove(mv) {
+    const dw = (mv.clientX - startX) * scaleX;
+    const dh = (mv.clientY - startY) * scaleY;
+    const nw = Math.max(40, w0 + dw);
+    const nh = Math.max(14, h0 + dh);
+    const np = pxToPct(px0.x, px0.y, nw, nh);
+    b.wPct = np.wPct; b.hPct = np.hPct;
+    renderBoxes();
+  }
+  function onUp() {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup',   onUp);
+    autoSave();
+  }
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup',   onUp);
+}
+
+/* ── Delete ──────────────────────────────────────────────────────────────── */
+function deleteSelected() {
+  if (!selectedId) return;
+  boxes = boxes.filter(b => b.id !== selectedId);
+  selectedId = null;
+  recalcAll();
+  showNoSel();
+  autoSave();
+}
+
+function clearAll() {
+  if (!boxes.length) return;
+  if (!confirm('Remove all fields on all pages?')) return;
+  boxes = [];
+  selectedId = null;
+  recalcAll();
+  showNoSel();
+  autoSave();
+}
+
+/* ── Field list sidebar ──────────────────────────────────────────────────── */
+function updateFieldList() {
+  const list = document.getElementById('fieldList');
+  document.getElementById('fieldCount').textContent = boxes.length;
+  list.innerHTML = '';
+  if (!boxes.length) {
+    list.innerHTML = '<div style="padding:6px 8px;color:#aaa;font-size:11px">No fields yet</div>';
+    return;
+  }
+  boxes.forEach(b => {
+    const row = document.createElement('div');
+    row.className = 'ce-frow' + (b.id === selectedId ? ' selected' : '');
+    row.dataset.id = b.id;
+    row.innerHTML = `<span class="ce-frow-name">${b.name || '<em>unnamed</em>'}</span>
+                     <span class="ce-frow-page">p${b.page}</span>`;
+    row.addEventListener('click', () => {
+      if (b.page !== currentPage) {
+        currentPage = b.page;
+        if (pdfDoc) renderPage(currentPage); else renderBoxes();
+      }
+      selectBox(b.id);
+    });
+    list.appendChild(row);
+  });
+}
+
+/* ── Keyboard shortcuts ──────────────────────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'Escape' && addMode) { toggleAddMode(); return; }
+  if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId) { deleteSelected(); return; }
+  if (e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.metaKey) { toggleAddMode(); }
+});
+
+/* ── Persistence ─────────────────────────────────────────────────────────── */
+const LS_KEY = `cra_customize_${FORM_KEY}`;
+
+function autoSave() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ boxes })); } catch(_) {}
+}
+
+async function saveLayout() {
+  autoSave();
+  try {
+    const res = await fetch(`${ROOT}/api/customize/${FORM_KEY}`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ boxes }),
+    });
+    if (res.ok) showToast('Layout saved ✓', 'success');
+    else if (res.status === 401) showToast('Not signed in — saved locally only', 'warn');
+    else showToast('Server save failed — saved locally', 'warn');
+  } catch(_) {
+    showToast('Offline — saved locally', 'warn');
+  }
+}
+
+async function loadLayout() {
+  // try server first
+  try {
+    const res = await fetch(`${ROOT}/api/customize/${FORM_KEY}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.boxes) && data.boxes.length) {
+        boxes = data.boxes;
+        recalcAll();
+        return;
+      }
+    }
+  } catch(_) {}
+
+  // fallback to localStorage
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      if (data && Array.isArray(data.boxes)) { boxes = data.boxes; recalcAll(); }
+    }
+  } catch(_) {}
+}
+
+/* ── Toast ───────────────────────────────────────────────────────────────── */
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast toast--' + (type || 'success') + ' show';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── Boot ────────────────────────────────────────────────────────────────── */
+(async () => {
+  await initPdf();
+  await loadLayout();
+})();
+</script>
+{% endblock %}
