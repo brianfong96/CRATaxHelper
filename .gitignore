@@ -19,3 +19,11 @@ app/static/forms/*.pdf
 # Local data volumes
 data/
 archive_data/
+
+# Desktop build artifacts
+dist-server/
+dist-desktop/
+build-pyinstaller/
+electron/node_modules/
+electron/dist/
+*.spec.bak

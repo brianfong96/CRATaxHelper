@@ -25,8 +25,21 @@ from __future__ import annotations
 import asyncio
 import io
 import logging
+import sys
 from pathlib import Path
 from typing import Dict
+
+
+def _app_pkg_dir() -> Path:
+    """Return the app package directory.
+
+    Works in three contexts:
+    - Development:  CRATaxHelper/app/  (relative to this file)
+    - PyInstaller:  sys._MEIPASS/app/  (data files extracted to temp dir)
+    """
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        return Path(sys._MEIPASS) / "app"
+    return Path(__file__).parent
 
 from fastapi import FastAPI, HTTPException, Request, UploadFile, File
 from fastapi.responses import HTMLResponse, JSONResponse, Response
@@ -108,10 +121,10 @@ app = FastAPI(
     lifespan=_lifespan,
 )
 
-_TMPL_DIR = Path(__file__).parent / "templates"
+_TMPL_DIR = _app_pkg_dir() / "templates"
 templates = Jinja2Templates(directory=str(_TMPL_DIR))
 
-app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
+app.mount("/static", StaticFiles(directory=str(_app_pkg_dir() / "static")), name="static")
 
 
 # ── Auth middleware ───────────────────────────────────────────────────────────
@@ -312,7 +325,7 @@ _CUSTOMIZE_FORMS_BY_KEY: dict[str, dict] = {f["key"]: f for f in _CUSTOMIZE_FORM
 @app.get("/customize", response_class=HTMLResponse)
 async def customize_landing(request: Request):
     """Customize landing: grid of form cards to choose from."""
-    forms_dir = Path(__file__).parent / "static" / "forms"
+    forms_dir = _app_pkg_dir() / "static" / "forms"
     cards = []
     for f in _CUSTOMIZE_FORMS:
         pdf_path = forms_dir / f["filename"]
@@ -328,7 +341,7 @@ async def customize_editor(form_key: str, request: Request):
     meta = _CUSTOMIZE_FORMS_BY_KEY.get(form_key)
     if not meta:
         raise HTTPException(404, f"Unknown form '{form_key}'")
-    forms_dir = Path(__file__).parent / "static" / "forms"
+    forms_dir = _app_pkg_dir() / "static" / "forms"
     pdf_ready = (forms_dir / meta["filename"]).exists()
     ctx = _ctx(
         request,
@@ -370,8 +383,11 @@ async def customize_post(form_key: str, request: Request):
         raise HTTPException(400, "Invalid JSON body")
     ok = await save_form_data(cookie, email, f"custom__{form_key}", body)
     if not ok:
+        if not settings.ARCHIVE_URL:
+            # Desktop/no-archive mode: localStorage is the primary store.
+            return {"saved": True, "storage": "local"}
         raise HTTPException(502, "Archive save failed; layout kept in localStorage")
-    return {"saved": True}
+    return {"saved": True, "storage": "archive"}
 
 
 # ── User data API (server-side per-user persistence via Archive) ──────────────
@@ -408,8 +424,11 @@ async def userdata_post(form: str, request: Request):
         raise HTTPException(400, "Invalid JSON body")
     ok = await save_form_data(cookie, email, form, body)
     if not ok:
+        if not settings.ARCHIVE_URL:
+            # Desktop/no-archive mode: localStorage is the primary store.
+            return {"saved": True, "storage": "local"}
         raise HTTPException(502, "Archive save failed; data kept in localStorage")
-    return {"saved": True}
+    return {"saved": True, "storage": "archive"}
 
 
 # ── Excel export ──────────────────────────────────────────────────────────────

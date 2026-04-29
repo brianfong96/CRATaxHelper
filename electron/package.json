@@ -1,0 +1,59 @@
+{
+  "name": "cra-tax-helper",
+  "version": "1.0.0",
+  "description": "CRA Tax Helper — Desktop Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win":   "electron-builder --win",
+    "build:mac":   "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all":   "electron-builder --win --mac --linux"
+  },
+  "build": {
+    "appId": "ca.aether.cra-tax-helper",
+    "productName": "CRA Tax Helper",
+    "copyright": "Copyright © 2025",
+    "directories": {
+      "output": "../dist-desktop",
+      "buildResources": "build"
+    },
+    "extraResources": [
+      {
+        "from": "../dist-server/",
+        "to": "server/",
+        "filter": ["cra-taxhelper-server*"]
+      }
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "build/**/*"
+    ],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.finance"
+    },
+    "linux": {
+      "target": [{ "target": "AppImage", "arch": ["x64"] }],
+      "icon": "build/icon.png",
+      "category": "Finance"
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}
