@@ -16,9 +16,11 @@
 #>
 
 param(
-    [string]$AtlasUrl       = ($env:ATLAS_URL            ?? "http://localhost:8600"),
-    [string]$InternalSecret = ($env:AETHER_SESSION_SECRET ?? ""),
-    [string]$EncryptionKey  = ($env:FIELD_ENCRYPTION_KEY  ?? "")
+    [string]$AtlasUrl              = ($env:ATLAS_URL ?? "http://localhost:8600"),
+    [string]$PlatformInternalSecret = ($env:AETHER_SESSION_SECRET ?? ""),
+    [string]$AuthSecretHex          = ($env:CRA_TAXHELPER_AUTH_SECRET_HEX ?? ""),
+    [string]$ArchiveInternalSecret  = ($env:ARCHIVE_INTERNAL_SECRET ?? ""),
+    [string]$EncryptionKey          = ($env:FIELD_ENCRYPTION_KEY ?? "")
 )
 
 # Helper: read a key from a .env file
@@ -29,10 +31,15 @@ function Read-EnvValue([string]$FilePath, [string]$Key) {
     return ""
 }
 
-# Try reading SESSION_SECRET from Aether .env if not supplied
-if (-not $InternalSecret) {
-    $aetherEnv = Join-Path $PSScriptRoot "..\..\Aether\.env"
-    $InternalSecret = Read-EnvValue $aetherEnv "SESSION_SECRET"
+$aetherEnv = Join-Path $PSScriptRoot "..\..\Aether\.env"
+if (-not $PlatformInternalSecret) {
+    $PlatformInternalSecret = Read-EnvValue $aetherEnv "SESSION_SECRET"
+}
+if (-not $AuthSecretHex) {
+    $AuthSecretHex = Read-EnvValue $aetherEnv "CRA_TAXHELPER_AUTH_SECRET_HEX"
+}
+if (-not $ArchiveInternalSecret) {
+    $ArchiveInternalSecret = Read-EnvValue $aetherEnv "ARCHIVE_INTERNAL_SECRET"
 }
 
 # Try reading FIELD_ENCRYPTION_KEY from local .env if not supplied
@@ -43,8 +50,16 @@ if (-not $EncryptionKey) {
     $EncryptionKey = Read-EnvValue $localEnv "FIELD_ENCRYPTION_KEY"
 }
 
-if (-not $InternalSecret) {
+if (-not $PlatformInternalSecret) {
     Write-Error "SESSION_SECRET not found. Set AETHER_SESSION_SECRET env var or add SESSION_SECRET to Aether/.env"
+    exit 1
+}
+if (-not $AuthSecretHex) {
+    Write-Error "CRA_TAXHELPER_AUTH_SECRET_HEX not found. Run Aether scripts/sync-auth-scope-secrets.ps1."
+    exit 1
+}
+if (-not $ArchiveInternalSecret) {
+    Write-Error "ARCHIVE_INTERNAL_SECRET not found. Run Aether scripts/sync-auth-scope-secrets.ps1."
     exit 1
 }
 
@@ -54,7 +69,9 @@ if (-not $EncryptionKey) {
 }
 
 $headers = @{ "Content-Type" = "application/json" }
-if ($InternalSecret) { $headers["X-Aether-Internal"] = $InternalSecret }
+if ($PlatformInternalSecret) {
+    $headers["X-Aether-Internal"] = $PlatformInternalSecret
+}
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path $PSScriptRoot -Parent
@@ -67,10 +84,9 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 $AppConfig = Get-Content "$RepoRoot\atlas-app.json" | ConvertFrom-Json
 
-# Inject runtime secrets — never stored in atlas-app.json
-if ($InternalSecret) {
-    $AppConfig.env | Add-Member -NotePropertyName "SESSION_SECRET" -NotePropertyValue $InternalSecret -Force
-}
+# Inject scoped runtime secrets — never store the platform master in the app.
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_SECRET_HEX" -NotePropertyValue $AuthSecretHex -Force
+$AppConfig.env | Add-Member -NotePropertyName "ARCHIVE_INTERNAL_SECRET" -NotePropertyValue $ArchiveInternalSecret -Force
 if ($EncryptionKey) {
     $AppConfig.env | Add-Member -NotePropertyName "FIELD_ENCRYPTION_KEY" -NotePropertyValue $EncryptionKey -Force
 }

@@ -65,7 +65,7 @@ from app.calculator import (
     T2209Input, calculate_t2209,
     WorksheetFedInput, calculate_worksheet_fed,
 )
-from app.auth import get_current_user, require_auth_response
+from app.auth import get_current_user, require_auth_response, signing_key_configured
 from app.config import settings
 from app.form_filler import (
     fill_official_pdf,
@@ -102,12 +102,16 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def _lifespan(app):
     """Startup validation + Archive project/table/RLS init (idempotent, non-fatal)."""
-    # Fail fast: if auth is enabled but no secret is set, every request will
-    # be unauthenticated — this is a dangerous misconfiguration.
-    if settings.AUTH_ENABLED and not settings.SESSION_SECRET:
+    # Fail fast: if auth is enabled but no usable audience-scoped signing key is
+    # available, user sessions cannot be verified — a dangerous misconfiguration.
+    # Production must supply AETHER_AUTH_SECRET_HEX (the master SESSION_SECRET is
+    # only used for X-Aether-Internal machine calls).
+    if settings.AUTH_ENABLED and not signing_key_configured():
         raise RuntimeError(
-            "FATAL: AUTH_ENABLED=true but SESSION_SECRET is not set. "
-            "Set SESSION_SECRET in your environment or disable auth with AUTH_ENABLED=false."
+            "FATAL: AUTH_ENABLED=true but no usable AETHER_AUTH_SECRET_HEX is set. "
+            "Provide the 64-hex-character audience-scoped key (recommended), or "
+            "for local/tests enable AETHER_ALLOW_MASTER_KEY_FALLBACK with "
+            "SESSION_SECRET, or disable auth with AUTH_ENABLED=false."
         )
     asyncio.create_task(ensure_archive_project())
     yield
@@ -155,8 +159,11 @@ async def taxhelper_auth_middleware(request: Request, call_next):
     path = request.url.path
     if path.endswith("/health"):
         return await call_next(request)
-    if not settings.AUTH_ENABLED or not settings.SESSION_SECRET:
-        # Inject a synthetic local user so the userdata API has an email to work with.
+    if not settings.AUTH_ENABLED:
+        # Local/desktop mode: only an explicit AUTH_ENABLED=false opens the app.
+        # Inject a synthetic local user so the userdata API has an email to work
+        # with. When auth is enabled it is always enforced below, and a
+        # missing/malformed scoped signing key fails closed (no access).
         if settings.LOCAL_USER_EMAIL:
             request.state.user = {
                 "email": settings.LOCAL_USER_EMAIL,
@@ -205,7 +212,7 @@ async def index(request: Request):
 @app.get("/profile", response_class=HTMLResponse)
 async def profile(request: Request):
     user = getattr(request.state, "user", {}) or {}
-    archive_enabled = bool(settings.ARCHIVE_URL and settings.SESSION_SECRET)
+    archive_enabled = bool(settings.ARCHIVE_URL and settings.archive_internal_secret)
     return templates.TemplateResponse(
         request, "profile.html", _ctx(request, archive_enabled=archive_enabled),
     )
@@ -360,8 +367,9 @@ async def customize_get(form_key: str, request: Request):
     """Return saved custom layout for a form."""
     if form_key not in _CUSTOMIZE_FORMS_BY_KEY:
         raise HTTPException(400, f"Unknown form '{form_key}'")
-    cookie = request.cookies.get("aether_session", "")
-    data = await get_form_data(cookie, f"custom__{form_key}")
+    user = getattr(request.state, "user", {}) or {}
+    email = user.get("email", "")
+    data = await get_form_data(email, f"custom__{form_key}")
     if data is None:
         return {"boxes": []}
     return data
@@ -376,12 +384,11 @@ async def customize_post(form_key: str, request: Request):
     email = user.get("email", "")
     if not email:
         raise HTTPException(401, "Not authenticated")
-    cookie = request.cookies.get("aether_session", "")
     try:
         body = await request.json()
     except Exception:
         raise HTTPException(400, "Invalid JSON body")
-    ok = await save_form_data(cookie, email, f"custom__{form_key}", body)
+    ok = await save_form_data(email, f"custom__{form_key}", body)
     if not ok:
         if not settings.ARCHIVE_URL:
             # Desktop/no-archive mode: localStorage is the primary store.
@@ -401,8 +408,9 @@ async def userdata_get(form: str, request: Request):
     """Return the logged-in user's saved form data from Archive."""
     if form not in _ALLOWED_FORMS:
         raise HTTPException(400, f"Unknown form '{form}'")
-    cookie = request.cookies.get("aether_session", "")
-    data = await get_form_data(cookie, form)
+    user = getattr(request.state, "user", {}) or {}
+    email = user.get("email", "")
+    data = await get_form_data(email, form)
     if data is None:
         raise HTTPException(404, "No saved data found")
     return data
@@ -417,12 +425,11 @@ async def userdata_post(form: str, request: Request):
     email = user.get("email", "")
     if not email:
         raise HTTPException(401, "Not authenticated")
-    cookie = request.cookies.get("aether_session", "")
     try:
         body = await request.json()
     except Exception:
         raise HTTPException(400, "Invalid JSON body")
-    ok = await save_form_data(cookie, email, form, body)
+    ok = await save_form_data(email, form, body)
     if not ok:
         if not settings.ARCHIVE_URL:
             # Desktop/no-archive mode: localStorage is the primary store.

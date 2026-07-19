@@ -1,9 +1,12 @@
 """CRA Tax Helper — Archive-backed per-user form data persistence.
 
 Uses the Aether Archive internal service to store T1 and BC428 form data
-per user with row-level security (RLS).  All user-data operations use the
-user's own Aether session cookie so Archive can enforce ownership.  Admin
-operations (project/table/role setup) use the internal service token.
+per user with row-level security (RLS).  CRA authenticates the user itself
+(auth middleware) and then calls Archive as a trusted internal service,
+delegating the authenticated owner's identity via the ``X-Aether-Owner``
+header (with ``X-Aether-Internal=ARCHIVE_INTERNAL_SECRET``).  No browser
+session cookie and no master ``SESSION_SECRET`` is ever forwarded to Archive.
+Admin operations (project/table/role setup) use the internal service token.
 
 If Archive is unreachable, every function silently no-ops — the app
 continues to work using localStorage only.
@@ -32,21 +35,29 @@ def _base() -> str:
 
 def _sys_hdrs() -> dict[str, str]:
     """Internal-service auth header for Archive admin calls.
-    Production: SESSION_SECRET validated by the real Archive.
-    Local mode: SESSION_SECRET is empty — local Archive accepts any header.
+    Production: ARCHIVE_INTERNAL_SECRET validated by the real Archive (the
+    platform master SESSION_SECRET is never sent from hosted CRA).
+    Local mode: no dedicated secret — local Archive accepts any header.
     """
-    if settings.SESSION_SECRET:
-        return {"X-Aether-Internal": settings.SESSION_SECRET}
+    secret = settings.archive_internal_secret
+    if secret:
+        return {"X-Aether-Internal": secret}
     return {"X-Local-Admin": "local"}
 
 
-def _cookie_hdrs(cookie: str) -> dict[str, str]:
-    if cookie:
-        return {"Cookie": f"aether_session={cookie}"}
-    # Local mode: no session cookie exists — identify via header instead.
-    if settings.is_local:
-        return {"X-Local-User": settings.LOCAL_USER_EMAIL}
-    return {}
+def _owner_hdrs(owner_email: str) -> dict[str, str]:
+    """Delegated-identity headers for per-user Archive data calls.
+
+    CRA authenticates the user itself (auth middleware) and then calls Archive as
+    a trusted internal service: it authenticates with the dedicated
+    ARCHIVE_INTERNAL_SECRET (X-Aether-Internal) and delegates the authenticated
+    owner's identity via X-Aether-Owner. No browser session cookie and no master
+    SESSION_SECRET is ever sent to Archive.
+    """
+    headers = dict(_sys_hdrs())
+    if owner_email:
+        headers["X-Aether-Owner"] = owner_email
+    return headers
 
 
 # ── Startup initialisation ────────────────────────────────────────────────────
@@ -54,16 +65,19 @@ def _cookie_hdrs(cookie: str) -> dict[str, str]:
 async def ensure_archive_project() -> None:
     """Idempotently create the Archive project, table, and RLS policy on startup.
 
-    Runs in both production (SESSION_SECRET set) and local mode (AUTH_ENABLED=false).
-    Safe to call repeatedly — every step checks for prior existence.
-    Errors are logged and swallowed so the app starts even if Archive is down.
+    Runs in both production (ARCHIVE_INTERNAL_SECRET set) and local mode
+    (AUTH_ENABLED=false). Safe to call repeatedly — every step checks for prior
+    existence. Errors are logged and swallowed so the app starts even if Archive
+    is down.
     """
-    _local_mode = not settings.AUTH_ENABLED and not settings.SESSION_SECRET
+    _local_mode = not settings.AUTH_ENABLED and not settings.archive_internal_secret
     if not settings.ARCHIVE_URL:
         logger.info("ARCHIVE_URL not set — using localStorage only")
         return
-    if not _local_mode and not settings.SESSION_SECRET:
-        logger.info("Archive not configured (no SESSION_SECRET) — using localStorage only")
+    if not _local_mode and not settings.archive_internal_secret:
+        logger.info(
+            "Archive not configured (no ARCHIVE_INTERNAL_SECRET) — using localStorage only"
+        )
         return
 
     try:
@@ -145,7 +159,7 @@ async def grant_user_access(email: str) -> None:
     """Grant rls-editor on the cra-taxhelper project to *email* (idempotent)."""
     if email in _granted_emails:
         return
-    if not settings.ARCHIVE_URL or not settings.SESSION_SECRET:
+    if not settings.ARCHIVE_URL or not settings.archive_internal_secret:
         return
     try:
         async with httpx.AsyncClient(timeout=5) as client:
@@ -167,17 +181,21 @@ async def grant_user_access(email: str) -> None:
 
 # ── Data CRUD ─────────────────────────────────────────────────────────────────
 
-async def get_form_data(session_cookie: str, form_name: str) -> dict[str, Any] | None:
-    """Return the user's saved form data for *form_name*, or None if not found."""
+async def get_form_data(owner_email: str, form_name: str) -> dict[str, Any] | None:
+    """Return the user's saved form data for *form_name*, or None if not found.
+
+    *owner_email* is the CRA-authenticated user; it is delegated to Archive via
+    X-Aether-Owner (no browser cookie is forwarded).
+    """
     if not settings.ARCHIVE_URL:
         return None
-    if not session_cookie and not settings.is_local:
+    if not owner_email:
         return None
     try:
         async with httpx.AsyncClient(timeout=5) as client:
             r = await client.get(
                 f"{_base()}/{_PROJECT}/{_TABLE}",
-                headers=_cookie_hdrs(session_cookie),
+                headers=_owner_hdrs(owner_email),
                 params={"limit": 10, "order_by": "id", "order": "desc"},
             )
             if r.status_code != 200:
@@ -197,22 +215,25 @@ async def get_form_data(session_cookie: str, form_name: str) -> dict[str, Any] |
 
 
 async def save_form_data(
-    session_cookie: str,
-    email: str,
+    owner_email: str,
     form_name: str,
     data: dict,
 ) -> bool:
-    """Upsert the user's form data in Archive. Returns True on success."""
+    """Upsert the user's form data in Archive. Returns True on success.
+
+    *owner_email* is the CRA-authenticated user; it is delegated to Archive via
+    X-Aether-Owner (no browser cookie is forwarded).
+    """
     if not settings.ARCHIVE_URL:
         return False
-    if not session_cookie and not settings.is_local:
+    if not owner_email:
         return False
     try:
         async with httpx.AsyncClient(timeout=8) as client:
-            # Find the existing row ID (RLS limits results to this user's rows)
+            # Find the existing row ID (Archive scopes results to this owner)
             r = await client.get(
                 f"{_base()}/{_PROJECT}/{_TABLE}",
-                headers=_cookie_hdrs(session_cookie),
+                headers=_owner_hdrs(owner_email),
                 params={"limit": 10, "order_by": "id"},
             )
             existing_id: int | None = None
@@ -223,7 +244,7 @@ async def save_form_data(
                         break
 
             payload = {
-                "owner_email": email,
+                "owner_email": owner_email,
                 "form_name":   form_name,
                 "form_data":   encrypt_blob(json.dumps(data)),
                 "saved_at":    time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -232,13 +253,13 @@ async def save_form_data(
             if existing_id:
                 r = await client.patch(
                     f"{_base()}/{_PROJECT}/{_TABLE}/{existing_id}",
-                    headers=_cookie_hdrs(session_cookie),
+                    headers=_owner_hdrs(owner_email),
                     json={"data": payload},
                 )
             else:
                 r = await client.post(
                     f"{_base()}/{_PROJECT}/{_TABLE}",
-                    headers=_cookie_hdrs(session_cookie),
+                    headers=_owner_hdrs(owner_email),
                     json={"data": payload},
                 )
 
@@ -246,7 +267,7 @@ async def save_form_data(
             if not ok:
                 logger.debug(
                     "save_form_data %s/%s → %s: %s",
-                    email, form_name, r.status_code, r.text[:200],
+                    owner_email, form_name, r.status_code, r.text[:200],
                 )
             return ok
     except Exception as exc:

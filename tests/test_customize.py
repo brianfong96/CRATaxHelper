@@ -185,7 +185,7 @@ async def test_api_customize_post_saves_layout(client):
                           "value": "1234", "formula": "", "format": "number"}]}
     saved_calls = []
 
-    async def mock_save(cookie, email, form_key, body):
+    async def mock_save(owner_email, form_key, body):
         saved_calls.append((form_key, body))
         return True
 
