@@ -65,7 +65,13 @@ from app.calculator import (
     T2209Input, calculate_t2209,
     WorksheetFedInput, calculate_worksheet_fed,
 )
-from app.auth import get_current_user, require_auth_response, signing_key_configured
+from app.auth import (
+    _extract_token,
+    get_current_user,
+    require_auth_response,
+    session_is_active,
+    signing_key_configured,
+)
 from app.config import settings
 from app.form_filler import (
     fill_official_pdf,
@@ -174,6 +180,14 @@ async def taxhelper_auth_middleware(request: Request, call_next):
     user = get_current_user(request)
     if not user:
         return require_auth_response(request)
+
+    # Immediate revocation: after local cryptographic validation, confirm with
+    # the Gateway that a browser session has not been revoked. Internal
+    # machine-to-machine calls (X-Aether-Internal) are exempt. Fail closed to
+    # the canonical login redirect / 401 so login UX is unchanged.
+    if not user.get("_internal"):
+        if not await session_is_active(_extract_token(request)):
+            return require_auth_response(request)
 
     email = (user.get("email") or "").lower()
 

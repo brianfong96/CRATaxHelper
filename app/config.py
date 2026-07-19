@@ -28,6 +28,12 @@ class Settings(BaseSettings):
     # provided, derive it from the master SESSION_SECRET. Must never be enabled
     # in production.
     AETHER_ALLOW_MASTER_KEY_FALLBACK: bool = False
+    # Bounded migration window (Unix seconds). While the current time is before
+    # this deadline, legacy auth v2 tokens that predate the ``typ`` claim (typ
+    # absent) are still accepted so active users are not abruptly logged out.
+    # Default 0 fails closed. Deploy with a value no larger than the old maximum
+    # web-session lifetime (<= 48h from rollout), then let it lapse.
+    AETHER_LEGACY_SESSION_GRACE_UNTIL: float = 0.0
     GATEWAY_URL: str = "https://api.aether-data.net"
     ALLOWED_EMAILS: str = ""
     FIELD_ENCRYPTION_KEY: str = ""

@@ -10,13 +10,17 @@ from __future__ import annotations
 import hashlib
 import hmac
 import json
+import logging
 import time
 from urllib.parse import urlencode
 
+import httpx
 from fastapi import Request
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.config import settings
+
+logger = logging.getLogger(__name__)
 
 # Audience this service accepts, and the app-specific session cookie name.
 AETHER_AUD = "cra-taxhelper"
@@ -69,8 +73,12 @@ def _verify_v2_token(token: str, aud: str = AETHER_AUD) -> dict | None:
     Verification uses the audience-scoped key (see :func:`_app_signing_key`);
     the master ``SESSION_SECRET`` is not required. Returns the decoded payload,
     or ``None`` if there is no usable scoped key, or the token is missing,
-    malformed, signed with the wrong key, not a v2 token, addressed to a
-    different audience, missing an identity, or expired.
+    malformed, signed with the wrong key, not a v2 token, not a ``session``
+    token, addressed to a different audience, missing an identity, or expired.
+    During the bounded migration window
+    (``AETHER_LEGACY_SESSION_GRACE_UNTIL``), a legacy token that predates the
+    ``typ`` claim (typ absent) is still accepted; a present-but-wrong ``typ`` is
+    always rejected.
     """
     if not token:
         return None
@@ -98,6 +106,16 @@ def _verify_v2_token(token: str, aud: str = AETHER_AUD) -> dict | None:
         return None
     if data.get("aud") != aud:
         return None
+    # Explicit token purpose: only browser session tokens are accepted here.
+    # A missing typ is tolerated only during the bounded migration window.
+    typ = data.get("typ")
+    if typ != "session":
+        legacy_ok = (
+            typ is None
+            and time.time() < settings.AETHER_LEGACY_SESSION_GRACE_UNTIL
+        )
+        if not legacy_ok:
+            return None
 
     identity = str(data.get("email") or data.get("identity") or "").strip()
     if not identity:
@@ -133,6 +151,63 @@ def get_current_user(request: Request) -> dict | None:
         return None
 
     return _verify_v2_token(token, AETHER_AUD)
+
+
+# ── Live session introspection (immediate revocation) ─────────────────────────
+
+# Tight timeout so a slow/unreachable Gateway cannot hang a request; we fail
+# closed instead.
+_INTROSPECT_TIMEOUT = 2.5
+
+
+def _extract_token(request: Request) -> str:
+    """Return the raw session token from the app cookie or bearer header."""
+    token = request.cookies.get(_COOKIE_NAME, "")
+    if not token:
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:].strip()
+    return token
+
+
+async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
+    """Confirm with the Gateway that ``token`` is still an active session.
+
+    Performed after local cryptographic validation succeeds. Calls
+    ``POST {GATEWAY_URL}/auth/session/introspect`` with ``{token, aud}`` and the
+    signed introspection headers, keyed by the raw audience-scoped signing key
+    (never the master secret). Fails closed (returns ``False``) on any
+    inactive/malformed/timeout/unavailable condition. Never logs token material.
+    """
+    key = _app_signing_key(aud)
+    if not token or key is None:
+        return False
+    ts = str(int(time.time()))
+    token_digest = hashlib.sha256(token.encode()).hexdigest()
+    signature = hmac.new(
+        key, f"{ts}\n{token_digest}".encode(), hashlib.sha256
+    ).hexdigest()
+    headers = {
+        "X-Aether-Audience": aud,
+        "X-Aether-Timestamp": ts,
+        "X-Aether-Introspection": signature,
+    }
+    url = f"{settings.GATEWAY_URL.rstrip('/')}/auth/session/introspect"
+    try:
+        async with httpx.AsyncClient(timeout=_INTROSPECT_TIMEOUT) as client:
+            resp = await client.post(
+                url, json={"token": token, "aud": aud}, headers=headers
+            )
+        if resp.status_code != 200:
+            logger.warning(
+                "Session introspection returned HTTP %s", resp.status_code
+            )
+            return False
+        data = resp.json()
+    except (httpx.HTTPError, ValueError, TypeError) as exc:
+        logger.warning("Session introspection unavailable: %s", type(exc).__name__)
+        return False
+    return isinstance(data, dict) and data.get("active") is True
 
 
 def require_auth_response(request: Request) -> RedirectResponse | JSONResponse:

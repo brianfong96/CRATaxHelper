@@ -22,7 +22,7 @@ import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 
 from app.main import app
-from app.auth import AETHER_AUD, _derive_app_key
+from app.auth import AETHER_AUD, _derive_app_key, _verify_v2_token, session_is_active
 
 _COOKIE = "aether_session_cra_taxhelper"
 
@@ -37,15 +37,19 @@ def _make_token(
     aud: str = AETHER_AUD,
     auth_version: int = 2,
     is_admin: bool = False,
+    typ: str | None = "session",
 ) -> str:
     """Create a strict Aether auth v2 token (mirrors auth.py derivation)."""
-    payload = json.dumps({
+    claims = {
         "auth_version": auth_version,
         "aud": aud,
         "email": email, "name": "Test User",
         "is_admin": is_admin,
         "exp": time.time() + exp_offset,
-    })
+    }
+    if typ is not None:
+        claims["typ"] = typ
+    payload = json.dumps(claims)
     key = _derive_app_key(secret, aud)
     sig = hmac.new(key, payload.encode(), hashlib.sha256).hexdigest()
     return f"{sig}.{payload}"
@@ -79,6 +83,16 @@ def _scoped_hex(secret: str = _SECRET, aud: str = AETHER_AUD) -> str:
     return _derive_app_key(secret, aud).hex()
 
 
+async def _introspect_ok(*_args, **_kwargs):
+    """Stand-in for session_is_active that reports the session is active."""
+    return True
+
+
+async def _introspect_revoked(*_args, **_kwargs):
+    """Stand-in for session_is_active that reports the session is inactive."""
+    return False
+
+
 @pytest.fixture(autouse=True)
 def _local_master_fallback(monkeypatch):
     """Tests/local escape hatch: derive the scoped key from the master SESSION_SECRET.
@@ -86,10 +100,16 @@ def _local_master_fallback(monkeypatch):
     Mirrors AETHER_ALLOW_MASTER_KEY_FALLBACK for the existing suite so tokens
     signed with the master-derived key verify. Individual tests override these
     to exercise the production hex path and the fail-closed behaviour.
+
+    Also defaults the live Gateway session-introspection check to "active" so
+    the existing suite exercises local validation without a network dependency;
+    the immediate-revocation tests override this to assert fail-closed behaviour.
     """
     import app.config as cfg
+    import app.main as main_mod
     monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", "")
     monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", True)
+    monkeypatch.setattr(main_mod, "session_is_active", _introspect_ok)
 
 
 @pytest_asyncio.fixture
@@ -221,9 +241,8 @@ async def test_bearer_token_accepted(monkeypatch):
         transport=ASGITransport(app=app), base_url="http://test",
         headers={"Authorization": f"Bearer {token}"},
     ) as ac:
-        r = await ac.get("/tax/t1")
+    r = await ac.get("/tax/t1")
     assert r.status_code == 200
-
 
 @pytest.mark.asyncio
 async def test_internal_header_grants_system_access(monkeypatch):
@@ -681,3 +700,239 @@ def test_decrypt_without_key_raises_for_encrypted_blob(monkeypatch):
 
     with pytest.raises(ValueError):
         crypto.decrypt_blob(blob)
+
+
+# ── Explicit token purpose (typ == "session") ─────────────────────────────────
+
+def test_missing_typ_rejected(monkeypatch):
+    """A token without an explicit typ=session claim must not verify."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    token = _make_token(_SECRET, "user@test.com", typ=None)
+    assert _verify_v2_token(token, AETHER_AUD) is None
+
+
+def test_wrong_typ_rejected(monkeypatch):
+    """A non-session token purpose (e.g. an internal token) must not verify."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    for bad_typ in ("internal", "app_invite", "refresh", ""):
+        token = _make_token(_SECRET, "user@test.com", typ=bad_typ)
+        assert _verify_v2_token(token, AETHER_AUD) is None, \
+            f"typ={bad_typ!r} token was accepted"
+
+
+def test_valid_session_typ_accepted(monkeypatch):
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    token = _make_token(_SECRET, "user@test.com")  # typ defaults to "session"
+    data = _verify_v2_token(token, AETHER_AUD)
+    assert data is not None and data["email"] == "user@test.com"
+
+
+def test_missing_typ_accepted_during_grace_window(monkeypatch):
+    """Migration safety: while the grace deadline is in the future, a legacy
+    token that predates the ``typ`` claim (typ absent) still verifies."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(
+        cfg.settings, "AETHER_LEGACY_SESSION_GRACE_UNTIL", time.time() + 3600
+    )
+    token = _make_token(_SECRET, "user@test.com", typ=None)
+    data = _verify_v2_token(token, AETHER_AUD)
+    assert data is not None and data["email"] == "user@test.com"
+
+
+def test_missing_typ_rejected_after_grace_window(monkeypatch):
+    """Once the grace deadline has passed, a missing ``typ`` is rejected."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(
+        cfg.settings, "AETHER_LEGACY_SESSION_GRACE_UNTIL", time.time() - 1
+    )
+    token = _make_token(_SECRET, "user@test.com", typ=None)
+    assert _verify_v2_token(token, AETHER_AUD) is None
+
+
+def test_wrong_typ_rejected_even_during_grace_window(monkeypatch):
+    """The grace window only forgives an *absent* ``typ``; a present-but-wrong
+    value is always rejected, even mid-rollout."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(
+        cfg.settings, "AETHER_LEGACY_SESSION_GRACE_UNTIL", time.time() + 3600
+    )
+    token = _make_token(_SECRET, "user@test.com", typ="internal")
+    assert _verify_v2_token(token, AETHER_AUD) is None
+
+
+# ── Live session introspection (immediate revocation) ─────────────────────────
+
+def _fake_introspect_client(record, *, status_code=200, payload=None, exc=None):
+    """Build a fake httpx.AsyncClient recording the request and returning a result."""
+
+    class _Resp:
+        def __init__(self):
+            self.status_code = status_code
+
+        def json(self):
+            return payload if payload is not None else {}
+
+    class _Client:
+        def __init__(self, *a, **k):
+            record["timeout"] = k.get("timeout")
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *a):
+            return False
+
+        async def post(self, url, json=None, headers=None):
+            record["url"] = url
+            record["json"] = json
+            record["headers"] = dict(headers or {})
+            if exc is not None:
+                raise exc
+            return _Resp()
+
+    return _Client
+
+
+@pytest.mark.asyncio
+async def test_introspection_active_session_signs_headers(monkeypatch):
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(cfg.settings, "SESSION_SECRET", "")
+    monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
+
+    record: dict = {}
+    monkeypatch.setattr(
+        auth_mod.httpx, "AsyncClient",
+        _fake_introspect_client(record, payload={"active": True}),
+    )
+    token = "sig.payload"
+    assert await session_is_active(token) is True
+
+    assert record["url"].endswith("/auth/session/introspect")
+    assert record["json"] == {"token": token, "aud": AETHER_AUD}
+    headers = record["headers"]
+    assert headers["X-Aether-Audience"] == AETHER_AUD
+    ts = headers["X-Aether-Timestamp"]
+    digest = hashlib.sha256(token.encode()).hexdigest()
+    key = _derive_app_key(_SECRET, AETHER_AUD)
+    expected = hmac.new(key, f"{ts}\n{digest}".encode(), hashlib.sha256).hexdigest()
+    assert headers["X-Aether-Introspection"] == expected
+    assert headers["X-Aether-Introspection"] == expected.lower()
+    # The raw token must never travel in the signed headers.
+    assert token not in headers.values()
+
+
+@pytest.mark.asyncio
+async def test_introspection_revoked_fails_closed(monkeypatch):
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    record: dict = {}
+    monkeypatch.setattr(
+        auth_mod.httpx, "AsyncClient",
+        _fake_introspect_client(record, payload={"active": False}),
+    )
+    assert await session_is_active("sig.payload") is False
+
+
+@pytest.mark.asyncio
+async def test_introspection_gateway_unavailable_fails_closed(monkeypatch):
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    record: dict = {}
+    monkeypatch.setattr(
+        auth_mod.httpx, "AsyncClient",
+        _fake_introspect_client(record, exc=auth_mod.httpx.ConnectError("boom")),
+    )
+    assert await session_is_active("sig.payload") is False
+
+
+@pytest.mark.asyncio
+async def test_introspection_non_200_fails_closed(monkeypatch):
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    record: dict = {}
+    monkeypatch.setattr(
+        auth_mod.httpx, "AsyncClient",
+        _fake_introspect_client(record, status_code=503, payload={"active": True}),
+    )
+    assert await session_is_active("sig.payload") is False
+
+
+@pytest.mark.asyncio
+async def test_introspection_no_master_key_fallback(monkeypatch):
+    """Without a scoped key (no master fallback) the check fails closed and never
+    signs with a master-derived key."""
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", "")
+    monkeypatch.setattr(cfg.settings, "SESSION_SECRET", _SECRET)
+    monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
+
+    def _boom(*a, **k):
+        raise AssertionError("must not contact the Gateway without a scoped key")
+
+    monkeypatch.setattr(auth_mod.httpx, "AsyncClient", _boom)
+    assert await session_is_active("sig.payload") is False
+
+
+@pytest.mark.asyncio
+async def test_middleware_fails_closed_when_session_revoked(monkeypatch):
+    """A locally valid, allowlisted session that the Gateway reports as revoked
+    must be rejected (fail closed) — browsers get the canonical login redirect."""
+    import app.config as cfg
+    import app.main as main_mod
+
+    monkeypatch.setattr(cfg.settings, "SESSION_SECRET", _SECRET)
+    monkeypatch.setattr(cfg.settings, "AUTH_ENABLED", True)
+    monkeypatch.setattr(cfg.settings, "ALLOWED_EMAILS", "")
+    monkeypatch.setattr(main_mod, "session_is_active", _introspect_revoked)
+
+    token = _make_token(_SECRET, "allowed@test.com")
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test",
+        cookies={_COOKIE: token},
+    ) as ac:
+        html = await ac.get(
+            "/tax/t1", headers={"Accept": "text/html"}, follow_redirects=False
+        )
+        assert html.status_code == 302
+        assert "login" in html.headers.get("location", "").lower()
+        api = await ac.get(
+            "/tax/t1", headers={"Accept": "application/json"}, follow_redirects=False
+        )
+        assert api.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_middleware_allows_active_session(monkeypatch):
+    """The same session is granted when the Gateway confirms it is active."""
+    import app.config as cfg
+    import app.main as main_mod
+
+    monkeypatch.setattr(cfg.settings, "SESSION_SECRET", _SECRET)
+    monkeypatch.setattr(cfg.settings, "AUTH_ENABLED", True)
+    monkeypatch.setattr(cfg.settings, "ALLOWED_EMAILS", "")
+    monkeypatch.setattr(main_mod, "session_is_active", _introspect_ok)
+
+    token = _make_token(_SECRET, "allowed@test.com")
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test",
+        cookies={_COOKIE: token},
+    ) as ac:
+        r = await ac.get("/tax/t1")
+        assert r.status_code == 200
