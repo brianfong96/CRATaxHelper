@@ -241,7 +241,7 @@ async def test_bearer_token_accepted(monkeypatch):
         transport=ASGITransport(app=app), base_url="http://test",
         headers={"Authorization": f"Bearer {token}"},
     ) as ac:
-    r = await ac.get("/tax/t1")
+        r = await ac.get("/tax/t1")
     assert r.status_code == 200
 
 @pytest.mark.asyncio
