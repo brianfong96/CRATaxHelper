@@ -229,4 +229,3 @@ async def test_userdata_get_route_delegates_authenticated_email(monkeypatch):
     assert r.status_code == 200
     assert seen["email"] == cfg.settings.LOCAL_USER_EMAIL
     assert seen["form"] == "t1"
-
