@@ -243,6 +243,16 @@ pip install playwright && playwright install chromium
 python -m pytest tests/test_e2e.py -v
 ```
 
+### Hosted Aether authentication
+
+The hosted app accepts only `auth_version=2`, `typ=session` tokens for the exact
+`cra-taxhelper` audience. A deployment must provide all previous/current/next
+`AETHER_AUTH_*_KEY_ID` and `AETHER_AUTH_*_SECRET_HEX` keyring values generated
+for Aether's three-day UTC periods. Sessions are limited to six hours and are
+checked against Gateway introspection for immediate revocation. Missing,
+partial, malformed, retired, or legacy key configuration fails closed at
+startup; there is no static or master-secret fallback.
+
 ### Project structure
 
 ```

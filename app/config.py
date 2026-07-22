@@ -15,25 +15,20 @@ class Settings(BaseSettings):
     LOCAL_USER_NAME: str = "Local User"
 
     # ── PRODUCTION only (aether-data.net deployment) ─────────────────────────
-    # SESSION_SECRET is the platform master secret. In production it is only
-    # needed for X-Aether-Internal machine-to-machine calls — user session
-    # cookies are verified with the audience-scoped AETHER_AUTH_SECRET_HEX.
+    # SESSION_SECRET is only used for legacy X-Aether-Internal calls.
     SESSION_SECRET: str = ""
-    # Audience-scoped HMAC key (64 hex chars = 32 bytes) supplied directly by the
-    # deployment. The Gateway computes it as
-    # HMAC-SHA256(SESSION_SECRET, "aether-auth:v2:<aud>"), so this service never
-    # needs the master secret to verify user sessions.
+    # Mandatory audience-scoped keys for the previous/current/next three-day UTC
+    # periods. The hosted service never derives keys or falls back to a static
+    # secret; deployments must provide all six values.
+    AETHER_AUTH_PREVIOUS_KEY_ID: str = ""
+    AETHER_AUTH_PREVIOUS_SECRET_HEX: str = ""
+    AETHER_AUTH_KEY_ID: str = ""
     AETHER_AUTH_SECRET_HEX: str = ""
-    # Escape hatch for tests / local development ONLY: when no scoped secret is
-    # provided, derive it from the master SESSION_SECRET. Must never be enabled
-    # in production.
+    AETHER_AUTH_NEXT_KEY_ID: str = ""
+    AETHER_AUTH_NEXT_SECRET_HEX: str = ""
+    # Archive-only local/test compatibility. User-session verification never
+    # consults this flag and never falls back to SESSION_SECRET.
     AETHER_ALLOW_MASTER_KEY_FALLBACK: bool = False
-    # Bounded migration window (Unix seconds). While the current time is before
-    # this deadline, legacy auth v2 tokens that predate the ``typ`` claim (typ
-    # absent) are still accepted so active users are not abruptly logged out.
-    # Default 0 fails closed. Deploy with a value no larger than the old maximum
-    # web-session lifetime (<= 48h from rollout), then let it lapse.
-    AETHER_LEGACY_SESSION_GRACE_UNTIL: float = 0.0
     GATEWAY_URL: str = "https://api.aether-data.net"
     ALLOWED_EMAILS: str = ""
     FIELD_ENCRYPTION_KEY: str = ""
