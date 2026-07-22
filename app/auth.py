@@ -1,8 +1,7 @@
 """
 CRA Tax Helper auth — Aether session cookie / Bearer / internal secret validation.
 
-Shared pattern across all Aether services. Validates HMAC-signed
-session tokens against the platform SESSION_SECRET.
+Hosted sessions use a mandatory previous/current/next audience keyring.
 """
 
 from __future__ import annotations
@@ -18,6 +17,12 @@ import httpx
 from fastapi import Request
 from fastapi.responses import JSONResponse, RedirectResponse
 
+from app.auth_rotation import (
+    AUTH_VERSION,
+    derive_signing_key,
+    load_required_keyring,
+    token_window_valid,
+)
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -26,72 +31,53 @@ logger = logging.getLogger(__name__)
 AETHER_AUD = "cra-taxhelper"
 COOKIE_NAME = "aether_session_cra_taxhelper"
 _COOKIE_NAME = COOKIE_NAME
+_MAX_TOKEN_BYTES = 4096
 
 
-def _derive_app_key(master_secret: str, aud: str) -> bytes:
-    """Per-app signing key: HMAC-SHA256(master SESSION_SECRET, 'aether-auth:v2:<aud>')."""
-    return hmac.new(
-        master_secret.encode(), f"aether-auth:v2:{aud}".encode(), hashlib.sha256
-    ).digest()
+def _derive_app_key(master_secret: str, aud: str, key_id: str) -> bytes:
+    """Reproduce period-key derivation for tests and deployment tooling."""
+    return derive_signing_key(master_secret, aud, key_id)
 
 
-def _app_signing_key(aud: str = AETHER_AUD) -> bytes | None:
-    """Resolve the audience-scoped HMAC key used to verify user session cookies.
-
-    Production supplies ``AETHER_AUTH_SECRET_HEX`` (64 hex chars = 32 bytes),
-    which the Gateway computed as
-    ``HMAC-SHA256(SESSION_SECRET, "aether-auth:v2:<aud>")`` — so this service
-    never needs the master secret to verify user sessions.
-
-    Fails closed (returns ``None``) when the scoped secret is missing or
-    malformed. A master-derived fallback is only used when explicitly enabled
-    via ``AETHER_ALLOW_MASTER_KEY_FALLBACK`` for tests / local development, and
-    is never intended for production.
-    """
-    hex_secret = (settings.AETHER_AUTH_SECRET_HEX or "").strip()
-    if hex_secret:
-        try:
-            key = bytes.fromhex(hex_secret)
-        except ValueError:
-            return None
-        return key if len(key) == 32 else None
-
-    if settings.AETHER_ALLOW_MASTER_KEY_FALLBACK and settings.SESSION_SECRET:
-        return _derive_app_key(settings.SESSION_SECRET, aud)
-
-    return None
+def _app_keyring(
+    *, now: float | None = None, require_current_period: bool = False
+) -> dict[str, bytes] | None:
+    """Load the complete deployment keyring without any static fallback."""
+    return load_required_keyring(
+        (
+            settings.AETHER_AUTH_PREVIOUS_KEY_ID,
+            settings.AETHER_AUTH_PREVIOUS_SECRET_HEX,
+        ),
+        (settings.AETHER_AUTH_KEY_ID, settings.AETHER_AUTH_SECRET_HEX),
+        (settings.AETHER_AUTH_NEXT_KEY_ID, settings.AETHER_AUTH_NEXT_SECRET_HEX),
+        now=now,
+        require_current_period=require_current_period,
+    )
 
 
 def signing_key_configured() -> bool:
-    """Whether a usable audience-scoped signing key is available (for startup checks)."""
-    return _app_signing_key() is not None
+    """Whether a complete consecutive rotating keyring is configured."""
+    return _app_keyring(require_current_period=True) is not None
 
 
-def _verify_v2_token(token: str, aud: str = AETHER_AUD) -> dict | None:
-    """Validate a strict Aether auth v2 token for exactly ``aud``.
-
-    Verification uses the audience-scoped key (see :func:`_app_signing_key`);
-    the master ``SESSION_SECRET`` is not required. Returns the decoded payload,
-    or ``None`` if there is no usable scoped key, or the token is missing,
-    malformed, signed with the wrong key, not a v2 token, not a ``session``
-    token, addressed to a different audience, missing an identity, or expired.
-    During the bounded migration window
-    (``AETHER_LEGACY_SESSION_GRACE_UNTIL``), a legacy token that predates the
-    ``typ`` claim (typ absent) is still accepted; a present-but-wrong ``typ`` is
-    always rejected.
-    """
-    if not token:
+def _verify_v2_token(
+    token: str, aud: str = AETHER_AUD, *, now: float | None = None
+) -> dict | None:
+    """Validate a strict, period-bound Aether session for this exact audience."""
+    if (
+        not isinstance(token, str)
+        or not token
+        or len(token.encode("utf-8")) > _MAX_TOKEN_BYTES
+        or aud != AETHER_AUD
+    ):
         return None
-    key = _app_signing_key(aud)
-    if key is None:
+    verification_time = time.time() if now is None else now
+    keys = _app_keyring()
+    if keys is None:
         return None
     try:
         sig, raw = token.split(".", 1)
     except ValueError:
-        return None
-
-    expected = hmac.new(key, raw.encode(), hashlib.sha256).hexdigest()
-    if not hmac.compare_digest(sig, expected):
         return None
 
     try:
@@ -101,33 +87,31 @@ def _verify_v2_token(token: str, aud: str = AETHER_AUD) -> dict | None:
     if not isinstance(data, dict):
         return None
 
-    # Strict v2 claims — reject legacy/generic/other-app tokens.
-    if data.get("auth_version") != 2:
+    key_id = data.get("kid")
+    if not isinstance(key_id, str) or not token_window_valid(
+        data, now=verification_time, expected_key_id=key_id
+    ):
+        return None
+    key = keys.get(key_id)
+    if key is None:
+        return None
+    expected = hmac.new(key, raw.encode("utf-8"), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(sig, expected):
+        return None
+
+    version = data.get("auth_version")
+    if (
+        isinstance(version, bool)
+        or not isinstance(version, int)
+        or version != AUTH_VERSION
+    ):
         return None
     if data.get("aud") != aud:
         return None
-    # Explicit token purpose: only browser session tokens are accepted here.
-    # A missing typ is tolerated only during the bounded migration window.
-    typ = data.get("typ")
-    if typ != "session":
-        legacy_ok = (
-            typ is None
-            and time.time() < settings.AETHER_LEGACY_SESSION_GRACE_UNTIL
-        )
-        if not legacy_ok:
-            return None
-
-    identity = str(data.get("email") or data.get("identity") or "").strip()
-    if not identity:
+    if data.get("typ") != "session":
         return None
-    data.setdefault("email", identity)
-
-    try:
-        if float(data.get("exp", 0)) < time.time():
-            return None
-    except (TypeError, ValueError):
+    if not isinstance(data.get("email"), str) or not data["email"].strip():
         return None
-
     return data
 
 
@@ -179,8 +163,19 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
     (never the master secret). Fails closed (returns ``False``) on any
     inactive/malformed/timeout/unavailable condition. Never logs token material.
     """
-    key = _app_signing_key(aud)
-    if not token or key is None:
+    if aud != AETHER_AUD or not isinstance(token, str) or not token:
+        return False
+    keys = _app_keyring()
+    if keys is None:
+        return False
+    try:
+        _sig, raw = token.split(".", 1)
+        claims = json.loads(raw)
+    except (ValueError, TypeError, AttributeError):
+        return False
+    key_id = claims.get("kid") if isinstance(claims, dict) else None
+    key = keys.get(key_id) if isinstance(key_id, str) else None
+    if key is None:
         return False
     ts = str(int(time.time()))
     token_digest = hashlib.sha256(token.encode()).hexdigest()
@@ -189,6 +184,7 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
     ).hexdigest()
     headers = {
         "X-Aether-Audience": aud,
+        "X-Aether-Key-Id": key_id,
         "X-Aether-Timestamp": ts,
         "X-Aether-Introspection": signature,
     }
@@ -207,7 +203,7 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
     except (httpx.HTTPError, ValueError, TypeError) as exc:
         logger.warning("Session introspection unavailable: %s", type(exc).__name__)
         return False
-    return isinstance(data, dict) and data.get("active") is True
+    return data == {"active": True}
 
 
 def require_auth_response(request: Request) -> RedirectResponse | JSONResponse:

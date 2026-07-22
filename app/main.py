@@ -110,14 +110,13 @@ async def _lifespan(app):
     """Startup validation + Archive project/table/RLS init (idempotent, non-fatal)."""
     # Fail fast: if auth is enabled but no usable audience-scoped signing key is
     # available, user sessions cannot be verified — a dangerous misconfiguration.
-    # Production must supply AETHER_AUTH_SECRET_HEX (the master SESSION_SECRET is
-    # only used for X-Aether-Internal machine calls).
+    # Production must supply a complete previous/current/next keyring.
     if settings.AUTH_ENABLED and not signing_key_configured():
         raise RuntimeError(
-            "FATAL: AUTH_ENABLED=true but no usable AETHER_AUTH_SECRET_HEX is set. "
-            "Provide the 64-hex-character audience-scoped key (recommended), or "
-            "for local/tests enable AETHER_ALLOW_MASTER_KEY_FALLBACK with "
-            "SESSION_SECRET, or disable auth with AUTH_ENABLED=false."
+            "FATAL: AUTH_ENABLED=true but the required rotating Aether auth "
+            "keyring is missing or malformed. Provide consecutive previous, "
+            "current, and next key IDs with 64-hex-character scoped secrets, "
+            "or disable auth with AUTH_ENABLED=false."
         )
     asyncio.create_task(ensure_archive_project())
     yield
@@ -1077,4 +1076,3 @@ async def bc428_pdf(body: BC428PDFBody):
 @app.get("/health")
 async def health():
     return {"service": "taxhelper", "status": "ok"}
-

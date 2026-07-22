@@ -18,7 +18,12 @@
 param(
     [string]$AtlasUrl              = ($env:ATLAS_URL ?? "http://localhost:8600"),
     [string]$PlatformInternalSecret = ($env:AETHER_SESSION_SECRET ?? ""),
+    [string]$AuthPreviousKeyId      = ($env:CRA_TAXHELPER_AUTH_PREVIOUS_KEY_ID ?? ""),
+    [string]$AuthPreviousSecretHex  = ($env:CRA_TAXHELPER_AUTH_PREVIOUS_SECRET_HEX ?? ""),
+    [string]$AuthKeyId              = ($env:CRA_TAXHELPER_AUTH_KEY_ID ?? ""),
     [string]$AuthSecretHex          = ($env:CRA_TAXHELPER_AUTH_SECRET_HEX ?? ""),
+    [string]$AuthNextKeyId          = ($env:CRA_TAXHELPER_AUTH_NEXT_KEY_ID ?? ""),
+    [string]$AuthNextSecretHex      = ($env:CRA_TAXHELPER_AUTH_NEXT_SECRET_HEX ?? ""),
     [string]$ArchiveInternalSecret  = ($env:ARCHIVE_INTERNAL_SECRET ?? ""),
     [string]$EncryptionKey          = ($env:FIELD_ENCRYPTION_KEY ?? "")
 )
@@ -32,11 +37,28 @@ function Read-EnvValue([string]$FilePath, [string]$Key) {
 }
 
 $aetherEnv = Join-Path $PSScriptRoot "..\..\Aether\.env"
+$localEnv = Join-Path (Split-Path $PSScriptRoot -Parent) ".env"
 if (-not $PlatformInternalSecret) {
     $PlatformInternalSecret = Read-EnvValue $aetherEnv "SESSION_SECRET"
 }
-if (-not $AuthSecretHex) {
-    $AuthSecretHex = Read-EnvValue $aetherEnv "CRA_TAXHELPER_AUTH_SECRET_HEX"
+$authSources = @{
+    AuthPreviousKeyId     = "CRA_TAXHELPER_AUTH_PREVIOUS_KEY_ID"
+    AuthPreviousSecretHex = "CRA_TAXHELPER_AUTH_PREVIOUS_SECRET_HEX"
+    AuthKeyId             = "CRA_TAXHELPER_AUTH_KEY_ID"
+    AuthSecretHex         = "CRA_TAXHELPER_AUTH_SECRET_HEX"
+    AuthNextKeyId         = "CRA_TAXHELPER_AUTH_NEXT_KEY_ID"
+    AuthNextSecretHex     = "CRA_TAXHELPER_AUTH_NEXT_SECRET_HEX"
+}
+foreach ($entry in $authSources.GetEnumerator()) {
+    $variable = Get-Variable -Name $entry.Key
+    if (-not $variable.Value) {
+        Set-Variable -Name $entry.Key -Value (Read-EnvValue $aetherEnv $entry.Value)
+    }
+    $variable = Get-Variable -Name $entry.Key
+    if (-not $variable.Value) {
+        $runtimeName = $entry.Value -replace "^CRA_TAXHELPER_", "AETHER_"
+        Set-Variable -Name $entry.Key -Value (Read-EnvValue $localEnv $runtimeName)
+    }
 }
 if (-not $ArchiveInternalSecret) {
     $ArchiveInternalSecret = Read-EnvValue $aetherEnv "ARCHIVE_INTERNAL_SECRET"
@@ -44,9 +66,6 @@ if (-not $ArchiveInternalSecret) {
 
 # Try reading FIELD_ENCRYPTION_KEY from local .env if not supplied
 if (-not $EncryptionKey) {
-    $localEnv = Join-Path $PSScriptRoot "..\..env"  # repo root .env
-    # Resolve properly
-    $localEnv = Join-Path (Split-Path $PSScriptRoot -Parent) ".env"
     $EncryptionKey = Read-EnvValue $localEnv "FIELD_ENCRYPTION_KEY"
 }
 
@@ -54,8 +73,11 @@ if (-not $PlatformInternalSecret) {
     Write-Error "SESSION_SECRET not found. Set AETHER_SESSION_SECRET env var or add SESSION_SECRET to Aether/.env"
     exit 1
 }
-if (-not $AuthSecretHex) {
-    Write-Error "CRA_TAXHELPER_AUTH_SECRET_HEX not found. Run Aether scripts/sync-auth-scope-secrets.ps1."
+$missingAuthValues = $authSources.Keys | Where-Object {
+    -not (Get-Variable -Name $_).Value
+}
+if ($missingAuthValues) {
+    Write-Error "Incomplete CRA Tax Helper auth keyring ($($missingAuthValues -join ', ')). Run Aether scripts/sync-auth-scope-secrets.ps1."
     exit 1
 }
 if (-not $ArchiveInternalSecret) {
@@ -84,8 +106,13 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 $AppConfig = Get-Content "$RepoRoot\atlas-app.json" | ConvertFrom-Json
 
-# Inject scoped runtime secrets — never store the platform master in the app.
+# Inject the complete rotating scoped keyring; never store the platform master in the app.
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_PREVIOUS_KEY_ID" -NotePropertyValue $AuthPreviousKeyId -Force
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_PREVIOUS_SECRET_HEX" -NotePropertyValue $AuthPreviousSecretHex -Force
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_KEY_ID" -NotePropertyValue $AuthKeyId -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_SECRET_HEX" -NotePropertyValue $AuthSecretHex -Force
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_NEXT_KEY_ID" -NotePropertyValue $AuthNextKeyId -Force
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_NEXT_SECRET_HEX" -NotePropertyValue $AuthNextSecretHex -Force
 $AppConfig.env | Add-Member -NotePropertyName "ARCHIVE_INTERNAL_SECRET" -NotePropertyValue $ArchiveInternalSecret -Force
 if ($EncryptionKey) {
     $AppConfig.env | Add-Member -NotePropertyName "FIELD_ENCRYPTION_KEY" -NotePropertyValue $EncryptionKey -Force
