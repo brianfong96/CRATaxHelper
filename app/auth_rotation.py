@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
-import hmac
 import math
 import re
 import time
@@ -14,6 +12,7 @@ AUTH_TOKEN_MAX_AGE_SECONDS = 21_600
 AUTH_CLOCK_SKEW_SECONDS = 60
 SIGNING_KEY_BYTES = 32
 _KID_RE = re.compile(r"^(0|[1-9][0-9]{0,9})$")
+_SECRET_HEX_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def key_id_at(now: float | None = None) -> str:
@@ -29,26 +28,12 @@ def key_context(audience: str, key_id: str) -> str:
     return f"aether-auth:v{AUTH_VERSION}:{audience}:{key_id}"
 
 
-def derive_signing_key(master_secret: str, audience: str, key_id: str) -> bytes:
-    """Derive one audience key for tests and deployment tooling."""
-    if not master_secret:
-        raise ValueError("master secret is required")
-    return hmac.new(
-        master_secret.encode("utf-8"),
-        key_context(audience, key_id).encode("utf-8"),
-        hashlib.sha256,
-    ).digest()
-
-
 def decode_signing_key(secret_hex: str | None) -> bytes | None:
     """Decode one 32-byte key, failing closed on malformed input."""
-    if not secret_hex:
-        return None
-    cleaned = secret_hex.strip()
-    if len(cleaned) != SIGNING_KEY_BYTES * 2:
+    if not isinstance(secret_hex, str) or not _SECRET_HEX_RE.fullmatch(secret_hex):
         return None
     try:
-        key = bytes.fromhex(cleaned)
+        key = bytes.fromhex(secret_hex)
     except ValueError:
         return None
     return key if len(key) == SIGNING_KEY_BYTES else None
@@ -67,7 +52,7 @@ def load_required_keyring(
     keys: dict[str, bytes] = {}
     key_ids: list[str] = []
     for raw_key_id, secret_hex in entries:
-        key_id = (raw_key_id or "").strip()
+        key_id = raw_key_id or ""
         key = decode_signing_key(secret_hex)
         if not _KID_RE.fullmatch(key_id) or key is None or key_id in keys:
             return None

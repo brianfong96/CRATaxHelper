@@ -24,7 +24,6 @@ from httpx import ASGITransport, AsyncClient
 from app.main import app
 from app.auth import (
     AETHER_AUD,
-    _derive_app_key,
     _verify_v2_token,
     session_is_active,
     signing_key_configured,
@@ -40,6 +39,11 @@ _COOKIE = "aether_session_cra_taxhelper"
 
 
 # ── Token helpers ─────────────────────────────────────────────────────────────
+
+
+def _derive_app_key(master_secret: str, aud: str, key_id: str) -> bytes:
+    context = f"aether-auth:v2:{aud}:{key_id}".encode()
+    return hmac.new(master_secret.encode(), context, hashlib.sha256).digest()
 
 def _make_token(
     secret: str,
@@ -68,7 +72,7 @@ def _make_token(
     }
     if typ is not None:
         claims["typ"] = typ
-    payload = json.dumps(claims)
+    payload = json.dumps(claims, separators=(",", ":"), sort_keys=True)
     key = _derive_app_key(secret, aud, signing_kid or token_kid)
     sig = hmac.new(key, payload.encode(), hashlib.sha256).hexdigest()
     return f"{sig}.{payload}"
@@ -542,6 +546,16 @@ async def test_wrong_length_scoped_secret_fails_closed(monkeypatch):
     assert r.status_code in (302, 401, 403)
 
 
+def test_uppercase_or_padded_scoped_secret_fails_closed(monkeypatch):
+    import app.config as cfg
+
+    current = cfg.settings.AETHER_AUTH_SECRET_HEX
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", current.upper())
+    assert signing_key_configured() is False
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", f" {current}")
+    assert signing_key_configured() is False
+
+
 @pytest.mark.asyncio
 async def test_master_fallback_never_authenticates_sessions(monkeypatch):
     """The archive compatibility flag must never enable a user-session fallback."""
@@ -887,6 +901,31 @@ def test_malformed_and_oversized_tokens_are_rejected(monkeypatch):
     assert _verify_v2_token(oversized, now=issued + 1) is None
     assert _verify_v2_token("not-a-token", now=issued + 1) is None
     assert _verify_v2_token("0" * 64 + ".[]", now=issued + 1) is None
+
+
+def test_noncanonical_json_and_signature_are_rejected(monkeypatch):
+    kid = "210"
+    issued = int(kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    _set_keyring(monkeypatch, current_kid=kid)
+    claims = {
+        "auth_version": 2,
+        "aud": AETHER_AUD,
+        "typ": "session",
+        "kid": kid,
+        "iat": issued,
+        "exp": issued + 3600,
+        "email": "user@test.com",
+    }
+    noncanonical = json.dumps(claims)
+    key = _derive_app_key(_SECRET, AETHER_AUD, kid)
+    signature = hmac.new(key, noncanonical.encode(), hashlib.sha256).hexdigest()
+    assert _verify_v2_token(
+        f"{signature}.{noncanonical}", now=issued + 1
+    ) is None
+
+    canonical = _sign_claims(claims)
+    sig, raw = canonical.split(".", 1)
+    assert _verify_v2_token(f"{sig.upper()}.{raw}", now=issued + 1) is None
 
 
 @pytest.mark.parametrize("bad_kid", ["0208", "-1", "9" * 10000, 208, None])

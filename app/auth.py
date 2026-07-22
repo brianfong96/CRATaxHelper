@@ -10,6 +10,7 @@ import hashlib
 import hmac
 import json
 import logging
+import re
 import time
 from urllib.parse import urlencode
 
@@ -19,7 +20,6 @@ from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.auth_rotation import (
     AUTH_VERSION,
-    derive_signing_key,
     load_required_keyring,
     token_window_valid,
 )
@@ -32,11 +32,7 @@ AETHER_AUD = "cra-taxhelper"
 COOKIE_NAME = "aether_session_cra_taxhelper"
 _COOKIE_NAME = COOKIE_NAME
 _MAX_TOKEN_BYTES = 4096
-
-
-def _derive_app_key(master_secret: str, aud: str, key_id: str) -> bytes:
-    """Reproduce period-key derivation for tests and deployment tooling."""
-    return derive_signing_key(master_secret, aud, key_id)
+_SIGNATURE_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def _app_keyring(
@@ -79,12 +75,17 @@ def _verify_v2_token(
         sig, raw = token.split(".", 1)
     except ValueError:
         return None
+    if not _SIGNATURE_RE.fullmatch(sig):
+        return None
 
     try:
         data = json.loads(raw)
     except (ValueError, TypeError):
         return None
     if not isinstance(data, dict):
+        return None
+    canonical_raw = json.dumps(data, separators=(",", ":"), sort_keys=True)
+    if raw != canonical_raw:
         return None
 
     key_id = data.get("kid")
