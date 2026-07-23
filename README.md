@@ -246,14 +246,15 @@ python -m pytest tests/test_e2e.py -v
 ### Hosted Aether authentication
 
 The hosted app accepts only `auth_version=2`, `typ=session` tokens for the exact
-`cra-taxhelper` audience. A deployment must provide all previous/current/next
-`AETHER_AUTH_*_KEY_ID` and `AETHER_AUTH_*_SECRET_HEX` keyring values generated
-for Aether's three-day UTC periods. Secrets are exactly 64 lowercase hex
+`cra-taxhelper` audience. Static tokens omit `kid`/`iat` and use
+`AETHER_AUTH_SECRET_HEX`; rotating tokens use a canonical JSON integer `kid`
+with the previous/current/next keyring, whose current key is supplied only by
+`AETHER_AUTH_ROTATING_SECRET_HEX`. Secrets are exactly 64 lowercase hex
 characters, and tokens use a lowercase 64-character signature over canonical
-compact, key-sorted JSON. Sessions are limited to six hours and are checked
-against Gateway introspection for immediate revocation. Missing, partial,
-malformed, retired, or legacy configuration fails closed at startup; there is
-no static or master-secret fallback.
+compact, key-sorted JSON. Rotating sessions are limited to six hours, and every
+session is checked against authenticated Gateway introspection for immediate
+revocation. Missing, partial, malformed, retired, or legacy configuration fails
+closed at startup; there is no master-secret fallback.
 
 ### Project structure
 

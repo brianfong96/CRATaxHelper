@@ -1,7 +1,7 @@
 """
 CRA Tax Helper auth — Aether session cookie / Bearer / internal secret validation.
 
-Hosted sessions use a mandatory previous/current/next audience keyring.
+Hosted sessions accept the transitional static and rotating Aether v2 formats.
 """
 
 from __future__ import annotations
@@ -10,6 +10,7 @@ import hashlib
 import hmac
 import json
 import logging
+import math
 import re
 import time
 from urllib.parse import urlencode
@@ -20,6 +21,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 
 from app.auth_rotation import (
     AUTH_VERSION,
+    decode_signing_key,
     load_required_keyring,
     token_window_valid,
 )
@@ -35,25 +37,44 @@ _MAX_TOKEN_BYTES = 4096
 _SIGNATURE_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
-def _app_keyring(
+def _configured_keys(
     *, now: float | None = None, require_current_period: bool = False
-) -> dict[str, bytes] | None:
-    """Load the complete deployment keyring without any static fallback."""
-    return load_required_keyring(
+) -> dict[int | None, bytes] | None:
+    """Load the static key and an optional complete rotating keyring."""
+    static_key = decode_signing_key(settings.AETHER_AUTH_SECRET_HEX)
+    if static_key is None:
+        return None
+    rotating_values = (
+        settings.AETHER_AUTH_PREVIOUS_KEY_ID,
+        settings.AETHER_AUTH_PREVIOUS_SECRET_HEX,
+        settings.AETHER_AUTH_KEY_ID,
+        settings.AETHER_AUTH_ROTATING_SECRET_HEX,
+        settings.AETHER_AUTH_NEXT_KEY_ID,
+        settings.AETHER_AUTH_NEXT_SECRET_HEX,
+    )
+    if not any(rotating_values):
+        return {None: static_key}
+    rotating = load_required_keyring(
         (
             settings.AETHER_AUTH_PREVIOUS_KEY_ID,
             settings.AETHER_AUTH_PREVIOUS_SECRET_HEX,
         ),
-        (settings.AETHER_AUTH_KEY_ID, settings.AETHER_AUTH_SECRET_HEX),
+        (
+            settings.AETHER_AUTH_KEY_ID,
+            settings.AETHER_AUTH_ROTATING_SECRET_HEX,
+        ),
         (settings.AETHER_AUTH_NEXT_KEY_ID, settings.AETHER_AUTH_NEXT_SECRET_HEX),
         now=now,
         require_current_period=require_current_period,
     )
+    if rotating is None:
+        return None
+    return {None: static_key, **rotating}
 
 
 def signing_key_configured() -> bool:
-    """Whether a complete consecutive rotating keyring is configured."""
-    return _app_keyring(require_current_period=True) is not None
+    """Whether static auth and any configured rotating keyring are usable."""
+    return _configured_keys(require_current_period=True) is not None
 
 
 def _verify_v2_token(
@@ -68,7 +89,7 @@ def _verify_v2_token(
     ):
         return None
     verification_time = time.time() if now is None else now
-    keys = _app_keyring()
+    keys = _configured_keys()
     if keys is None:
         return None
     try:
@@ -88,11 +109,29 @@ def _verify_v2_token(
     if raw != canonical_raw:
         return None
 
-    key_id = data.get("kid")
-    if not isinstance(key_id, str) or not token_window_valid(
-        data, now=verification_time, expected_key_id=key_id
-    ):
+    has_key_id = "kid" in data
+    has_issued_at = "iat" in data
+    if has_key_id != has_issued_at:
         return None
+    key_id = data.get("kid") if has_key_id else None
+    if has_key_id:
+        if (
+            isinstance(key_id, bool)
+            or not isinstance(key_id, int)
+            or not token_window_valid(
+                data, now=verification_time, expected_key_id=key_id
+            )
+        ):
+            return None
+    else:
+        expires_at = data.get("exp")
+        if (
+            isinstance(expires_at, bool)
+            or not isinstance(expires_at, (int, float))
+            or not math.isfinite(float(expires_at))
+            or expires_at <= verification_time
+        ):
+            return None
     key = keys.get(key_id)
     if key is None:
         return None
@@ -166,7 +205,7 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
     """
     if aud != AETHER_AUD or not isinstance(token, str) or not token:
         return False
-    keys = _app_keyring()
+    keys = _configured_keys()
     if keys is None:
         return False
     try:
@@ -174,8 +213,18 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
         claims = json.loads(raw)
     except (ValueError, TypeError, AttributeError):
         return False
-    key_id = claims.get("kid") if isinstance(claims, dict) else None
-    key = keys.get(key_id) if isinstance(key_id, str) else None
+    if not isinstance(claims, dict):
+        return False
+    has_key_id = "kid" in claims
+    has_issued_at = "iat" in claims
+    if has_key_id != has_issued_at:
+        return False
+    key_id = claims.get("kid") if has_key_id else None
+    if has_key_id and (
+        isinstance(key_id, bool) or not isinstance(key_id, int)
+    ):
+        return False
+    key = keys.get(key_id)
     if key is None:
         return False
     ts = str(int(time.time()))
@@ -183,12 +232,13 @@ async def session_is_active(token: str, aud: str = AETHER_AUD) -> bool:
     signature = hmac.new(
         key, f"{ts}\n{token_digest}".encode(), hashlib.sha256
     ).hexdigest()
-    headers = {
+    headers: dict[str, str] = {
         "X-Aether-Audience": aud,
-        "X-Aether-Key-Id": key_id,
         "X-Aether-Timestamp": ts,
         "X-Aether-Introspection": signature,
     }
+    if key_id is not None:
+        headers["X-Aether-Key-Id"] = str(key_id)
     url = f"{settings.GATEWAY_URL.rstrip('/')}/auth/session/introspect"
     try:
         async with httpx.AsyncClient(timeout=_INTROSPECT_TIMEOUT) as client:

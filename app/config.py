@@ -17,13 +17,13 @@ class Settings(BaseSettings):
     # ── PRODUCTION only (aether-data.net deployment) ─────────────────────────
     # SESSION_SECRET is only used for legacy X-Aether-Internal calls.
     SESSION_SECRET: str = ""
-    # Mandatory audience-scoped keys for the previous/current/next three-day UTC
-    # periods. The hosted service never derives keys or falls back to a static
-    # secret; deployments must provide all six values.
+    # Static audience key plus optional previous/current/next three-day UTC
+    # rotating keys. Static and rotating current keys are purpose-separated.
     AETHER_AUTH_PREVIOUS_KEY_ID: str = ""
     AETHER_AUTH_PREVIOUS_SECRET_HEX: str = ""
     AETHER_AUTH_KEY_ID: str = ""
     AETHER_AUTH_SECRET_HEX: str = ""
+    AETHER_AUTH_ROTATING_SECRET_HEX: str = ""
     AETHER_AUTH_NEXT_KEY_ID: str = ""
     AETHER_AUTH_NEXT_SECRET_HEX: str = ""
     # Archive-only local/test compatibility. User-session verification never
