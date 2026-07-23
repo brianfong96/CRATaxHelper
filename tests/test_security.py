@@ -214,6 +214,24 @@ async def test_redirect_includes_login_url(auth_client):
 
 
 @pytest.mark.asyncio
+async def test_redirect_targets_public_gateway_host_not_internal(auth_client, monkeypatch):
+    """The browser-facing login redirect must always target the PUBLIC
+    api.<DOMAIN> host, even when GATEWAY_URL is set to the internal
+    http://gateway:8000 address used for server-to-server introspection.
+    A browser can never resolve an internal Docker service name, so leaking
+    it into this redirect would permanently break login for real users."""
+    import app.config as cfg
+    monkeypatch.setattr(cfg.settings, "GATEWAY_URL", "http://gateway:8000")
+    monkeypatch.setattr(cfg.settings, "DOMAIN", "aether-data.net")
+    r = await auth_client.get("/tax/t1", headers={"Accept": "text/html"},
+                               follow_redirects=False)
+    assert r.status_code == 302
+    location = r.headers.get("location", "")
+    assert location.startswith("https://api.aether-data.net/login?")
+    assert "gateway:8000" not in location
+
+
+@pytest.mark.asyncio
 async def test_api_without_accept_html_returns_401(auth_client):
     """API clients (no Accept: text/html) must get JSON 401, not a redirect."""
     r = await auth_client.get("/tax/t1", headers={"Accept": "application/json"},
