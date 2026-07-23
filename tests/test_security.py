@@ -330,6 +330,51 @@ async def test_api_wildcard_accept_returns_json_401(auth_client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "path",
+    ["/admin/forms-status", "/admin/list-fields/t1-2025.pdf"],
+)
+async def test_json_admin_routes_wildcard_accept_return_401(auth_client, path):
+    r = await auth_client.get(
+        path,
+        headers={"Accept": "*/*"},
+        follow_redirects=False,
+    )
+    assert r.status_code == 401
+    assert r.json() == {"detail": "Authentication required"}
+
+
+@pytest.mark.asyncio
+async def test_admin_setup_wildcard_accept_redirects(auth_client):
+    r = await auth_client.get(
+        "/admin/setup",
+        headers={"Accept": "*/*"},
+        follow_redirects=False,
+    )
+    assert r.status_code == 302
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "accept",
+    [
+        "application/problem+json",
+        "application/problem+json, */*",
+        "application/vnd.api+json",
+        "application/vnd.api+json, */*",
+    ],
+)
+async def test_structured_json_accept_returns_401(auth_client, accept):
+    r = await auth_client.get(
+        "/tax/t1",
+        headers={"Accept": accept},
+        follow_redirects=False,
+    )
+    assert r.status_code == 401
+    assert r.json() == {"detail": "Authentication required"}
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("path", ["/login", "/.aether/auth/callback"])
 async def test_auth_handoff_paths_bypass_application_auth(auth_client, path):
     r = await auth_client.get(
