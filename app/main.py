@@ -166,6 +166,7 @@ async def taxhelper_auth_middleware(request: Request, call_next):
     if (
         path.endswith("/health")
         or path == "/login"
+        or path == "/logout"
         or path == "/.aether/auth"
         or path.startswith("/.aether/auth/")
     ):
