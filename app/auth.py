@@ -273,9 +273,13 @@ def require_auth_response(request: Request) -> RedirectResponse | JSONResponse:
     # Always target the PUBLIC api.<DOMAIN> host here — never settings.GATEWAY_URL,
     # which production sets to the internal http://gateway:8000 address for
     # server-to-server introspection only; a user's browser can never resolve it.
-    query = urlencode({"next": current_url, "app": AETHER_AUD})
+    query = urlencode({"app": AETHER_AUD, "next": current_url})
     login_url = f"https://api.{settings.DOMAIN}/login?{query}"
-    accept = request.headers.get("Accept", "")
-    if "text/html" in accept:
+    accept = request.headers.get("Accept", "").lower()
+    is_api_route = path == "/api" or path.startswith("/api/")
+    accepts_html = "text/html" in accept or (
+        "*/*" in accept and "application/json" not in accept
+    )
+    if request.method in {"GET", "HEAD"} and not is_api_route and accepts_html:
         return RedirectResponse(login_url, status_code=302)
     return JSONResponse(status_code=401, content={"detail": "Authentication required"})

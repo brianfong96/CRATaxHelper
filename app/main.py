@@ -163,7 +163,12 @@ _FORBIDDEN_TMPL = """\
 async def taxhelper_auth_middleware(request: Request, call_next):
     """Require valid Aether session; enforce per-app RBAC if ALLOWED_EMAILS is set."""
     path = request.url.path
-    if path.endswith("/health"):
+    if (
+        path.endswith("/health")
+        or path == "/login"
+        or path == "/.aether/auth"
+        or path.startswith("/.aether/auth/")
+    ):
         return await call_next(request)
     if not settings.AUTH_ENABLED:
         # Local/desktop mode: only an explicit AUTH_ENABLED=false opens the app.

@@ -283,11 +283,61 @@ async def test_redirect_targets_public_gateway_host_not_internal(auth_client, mo
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("method", ["GET", "HEAD"])
+async def test_page_wildcard_accept_redirects_with_exact_return_url(
+    auth_client, monkeypatch, method
+):
+    import app.config as cfg
+
+    monkeypatch.setattr(cfg.settings, "DOMAIN", "aether-data.net")
+    monkeypatch.setattr(cfg.settings, "ROOT_PATH", "/app/cra-taxhelper")
+    r = await auth_client.request(
+        method,
+        "/tax/t1?source=health%20monitor",
+        headers={
+            "Accept": "*/*",
+            "X-Forwarded-Host": "cra-taxhelper.aether-data.net",
+            "X-Forwarded-Proto": "https",
+        },
+        follow_redirects=False,
+    )
+    assert r.status_code == 302
+    assert r.headers["location"] == (
+        "https://api.aether-data.net/login?app=cra-taxhelper"
+        "&next=https%3A%2F%2Fcra-taxhelper.aether-data.net"
+        "%2Fapp%2Fcra-taxhelper%2Ftax%2Ft1"
+        "%3Fsource%3Dhealth%2520monitor"
+    )
+
+
+@pytest.mark.asyncio
 async def test_api_without_accept_html_returns_401(auth_client):
     """API clients (no Accept: text/html) must get JSON 401, not a redirect."""
     r = await auth_client.get("/tax/t1", headers={"Accept": "application/json"},
                                follow_redirects=False)
     assert r.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_api_wildcard_accept_returns_json_401(auth_client):
+    r = await auth_client.get(
+        "/api/userdata/t1",
+        headers={"Accept": "*/*"},
+        follow_redirects=False,
+    )
+    assert r.status_code == 401
+    assert r.json() == {"detail": "Authentication required"}
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("path", ["/login", "/.aether/auth/callback"])
+async def test_auth_handoff_paths_bypass_application_auth(auth_client, path):
+    r = await auth_client.get(
+        path,
+        headers={"Accept": "*/*"},
+        follow_redirects=False,
+    )
+    assert r.status_code == 404
 
 
 # ── Token validation ──────────────────────────────────────────────────────────
