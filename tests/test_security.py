@@ -41,9 +41,15 @@ _COOKIE = "aether_session_cra_taxhelper"
 # ── Token helpers ─────────────────────────────────────────────────────────────
 
 
-def _derive_app_key(master_secret: str, aud: str, key_id: str) -> bytes:
+def _derive_app_key(master_secret: str, aud: str, key_id: int) -> bytes:
     context = f"aether-auth:v2:{aud}:{key_id}".encode()
     return hmac.new(master_secret.encode(), context, hashlib.sha256).digest()
+
+
+def _derive_static_key(master_secret: str, aud: str) -> bytes:
+    context = f"aether-auth:v2:{aud}".encode()
+    return hmac.new(master_secret.encode(), context, hashlib.sha256).digest()
+
 
 def _make_token(
     secret: str,
@@ -55,11 +61,11 @@ def _make_token(
     is_admin: bool = False,
     typ: str | None = "session",
     issued_at: float | None = None,
-    kid: str | None = None,
-    signing_kid: str | None = None,
+    kid: int | str | None = None,
+    signing_kid: int | None = None,
 ) -> str:
     """Create a strict rotating Aether auth v2 token."""
-    issued = time.time() if issued_at is None else issued_at
+    issued = int(time.time()) if issued_at is None else issued_at
     token_kid = key_id_at(issued) if kid is None else kid
     claims = {
         "auth_version": auth_version,
@@ -76,6 +82,30 @@ def _make_token(
     key = _derive_app_key(secret, aud, signing_kid or token_kid)
     sig = hmac.new(key, payload.encode(), hashlib.sha256).hexdigest()
     return f"{sig}.{payload}"
+
+
+def _make_static_token(
+    secret: str,
+    email: str,
+    exp_offset: int = 3600,
+    *,
+    aud: str = AETHER_AUD,
+    auth_version: int = 2,
+    typ: str = "session",
+) -> str:
+    claims = {
+        "auth_version": auth_version,
+        "aud": aud,
+        "email": email,
+        "exp": int(time.time()) + exp_offset,
+        "name": "Test User",
+        "typ": typ,
+    }
+    raw = json.dumps(claims, separators=(",", ":"), sort_keys=True)
+    signature = hmac.new(
+        _derive_static_key(secret, aud), raw.encode(), hashlib.sha256
+    ).hexdigest()
+    return f"{signature}.{raw}"
 
 
 def _make_v1_token(secret: str, email: str, exp_offset: int = 3600) -> str:
@@ -96,9 +126,9 @@ def _tamper_token(token: str) -> str:
     return f"{sig}.{''.join(raw_list)}"
 
 
-def _sign_claims(claims: dict, *, signing_kid: str | None = None) -> str:
+def _sign_claims(claims: dict, *, signing_kid: int | None = None) -> str:
     raw = json.dumps(claims, separators=(",", ":"), sort_keys=True)
-    kid = signing_kid or str(claims["kid"])
+    kid = claims["kid"] if signing_kid is None else signing_kid
     key = _derive_app_key(_SECRET, AETHER_AUD, kid)
     signature = hmac.new(key, raw.encode(), hashlib.sha256).hexdigest()
     return f"{signature}.{raw}"
@@ -110,26 +140,47 @@ _SECRET = "test-secret-for-security-tests"
 
 
 def _scoped_hex(
-    secret: str = _SECRET, aud: str = AETHER_AUD, kid: str | None = None
+    secret: str = _SECRET, aud: str = AETHER_AUD, kid: int | None = None
 ) -> str:
     """Return one audience/period key as deployment-ready hex."""
-    return _derive_app_key(secret, aud, kid or key_id_at()).hex()
+    return _derive_app_key(
+        secret, aud, key_id_at() if kid is None else kid
+    ).hex()
 
 
-def _set_keyring(monkeypatch, *, current_kid: str | None = None) -> None:
+def _static_hex(secret: str = _SECRET, aud: str = AETHER_AUD) -> str:
+    return _derive_static_key(secret, aud).hex()
+
+
+def _set_keyring(monkeypatch, *, current_kid: int | str | None = None) -> None:
     import app.config as cfg
 
     current = int(current_kid or key_id_at())
     values = {
+        "AETHER_AUTH_SECRET_HEX": _static_hex(),
         "AETHER_AUTH_PREVIOUS_KEY_ID": str(current - 1),
-        "AETHER_AUTH_PREVIOUS_SECRET_HEX": _scoped_hex(kid=str(current - 1)),
+        "AETHER_AUTH_PREVIOUS_SECRET_HEX": _scoped_hex(kid=current - 1),
         "AETHER_AUTH_KEY_ID": str(current),
-        "AETHER_AUTH_SECRET_HEX": _scoped_hex(kid=str(current)),
+        "AETHER_AUTH_ROTATING_SECRET_HEX": _scoped_hex(kid=current),
         "AETHER_AUTH_NEXT_KEY_ID": str(current + 1),
-        "AETHER_AUTH_NEXT_SECRET_HEX": _scoped_hex(kid=str(current + 1)),
+        "AETHER_AUTH_NEXT_SECRET_HEX": _scoped_hex(kid=current + 1),
     }
     for name, value in values.items():
         monkeypatch.setattr(cfg.settings, name, value)
+
+
+def _clear_rotating_keyring(monkeypatch) -> None:
+    import app.config as cfg
+
+    for name in (
+        "AETHER_AUTH_PREVIOUS_KEY_ID",
+        "AETHER_AUTH_PREVIOUS_SECRET_HEX",
+        "AETHER_AUTH_KEY_ID",
+        "AETHER_AUTH_ROTATING_SECRET_HEX",
+        "AETHER_AUTH_NEXT_KEY_ID",
+        "AETHER_AUTH_NEXT_SECRET_HEX",
+    ):
+        monkeypatch.setattr(cfg.settings, name, "")
 
 
 async def _introspect_ok(*_args, **_kwargs):
@@ -474,14 +525,14 @@ async def test_login_redirect_includes_app_param(auth_client):
 
 @pytest.mark.asyncio
 async def test_hex_secret_verifies_without_master(monkeypatch):
-    """Production path: a valid session verifies using only AETHER_AUTH_SECRET_HEX (no master)."""
+    """A static session verifies using only AETHER_AUTH_SECRET_HEX."""
     import app.config as cfg
     monkeypatch.setattr(cfg.settings, "SESSION_SECRET", "")            # no master secret
     monkeypatch.setattr(cfg.settings, "AUTH_ENABLED", True)
     monkeypatch.setattr(cfg.settings, "ALLOWED_EMAILS", "")
-    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _static_hex())
     monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
-    token = _make_token(_SECRET, "user@test.com")
+    token = _make_static_token(_SECRET, "user@test.com")
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test",
         cookies={_COOKIE: token},
@@ -629,7 +680,7 @@ async def test_startup_ok_with_scoped_hex(monkeypatch):
     from app.main import _lifespan
     monkeypatch.setattr(cfg.settings, "AUTH_ENABLED", True)
     monkeypatch.setattr(cfg.settings, "SESSION_SECRET", "")
-    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _static_hex())
     monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
     monkeypatch.setattr(cfg.settings, "ARCHIVE_URL", "")  # skip Archive init task
     async with _lifespan(app):
@@ -764,8 +815,8 @@ def test_decrypt_without_key_raises_for_encrypted_blob(monkeypatch):
 
 
 def test_exact_six_hour_lifetime_is_accepted(monkeypatch):
-    kid = "200"
-    issued = int(kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    kid = 200
+    issued = kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=kid)
     token = _make_token(
         _SECRET,
@@ -778,8 +829,8 @@ def test_exact_six_hour_lifetime_is_accepted(monkeypatch):
 
 
 def test_oversized_session_lifetime_is_rejected(monkeypatch):
-    kid = "201"
-    issued = int(kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    kid = 201
+    issued = kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=kid)
     token = _make_token(
         _SECRET,
@@ -792,8 +843,8 @@ def test_oversized_session_lifetime_is_rejected(monkeypatch):
 
 
 def test_future_issuance_skew_boundary(monkeypatch):
-    kid = "202"
-    now = int(kid) * AUTH_KEY_ROTATION_SECONDS + 1000
+    kid = 202
+    now = kid * AUTH_KEY_ROTATION_SECONDS + 1000
     _set_keyring(monkeypatch, current_kid=kid)
     at_limit = _make_token(
         _SECRET, "user@test.com", issued_at=now + AUTH_CLOCK_SKEW_SECONDS, kid=kid
@@ -809,8 +860,8 @@ def test_future_issuance_skew_boundary(monkeypatch):
 
 
 def test_kid_period_issuance_boundaries(monkeypatch):
-    kid = "203"
-    period_start = int(kid) * AUTH_KEY_ROTATION_SECONDS
+    kid = 203
+    period_start = kid * AUTH_KEY_ROTATION_SECONDS
     period_end = period_start + AUTH_KEY_ROTATION_SECONDS
     _set_keyring(monkeypatch, current_kid=kid)
     lower = _make_token(
@@ -834,22 +885,22 @@ def test_kid_period_issuance_boundaries(monkeypatch):
     too_late = _make_token(
         _SECRET,
         "user@test.com",
-        issued_at=period_end + AUTH_CLOCK_SKEW_SECONDS,
+        issued_at=period_end + AUTH_CLOCK_SKEW_SECONDS + 1,
         kid=kid,
     )
     assert _verify_v2_token(lower, now=period_start) is not None
     assert _verify_v2_token(too_early, now=period_start) is None
-    _set_keyring(monkeypatch, current_kid=str(int(kid) + 1))
+    _set_keyring(monkeypatch, current_kid=kid + 1)
     assert _verify_v2_token(upper, now=period_end) is not None
     assert _verify_v2_token(too_late, now=period_end) is None
 
 
 def test_previous_key_retires_at_bounded_overlap(monkeypatch):
-    kid = "204"
-    period_end = (int(kid) + 1) * AUTH_KEY_ROTATION_SECONDS
+    kid = 204
+    period_end = (kid + 1) * AUTH_KEY_ROTATION_SECONDS
     issued = period_end + AUTH_CLOCK_SKEW_SECONDS - 1
-    retirement = period_end + AUTH_TOKEN_MAX_AGE_SECONDS + AUTH_CLOCK_SKEW_SECONDS
-    _set_keyring(monkeypatch, current_kid=str(int(kid) + 1))
+    retirement = period_end + AUTH_CLOCK_SKEW_SECONDS
+    _set_keyring(monkeypatch, current_kid=kid + 1)
     token = _make_token(
         _SECRET,
         "user@test.com",
@@ -862,9 +913,9 @@ def test_previous_key_retires_at_bounded_overlap(monkeypatch):
 
 
 def test_next_key_is_not_accepted_before_skew_window(monkeypatch):
-    current_kid = "205"
-    next_kid = str(int(current_kid) + 1)
-    period_start = int(next_kid) * AUTH_KEY_ROTATION_SECONDS
+    current_kid = 205
+    next_kid = current_kid + 1
+    period_start = next_kid * AUTH_KEY_ROTATION_SECONDS
     _set_keyring(monkeypatch, current_kid=current_kid)
     token = _make_token(
         _SECRET, "user@test.com", issued_at=period_start, kid=next_kid
@@ -882,9 +933,9 @@ def test_next_key_is_not_accepted_before_skew_window(monkeypatch):
 
 
 def test_unknown_and_wrong_period_keys_are_rejected(monkeypatch):
-    current_kid = "206"
-    unknown_kid = str(int(current_kid) + 2)
-    issued = int(unknown_kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    current_kid = 206
+    unknown_kid = current_kid + 2
+    issued = unknown_kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=current_kid)
     unknown = _make_token(
         _SECRET, "user@test.com", issued_at=issued, kid=unknown_kid
@@ -901,8 +952,8 @@ def test_unknown_and_wrong_period_keys_are_rejected(monkeypatch):
 
 
 def test_malformed_and_oversized_tokens_are_rejected(monkeypatch):
-    kid = "207"
-    issued = int(kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    kid = 207
+    issued = kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=kid)
     claims = {
         "auth_version": 2,
@@ -922,8 +973,8 @@ def test_malformed_and_oversized_tokens_are_rejected(monkeypatch):
 
 
 def test_noncanonical_json_and_signature_are_rejected(monkeypatch):
-    kid = "210"
-    issued = int(kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    kid = 210
+    issued = kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=kid)
     claims = {
         "auth_version": 2,
@@ -946,10 +997,12 @@ def test_noncanonical_json_and_signature_are_rejected(monkeypatch):
     assert _verify_v2_token(f"{sig.upper()}.{raw}", now=issued + 1) is None
 
 
-@pytest.mark.parametrize("bad_kid", ["0208", "-1", "9" * 10000, 208, None])
+@pytest.mark.parametrize(
+    "bad_kid", ["208", "0208", -1, 10_000_000_000, True, None]
+)
 def test_noncanonical_kids_are_rejected(monkeypatch, bad_kid):
-    valid_kid = "208"
-    issued = int(valid_kid) * AUTH_KEY_ROTATION_SECONDS + 100
+    valid_kid = 208
+    issued = valid_kid * AUTH_KEY_ROTATION_SECONDS + 100
     _set_keyring(monkeypatch, current_kid=valid_kid)
     claims = {
         "auth_version": 2,
@@ -979,6 +1032,24 @@ def test_complete_consecutive_keyring_is_required(monkeypatch):
     assert signing_key_configured() is False
 
 
+def test_static_configuration_does_not_require_rotating_keys(monkeypatch):
+    import app.config as cfg
+
+    _clear_rotating_keyring(monkeypatch)
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _static_hex())
+    assert signing_key_configured() is True
+    assert _verify_v2_token(_make_static_token(_SECRET, "user@test.com")) is not None
+
+
+def test_rotating_current_key_comes_only_from_rotating_secret(monkeypatch):
+    import app.config as cfg
+
+    token = _make_token(_SECRET, "user@test.com")
+    assert _verify_v2_token(token) is not None
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_ROTATING_SECRET_HEX", "")
+    assert _verify_v2_token(token) is None
+
+
 def test_stale_consecutive_keyring_fails_startup_validation(monkeypatch):
     stale_current = str(int(key_id_at()) - 2)
     _set_keyring(monkeypatch, current_kid=stale_current)
@@ -986,9 +1057,9 @@ def test_stale_consecutive_keyring_fails_startup_validation(monkeypatch):
 
 
 def test_running_instance_accepts_prestaged_next_key_after_rollover(monkeypatch):
-    current_kid = "209"
-    next_kid = str(int(current_kid) + 1)
-    rollover = int(next_kid) * AUTH_KEY_ROTATION_SECONDS
+    current_kid = 209
+    next_kid = current_kid + 1
+    rollover = next_kid * AUTH_KEY_ROTATION_SECONDS
     _set_keyring(monkeypatch, current_kid=current_kid)
     token = _make_token(
         _SECRET,
@@ -1018,7 +1089,9 @@ def test_wrong_typ_rejected(monkeypatch):
 
 def test_valid_session_typ_accepted(monkeypatch):
     import app.config as cfg
-    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(
+        cfg.settings, "AETHER_AUTH_ROTATING_SECRET_HEX", _scoped_hex()
+    )
     token = _make_token(_SECRET, "user@test.com")  # typ defaults to "session"
     data = _verify_v2_token(token, AETHER_AUD)
     assert data is not None and data["email"] == "user@test.com"
@@ -1073,8 +1146,14 @@ def _fake_introspect_client(record, *, status_code=200, payload=None, exc=None):
     return _Client
 
 
-def _introspection_token(kid: str | None = None) -> str:
-    return "sig." + json.dumps({"kid": kid or key_id_at()})
+def _introspection_token(kid: int | str | None = None) -> str:
+    return "sig." + json.dumps(
+        {"iat": int(time.time()), "kid": key_id_at() if kid is None else kid}
+    )
+
+
+def _static_introspection_token() -> str:
+    return 'sig.{"typ":"session"}'
 
 
 @pytest.mark.asyncio
@@ -1082,7 +1161,7 @@ async def test_introspection_active_session_signs_headers(monkeypatch):
     import app.auth as auth_mod
     import app.config as cfg
 
-    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _scoped_hex())
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _static_hex())
     monkeypatch.setattr(cfg.settings, "SESSION_SECRET", "")
     monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
 
@@ -1098,7 +1177,7 @@ async def test_introspection_active_session_signs_headers(monkeypatch):
     assert record["json"] == {"token": token, "aud": AETHER_AUD}
     headers = record["headers"]
     assert headers["X-Aether-Audience"] == AETHER_AUD
-    assert headers["X-Aether-Key-Id"] == key_id_at()
+    assert headers["X-Aether-Key-Id"] == str(key_id_at())
     ts = headers["X-Aether-Timestamp"]
     digest = hashlib.sha256(token.encode()).hexdigest()
     key = _derive_app_key(_SECRET, AETHER_AUD, key_id_at())
@@ -1107,6 +1186,47 @@ async def test_introspection_active_session_signs_headers(monkeypatch):
     assert headers["X-Aether-Introspection"] == expected.lower()
     # The raw token must never travel in the signed headers.
     assert token not in headers.values()
+
+
+@pytest.mark.asyncio
+async def test_static_introspection_uses_static_key_without_key_id(monkeypatch):
+    import app.auth as auth_mod
+    import app.config as cfg
+
+    _clear_rotating_keyring(monkeypatch)
+    monkeypatch.setattr(cfg.settings, "AETHER_AUTH_SECRET_HEX", _static_hex())
+    record: dict = {}
+    monkeypatch.setattr(
+        auth_mod.httpx,
+        "AsyncClient",
+        _fake_introspect_client(record, payload={"active": True}),
+    )
+    token = _static_introspection_token()
+    assert await session_is_active(token) is True
+
+    headers = record["headers"]
+    assert "X-Aether-Key-Id" not in headers
+    timestamp = headers["X-Aether-Timestamp"]
+    digest = hashlib.sha256(token.encode()).hexdigest()
+    expected = hmac.new(
+        _derive_static_key(_SECRET, AETHER_AUD),
+        f"{timestamp}\n{digest}".encode(),
+        hashlib.sha256,
+    ).hexdigest()
+    assert headers["X-Aether-Introspection"] == expected
+
+
+@pytest.mark.asyncio
+async def test_introspection_rejects_string_kid_without_contacting_gateway(
+    monkeypatch,
+):
+    import app.auth as auth_mod
+
+    def _boom(*_args, **_kwargs):
+        raise AssertionError("must not introspect a noncanonical rotating token")
+
+    monkeypatch.setattr(auth_mod.httpx, "AsyncClient", _boom)
+    assert await session_is_active(_introspection_token(str(key_id_at()))) is False
 
 
 @pytest.mark.asyncio

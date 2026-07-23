@@ -22,6 +22,7 @@ param(
     [string]$AuthPreviousSecretHex  = ($env:CRA_TAXHELPER_AUTH_PREVIOUS_SECRET_HEX ?? ""),
     [string]$AuthKeyId              = ($env:CRA_TAXHELPER_AUTH_KEY_ID ?? ""),
     [string]$AuthSecretHex          = ($env:CRA_TAXHELPER_AUTH_SECRET_HEX ?? ""),
+    [string]$AuthRotatingSecretHex  = ($env:CRA_TAXHELPER_AUTH_ROTATING_SECRET_HEX ?? ""),
     [string]$AuthNextKeyId          = ($env:CRA_TAXHELPER_AUTH_NEXT_KEY_ID ?? ""),
     [string]$AuthNextSecretHex      = ($env:CRA_TAXHELPER_AUTH_NEXT_SECRET_HEX ?? ""),
     [string]$ArchiveInternalSecret  = ($env:ARCHIVE_INTERNAL_SECRET ?? ""),
@@ -46,6 +47,7 @@ $authSources = @{
     AuthPreviousSecretHex = "CRA_TAXHELPER_AUTH_PREVIOUS_SECRET_HEX"
     AuthKeyId             = "CRA_TAXHELPER_AUTH_KEY_ID"
     AuthSecretHex         = "CRA_TAXHELPER_AUTH_SECRET_HEX"
+    AuthRotatingSecretHex = "CRA_TAXHELPER_AUTH_ROTATING_SECRET_HEX"
     AuthNextKeyId         = "CRA_TAXHELPER_AUTH_NEXT_KEY_ID"
     AuthNextSecretHex     = "CRA_TAXHELPER_AUTH_NEXT_SECRET_HEX"
 }
@@ -106,11 +108,12 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Docker build failed"; exit 1 }
 
 $AppConfig = Get-Content "$RepoRoot\atlas-app.json" | ConvertFrom-Json
 
-# Inject the complete rotating scoped keyring; never store the platform master in the app.
+# Inject the static scoped key and complete rotating keyring; never store the platform master.
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_PREVIOUS_KEY_ID" -NotePropertyValue $AuthPreviousKeyId -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_PREVIOUS_SECRET_HEX" -NotePropertyValue $AuthPreviousSecretHex -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_KEY_ID" -NotePropertyValue $AuthKeyId -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_SECRET_HEX" -NotePropertyValue $AuthSecretHex -Force
+$AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_ROTATING_SECRET_HEX" -NotePropertyValue $AuthRotatingSecretHex -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_NEXT_KEY_ID" -NotePropertyValue $AuthNextKeyId -Force
 $AppConfig.env | Add-Member -NotePropertyName "AETHER_AUTH_NEXT_SECRET_HEX" -NotePropertyValue $AuthNextSecretHex -Force
 $AppConfig.env | Add-Member -NotePropertyName "ARCHIVE_INTERNAL_SECRET" -NotePropertyValue $ArchiveInternalSecret -Force

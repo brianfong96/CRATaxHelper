@@ -110,12 +110,13 @@ async def _lifespan(app):
     """Startup validation + Archive project/table/RLS init (idempotent, non-fatal)."""
     # Fail fast: if auth is enabled but no usable audience-scoped signing key is
     # available, user sessions cannot be verified — a dangerous misconfiguration.
-    # Production must supply a complete previous/current/next keyring.
+    # Production must supply the static key and, when rotation is configured,
+    # a complete previous/current/next keyring.
     if settings.AUTH_ENABLED and not signing_key_configured():
         raise RuntimeError(
-            "FATAL: AUTH_ENABLED=true but the required rotating Aether auth "
-            "keyring is missing or malformed. Provide consecutive previous, "
-            "current, and next key IDs with 64-hex-character scoped secrets, "
+            "FATAL: AUTH_ENABLED=true but the Aether auth keys are missing or "
+            "malformed. Provide the static 64-hex-character scoped secret and "
+            "a complete consecutive rotating keyring when rotation is enabled, "
             "or disable auth with AUTH_ENABLED=false."
         )
     asyncio.create_task(ensure_archive_project())
