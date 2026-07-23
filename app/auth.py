@@ -220,8 +220,11 @@ def require_auth_response(request: Request) -> RedirectResponse | JSONResponse:
     current_url = f"{proto}://{host}{root}{path}{qs}"
 
     # Pass the exact app audience and the public return URL to the Gateway login.
+    # Always target the PUBLIC api.<DOMAIN> host here — never settings.GATEWAY_URL,
+    # which production sets to the internal http://gateway:8000 address for
+    # server-to-server introspection only; a user's browser can never resolve it.
     query = urlencode({"next": current_url, "app": AETHER_AUD})
-    login_url = f"{settings.GATEWAY_URL}/login?{query}"
+    login_url = f"https://api.{settings.DOMAIN}/login?{query}"
     accept = request.headers.get("Accept", "")
     if "text/html" in accept:
         return RedirectResponse(login_url, status_code=302)

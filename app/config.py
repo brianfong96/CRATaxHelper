@@ -30,6 +30,12 @@ class Settings(BaseSettings):
     # consults this flag and never falls back to SESSION_SECRET.
     AETHER_ALLOW_MASTER_KEY_FALLBACK: bool = False
     GATEWAY_URL: str = "https://api.aether-data.net"
+    # Public Aether domain used to build the browser-facing login redirect.
+    # Deliberately independent of GATEWAY_URL: production sets GATEWAY_URL to
+    # the internal http://gateway:8000 address for server-to-server
+    # introspection, which a user's browser can never resolve. The login
+    # redirect must always target the public https://api.<DOMAIN> host.
+    DOMAIN: str = "aether-data.net"
     ALLOWED_EMAILS: str = ""
     FIELD_ENCRYPTION_KEY: str = ""
 
