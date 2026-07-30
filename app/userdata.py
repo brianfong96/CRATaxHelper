@@ -25,7 +25,7 @@ from app.crypto import decrypt_blob, encrypt_blob
 
 logger = logging.getLogger("taxhelper.userdata")
 
-_PROJECT = "cra-taxhelper"
+_PROJECT = "cra_taxhelper"
 _TABLE   = "form_saves"
 
 

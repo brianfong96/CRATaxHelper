@@ -174,6 +174,45 @@ def _configure_archive(monkeypatch):
     monkeypatch.setattr(cfg.settings, "AETHER_ALLOW_MASTER_KEY_FALLBACK", False)
 
 
+@pytest.mark.asyncio
+async def test_archive_bootstrap_uses_valid_canonical_project_name(monkeypatch):
+    _configure_archive(monkeypatch)
+    calls: list[tuple[str, str, dict | None]] = []
+
+    class _Client:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args):
+            return False
+
+        async def get(self, url, headers=None):
+            calls.append(("GET", url, None))
+            if url.endswith("/projects"):
+                return _FakeResp(200, [])
+            return _FakeResp(200, {"tables": []})
+
+        async def post(self, url, headers=None, json=None):
+            calls.append(("POST", url, json))
+            return _FakeResp(201, {})
+
+    monkeypatch.setattr(userdata.httpx, "AsyncClient", _Client)
+
+    await userdata.ensure_archive_project()
+
+    assert [url for _method, url, _body in calls] == [
+        "http://archive:7000/api/v1/projects",
+        "http://archive:7000/api/v1/projects",
+        "http://archive:7000/api/v1/cra_taxhelper/tables",
+        "http://archive:7000/api/v1/cra_taxhelper/tables",
+        "http://archive:7000/api/v1/projects/cra_taxhelper/rls",
+    ]
+    assert calls[1][2]["name"] == "cra_taxhelper"
+
+
 def test_save_form_data_sends_delegated_identity(monkeypatch):
     _configure_archive(monkeypatch)
     calls: list = []
