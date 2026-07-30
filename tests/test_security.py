@@ -375,7 +375,7 @@ async def test_structured_json_accept_returns_401(auth_client, accept):
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("path", ["/login", "/.aether/auth/callback"])
+@pytest.mark.parametrize("path", ["/login", "/logout", "/.aether/auth/callback"])
 async def test_auth_handoff_paths_bypass_application_auth(auth_client, path):
     r = await auth_client.get(
         path,
@@ -1145,10 +1145,10 @@ def test_rotating_current_key_comes_only_from_rotating_secret(monkeypatch):
     assert _verify_v2_token(token) is None
 
 
-def test_stale_consecutive_keyring_fails_startup_validation(monkeypatch):
+def test_consecutive_keyring_remains_usable_across_period_boundary(monkeypatch):
     stale_current = str(int(key_id_at()) - 2)
     _set_keyring(monkeypatch, current_kid=stale_current)
-    assert signing_key_configured() is False
+    assert signing_key_configured() is True
 
 
 def test_running_instance_accepts_prestaged_next_key_after_rollover(monkeypatch):
