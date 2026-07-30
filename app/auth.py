@@ -74,7 +74,7 @@ def _configured_keys(
 
 def signing_key_configured() -> bool:
     """Whether static auth and any configured rotating keyring are usable."""
-    return _configured_keys(require_current_period=True) is not None
+    return _configured_keys() is not None
 
 
 def _verify_v2_token(
